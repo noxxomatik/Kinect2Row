@@ -14,7 +14,7 @@ namespace RowingMonitor
         {
             public int index;
             public IReadOnlyDictionary<JointType, Joint> rawJoints;
-            public IReadOnlyDictionary<JointType, Joint> smoothedJoints;
+            public Dictionary<JointType, Joint> smoothedJoints;
         }
 
         List<Frame> frames = new List<Frame>();
@@ -24,10 +24,6 @@ namespace RowingMonitor
             Frame f = new Frame();
             f.rawJoints = joints;
             frames.Add(f);
-
-            Debug.WriteLine("chip: " + joints[JointType.SpineBase].Position.X + ", "
-                                + joints[JointType.SpineBase].Position.Y + ", "
-                                + joints[JointType.SpineBase].Position.Z);
         }
 
         public IReadOnlyDictionary<JointType, Joint> GetFrameRaw(int index)

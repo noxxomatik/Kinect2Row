@@ -1,22 +1,19 @@
-﻿using System;
+﻿using Microsoft.Kinect;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OxyPlot;
-using OxyPlot.Series;
-using Microsoft.Kinect;
-using System.ComponentModel;
-using System.Windows.Media;
 using System.Windows;
-using System.Windows.Input;
+using System.Windows.Media;
 
-namespace RowingMonitor
+namespace RowingMonitor.Model
 {
     /// <summary>
-    /// Represents the view-model for the main window.
+    /// This class shows a frontal view of the tracked skeleton.
+    /// Also it shows the color image sequence which is recorded by the kinect sensor.
     /// </summary>
-    class MainViewModel : INotifyPropertyChanged
+    class FrontalView
     {
         /// <summary>
         /// Radius of drawn hand circles
@@ -79,29 +76,14 @@ namespace RowingMonitor
         private DrawingImage imageSource;
 
         /// <summary>
-        /// Active Kinect sensor
+        /// definition of bones
         /// </summary>
-        private KinectSensor kinectSensor = null;
+        private List<Tuple<JointType, JointType>> bones;
 
         /// <summary>
         /// Coordinate mapper to map one type of point to another
         /// </summary>
         private CoordinateMapper coordinateMapper = null;
-
-        /// <summary>
-        /// Reader for body frames
-        /// </summary>
-        private BodyFrameReader bodyFrameReader = null;
-
-        /// <summary>
-        /// Array for the bodies
-        /// </summary>
-        private Body[] bodies = null;
-
-        /// <summary>
-        /// definition of bones
-        /// </summary>
-        private List<Tuple<JointType, JointType>> bones;
 
         /// <summary>
         /// Width of display (depth space)
@@ -118,52 +100,11 @@ namespace RowingMonitor
         /// </summary>
         private List<Pen> bodyColors;
 
-        /// <summary>
-        /// Current status text to display
-        /// </summary>
-        private string statusText = null;
+        /* Properties */
+        public DrawingImage ImageSource { get => imageSource;}
 
-        /// <summary>
-        /// INotifyPropertyChangedPropertyChanged event to allow window controls to bind to changeable data
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        FrameContainer frameConatainer = new FrameContainer();
-        public ICommand WindowLoaded { get; private set; }
-        public ICommand WindowClosing { get; private set; }
-
-        // 1€ filter parameter
-        private float beta;
-        private float fcmin;
-
-        // plot options
-        private String selectedJointName;
-        private JointType selectedJointType;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MainViewModel" /> class.
-        /// </summary>
-        public MainViewModel()
+        public FrontalView(CoordinateMapper mapper, int width, int height)
         {
-            // one sensor is currently supported
-            this.kinectSensor = KinectSensor.GetDefault();
-
-            // get the coordinate mapper
-            this.coordinateMapper = this.kinectSensor.CoordinateMapper;
-
-            // get the depth (display) extents
-            FrameDescription frameDescription = this.kinectSensor.DepthFrameSource.FrameDescription;
-
-            // get size of joint space
-            this.displayWidth = frameDescription.Width;
-            this.displayHeight = frameDescription.Height;
-
-            // open the reader for the body frames
-            this.bodyFrameReader = this.kinectSensor.BodyFrameSource.OpenReader();
-
             // a bone defined as a line between two joints
             this.bones = new List<Tuple<JointType, JointType>>();
 
@@ -211,154 +152,60 @@ namespace RowingMonitor
             this.bodyColors.Add(new Pen(Brushes.Indigo, 6));
             this.bodyColors.Add(new Pen(Brushes.Violet, 6));
 
-            // set IsAvailableChanged event notifier
-            this.kinectSensor.IsAvailableChanged += this.Sensor_IsAvailableChanged;
-
-            // open the sensor
-            this.kinectSensor.Open();
-
-            // set the status text
-            this.StatusText = this.kinectSensor.IsAvailable ? Properties.Resources.RunningStatusText
-                                                            : Properties.Resources.NoSensorStatusText;
-
             // Create the drawing group we'll use for drawing
             this.drawingGroup = new DrawingGroup();
 
             // Create an image source that we can use in our image control
             this.imageSource = new DrawingImage(this.drawingGroup);
 
-            // register commands
-            this.WindowLoaded = new RelayCommand(WindowLoadedCommand, CommandCanExecute);
-            this.WindowClosing = new RelayCommand(WindowClosingCommand, CommandCanExecute);
-
-            // set default 1€ filter values
-            this.Beta = 0.0001f;
-            this.Fcmin = 1;
-
-            // set default plot option
-            this.SelectedJointName = "SpineBase";
+            coordinateMapper = mapper;
+            displayWidth = width;
+            displayHeight = height;
         }
 
         /// <summary>
-        /// Gets the plot model.
+        /// Updates the view with new data.
         /// </summary>
-        public PlotModel Model { get; private set; }
-
-        /// <summary>
-        /// Gets the bitmap to display
-        /// </summary>
-        public ImageSource ImageSource
+        public void Update(Body[] bodies)
         {
-            get {
-                return this.imageSource;
-            }
-        }
+            using (DrawingContext dc = this.drawingGroup.Open()) {
+                // Draw a transparent background to set the render size
+                dc.DrawRectangle(Brushes.Black, null, new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
 
-        /// <summary>
-        /// Gets or sets the current status text to display
-        /// </summary>
-        public string StatusText
-        {
-            get {
-                return this.statusText;
-            }
+                int penIndex = 0;
+                foreach (Body body in bodies) {
+                    Pen drawPen = this.bodyColors[penIndex++];
 
-            set {
-                if (this.statusText != value) {
-                    this.statusText = value;
+                    if (body.IsTracked) {
+                        this.DrawClippedEdges(body, dc);
 
-                    // notify any bound elements that the text has changed
-                    if (this.PropertyChanged != null) {
-                        this.PropertyChanged(this, new PropertyChangedEventArgs("StatusText"));
-                    }
-                }
-            }
-        }
+                        IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
 
-        public float Beta { get => beta; set => beta = value; }
-        public float Fcmin { get => fcmin; set => fcmin = value; }
-        public string SelectedJointName {get => selectedJointName; set => selectedJointName = value; }
-        public JointType SelectedJointType { get {
-                switch (this.SelectedJointName) {
-                    case "SpineBase":
-                        return JointType.SpineBase;
-                    case "HandRight":
-                        return JointType.HandRight;
-                    case "HandLeft":
-                        return JointType.HandLeft;
-                    default:
-                        return JointType.SpineBase;
-                }                
-            }
-            set => selectedJointType = value; }
+                        // convert the joint points to depth (display) space
+                        Dictionary<JointType, Point> jointPoints = new Dictionary<JointType, Point>();
 
-        /// <summary>
-        /// Handles the body frame data arriving from the sensor
-        /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
-        private void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
-        {
-            bool dataReceived = false;
-
-            using (BodyFrame bodyFrame = e.FrameReference.AcquireFrame()) {
-                if (bodyFrame != null) {
-                    if (this.bodies == null) {
-                        this.bodies = new Body[bodyFrame.BodyCount];
-                    }
-
-                    // The first time GetAndRefreshBodyData is called, Kinect will allocate each Body in the array.
-                    // As long as those body objects are not disposed and not set to null in the array,
-                    // those body objects will be re-used.
-                    bodyFrame.GetAndRefreshBodyData(this.bodies);
-                    dataReceived = true;
-                }
-            }
-
-            if (dataReceived) {
-                using (DrawingContext dc = this.drawingGroup.Open()) {
-                    // Draw a transparent background to set the render size
-                    dc.DrawRectangle(Brushes.Black, null, new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
-
-                    int penIndex = 0;
-                    foreach (Body body in this.bodies) {
-                        Pen drawPen = this.bodyColors[penIndex++];
-
-                        if (body.IsTracked) {
-                            this.DrawClippedEdges(body, dc);
-
-                            IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
-
-                            ///
-                            ///
-                            frameConatainer.AddFrame(joints);
-                            this.UpdatePlot(frameConatainer.GetAllFramesRaw());
-
-                            // convert the joint points to depth (display) space
-                            Dictionary<JointType, Point> jointPoints = new Dictionary<JointType, Point>();
-
-                            foreach (JointType jointType in joints.Keys) {
-                                // sometimes the depth(Z) of an inferred joint may show as negative
-                                // clamp down to 0.1f to prevent coordinatemapper from returning (-Infinity, -Infinity)
-                                CameraSpacePoint position = joints[jointType].Position;
-                                if (position.Z < 0) {
-                                    position.Z = InferredZPositionClamp;
-                                }
-
-                                DepthSpacePoint depthSpacePoint = this.coordinateMapper.MapCameraPointToDepthSpace(position);
-                                jointPoints[jointType] = new Point(depthSpacePoint.X, depthSpacePoint.Y);
+                        foreach (JointType jointType in joints.Keys) {
+                            // sometimes the depth(Z) of an inferred joint may show as negative
+                            // clamp down to 0.1f to prevent coordinatemapper from returning (-Infinity, -Infinity)
+                            CameraSpacePoint position = joints[jointType].Position;
+                            if (position.Z < 0) {
+                                position.Z = InferredZPositionClamp;
                             }
 
-                            this.DrawBody(joints, jointPoints, dc, drawPen);
-
-                            this.DrawHand(body.HandLeftState, jointPoints[JointType.HandLeft], dc);
-                            this.DrawHand(body.HandRightState, jointPoints[JointType.HandRight], dc);
+                            DepthSpacePoint depthSpacePoint = this.coordinateMapper.MapCameraPointToDepthSpace(
+                                position);
+                            jointPoints[jointType] = new Point(depthSpacePoint.X, depthSpacePoint.Y);
                         }
-                    }
 
-                    // prevent drawing outside of our render area
-                    this.drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
+                        this.DrawBody(joints, jointPoints, dc, drawPen);
+
+                        this.DrawHand(body.HandLeftState, jointPoints[JointType.HandLeft], dc);
+                        this.DrawHand(body.HandRightState, jointPoints[JointType.HandRight], dc);
+                    }
                 }
+
+                // prevent drawing outside of our render area
+                this.drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
             }
         }
 
@@ -484,80 +331,5 @@ namespace RowingMonitor
                     new Rect(this.displayWidth - ClipBoundsThickness, 0, ClipBoundsThickness, this.displayHeight));
             }
         }
-
-        /// <summary>
-        /// Handles the event which the sensor becomes unavailable (E.g. paused, closed, unplugged).
-        /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
-        private void Sensor_IsAvailableChanged(object sender, IsAvailableChangedEventArgs e)
-        {
-            // on failure, set the status text
-            this.StatusText = this.kinectSensor.IsAvailable ? Properties.Resources.RunningStatusText
-                                                            : Properties.Resources.SensorNotAvailableStatusText;
-        }
-
-        public void UpdatePlot(List<RowingMonitor.FrameContainer.Frame> frames)
-        {            
-            PlotModel tmp = new PlotModel { Title = "plot" };
-
-            LineSeries series = new LineSeries { Title = "Raw "+ this.SelectedJointName + " z", MarkerType = MarkerType.Circle };
-
-            int frameCount = frames.Count();
-            int i = frameCount > 200 ? frameCount - 200 : 0;
-            for (int j = i; j < frameCount; j++) {
-                series.Points.Add(new DataPoint(j, frames[j].rawJoints[this.SelectedJointType].Position.Z));
-            }
-            /*foreach (FrameContainer.Frame frame in frames) {
-                series.Points.Add(new DataPoint(i, frame.rawJoints[JointType.SpineBase].Position.Z));
-                i++;
-            }*/
-
-            tmp.Series.Add(series);
-            this.Model = tmp;
-            this.RaisePropertyChanged("Model");
-        }
-
-        /// <summary>
-        /// Execute start up tasks
-        /// </summary>
-        private void WindowLoadedCommand(object obj)
-        {
-            if (this.bodyFrameReader != null) {
-                this.bodyFrameReader.FrameArrived += this.Reader_FrameArrived;
-            }
-        }
-
-        /// <summary>
-        /// Execute shutdown tasks
-        /// </summary>
-        private void WindowClosingCommand(object obj)
-        {
-            if (this.bodyFrameReader != null) {
-                // BodyFrameReader is IDisposable
-                this.bodyFrameReader.Dispose();
-                this.bodyFrameReader = null;
-            }
-
-            if (this.kinectSensor != null) {
-                this.kinectSensor.Close();
-                this.kinectSensor = null;
-            }
-        }
-
-        // need check for RelayCommand
-        private bool CommandCanExecute(object obj)
-        {
-            return true;
-        }
-
-        // for realtime oxyplot
-        protected void RaisePropertyChanged(string property)
-        {
-            var handler = this.PropertyChanged;
-            if (handler != null) {
-                handler(this, new PropertyChangedEventArgs(property));
-            }
-        }        
     }
 }
