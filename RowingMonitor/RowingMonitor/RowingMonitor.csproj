@@ -107,6 +107,7 @@
     <Compile Include="Model\FrontalView.cs" />
     <Compile Include="Model\KinectDataContainer.cs" />
     <Compile Include="Model\ColorFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\CalculatedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\LowPassFilter.cs" />
     <Compile Include="Model\SmoothedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\KinectFrameArrivedEventArgs.cs" />
@@ -123,6 +124,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\FrameContainer.cs" />
+    <Compile Include="Model\VelocityCalculator.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

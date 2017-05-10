@@ -38,6 +38,10 @@ namespace RowingMonitor
         private FrontalView frontalView;
 
         private Plot plot;
+        private Plot velPlot;
+
+        private VelocityCalculator velCalc;
+        
 
         /* Properties */
         /// <summary>
@@ -46,6 +50,12 @@ namespace RowingMonitor
         public PlotModel Model {
             get {
                 return plot.PlotModel;
+            }
+        }
+        public PlotModel VelModel
+        {
+            get {
+                return velPlot.PlotModel;
             }
         }
 
@@ -141,6 +151,7 @@ namespace RowingMonitor
                 kinectReader.DisplayHeight);
 
             plot = new Plot(200);
+            velPlot = new Plot(200);
 
             // register event handler
             kinectReader.KinectFrameArrived += KinectReader_KinectFrameArrived;
@@ -150,15 +161,32 @@ namespace RowingMonitor
             WindowLoaded = new RelayCommand(WindowLoadedCommand, CommandCanExecute);
             WindowClosing = new RelayCommand(WindowClosingCommand, CommandCanExecute);
 
-            //// set default 1€ filter values
-            //Beta = 0.0001;
-            //Fcmin = 1.0;
-
             // set default plot option
             SelectedJointName = "SpineBase";
 
             // init filter
             filter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
+
+            // init velocity calculation
+            velCalc = new VelocityCalculator();
+            velCalc.CalculatedFrameArrived += VelCalc_CalculatedFrameArrived;
+        }
+
+        private void VelCalc_CalculatedFrameArrived(object sender, CalculatedFrameArrivedEventArgs e)
+        {
+            // update plot
+            int count = 0;
+            Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
+            dataPoints[SelectedJointName + " Velocity"] = new List<Double[]>();
+            foreach (JointData jointData in e.KinectDataContainer.VelocityJointData) {
+                Double[] values = new Double[2];
+                values[0] = jointData.AbsTimestamp / 1000;
+                values[1] = jointData.Joints[SelectedJointType].Position.Z;
+                dataPoints[SelectedJointName + " Velocity"].Add(values);
+                count++;
+            }
+            velPlot.Update(dataPoints, SelectedJointName + " Velocity Z");
+            RaisePropertyChanged("VelModel");
         }
 
         private void KinectReader_ColorFrameArrived(object sender, Model.ColorFrameArrivedEventArgs e)
@@ -169,8 +197,11 @@ namespace RowingMonitor
 
         private void Filter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
         {
+            // calculate velocites
+            velCalc.CalculateVelocity(e.KinectDataContainer.SmoothedJointData);
+
             // update frontal view skeleton
-            frontalView.UpdateSkeleton(e.KinectDataContainer.Bodies);
+            frontalView.UpdateSkeleton(e.KinectDataContainer.SmoothedJointData.Last().Joints);
 
             // update plot
             int count = 0;

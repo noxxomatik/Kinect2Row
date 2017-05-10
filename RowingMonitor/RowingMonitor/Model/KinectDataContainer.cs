@@ -22,7 +22,9 @@ namespace RowingMonitor.Model
 
         private List<JointData> rawJointData = new List<JointData>();
 
-        private List<JointData> smoothedJointData = new List<JointData>();        
+        private List<JointData> smoothedJointData = new List<JointData>();
+
+        private List<JointData> velocityJointData = new List<JointData>();
 
         private double relStartTime = -1;
 
@@ -34,14 +36,22 @@ namespace RowingMonitor.Model
         /// and not set to null in the array, those body objects will be re-used
         /// </summary>
         public Body[] Bodies { get => bodies; set => bodies = value;}
+
         /// <summary>
         /// List of all captured joint data.
         /// </summary>
-        public List<JointData> RawJointData { get => rawJointData;}
+        public List<JointData> RawJointData { get => rawJointData; }
+
         /// <summary>
         /// List of all smoothed joint data.
         /// </summary>
-        public List<JointData> SmoothedJointData { get => smoothedJointData;}
+        public List<JointData> SmoothedJointData { get => smoothedJointData; }
+
+        /// <summary>
+        /// List of all velocity joint data,
+        /// </summary>
+        public List<JointData> VelocityJointData { get => velocityJointData; }
+
         /// <summary>
         /// Last recorded color image.
         /// </summary>
@@ -84,6 +94,12 @@ namespace RowingMonitor.Model
         {
             JointData jointData = NewJointData(timestamp, joints);
             smoothedJointData.Add(jointData);
+        }
+
+        public void AddNewVelocityJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints)
+        {
+            JointData jointData = NewJointData(timestamp, joints);
+            velocityJointData.Add(jointData);
         }
 
         private JointData NewJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints)
