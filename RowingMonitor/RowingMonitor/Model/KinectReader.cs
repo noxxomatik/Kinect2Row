@@ -5,6 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace RowingMonitor.Model
 {
@@ -30,7 +33,7 @@ namespace RowingMonitor.Model
         /// <summary>
         /// Reader for body frames
         /// </summary>
-        private BodyFrameReader bodyFrameReader = null;
+        private MultiSourceFrameReader multiSourceFrameReader = null;
 
         /// <summary>
         /// Width of display (depth space)
@@ -54,7 +57,6 @@ namespace RowingMonitor.Model
 
         /* Properties */
         public CoordinateMapper CoordinateMapper { get => coordinateMapper; }
-        public BodyFrameReader BodyFrameReader { get => bodyFrameReader; }
         public int DisplayWidth { get => displayWidth; }
         public int DisplayHeight { get => displayHeight; }
         public string StatusText { get => statusText; }
@@ -62,6 +64,9 @@ namespace RowingMonitor.Model
         /* Events */
         public delegate void KinectFrameArrivedEventHandler(Object sender, KinectFrameArrivedEventArgs e);
         public event KinectFrameArrivedEventHandler KinectFrameArrived;
+
+        public delegate void ColorFrameArrivedEventHandler(Object sender, ColorFrameArrivedEventArgs e);
+        public event ColorFrameArrivedEventHandler ColorFrameArrived;
 
         /// <summary>
         /// Initilizes the KinectReader class and establishes the connection to the sensor.
@@ -82,7 +87,7 @@ namespace RowingMonitor.Model
             displayHeight = frameDescription.Height;
 
             // open the reader for the body frames
-            bodyFrameReader = kinectSensor.BodyFrameSource.OpenReader();
+            multiSourceFrameReader = kinectSensor.OpenMultiSourceFrameReader(FrameSourceTypes.Body | FrameSourceTypes.Color);
 
             // set IsAvailableChanged event notifier
             kinectSensor.IsAvailableChanged += Sensor_IsAvailableChanged;
@@ -119,13 +124,15 @@ namespace RowingMonitor.Model
         }
 
         /// <summary>
-        /// Handles the body frame data arriving from the sensor
+        /// Handles the multiple frame data arriving from sensor. 
         /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
-        private void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
+        /// <param name="sender">Object sending the event.</param>
+        /// <param name="e">Event arguments.</param>
+        private void MultiSourceFrameReader_MultiSourceFrameArrived(object sender, MultiSourceFrameArrivedEventArgs e)
         {
-            using (BodyFrame bodyFrame = e.FrameReference.AcquireFrame()) {                
+            MultiSourceFrame multiSourceFrame = e.FrameReference.AcquireFrame();
+
+            using (BodyFrame bodyFrame = multiSourceFrame.BodyFrameReference.AcquireFrame()) {
                 if (bodyFrame != null) {
                     if (bodies == null) {
                         bodies = new Body[bodyFrame.BodyCount];
@@ -147,21 +154,50 @@ namespace RowingMonitor.Model
                     }
                 }
             }
-        }
 
-        public void StartReader()
-        {
-            if (this.bodyFrameReader != null) {
-                this.bodyFrameReader.FrameArrived += this.Reader_FrameArrived;
+            using (ColorFrame colorFrame = multiSourceFrame.ColorFrameReference.AcquireFrame()) {
+                if (colorFrame != null) {
+                    FrameDescription colorFrameDescription = colorFrame.FrameDescription;
+
+                    using (KinectBuffer colorBuffer = colorFrame.LockRawImageBuffer()) {
+                        KinectDataContainer kdc = KinectDataContainer.Instance;
+                        kdc.ColorBitmap =  new WriteableBitmap(colorFrameDescription.Width, colorFrameDescription.Height, 96.0, 96.0, PixelFormats.Bgr32, null);
+                        kdc.ColorBitmap.Lock();
+                        // verify data and write the new color frame data to the display bitmap
+                        if ((colorFrameDescription.Width == kdc.ColorBitmap.PixelWidth) && (colorFrameDescription.Height == kdc.ColorBitmap.PixelHeight)) {
+                            colorFrame.CopyConvertedFrameDataToIntPtr(
+                                kdc.ColorBitmap.BackBuffer,
+                                (uint) (colorFrameDescription.Width * colorFrameDescription.Height * 4),
+                                ColorImageFormat.Bgra);
+
+                            kdc.ColorBitmap.AddDirtyRect(new Int32Rect(0, 0, kdc.ColorBitmap.PixelWidth, kdc.ColorBitmap.PixelHeight));
+                        }
+                        kdc.ColorBitmap.Unlock();
+                        ColorFrameArrived(this, new ColorFrameArrivedEventArgs());
+                    }
+                }
             }
         }
 
+        /// <summary>
+        /// Start the reader to aquire sensor data from the kinect sensor.
+        /// </summary>
+        public void StartReader()
+        {
+            if (this.multiSourceFrameReader != null) {
+                this.multiSourceFrameReader.MultiSourceFrameArrived += MultiSourceFrameReader_MultiSourceFrameArrived;
+            }
+        }        
+
+        /// <summary>
+        /// Stop the kinect reader and clean up.
+        /// </summary>
         public void StopReader()
         {
-            if (this.bodyFrameReader != null) {
+            if (this.multiSourceFrameReader != null) {
                 // BodyFrameReader is IDisposable
-                this.bodyFrameReader.Dispose();
-                this.bodyFrameReader = null;
+                this.multiSourceFrameReader.Dispose();
+                this.multiSourceFrameReader = null;
             }
 
             if (this.kinectSensor != null) {

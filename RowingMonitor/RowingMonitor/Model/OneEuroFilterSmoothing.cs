@@ -1,6 +1,7 @@
 ﻿using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +10,8 @@ namespace RowingMonitor.Model
 {
     class OneEuroFilterSmoothing
     {
-        // first time flag
-        private bool firstTime;
         // data update rate in Hz (default is 30 FPS)
-        private double rate = 30;
+        private double rate = 1.0 / 0.0333;
         // minimum cutoff frequency
         private double fcmin;
         private Dictionary<JointType, Dictionary<String, Double>> mincutoff =
@@ -50,7 +49,7 @@ namespace RowingMonitor.Model
             Fcmin = 1.0;
             Mincutoff = InitCutoffDictionary(Fcmin);
 
-            dcutoff = InitCutoffDictionary(1.0);
+            dcutoff = InitCutoffDictionary(5.0);
 
             xfilt = new LowPassFilter();
             dxfilt = new LowPassFilter();
@@ -60,6 +59,7 @@ namespace RowingMonitor.Model
         {
             KinectDataContainer kdc = KinectDataContainer.Instance;
             Dictionary<JointType, Joint> dx = new Dictionary<JointType, Joint>();
+            // if first time
             if (kdc.SmoothedJointData.Count() <= 0) {
                 foreach (KeyValuePair<JointType, Joint> joint in kdc.RawJointData.Last().Joints) {
                     Joint newJoint = joint.Value;
@@ -70,6 +70,8 @@ namespace RowingMonitor.Model
                 }
             }
             else {
+                rate = 1.0 / ((kdc.RawJointData.Last().RelTimestamp - kdc.RawJointData[kdc.RawJointData.Count()-2].RelTimestamp) / 1000);
+
                 foreach (KeyValuePair<JointType, Joint> joint in kdc.RawJointData.Last().Joints) {
                     Joint newJoint = joint.Value;
                     newJoint.Position.X = Convert.ToSingle((joint.Value.Position.X -
@@ -83,6 +85,7 @@ namespace RowingMonitor.Model
             }
             Dictionary<JointType, Joint> edx = dxfilt.Filter(dx, Alpha(rate, dcutoff));
 
+            Debug.WriteLine("Beta: " + Beta + " Fcmin: " + Fcmin + " rate: " + rate);
             Dictionary<JointType, Dictionary<String, Double>> cutoff = 
                 new Dictionary<JointType, Dictionary<string, double>>();
             foreach (KeyValuePair<JointType, Joint> joint in kdc.RawJointData.Last().Joints) {

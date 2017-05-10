@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace RowingMonitor.Model
 {
@@ -73,7 +74,9 @@ namespace RowingMonitor.Model
         /// <summary>
         /// Drawing image that we will display
         /// </summary>
-        private DrawingImage imageSource;
+        private DrawingImage bodyImageSource;
+
+        private WriteableBitmap colorImageSource;
 
         /// <summary>
         /// definition of bones
@@ -101,7 +104,8 @@ namespace RowingMonitor.Model
         private List<Pen> bodyColors;
 
         /* Properties */
-        public DrawingImage ImageSource { get => imageSource;}
+        public DrawingImage BodyImageSource { get => bodyImageSource;}
+        public WriteableBitmap ColorImageSource { get => colorImageSource;}
 
         public FrontalView(CoordinateMapper mapper, int width, int height)
         {
@@ -156,7 +160,7 @@ namespace RowingMonitor.Model
             this.drawingGroup = new DrawingGroup();
 
             // Create an image source that we can use in our image control
-            this.imageSource = new DrawingImage(this.drawingGroup);
+            this.bodyImageSource = new DrawingImage(this.drawingGroup);
 
             coordinateMapper = mapper;
             displayWidth = width;
@@ -166,11 +170,11 @@ namespace RowingMonitor.Model
         /// <summary>
         /// Updates the view with new data.
         /// </summary>
-        public void Update(Body[] bodies)
+        public void UpdateSkeleton(Body[] bodies)
         {
             using (DrawingContext dc = this.drawingGroup.Open()) {
                 // Draw a transparent background to set the render size
-                dc.DrawRectangle(Brushes.Black, null, new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
+                dc.DrawRectangle(Brushes.Transparent, null, new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
 
                 int penIndex = 0;
                 foreach (Body body in bodies) {
@@ -207,6 +211,15 @@ namespace RowingMonitor.Model
                 // prevent drawing outside of our render area
                 this.drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
             }
+        }
+
+        public void UpdateColorImage(WriteableBitmap colorImage)
+        {
+            colorImageSource = colorImage;
+            // raise property changed
+            //colorImageSource.Lock();
+            //colorImageSource.AddDirtyRect(new Int32Rect(0, 0, ColorImageSource.PixelWidth, ColorImageSource.PixelHeight));
+            //colorImageSource.Unlock();
         }
 
         /// <summary>

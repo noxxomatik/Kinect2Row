@@ -10,8 +10,9 @@ using System.ComponentModel;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Input;
-using Sensorit.Base;
 using RowingMonitor.Model;
+using Xceed.Wpf.Toolkit;
+using System.Windows.Controls;
 
 namespace RowingMonitor
 {
@@ -23,22 +24,13 @@ namespace RowingMonitor
         /// <summary>
         /// Current status text to display
         /// </summary>
-        private string statusText = null;
-
-        /// <summary>
-        /// INotifyPropertyChangedPropertyChanged event to allow window controls to bind to changeable data
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public ICommand WindowLoaded { get; private set; }
-        public ICommand WindowClosing { get; private set; }
+        private string statusText = null;        
 
         // plot options
         private String selectedJointName;
         private JointType selectedJointType;
 
         // filter
-        //private OneEuroFilter filter;
         private OneEuroFilterSmoothing filter = new OneEuroFilterSmoothing();
 
         private KinectReader kinectReader;
@@ -60,10 +52,17 @@ namespace RowingMonitor
         /// <summary>
         /// Gets the bitmap to display
         /// </summary>
-        public ImageSource ImageSource
+        public ImageSource BodyImageSource
         {
             get {
-                return frontalView.ImageSource;
+                return frontalView.BodyImageSource;
+            }
+        }
+
+        public ImageSource ColorImageSource
+        {
+            get {
+                return frontalView.ColorImageSource;
             }
         }
 
@@ -73,28 +72,43 @@ namespace RowingMonitor
         public string StatusText
         {
             get {
-                return this.statusText;
+                return statusText;
             }
 
             set {
-                if (this.statusText != value) {
-                    this.statusText = value;
+                if (statusText != value) {
+                    statusText = value;
 
                     // notify any bound elements that the text has changed
-                    if (this.PropertyChanged != null) {
-                        this.PropertyChanged(this, new PropertyChangedEventArgs("StatusText"));
+                    if (PropertyChanged != null) {
+                        PropertyChanged(this, new PropertyChangedEventArgs("StatusText"));
                     }
                 }
             }
         }
 
-        public double Beta { get => filter.Beta; set => filter.Beta = value; }
-        public double Fcmin { get => filter.Fcmin; set => filter.Fcmin = value; }
+        public double Beta {
+            get => filter.Beta;
+            set {
+                filter.Beta = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Beta"));
+            }
+        }
+
+        public double Fcmin {
+            get => filter.Fcmin;
+            set {
+                filter.Fcmin = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Fcmin"));
+            }
+        }
+
         public string SelectedJointName { get => selectedJointName; set => selectedJointName = value; }
+
         public JointType SelectedJointType
         {
             get {
-                switch (this.SelectedJointName) {
+                switch (SelectedJointName) {
                     case "SpineBase":
                         return JointType.SpineBase;
                     case "HandRight":
@@ -107,6 +121,14 @@ namespace RowingMonitor
             }
             set => selectedJointType = value;
         }
+
+        /// <summary>
+        /// INotifyPropertyChangedPropertyChanged event to allow window controls to bind to changeable data
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ICommand WindowLoaded { get; private set; }
+        public ICommand WindowClosing { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel" /> class.
@@ -122,38 +144,52 @@ namespace RowingMonitor
 
             // register event handler
             kinectReader.KinectFrameArrived += KinectReader_KinectFrameArrived;
+            kinectReader.ColorFrameArrived += KinectReader_ColorFrameArrived;
 
             // register commands
-            this.WindowLoaded = new RelayCommand(WindowLoadedCommand, CommandCanExecute);
-            this.WindowClosing = new RelayCommand(WindowClosingCommand, CommandCanExecute);
+            WindowLoaded = new RelayCommand(WindowLoadedCommand, CommandCanExecute);
+            WindowClosing = new RelayCommand(WindowClosingCommand, CommandCanExecute);
 
-            // set default 1€ filter values
-            this.Beta = 0.0001f;
-            this.Fcmin = 1;
+            //// set default 1€ filter values
+            //Beta = 0.0001;
+            //Fcmin = 1.0;
 
             // set default plot option
-            this.SelectedJointName = "SpineBase";
+            SelectedJointName = "SpineBase";
 
             // init filter
-            //filter = new OneEuroFilterSmoothing();
             filter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
+        }
+
+        private void KinectReader_ColorFrameArrived(object sender, Model.ColorFrameArrivedEventArgs e)
+        {
+            frontalView.UpdateColorImage(e.KinectDataContainer.ColorBitmap);
+            RaisePropertyChanged("ColorImageSource");
         }
 
         private void Filter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
         {
-            // update frontal view
-            frontalView.Update(e.KinectDataContainer.Bodies);
+            // update frontal view skeleton
+            frontalView.UpdateSkeleton(e.KinectDataContainer.Bodies);
 
             // update plot
             int count = 0;
             Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
-            dataPoints[SelectedJointName.ToString()] = new List<Double[]>();
+            dataPoints[SelectedJointName + " Smoothed"] = new List<Double[]>();
             foreach (JointData jointData in e.KinectDataContainer.SmoothedJointData) {
                 Double[] values = new Double[2];
                 values[0] = jointData.AbsTimestamp / 1000;
-                // TODO: bodies[1] is the one that is tracked? check is tracked
                 values[1] = jointData.Joints[SelectedJointType].Position.Z;
-                dataPoints[SelectedJointName].Add(values);
+                dataPoints[SelectedJointName + " Smoothed"].Add(values);
+                count++;
+            }
+
+            dataPoints[SelectedJointName + " Raw"] = new List<Double[]>();
+            foreach (JointData jointData in e.KinectDataContainer.RawJointData) {
+                Double[] values = new Double[2];
+                values[0] = jointData.AbsTimestamp / 1000;
+                values[1] = jointData.Joints[SelectedJointType].Position.Z;
+                dataPoints[SelectedJointName + " Raw"].Add(values);
                 count++;
             }
             plot.Update(dataPoints, SelectedJointName + " Z");

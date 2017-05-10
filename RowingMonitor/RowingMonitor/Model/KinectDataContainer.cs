@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace RowingMonitor.Model
 {
@@ -25,6 +26,8 @@ namespace RowingMonitor.Model
 
         private double relStartTime = -1;
 
+        private WriteableBitmap colorBitmap = null;
+
         /* Properties */
         /// <summary>
         /// Get and sets the current body frame. As long as those body objects are not disposed 
@@ -39,6 +42,10 @@ namespace RowingMonitor.Model
         /// List of all smoothed joint data.
         /// </summary>
         public List<JointData> SmoothedJointData { get => smoothedJointData;}
+        /// <summary>
+        /// Last recorded color image.
+        /// </summary>
+        public WriteableBitmap ColorBitmap { get => colorBitmap; set => colorBitmap = value; }
 
         private KinectDataContainer() { }
 

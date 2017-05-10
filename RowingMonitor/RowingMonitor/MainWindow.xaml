@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:RowingMonitor"
         xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Rowing Monitor" Height="700" Width="1050">
+        Title="Rowing Monitor" Height="700" Width="1250">
     <Window.Resources>
         <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
         <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
@@ -21,40 +22,45 @@
             <i:InvokeCommandAction Command="{Binding WindowClosing}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid Margin="10 0 10 0">
+    <Grid Margin="4 4 4 4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0" Grid.Column="0" Margin="0 0 -1 0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="18">Rowing Monitor</TextBlock>
+        </Grid.RowDefinitions>        
 
-        <Viewbox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
-            <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />
+        <Viewbox Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+            <Image Source="{Binding ColorImageSource}" Stretch="UniformToFill" />            
         </Viewbox>
-       
-        <oxy:PlotView Model="{Binding Model}" Grid.Row="2" Grid.Column="0"/>
+        <Viewbox Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+            <Image Source="{Binding BodyImageSource}" Stretch="UniformToFill" />
+        </Viewbox>
+        
+        <oxy:PlotView Model="{Binding Model}" Grid.Row="1" Grid.Column="0"/>
 
-        <StatusBar Grid.Row="3" Grid.Column="0" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White" Foreground="{StaticResource MediumGreyBrush}">
+        <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Name="statusBar"
+                   VerticalAlignment="Bottom" Background="{StaticResource MediumGreyBrush}" Foreground="{StaticResource MediumGreyBrush}">
             <StatusBarItem Content="{Binding StatusText}" />
         </StatusBar>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10 0 10 0">
-            <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="18">Options</TextBlock>
-            
+        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Left" Margin="4 0 4 0">
+            <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="18">Options</TextBlock>            
             <UniformGrid Columns="2" Rows="5">
                 <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">1€ filter</TextBlock>
                 <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16"></TextBlock>
                 <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">beta:</TextBlock>
-                <Slider Width="200" Minimum="0" Maximum="0.01" TickPlacement="BottomRight" TickFrequency="0.0001" Value="{Binding Beta}"></Slider>
+                <xctk:ButtonSpinner Name="betaUpDown" HorizontalAlignment="Right" Spin="betaUpDown_Spin">
+                    <TextBox Text="{Binding Beta}" HorizontalAlignment="Right"/>
+                </xctk:ButtonSpinner>
                 <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">fcmin:</TextBlock>
-                <Slider Width="200" Minimum="0" Maximum="50" TickPlacement="BottomRight" TickFrequency="1" Value="{Binding Fcmin}"></Slider>
+                <xctk:ButtonSpinner Name="fcminUpDown" HorizontalAlignment="Right" Spin="fcminUpDown_Spin">
+                    <TextBox Text="{Binding Fcmin}" HorizontalAlignment="Right"/>
+                </xctk:ButtonSpinner>
                 <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Plot</TextBlock>
                 <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16"></TextBlock>
                 <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">Select a joint:</TextBlock>
