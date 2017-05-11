@@ -13,6 +13,7 @@ using System.Windows.Input;
 using RowingMonitor.Model;
 using Xceed.Wpf.Toolkit;
 using System.Windows.Controls;
+using System.Threading;
 
 namespace RowingMonitor
 {
@@ -41,7 +42,13 @@ namespace RowingMonitor
         private Plot velPlot;
 
         private VelocityCalculator velCalc;
-        
+
+        private ImageSource bodyImageSource;
+
+        private Timer timer;
+
+        private Shifter shifter;
+
 
         /* Properties */
         /// <summary>
@@ -155,7 +162,7 @@ namespace RowingMonitor
 
             // register event handler
             kinectReader.KinectFrameArrived += KinectReader_KinectFrameArrived;
-            kinectReader.ColorFrameArrived += KinectReader_ColorFrameArrived;
+            kinectReader.ColorFrameArrived += KinectReader_ColorFrameArrivedAsync;
 
             // register commands
             WindowLoaded = new RelayCommand(WindowLoadedCommand, CommandCanExecute);
@@ -165,14 +172,35 @@ namespace RowingMonitor
             SelectedJointName = "SpineBase";
 
             // init filter
-            filter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
+            filter.SmoothedFrameArrived += Filter_SmoothedFrameArrivedAsync;
+
+            // init shifter
+            shifter = new Shifter();
+            shifter.ShiftedFrameArrived += Shifter_ShiftedFrameArrivedAsync;
 
             // init velocity calculation
             velCalc = new VelocityCalculator();
-            velCalc.CalculatedFrameArrived += VelCalc_CalculatedFrameArrived;
+            velCalc.CalculatedFrameArrived += VelCalc_CalculatedFrameArrivedAsync;
+
+            // start render loop
+            timer = new Timer(Render, null, 0, 33);
         }
 
-        private void VelCalc_CalculatedFrameArrived(object sender, CalculatedFrameArrivedEventArgs e)
+        private void Render(object state)
+        {
+            RaisePropertyChanged("VelModel");
+            RaisePropertyChanged("ColorImageSource");
+            RaisePropertyChanged("BodyImageSource");
+            RaisePropertyChanged("Model");
+        }
+
+        private async void Shifter_ShiftedFrameArrivedAsync(object sender, ShiftedFrameArrivedEventArgs e)
+        {
+            // calculate velocites
+            velCalc.CalculateVelocity(e.KinectDataContainer.ShiftedJointData);
+        }
+
+        private async void VelCalc_CalculatedFrameArrivedAsync(object sender, CalculatedFrameArrivedEventArgs e)
         {
             // update plot
             int count = 0;
@@ -185,23 +213,21 @@ namespace RowingMonitor
                 dataPoints[SelectedJointName + " Velocity"].Add(values);
                 count++;
             }
-            velPlot.Update(dataPoints, SelectedJointName + " Velocity Z");
-            RaisePropertyChanged("VelModel");
+            await velPlot.UpdateAsync(dataPoints, SelectedJointName + " Velocity Z");
+            //RaisePropertyChanged("VelModel");
         }
 
-        private void KinectReader_ColorFrameArrived(object sender, Model.ColorFrameArrivedEventArgs e)
+        private async void KinectReader_ColorFrameArrivedAsync(object sender, Model.ColorFrameArrivedEventArgs e)
         {
-            frontalView.UpdateColorImage(e.KinectDataContainer.ColorBitmap);
-            RaisePropertyChanged("ColorImageSource");
+            await frontalView.UpdateColorImageAsync(e.KinectDataContainer.ColorBitmap);
+            //RaisePropertyChanged("ColorImageSource");
         }
 
-        private void Filter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
+        private async void Filter_SmoothedFrameArrivedAsync(object sender, SmoothedFrameArrivedEventArgs e)
         {
-            // calculate velocites
-            velCalc.CalculateVelocity(e.KinectDataContainer.SmoothedJointData);
-
             // update frontal view skeleton
-            frontalView.UpdateSkeleton(e.KinectDataContainer.SmoothedJointData.Last().Joints);
+            frontalView.UpdateSkeletonAsync(e.KinectDataContainer.SmoothedJointData.Last().Joints);
+            //RaisePropertyChanged("BodyImageSource");
 
             // update plot
             int count = 0;
@@ -223,8 +249,10 @@ namespace RowingMonitor
                 dataPoints[SelectedJointName + " Raw"].Add(values);
                 count++;
             }
-            plot.Update(dataPoints, SelectedJointName + " Z");
-            RaisePropertyChanged("Model");
+            await plot.UpdateAsync(dataPoints, SelectedJointName + " Z");
+            //RaisePropertyChanged("Model");
+
+            shifter.ShiftAndRotate(e.KinectDataContainer.SmoothedJointData.Last());            
         }
 
         void KinectReader_KinectFrameArrived(object sender, KinectFrameArrivedEventArgs e)

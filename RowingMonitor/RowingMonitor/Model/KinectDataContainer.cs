@@ -26,6 +26,8 @@ namespace RowingMonitor.Model
 
         private List<JointData> velocityJointData = new List<JointData>();
 
+        private List<JointData> shiftedJointData = new List<JointData>();
+
         private double relStartTime = -1;
 
         private WriteableBitmap colorBitmap = null;
@@ -51,6 +53,11 @@ namespace RowingMonitor.Model
         /// List of all velocity joint data,
         /// </summary>
         public List<JointData> VelocityJointData { get => velocityJointData; }
+
+        /// <summary>
+        /// List of all shifted joint data.
+        /// </summary>
+        public List<JointData> ShiftedJointData { get => shiftedJointData; set => shiftedJointData = value; }
 
         /// <summary>
         /// Last recorded color image.
@@ -100,6 +107,12 @@ namespace RowingMonitor.Model
         {
             JointData jointData = NewJointData(timestamp, joints);
             velocityJointData.Add(jointData);
+        }
+
+        public void AddNewShiftedJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints)
+        {
+            JointData jointData = NewJointData(timestamp, joints);
+            shiftedJointData.Add(jointData);
         }
 
         private JointData NewJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints)

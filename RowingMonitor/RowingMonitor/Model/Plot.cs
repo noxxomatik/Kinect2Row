@@ -35,23 +35,26 @@ namespace RowingMonitor.Model
         /// </summary>
         /// <param name="dataPoints">Set of data points (x,y). The Key will be used as title of the line series.</param>
         /// <param name="title">Title of the plot.</param>
-        public void Update(Dictionary<String, List<Double[]>> dataPoints, String title)
+        public Task UpdateAsync(Dictionary<String, List<Double[]>> dataPoints, String title)
         {
-            PlotModel tmp = new PlotModel { Title = title != null ? title : ""};
+            Task task = Task.Run(() => {
+                PlotModel tmp = new PlotModel { Title = title != null ? title : "" };
 
-            foreach (KeyValuePair<String, List<Double[]>> series in dataPoints) {
-                LineSeries lineSeries = new LineSeries { Title = series.Key, MarkerType = MarkerType.Circle };
+                foreach (KeyValuePair<String, List<Double[]>> series in dataPoints) {
+                    LineSeries lineSeries = new LineSeries { Title = series.Key, MarkerType = MarkerType.Circle };
 
-                int indexCount = series.Value.Count();
-                int indexStart = indexCount > maxValues ? indexCount - maxValues : 0;
-                for (int j = indexStart; j < indexCount; j++) {
-                    lineSeries.Points.Add(new DataPoint(series.Value[j][0], series.Value[j][1]));
+                    int indexCount = series.Value.Count();
+                    int indexStart = indexCount > maxValues ? indexCount - maxValues : 0;
+                    for (int j = indexStart; j < indexCount; j++) {
+                        lineSeries.Points.Add(new DataPoint(series.Value[j][0], series.Value[j][1]));
+                    }
+
+                    tmp.Series.Add(lineSeries);
                 }
 
-                tmp.Series.Add(lineSeries);
-            }
-
-            plotModel = tmp;
+                plotModel = tmp;
+            });
+            return task;
         }      
     }
 }

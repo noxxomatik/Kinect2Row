@@ -104,11 +104,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\BodyNotFullyTrackedException.cs" />
+    <Compile Include="Model\ShiftedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\FrontalView.cs" />
     <Compile Include="Model\KinectDataContainer.cs" />
     <Compile Include="Model\ColorFrameArrivedEventArgs.cs" />
     <Compile Include="Model\CalculatedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\LowPassFilter.cs" />
+    <Compile Include="Model\Shifter.cs" />
     <Compile Include="Model\SmoothedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\KinectFrameArrivedEventArgs.cs" />
     <Compile Include="Model\KinectReader.cs" />

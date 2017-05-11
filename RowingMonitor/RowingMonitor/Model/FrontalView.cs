@@ -1,6 +1,8 @@
 ﻿using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,8 @@ namespace RowingMonitor.Model
     /// </summary>
     class FrontalView
     {
+        // TODO: use more const, since the threaded methods can only use const values
+
         /// <summary>
         /// Radius of drawn hand circles
         /// </summary>
@@ -69,7 +73,7 @@ namespace RowingMonitor.Model
         /// <summary>
         /// Drawing group for body rendering output
         /// </summary>
-        private DrawingGroup drawingGroup;
+        //private DrawingGroup drawingGroup;
 
         /// <summary>
         /// Drawing image that we will display
@@ -104,8 +108,15 @@ namespace RowingMonitor.Model
         private List<Pen> bodyColors;
 
         /* Properties */
-        public DrawingImage BodyImageSource { get => bodyImageSource;}
-        public WriteableBitmap ColorImageSource { get => colorImageSource;}
+        public DrawingImage BodyImageSource
+        {
+            get => bodyImageSource;
+            private set {
+                bodyImageSource = value;
+                
+            }
+        }
+        public WriteableBitmap ColorImageSource { get => colorImageSource; private set => colorImageSource = value; }
 
         public FrontalView(CoordinateMapper mapper, int width, int height)
         {
@@ -157,10 +168,10 @@ namespace RowingMonitor.Model
             bodyColors.Add(new Pen(Brushes.Violet, 6));
 
             // Create the drawing group we'll use for drawing
-            drawingGroup = new DrawingGroup();
+            //drawingGroup = new DrawingGroup();
 
             // Create an image source that we can use in our image control
-            bodyImageSource = new DrawingImage(drawingGroup);
+            //bodyImageSource = new DrawingImage(drawingGroup);
 
             coordinateMapper = mapper;
             displayWidth = width;
@@ -170,14 +181,17 @@ namespace RowingMonitor.Model
         /// <summary>
         /// Updates the view with new data.
         /// </summary>
-        public void UpdateSkeleton(IReadOnlyDictionary<JointType, Joint> joints)
+        public void UpdateSkeletonAsync(IReadOnlyDictionary<JointType, Joint> joints)
         {
+            // TODO: make async
+            DrawingGroup drawingGroup = new DrawingGroup();
+            DrawingImage tmpImageSource = new DrawingImage(drawingGroup);
             using (DrawingContext dc = drawingGroup.Open()) {
                 // Draw a transparent background to set the render size
                 dc.DrawRectangle(Brushes.Transparent, null, new Rect(0.0, 0.0, displayWidth, displayHeight));
 
-                int penIndex = 0;
-                Pen drawPen = bodyColors[penIndex++];
+                //int penIndex = 0;
+                Pen drawPen = bodyColors[0];
 
                 // convert the joint points to depth (display) space
                 Dictionary<JointType, Point> jointPoints = new Dictionary<JointType, Point>();
@@ -199,16 +213,18 @@ namespace RowingMonitor.Model
 
                 // prevent drawing outside of our render area
                 drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0, displayWidth, displayHeight));
+                BodyImageSource = tmpImageSource;
             }
         }
 
-        public void UpdateColorImage(WriteableBitmap colorImage)
+        public Task UpdateColorImageAsync(WriteableBitmap colorImage)
         {
-            colorImageSource = colorImage;
-            // raise property changed
-            //colorImageSource.Lock();
-            //colorImageSource.AddDirtyRect(new Int32Rect(0, 0, ColorImageSource.PixelWidth, ColorImageSource.PixelHeight));
-            //colorImageSource.Unlock();
+            Task task = Task.Run(() => {
+                ColorImageSource = colorImage;
+                // freeze to avoid "Must create DependencySource on same Thread as the DependencyObject" error"
+                //colorImageSource.Freeze();
+            });
+            return task;
         }
 
         /// <summary>
@@ -232,10 +248,10 @@ namespace RowingMonitor.Model
                 TrackingState trackingState = joints[jointType].TrackingState;
 
                 if (trackingState == TrackingState.Tracked) {
-                    drawBrush = trackedJointBrush;
+                    drawBrush = new SolidColorBrush(Color.FromArgb(255, 68, 192, 68));
                 }
                 else if (trackingState == TrackingState.Inferred) {
-                    drawBrush = inferredJointBrush;
+                    drawBrush = Brushes.Yellow;
                 }
 
                 if (drawBrush != null) {
@@ -265,9 +281,9 @@ namespace RowingMonitor.Model
             }
 
             // We assume all drawn bones are inferred unless BOTH joints are tracked
-            Pen drawPen = inferredBonePen;
+            Pen drawPen = new Pen(Brushes.Gray, 1);
             if ((joint0.TrackingState == TrackingState.Tracked) && (joint1.TrackingState == TrackingState.Tracked)) {
-                drawPen = drawingPen;
+                drawPen = new Pen(Brushes.Red, 6);
             }
 
             drawingContext.DrawLine(drawPen, jointPoints[jointType0], jointPoints[jointType1]);
