@@ -104,20 +104,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\BodyNotFullyTrackedException.cs" />
-    <Compile Include="Model\ShiftedFrameArrivedEventArgs.cs" />
-    <Compile Include="Model\FrontalView.cs" />
-    <Compile Include="Model\KinectDataContainer.cs" />
-    <Compile Include="Model\ColorFrameArrivedEventArgs.cs" />
-    <Compile Include="Model\CalculatedFrameArrivedEventArgs.cs" />
-    <Compile Include="Model\LowPassFilter.cs" />
-    <Compile Include="Model\Shifter.cs" />
-    <Compile Include="Model\SmoothedFrameArrivedEventArgs.cs" />
-    <Compile Include="Model\KinectFrameArrivedEventArgs.cs" />
-    <Compile Include="Model\KinectReader.cs" />
-    <Compile Include="Model\OneEuroFilterSmoothing.cs" />
-    <Compile Include="Model\Plot.cs" />
-    <Compile Include="Model\RelayCommand.cs" />
+    <Compile Include="Model\Util\BodyNotFullyTrackedException.cs" />
+    <Compile Include="Model\EventArgs\ShiftedFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\Pipeline\FrontalView.cs" />
+    <Compile Include="Model\Util\KinectDataContainer.cs" />
+    <Compile Include="Model\EventArgs\ColorFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\EventArgs\CalculatedFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\Util\LowPassFilter.cs" />
+    <Compile Include="Model\Pipeline\Shifter.cs" />
+    <Compile Include="Model\Pipeline\SideView.cs" />
+    <Compile Include="Model\EventArgs\SmoothedFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\EventArgs\KinectFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\Pipeline\KinectReader.cs" />
+    <Compile Include="Model\Pipeline\OneEuroFilterSmoothing.cs" />
+    <Compile Include="Model\Pipeline\Plot.cs" />
+    <Compile Include="Model\Util\RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -126,8 +127,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\FrameContainer.cs" />
-    <Compile Include="Model\VelocityCalculator.cs" />
+    <Compile Include="Model\Pipeline\VelocityCalculator.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -38,7 +38,7 @@ namespace RowingMonitor.Model
         /// <summary>
         /// Constant for clamping Z values of camera space points from being negative
         /// </summary>
-        private const float InferredZPositionClamp = 0.1f;
+        protected const float InferredZPositionClamp = 0.1f;
 
         /// <summary>
         /// Brush used for drawing hands that are currently tracked as closed
@@ -90,28 +90,28 @@ namespace RowingMonitor.Model
         /// <summary>
         /// Coordinate mapper to map one type of point to another
         /// </summary>
-        private CoordinateMapper coordinateMapper = null;
+        protected CoordinateMapper coordinateMapper = null;
 
         /// <summary>
         /// Width of display (depth space)
         /// </summary>
-        private int displayWidth;
+        protected int displayWidth;
 
         /// <summary>
         /// Height of display (depth space)
         /// </summary>
-        private int displayHeight;
+        protected int displayHeight;
 
         /// <summary>
         /// List of colors for each body tracked
         /// </summary>
-        private List<Pen> bodyColors;
+        protected List<Pen> bodyColors;
 
         /* Properties */
         public DrawingImage BodyImageSource
         {
             get => bodyImageSource;
-            private set {
+            protected set {
                 bodyImageSource = value;
                 
             }
@@ -181,7 +181,7 @@ namespace RowingMonitor.Model
         /// <summary>
         /// Updates the view with new data.
         /// </summary>
-        public void UpdateSkeletonAsync(IReadOnlyDictionary<JointType, Joint> joints)
+        public virtual void UpdateSkeletonAsync(IReadOnlyDictionary<JointType, Joint> joints)
         {
             // TODO: make async
             DrawingGroup drawingGroup = new DrawingGroup();
@@ -234,7 +234,7 @@ namespace RowingMonitor.Model
         /// <param name="jointPoints">translated positions of joints to draw</param>
         /// <param name="drawingContext">drawing context to draw to</param>
         /// <param name="drawingPen">specifies color to draw a specific body</param>
-        private void DrawBody(IReadOnlyDictionary<JointType, Joint> joints, IDictionary<JointType, Point> jointPoints, DrawingContext drawingContext, Pen drawingPen)
+        protected void DrawBody(IReadOnlyDictionary<JointType, Joint> joints, IDictionary<JointType, Point> jointPoints, DrawingContext drawingContext, Pen drawingPen)
         {
             // Draw the bones
             foreach (var bone in bones) {

@@ -15,7 +15,7 @@ using Xceed.Wpf.Toolkit;
 using System.Windows.Controls;
 using System.Threading;
 
-namespace RowingMonitor
+namespace RowingMonitor.ViewModel
 {
     /// <summary>
     /// Represents the view-model for the main window.
@@ -37,6 +37,7 @@ namespace RowingMonitor
         private KinectReader kinectReader;
 
         private FrontalView frontalView;
+        private SideView sideView;
 
         private Plot plot;
         private Plot velPlot;
@@ -44,6 +45,8 @@ namespace RowingMonitor
         private VelocityCalculator velCalc;
 
         private ImageSource bodyImageSource;
+
+        private ImageSource sideBodyImageSource;
 
         private Timer timer;
 
@@ -81,6 +84,10 @@ namespace RowingMonitor
             get {
                 return frontalView.ColorImageSource;
             }
+        }
+
+        public ImageSource SideBodyImageSource {
+            get => sideView.BodyImageSource;
         }
 
         /// <summary>
@@ -145,7 +152,7 @@ namespace RowingMonitor
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand WindowLoaded { get; private set; }
-        public ICommand WindowClosing { get; private set; }
+        public ICommand WindowClosing { get; private set; }        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel" /> class.
@@ -154,7 +161,10 @@ namespace RowingMonitor
         {
             kinectReader = KinectReader.Instance;
 
+            // skeleton views
             frontalView = new FrontalView(kinectReader.CoordinateMapper, kinectReader.DisplayWidth, 
+                kinectReader.DisplayHeight);
+            sideView = new SideView(kinectReader.CoordinateMapper, kinectReader.DisplayWidth, 
                 kinectReader.DisplayHeight);
 
             plot = new Plot(200);
@@ -191,6 +201,7 @@ namespace RowingMonitor
             RaisePropertyChanged("VelModel");
             RaisePropertyChanged("ColorImageSource");
             RaisePropertyChanged("BodyImageSource");
+            RaisePropertyChanged("SideBodyImageSource");
             RaisePropertyChanged("Model");
         }
 
@@ -198,6 +209,9 @@ namespace RowingMonitor
         {
             // calculate velocites
             velCalc.CalculateVelocity(e.KinectDataContainer.ShiftedJointData);
+
+            // show side view
+            sideView.UpdateSkeletonAsync(e.KinectDataContainer.ShiftedJointData.Last().Joints);
         }
 
         private async void VelCalc_CalculatedFrameArrivedAsync(object sender, CalculatedFrameArrivedEventArgs e)
@@ -219,14 +233,14 @@ namespace RowingMonitor
 
         private async void KinectReader_ColorFrameArrivedAsync(object sender, Model.ColorFrameArrivedEventArgs e)
         {
-            await frontalView.UpdateColorImageAsync(e.KinectDataContainer.ColorBitmap);
+            //await frontalView.UpdateColorImageAsync(e.KinectDataContainer.ColorBitmap);
             //RaisePropertyChanged("ColorImageSource");
         }
 
         private async void Filter_SmoothedFrameArrivedAsync(object sender, SmoothedFrameArrivedEventArgs e)
         {
             // update frontal view skeleton
-            frontalView.UpdateSkeletonAsync(e.KinectDataContainer.SmoothedJointData.Last().Joints);
+            //frontalView.UpdateSkeletonAsync(e.KinectDataContainer.SmoothedJointData.Last().Joints);
             //RaisePropertyChanged("BodyImageSource");
 
             // update plot

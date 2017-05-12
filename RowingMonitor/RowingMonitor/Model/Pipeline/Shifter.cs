@@ -48,6 +48,8 @@ namespace RowingMonitor.Model
             // angle around x-axis
             double diffAngle = Math.Atan2(newJoints[JointType.SpineBase].Position.Z,
                 newJoints[JointType.SpineBase].Position.Y);
+            // add another 90°
+            //diffAngle += 1.5708;
             Debug.WriteLine("diffAngle " + diffAngle);
 
             // create the rotation matrix around x-axis
