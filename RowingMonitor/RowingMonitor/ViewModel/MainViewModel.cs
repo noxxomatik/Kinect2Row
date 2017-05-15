@@ -14,6 +14,8 @@ using RowingMonitor.Model;
 using Xceed.Wpf.Toolkit;
 using System.Windows.Controls;
 using System.Threading;
+using RowingMonitor.Model.Pipeline;
+using System.Diagnostics;
 
 namespace RowingMonitor.ViewModel
 {
@@ -25,7 +27,7 @@ namespace RowingMonitor.ViewModel
         /// <summary>
         /// Current status text to display
         /// </summary>
-        private string statusText = null;        
+        private string statusText = null;
 
         // plot options
         private String selectedJointName;
@@ -52,12 +54,15 @@ namespace RowingMonitor.ViewModel
 
         private Shifter shifter;
 
+        private SegmentDetector segmentDetector;
+
 
         /* Properties */
         /// <summary>
         /// Gets the plot model.
         /// </summary>
-        public PlotModel Model {
+        public PlotModel Model
+        {
             get {
                 return plot.PlotModel;
             }
@@ -86,7 +91,8 @@ namespace RowingMonitor.ViewModel
             }
         }
 
-        public ImageSource SideBodyImageSource {
+        public ImageSource SideBodyImageSource
+        {
             get => sideView.BodyImageSource;
         }
 
@@ -111,7 +117,8 @@ namespace RowingMonitor.ViewModel
             }
         }
 
-        public double Beta {
+        public double Beta
+        {
             get => filter.Beta;
             set {
                 filter.Beta = value;
@@ -119,7 +126,8 @@ namespace RowingMonitor.ViewModel
             }
         }
 
-        public double Fcmin {
+        public double Fcmin
+        {
             get => filter.Fcmin;
             set {
                 filter.Fcmin = value;
@@ -152,7 +160,7 @@ namespace RowingMonitor.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand WindowLoaded { get; private set; }
-        public ICommand WindowClosing { get; private set; }        
+        public ICommand WindowClosing { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel" /> class.
@@ -162,9 +170,9 @@ namespace RowingMonitor.ViewModel
             kinectReader = KinectReader.Instance;
 
             // skeleton views
-            frontalView = new FrontalView(kinectReader.CoordinateMapper, kinectReader.DisplayWidth, 
+            frontalView = new FrontalView(kinectReader.CoordinateMapper, kinectReader.DisplayWidth,
                 kinectReader.DisplayHeight);
-            sideView = new SideView(kinectReader.CoordinateMapper, kinectReader.DisplayWidth, 
+            sideView = new SideView(kinectReader.CoordinateMapper, kinectReader.DisplayWidth,
                 kinectReader.DisplayHeight);
 
             plot = new Plot(200);
@@ -192,6 +200,10 @@ namespace RowingMonitor.ViewModel
             velCalc = new VelocityCalculator();
             velCalc.CalculatedFrameArrived += VelCalc_CalculatedFrameArrivedAsync;
 
+            // init segment detector
+            segmentDetector = new SegmentDetector();
+            segmentDetector.SegmentDetected += SegmentDetector_SegmentDetected;
+
             // start render loop
             timer = new Timer(Render, null, 0, 33);
         }
@@ -205,7 +217,12 @@ namespace RowingMonitor.ViewModel
             RaisePropertyChanged("Model");
         }
 
-        private async void Shifter_ShiftedFrameArrivedAsync(object sender, ShiftedFrameArrivedEventArgs e)
+        private void SegmentDetector_SegmentDetected(object sender, SegmentDetectedEventArgs e)
+        {
+            Debug.WriteLine("*** SEGMENT DETECTED! ***");
+        }
+
+        private void Shifter_ShiftedFrameArrivedAsync(object sender, ShiftedFrameArrivedEventArgs e)
         {
             // calculate velocites
             velCalc.CalculateVelocity(e.KinectDataContainer.ShiftedJointData);
@@ -216,15 +233,28 @@ namespace RowingMonitor.ViewModel
 
         private async void VelCalc_CalculatedFrameArrivedAsync(object sender, CalculatedFrameArrivedEventArgs e)
         {
+            // check for segments
+            segmentDetector.SegmentByZeroCrossings(e.KinectDataContainer.VelocityJointData.Last(), JointType.HandRight, "Z");
+
             // update plot
             int count = 0;
             Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
             dataPoints[SelectedJointName + " Velocity"] = new List<Double[]>();
+            dataPoints["Hits"] = new List<double[]>();
             foreach (JointData jointData in e.KinectDataContainer.VelocityJointData) {
                 Double[] values = new Double[2];
                 values[0] = jointData.AbsTimestamp / 1000;
                 values[1] = jointData.Joints[SelectedJointType].Position.Z;
                 dataPoints[SelectedJointName + " Velocity"].Add(values);
+
+                // check if index is hit
+                if (e.KinectDataContainer.Hits.Contains(jointData.Index)) {
+                    Double[] hit = new Double[2];
+                    hit[0] = jointData.AbsTimestamp / 1000;
+                    hit[1] = 0;
+                    dataPoints["Hits"].Add(hit);
+                }
+
                 count++;
             }
             await velPlot.UpdateAsync(dataPoints, SelectedJointName + " Velocity Z");
@@ -266,7 +296,7 @@ namespace RowingMonitor.ViewModel
             await plot.UpdateAsync(dataPoints, SelectedJointName + " Z");
             //RaisePropertyChanged("Model");
 
-            shifter.ShiftAndRotate(e.KinectDataContainer.SmoothedJointData.Last());            
+            shifter.ShiftAndRotate(e.KinectDataContainer.SmoothedJointData.Last());
         }
 
         void KinectReader_KinectFrameArrived(object sender, KinectFrameArrivedEventArgs e)
@@ -303,6 +333,6 @@ namespace RowingMonitor.ViewModel
             if (handler != null) {
                 handler(this, new PropertyChangedEventArgs(property));
             }
-        }        
+        }
     }
 }

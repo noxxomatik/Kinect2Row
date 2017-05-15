@@ -28,9 +28,13 @@ namespace RowingMonitor.Model
 
         private List<JointData> shiftedJointData = new List<JointData>();
 
+        private List<int> hits = new List<int>();
+
         private double relStartTime = -1;
 
         private WriteableBitmap colorBitmap = null;
+
+        private int frameCount = 0;
 
         /* Properties */
         /// <summary>
@@ -64,6 +68,10 @@ namespace RowingMonitor.Model
         /// </summary>
         public WriteableBitmap ColorBitmap { get => colorBitmap; set => colorBitmap = value; }
 
+        public List<int> Hits { get => hits; set => hits = value; }
+
+        public int FrameCount { get => frameCount; set => frameCount = value; }
+
         private KinectDataContainer() { }
 
         public static KinectDataContainer Instance
@@ -93,29 +101,30 @@ namespace RowingMonitor.Model
 
         public void AddNewRawJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints)
         {
-            JointData jointData = NewJointData(timestamp, joints);
+            JointData jointData = NewJointData(timestamp, joints, FrameCount);
             rawJointData.Add(jointData);
+            FrameCount++;
         }
 
-        public void AddNewSmoothedJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints)
+        public void AddNewSmoothedJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints, int index)
         {
-            JointData jointData = NewJointData(timestamp, joints);
+            JointData jointData = NewJointData(timestamp, joints, index);
             smoothedJointData.Add(jointData);
         }
 
-        public void AddNewVelocityJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints)
+        public void AddNewVelocityJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints, int index)
         {
-            JointData jointData = NewJointData(timestamp, joints);
+            JointData jointData = NewJointData(timestamp, joints, index);
             velocityJointData.Add(jointData);
         }
 
-        public void AddNewShiftedJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints)
+        public void AddNewShiftedJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints, int index)
         {
-            JointData jointData = NewJointData(timestamp, joints);
+            JointData jointData = NewJointData(timestamp, joints, index);
             shiftedJointData.Add(jointData);
         }
 
-        private JointData NewJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints)
+        private JointData NewJointData(double timestamp, IReadOnlyDictionary<JointType, Joint> joints, int index)
         {
             if (relStartTime == -1) {
                 relStartTime = timestamp;
@@ -123,6 +132,7 @@ namespace RowingMonitor.Model
             JointData jointData = new JointData {
                 RelTimestamp = timestamp,
                 AbsTimestamp = timestamp - relStartTime,
+                Index = index,
                 Joints = joints
             };
             return jointData;
@@ -134,9 +144,11 @@ namespace RowingMonitor.Model
         private double relTimestamp;
         private double absTimestamp;
         private IReadOnlyDictionary<JointType, Joint> joints;
+        private int index;
 
         public double RelTimestamp { get => relTimestamp; set => relTimestamp = value; }
         public double AbsTimestamp { get => absTimestamp; set => absTimestamp = value; }
         public IReadOnlyDictionary<JointType, Joint> Joints { get => joints; set => joints = value; }
+        public int Index { get => index; set => index = value; }
     }
 }

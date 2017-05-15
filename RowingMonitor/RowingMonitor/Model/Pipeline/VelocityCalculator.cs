@@ -49,7 +49,7 @@ namespace RowingMonitor.Model
                     newJoints.Add(joint.Key, newJoint);
                 }
             }
-            kdc.AddNewVelocityJointData(currJointData.RelTimestamp, newJoints);
+            kdc.AddNewVelocityJointData(currJointData.RelTimestamp, newJoints, currJointData.Index);
 
             CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs());
         }

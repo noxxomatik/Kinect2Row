@@ -104,6 +104,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\EventArgs\SegmentDetectedEventArgs.cs" />
+    <Compile Include="Model\Pipeline\SegmentDetector.cs" />
     <Compile Include="Model\Util\BodyNotFullyTrackedException.cs" />
     <Compile Include="Model\EventArgs\ShiftedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\FrontalView.cs" />

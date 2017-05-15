@@ -79,7 +79,7 @@ namespace RowingMonitor.Model
             }
 
             KinectDataContainer kdc = KinectDataContainer.Instance;
-            kdc.AddNewShiftedJointData(jointData.RelTimestamp, shiftedJoints);
+            kdc.AddNewShiftedJointData(jointData.RelTimestamp, shiftedJoints, jointData.Index);
 
             ShiftedFrameArrived(this, new ShiftedFrameArrivedEventArgs());
         }

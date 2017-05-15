@@ -103,7 +103,7 @@ namespace RowingMonitor.Model
             }
 
             Dictionary<JointType, Joint> result = xfilt.Filter(x, Alpha(rate, cutoff));
-            kdc.AddNewSmoothedJointData(kdc.RawJointData.Last().RelTimestamp, result);
+            kdc.AddNewSmoothedJointData(kdc.RawJointData.Last().RelTimestamp, result, kdc.RawJointData.Last().Index);
 
             SmoothedFrameArrived(this, new SmoothedFrameArrivedEventArgs());
         }      
