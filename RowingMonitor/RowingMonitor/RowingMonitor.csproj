@@ -104,11 +104,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\EventArgs\KleshnevEventArgs.cs" />
     <Compile Include="Model\EventArgs\SegmentDetectedEventArgs.cs" />
+    <Compile Include="Model\Pipeline\KleshnevVelocityCalculator.cs" />
     <Compile Include="Model\Pipeline\SegmentDetector.cs" />
     <Compile Include="Model\Util\BodyNotFullyTrackedException.cs" />
     <Compile Include="Model\EventArgs\ShiftedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\FrontalView.cs" />
+    <Compile Include="Model\Util\Enums.cs" />
     <Compile Include="Model\Util\KinectDataContainer.cs" />
     <Compile Include="Model\EventArgs\ColorFrameArrivedEventArgs.cs" />
     <Compile Include="Model\EventArgs\CalculatedFrameArrivedEventArgs.cs" />
