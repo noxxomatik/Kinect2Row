@@ -13,45 +13,72 @@ namespace RowingMonitor.Model
             CalculatedFrameArrivedEventArgs e);
         public event CalculatedFrameArrivedEventHandler CalculatedFrameArrived;
 
+        private JointData lastJointData;
+        private JointData penultimateJointData;        
+
         /// <summary>
-        /// Calculates the velocity along the axis for every joint in m/s. 
+        /// Calculates the velocity as 1st derivative (gradient) of position.
+        /// Calculation needs one frame as buffer.
         /// </summary>
-        /// <param name="jointDataList">Given joint data list.</param>
-        public void CalculateVelocity(List<JointData> jointDataList)
+        /// <param name="jointData"></param>
+        public void CalculateVelocity(JointData jointData)
         {
-            KinectDataContainer kdc = KinectDataContainer.Instance;           
-            
-            JointData currJointData = jointDataList.Last();
-            Dictionary<JointType, Joint> newJoints = new Dictionary<JointType, Joint>();
-            // first time
-            if (kdc.VelocityJointData.Count() <= 0) {                
-                foreach(KeyValuePair<JointType, Joint> joint in currJointData.Joints) {
-                    Joint newJoint = joint.Value;
-                    newJoint.Position.X = newJoint.Position.Y = newJoint.Position.Z = 0;
-                    newJoints.Add(joint.Key, newJoint);
-                }                
+            // check if first value
+            if (lastJointData.RelTimestamp == 0) {
+                lastJointData = jointData;
             }
-            else {
-                JointData prevJointData = jointDataList[jointDataList.Count() - 2];
-                JointData prevVelJointData = kdc.VelocityJointData.Last();
-                double time = (currJointData.RelTimestamp - prevJointData.RelTimestamp) / 1000;
-                foreach (KeyValuePair<JointType, Joint> joint in currJointData.Joints) {
+            // check if second value -> use the boundaries formula
+            else if (penultimateJointData.RelTimestamp == 0) {
+                Dictionary<JointType, Joint> newJoints = new Dictionary<JointType, Joint>();
+                double time = (jointData.RelTimestamp - lastJointData.RelTimestamp) / 1000;
+                foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                     Joint newJoint = joint.Value;
                     newJoint.Position.X = Convert.ToSingle(
-                        (currJointData.Joints[joint.Key].Position.X
-                        - prevJointData.Joints[joint.Key].Position.X) / time);
+                        (jointData.Joints[joint.Key].Position.X
+                        - lastJointData.Joints[joint.Key].Position.X) / time);
                     newJoint.Position.Y = Convert.ToSingle(
-                        (currJointData.Joints[joint.Key].Position.Y 
-                        - prevJointData.Joints[joint.Key].Position.Y) / time);
+                        (jointData.Joints[joint.Key].Position.Y
+                        - lastJointData.Joints[joint.Key].Position.Y) / time);
                     newJoint.Position.Z = Convert.ToSingle(
-                        (currJointData.Joints[joint.Key].Position.Z
-                        - prevJointData.Joints[joint.Key].Position.Z) / time);
+                        (jointData.Joints[joint.Key].Position.Z
+                        - lastJointData.Joints[joint.Key].Position.Z) / time);
                     newJoints.Add(joint.Key, newJoint);
                 }
-            }
-            kdc.AddNewVelocityJointData(currJointData.RelTimestamp, newJoints, currJointData.Index);
+                KinectDataContainer kdc = KinectDataContainer.Instance;
+                kdc.AddNewVelocityJointData(jointData.RelTimestamp, newJoints, lastJointData.Index);
 
-            CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs());
+                // save to history
+                penultimateJointData = lastJointData;
+                lastJointData = jointData;
+
+                CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs());
+            }
+            // if two old values are present -> use interior formula
+            else {
+                Dictionary<JointType, Joint> newJoints = new Dictionary<JointType, Joint>();
+                double time = (jointData.RelTimestamp - penultimateJointData.RelTimestamp) / 1000;
+                foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
+                    Joint newJoint = joint.Value;
+                    newJoint.Position.X = Convert.ToSingle(
+                        (jointData.Joints[joint.Key].Position.X
+                        - penultimateJointData.Joints[joint.Key].Position.X) / time);
+                    newJoint.Position.Y = Convert.ToSingle(
+                        (jointData.Joints[joint.Key].Position.Y
+                        - penultimateJointData.Joints[joint.Key].Position.Y) / time);
+                    newJoint.Position.Z = Convert.ToSingle(
+                        (jointData.Joints[joint.Key].Position.Z
+                        - penultimateJointData.Joints[joint.Key].Position.Z) / time);
+                    newJoints.Add(joint.Key, newJoint);
+                }
+                KinectDataContainer kdc = KinectDataContainer.Instance;
+                kdc.AddNewVelocityJointData(jointData.RelTimestamp, newJoints, lastJointData.Index);
+
+                // save to history
+                penultimateJointData = lastJointData;
+                lastJointData = jointData;
+
+                CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs());
+            }
         }
     }
 }

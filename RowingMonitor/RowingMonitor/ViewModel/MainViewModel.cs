@@ -299,7 +299,8 @@ namespace RowingMonitor.ViewModel
         private void Shifter_ShiftedFrameArrivedAsync(object sender, ShiftedFrameArrivedEventArgs e)
         {
             // calculate velocites
-            velCalc.CalculateVelocity(e.KinectDataContainer.ShiftedJointData);
+            //velCalc.CalculateVelocity(e.KinectDataContainer.ShiftedJointData);
+            velCalc.CalculateVelocity(e.KinectDataContainer.ShiftedJointData.Last());
 
             // show side view
             sideView.UpdateSkeletonAsync(e.KinectDataContainer.ShiftedJointData.Last().Joints);
