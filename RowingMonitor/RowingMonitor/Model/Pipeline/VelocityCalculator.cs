@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RowingMonitor.Model
 {
-    class VelocityCalculator
+    public class VelocityCalculator
     {
         public delegate void CalculatedFrameArrivedEventHandler(Object sender, 
             CalculatedFrameArrivedEventArgs e);
