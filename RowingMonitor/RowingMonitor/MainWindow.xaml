@@ -8,7 +8,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Rowing Monitor" Height="700" Width="1250">
+        Title="Rowing Monitor" Height="900" Width="1250">
     <Window.Resources>
         <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
         <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
@@ -31,6 +31,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>        
 
@@ -45,8 +46,8 @@
         </Viewbox>
         
         <oxy:PlotView Model="{Binding Model}" Grid.Row="1" Grid.Column="0"/>
-
         <oxy:PlotView Model="{Binding VelModel}" Grid.Row="1" Grid.Column="1"/>
+        <oxy:PlotView Model="{Binding ResultsModel}" Grid.Row="2" Grid.Column="0"/>
 
         <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Name="statusBar"
                    VerticalAlignment="Bottom" Background="{StaticResource MediumGreyBrush}" Foreground="{StaticResource MediumGreyBrush}">

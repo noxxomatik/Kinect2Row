@@ -36,6 +36,7 @@ namespace RowingMonitor.ViewModel
 
         // filter
         private OneEuroFilterSmoothing filter = new OneEuroFilterSmoothing();
+        private KinectJointFilter kinectJointFilter;
 
         private KinectReader kinectReader;
 
@@ -44,6 +45,7 @@ namespace RowingMonitor.ViewModel
 
         private Plot plot;
         private Plot velPlot;
+        private Plot resultsPlot;
 
         private VelocityCalculator velCalc;
 
@@ -74,6 +76,12 @@ namespace RowingMonitor.ViewModel
         {
             get {
                 return velPlot.PlotModel;
+            }
+        }
+        public PlotModel ResultsModel
+        {
+            get {
+                return resultsPlot.PlotModel;
             }
         }
 
@@ -178,8 +186,9 @@ namespace RowingMonitor.ViewModel
             sideView = new SideView(kinectReader.CoordinateMapper, kinectReader.DisplayWidth,
                 kinectReader.DisplayHeight);
 
-            plot = new Plot(3);
+            plot = new Plot(10);
             velPlot = new Plot(10);
+            resultsPlot = new Plot(3);
 
             // register event handler
             kinectReader.KinectFrameArrived += KinectReader_KinectFrameArrived;
@@ -193,7 +202,24 @@ namespace RowingMonitor.ViewModel
             SelectedJointName = "SpineBase";
 
             // init filter
-            filter.SmoothedFrameArrived += Filter_SmoothedFrameArrivedAsync;
+            //filter.SmoothedFrameArrived += Filter_SmoothedFrameArrivedAsync;
+            kinectJointFilter = new KinectJointFilter();
+            //kinectJointFilter.Init();   // suggested value
+            // Some smoothing with little latency (defaults).
+            // Only filters out small jitters.
+            // Good for gesture recognition in games.
+            //kinectJointFilter.Init(0.5f, 0.5f, 0.5f, 0.05f, 0.04f);
+            // Smoothed with some latency.
+            // Filters out medium jitters.
+            // Good for a menu system that needs to be smooth but
+            // doesn't need the reduced latency as much as gesture recognition does.
+            kinectJointFilter.Init(0.5f, 0.1f, 0.5f, 0.1f, 0.1f);
+            // Very smooth, but with a lot of latency.
+            // Filters out large jitters.
+            // Good for situations where smooth data is absolutely required
+            // and latency is not an issue.
+            //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
+            kinectJointFilter.SmoothedFrameArrived += Filter_SmoothedFrameArrivedAsync;
 
             // init shifter
             shifter = new Shifter();
@@ -222,47 +248,49 @@ namespace RowingMonitor.ViewModel
             RaisePropertyChanged("BodyImageSource");
             RaisePropertyChanged("SideBodyImageSource");
             RaisePropertyChanged("Model");
+            RaisePropertyChanged("ResultsModel");
         }
 
         /* Event Handler */
         void KinectReader_KinectFrameArrived(object sender, KinectFrameArrivedEventArgs e)
         {
-            filter.Filter();
+            //filter.Filter();
+            kinectJointFilter.UpdateFilter(e.KinectDataContainer.RawJointData.Last());
         }
 
         private void KinectReader_ColorFrameArrivedAsync(object sender, Model.ColorFrameArrivedEventArgs e)
         {
-            //await frontalView.UpdateColorImageAsync(e.KinectDataContainer.ColorBitmap);
+            frontalView.UpdateColorImageAsync(e.KinectDataContainer.ColorBitmap);
             //RaisePropertyChanged("ColorImageSource");
         }
 
         private void Filter_SmoothedFrameArrivedAsync(object sender, SmoothedFrameArrivedEventArgs e)
         {
-            // update frontal view skeleton
-            //frontalView.UpdateSkeletonAsync(e.KinectDataContainer.SmoothedJointData.Last().Joints);
-            //RaisePropertyChanged("BodyImageSource");
+            //update frontal view skeleton
+            frontalView.UpdateSkeletonAsync(e.KinectDataContainer.SmoothedJointData.Last().Joints);
+            RaisePropertyChanged("BodyImageSource");
 
-            // update plot
-            //int count = 0;
-            //Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
-            //dataPoints[SelectedJointName + " Smoothed"] = new List<Double[]>();
-            //foreach (JointData jointData in e.KinectDataContainer.SmoothedJointData) {
-            //    Double[] values = new Double[2];
-            //    values[0] = jointData.AbsTimestamp / 1000;
-            //    values[1] = jointData.Joints[SelectedJointType].Position.Z;
-            //    dataPoints[SelectedJointName + " Smoothed"].Add(values);
-            //    count++;
-            //}
+            //update plot
+            int count = 0;
+            Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
+            dataPoints[SelectedJointName + " Smoothed"] = new List<Double[]>();
+            foreach (JointData jointData in e.KinectDataContainer.SmoothedJointData) {
+                Double[] values = new Double[2];
+                values[0] = jointData.AbsTimestamp / 1000;
+                values[1] = jointData.Joints[SelectedJointType].Position.Z;
+                dataPoints[SelectedJointName + " Smoothed"].Add(values);
+                count++;
+            }
 
-            //dataPoints[SelectedJointName + " Raw"] = new List<Double[]>();
-            //foreach (JointData jointData in e.KinectDataContainer.RawJointData) {
-            //    Double[] values = new Double[2];
-            //    values[0] = jointData.AbsTimestamp / 1000;
-            //    values[1] = jointData.Joints[SelectedJointType].Position.Z;
-            //    dataPoints[SelectedJointName + " Raw"].Add(values);
-            //    count++;
-            //}
-            //plot.UpdatePlot(dataPoints, SelectedJointName + " Z");
+            dataPoints[SelectedJointName + " Raw"] = new List<Double[]>();
+            foreach (JointData jointData in e.KinectDataContainer.RawJointData) {
+                Double[] values = new Double[2];
+                values[0] = jointData.AbsTimestamp / 1000;
+                values[1] = jointData.Joints[SelectedJointType].Position.Z;
+                dataPoints[SelectedJointName + " Raw"].Add(values);
+                count++;
+            }
+            plot.UpdatePlot(dataPoints, SelectedJointName + " Z");
             //RaisePropertyChanged("Model");
 
             shifter.ShiftAndRotate(e.KinectDataContainer.SmoothedJointData.Last());
@@ -312,7 +340,6 @@ namespace RowingMonitor.ViewModel
 
         private void KleshnevVelocityCalculator_KleshnevCalculationFinished(object sender, KleshnevEventArgs e)
         {
-            int count = 0;
             Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
             foreach (KleshnevVelocityType type in Enum.GetValues(typeof(KleshnevVelocityType))) {
                 dataPoints[type.ToString()] = new List<Double[]>();
@@ -325,7 +352,7 @@ namespace RowingMonitor.ViewModel
                     dataPoints[velocity.Key.ToString()].Add(values);
                 }
             }
-            plot.UpdatePlot(dataPoints, SelectedJointName + " Z");
+            resultsPlot.UpdatePlot(dataPoints, "Kleshnev Velocities");
         }
 
         private void SegmentDetector_SegmentDetected(object sender, SegmentDetectedEventArgs e)
@@ -348,6 +375,7 @@ namespace RowingMonitor.ViewModel
         private void WindowClosingCommand(object obj)
         {
             kinectReader.StopReader();
+            kinectJointFilter.Shutdown();
         }
 
         // need check for RelayCommand
