@@ -36,7 +36,9 @@ namespace RowingMonitor.Model
         /// </summary>
         /// <param name="dataPoints">Set of data points (x,y). The Key will be used as title of the line series.</param>
         /// <param name="title">Title of the plot.</param>
-        public void UpdatePlot(Dictionary<String, List<Double[]>> dataPoints, String title)
+        public void UpdatePlot(Dictionary<String, List<Double[]>> dataPoints, 
+            String title, 
+            Dictionary<String, OxyColor> colors = null)
         {
             PlotModel tmp = new PlotModel { Title = title != null ? title : "" };
             LinearAxis xAxis = new LinearAxis();
@@ -44,7 +46,15 @@ namespace RowingMonitor.Model
             double maxXValue = 0;            
 
             foreach (KeyValuePair<String, List<Double[]>> series in dataPoints) {
-                LineSeries lineSeries = new LineSeries { Title = series.Key, MarkerType = MarkerType.Circle };
+                LineSeries lineSeries = new LineSeries {
+                    Title = series.Key,
+                    MarkerType = MarkerType.Circle
+                };
+
+                // check if specific colors are set
+                if (colors != null && colors.Count() == dataPoints.Count()) {
+                    lineSeries.Color = colors[series.Key];
+                }
 
                 int indexCount = series.Value.Count();
                 //int indexStart = indexCount > maxValues ? indexCount - maxValues : 0;

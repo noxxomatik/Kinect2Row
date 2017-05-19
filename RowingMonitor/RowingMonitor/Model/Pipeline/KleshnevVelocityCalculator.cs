@@ -27,21 +27,18 @@ namespace RowingMonitor.Model.Pipeline
 
             // multiply all values with -1 to change the sign
             // leg velocity equals velocity of chip
-            double legs = (-1) * velocityJointData.Joints[JointType.SpineBase].Position.Z;
+            double legs = velocityJointData.Joints[JointType.SpineBase].Position.Z;
 
             // handle velocity equals hand velocity
-            double handleR = (-1) * velocityJointData.Joints[JointType.HandRight].Position.Z;
-            double handleL = (-1) * velocityJointData.Joints[JointType.HandLeft].Position.Z;
+            double handleR = velocityJointData.Joints[JointType.HandRight].Position.Z;
+            double handleL = velocityJointData.Joints[JointType.HandLeft].Position.Z;
 
             // trunk velocity equals cshoulder velocity minus leg velocity
-            double trunk = ((-1) * velocityJointData.Joints[JointType.SpineShoulder].Position.Z) 
-                - legs;
+            double trunk = velocityJointData.Joints[JointType.SpineShoulder].Position.Z - legs;
 
             // arms velocity equals handle velocity minus cshoulder velocity
-            double armsR = handleR - ((-1)
-                * velocityJointData.Joints[JointType.SpineShoulder].Position.Z);
-            double armsL = handleL - ((-1)
-                * velocityJointData.Joints[JointType.SpineShoulder].Position.Z);
+            double armsR = handleR - velocityJointData.Joints[JointType.SpineShoulder].Position.Z;
+            double armsL = handleL - velocityJointData.Joints[JointType.SpineShoulder].Position.Z;
 
             // add results to KleshnevData
             Dictionary<KleshnevVelocityType, double> velocities = new Dictionary<KleshnevVelocityType, double>();

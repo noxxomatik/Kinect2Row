@@ -341,6 +341,14 @@ namespace RowingMonitor.ViewModel
 
         private void KleshnevVelocityCalculator_KleshnevCalculationFinished(object sender, KleshnevEventArgs e)
         {
+            Dictionary<String, OxyColor> colors = new Dictionary<string, OxyColor>();
+            colors.Add(KleshnevVelocityType.ArmsLeft.ToString(), OxyColors.LightGreen);
+            colors.Add(KleshnevVelocityType.ArmsRight.ToString(), OxyColors.Green);
+            colors.Add(KleshnevVelocityType.HandleLeft.ToString(), OxyColors.Gray);
+            colors.Add(KleshnevVelocityType.HandleRight.ToString(), OxyColors.Black);
+            colors.Add(KleshnevVelocityType.Legs.ToString(), OxyColors.Red);
+            colors.Add(KleshnevVelocityType.Trunk.ToString(), OxyColors.Blue);
+
             Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
             foreach (KleshnevVelocityType type in Enum.GetValues(typeof(KleshnevVelocityType))) {
                 dataPoints[type.ToString()] = new List<Double[]>();
@@ -353,7 +361,7 @@ namespace RowingMonitor.ViewModel
                     dataPoints[velocity.Key.ToString()].Add(values);
                 }
             }
-            resultsPlot.UpdatePlot(dataPoints, "Kleshnev Velocities");
+            resultsPlot.UpdatePlot(dataPoints, "Kleshnev Velocities", colors);
         }
 
         private void SegmentDetector_SegmentDetected(object sender, SegmentDetectedEventArgs e)
