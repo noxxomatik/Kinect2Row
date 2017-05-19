@@ -113,9 +113,9 @@
     <Compile Include="Model\EventArgs\ShiftedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\FrontalView.cs" />
     <Compile Include="Model\Util\Enums.cs" />
-    <Compile Include="Model\Util\KinectDataContainer.cs" />
     <Compile Include="Model\EventArgs\ColorFrameArrivedEventArgs.cs" />
     <Compile Include="Model\EventArgs\CalculatedFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\Util\KinectDataHandler.cs" />
     <Compile Include="Model\Util\LowPassFilter.cs" />
     <Compile Include="Model\Pipeline\Shifter.cs" />
     <Compile Include="Model\Pipeline\SideView.cs" />

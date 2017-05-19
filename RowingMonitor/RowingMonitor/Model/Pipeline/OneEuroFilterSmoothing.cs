@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,7 +25,9 @@ namespace RowingMonitor.Model
         // low pass filter
         LowPassFilter xfilt;
         // low-pass filter for derivate
-        LowPassFilter dxfilt;        
+        LowPassFilter dxfilt;
+
+        JointData lastJointData;
 
         /* Properties */
         public Double Beta { get => beta; set => beta = value; }
@@ -55,13 +58,12 @@ namespace RowingMonitor.Model
             dxfilt = new LowPassFilter();
         }
 
-        public void Filter()
+        public void UpdateFilter(JointData jointData)
         {
-            KinectDataContainer kdc = KinectDataContainer.Instance;
             Dictionary<JointType, Joint> dx = new Dictionary<JointType, Joint>();
             // if first time
-            if (kdc.SmoothedJointData.Count() <= 0) {
-                foreach (KeyValuePair<JointType, Joint> joint in kdc.RawJointData.Last().Joints) {
+            if (lastJointData.RelTimestamp == 0) {
+                foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                     Joint newJoint = joint.Value;
                     newJoint.Position.X = 0;
                     newJoint.Position.Y = 0;
@@ -70,9 +72,9 @@ namespace RowingMonitor.Model
                 }
             }
             else {
-                rate = 1.0 / ((kdc.RawJointData.Last().RelTimestamp - kdc.RawJointData[kdc.RawJointData.Count()-2].RelTimestamp) / 1000);
+                rate = 1.0 / ((jointData.RelTimestamp - lastJointData.RelTimestamp) / 1000);
 
-                foreach (KeyValuePair<JointType, Joint> joint in kdc.RawJointData.Last().Joints) {
+                foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                     Joint newJoint = joint.Value;
                     newJoint.Position.X = Convert.ToSingle((joint.Value.Position.X -
                         xfilt.Hatxprev[joint.Key].Position.X) * rate);
@@ -88,7 +90,7 @@ namespace RowingMonitor.Model
             Debug.WriteLine("Beta: " + Beta + " Fcmin: " + Fcmin + " rate: " + rate);
             Dictionary<JointType, Dictionary<String, Double>> cutoff = 
                 new Dictionary<JointType, Dictionary<string, double>>();
-            foreach (KeyValuePair<JointType, Joint> joint in kdc.RawJointData.Last().Joints) {
+            foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                 Dictionary<string, double> values = new Dictionary<string, double>();
                 values.Add("X", Mincutoff[joint.Key]["X"] + Beta * Math.Abs(edx[joint.Key].Position.X));
                 values.Add("Y", Mincutoff[joint.Key]["Y"] + Beta * Math.Abs(edx[joint.Key].Position.Y));
@@ -97,15 +99,22 @@ namespace RowingMonitor.Model
             }
 
             Dictionary<JointType, Joint> x = new Dictionary<JointType, Joint>();
-            foreach (KeyValuePair<JointType, Joint> joint in kdc.RawJointData.Last().Joints) {
+            foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                 Joint newJoint = joint.Value;
                 x.Add(joint.Key, newJoint);
             }
 
-            Dictionary<JointType, Joint> result = xfilt.Filter(x, Alpha(rate, cutoff));
-            kdc.AddNewSmoothedJointData(kdc.RawJointData.Last().RelTimestamp, result, kdc.RawJointData.Last().Index);
+            Dictionary<JointType, Joint> result = xfilt.Filter(x, Alpha(rate, cutoff));            
 
-            SmoothedFrameArrived(this, new SmoothedFrameArrivedEventArgs());
+            JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+                jointData,
+                DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
+                result);
+
+            lastJointData = jointData;
+
+            SmoothedFrameArrived(this, new SmoothedFrameArrivedEventArgs(jointData,
+                newJointData));
         }      
 
         /// <summary>

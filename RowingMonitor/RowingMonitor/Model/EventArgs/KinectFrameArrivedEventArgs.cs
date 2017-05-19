@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,15 @@ namespace RowingMonitor.Model
     /// <summary>
     /// Represents the arguments for a KinectReader's FrameArrived event.
     /// </summary>
-    public class KinectFrameArrivedEventArgs : EventArgs        
+    public class KinectFrameArrivedEventArgs : EventArgs
     {
-        private KinectDataContainer kinectDataContainer = KinectDataContainer.Instance;
-        public KinectDataContainer KinectDataContainer { get => kinectDataContainer; }
+        private JointData jointData;
 
-        public KinectFrameArrivedEventArgs(){}        
+        public KinectFrameArrivedEventArgs(JointData jointData)
+        {
+            JointData = jointData;
+        }
+
+        public JointData JointData { get => jointData; private set => jointData = value; }
     }
 }

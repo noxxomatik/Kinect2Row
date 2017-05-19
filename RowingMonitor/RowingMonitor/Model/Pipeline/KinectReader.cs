@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -62,10 +63,12 @@ namespace RowingMonitor.Model
         public string StatusText { get => statusText; }
 
         /* Events */
-        public delegate void KinectFrameArrivedEventHandler(Object sender, KinectFrameArrivedEventArgs e);
+        public delegate void KinectFrameArrivedEventHandler(Object sender, 
+            KinectFrameArrivedEventArgs e);
         public event KinectFrameArrivedEventHandler KinectFrameArrived;
 
-        public delegate void ColorFrameArrivedEventHandler(Object sender, ColorFrameArrivedEventArgs e);
+        public delegate void ColorFrameArrivedEventHandler(Object sender, 
+            ColorFrameArrivedEventArgs e);
         public event ColorFrameArrivedEventHandler ColorFrameArrived;
 
         /// <summary>
@@ -80,14 +83,16 @@ namespace RowingMonitor.Model
             coordinateMapper = kinectSensor.CoordinateMapper;
 
             // get the depth (display) extents
-            FrameDescription frameDescription = kinectSensor.DepthFrameSource.FrameDescription;
+            FrameDescription frameDescription = 
+                kinectSensor.DepthFrameSource.FrameDescription;
 
             // get size of joint space
             displayWidth = frameDescription.Width;
             displayHeight = frameDescription.Height;
 
             // open the reader for the body frames
-            multiSourceFrameReader = kinectSensor.OpenMultiSourceFrameReader(FrameSourceTypes.Body | FrameSourceTypes.Color);
+            multiSourceFrameReader = kinectSensor.OpenMultiSourceFrameReader(
+                FrameSourceTypes.Body | FrameSourceTypes.Color);
 
             // set IsAvailableChanged event notifier
             kinectSensor.IsAvailableChanged += Sensor_IsAvailableChanged;
@@ -112,7 +117,8 @@ namespace RowingMonitor.Model
         }
 
         /// <summary>
-        /// Handles the event which the sensor becomes unavailable (E.g. paused, closed, unplugged).
+        /// Handles the event which the sensor becomes unavailable 
+        /// (E.g. paused, closed, unplugged).
         /// </summary>
         /// <param name="sender">object sending the event</param>
         /// <param name="e">event arguments</param>
@@ -128,52 +134,69 @@ namespace RowingMonitor.Model
         /// </summary>
         /// <param name="sender">Object sending the event.</param>
         /// <param name="e">Event arguments.</param>
-        private void MultiSourceFrameReader_MultiSourceFrameArrived(object sender, MultiSourceFrameArrivedEventArgs e)
+        private void MultiSourceFrameReader_MultiSourceFrameArrived(object sender, 
+            MultiSourceFrameArrivedEventArgs e)
         {
             MultiSourceFrame multiSourceFrame = e.FrameReference.AcquireFrame();
 
-            using (BodyFrame bodyFrame = multiSourceFrame.BodyFrameReference.AcquireFrame()) {
+            using (BodyFrame bodyFrame = 
+                multiSourceFrame.BodyFrameReference.AcquireFrame()) {
                 if (bodyFrame != null) {
                     if (bodies == null) {
                         bodies = new Body[bodyFrame.BodyCount];
                     }
 
-                    // The first time GetAndRefreshBodyData is called, Kinect will allocate each Body in the array.
-                    // As long as those body objects are not disposed and not set to null in the array,
+                    // The first time GetAndRefreshBodyData is called, 
+                    // Kinect will allocate each Body in the array.
+                    // As long as those body objects are not disposed 
+                    // and not set to null in the array,
                     // those body objects will be re-used.
                     bodyFrame.GetAndRefreshBodyData(bodies);
 
                     // update the kinect data container
-                    KinectDataContainer kdc = KinectDataContainer.Instance;
-                    kdc.Bodies = bodies;
-                    if (kdc.GetFirstTrackedBody() != null) {
-                        IReadOnlyDictionary<JointType, Joint> joints = kdc.GetFirstTrackedBody().Joints;
-                        kdc.AddNewRawJointData(bodyFrame.RelativeTime.TotalMilliseconds, joints);
+                    KinectDataHandler kdh = KinectDataHandler.Instance;
+                    kdh.Bodies = bodies;
+                    if (kdh.GetFirstTrackedBody() != null) {
+                        IReadOnlyDictionary<JointType, Joint> joints =
+                            kdh.GetFirstTrackedBody().Joints;                        
                         // body frame available for other pipeline members
-                        KinectFrameArrived(this, new KinectFrameArrivedEventArgs());
+                        KinectFrameArrived(this, 
+                            new KinectFrameArrivedEventArgs(
+                                kdh.CreateNewJointData(
+                                    bodyFrame.RelativeTime.TotalMilliseconds,
+                                    DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
+                                    joints)));
                     }
                 }
             }
 
-            using (ColorFrame colorFrame = multiSourceFrame.ColorFrameReference.AcquireFrame()) {
+            using (ColorFrame colorFrame = 
+                multiSourceFrame.ColorFrameReference.AcquireFrame()) {
                 if (colorFrame != null) {
                     FrameDescription colorFrameDescription = colorFrame.FrameDescription;
 
                     using (KinectBuffer colorBuffer = colorFrame.LockRawImageBuffer()) {
-                        KinectDataContainer kdc = KinectDataContainer.Instance;
-                        kdc.ColorBitmap =  new WriteableBitmap(colorFrameDescription.Width, colorFrameDescription.Height, 96.0, 96.0, PixelFormats.Bgr32, null);
-                        kdc.ColorBitmap.Lock();
-                        // verify data and write the new color frame data to the display bitmap
-                        if ((colorFrameDescription.Width == kdc.ColorBitmap.PixelWidth) && (colorFrameDescription.Height == kdc.ColorBitmap.PixelHeight)) {
+                        WriteableBitmap bitmap =  new WriteableBitmap(
+                            colorFrameDescription.Width,
+                            colorFrameDescription.Height, 
+                            96.0, 96.0, PixelFormats.Bgr32, null);
+                        bitmap.Lock();
+                        // verify data and write the new color frame data
+                        // to the display bitmap
+                        if ((colorFrameDescription.Width == bitmap.PixelWidth) 
+                            && (colorFrameDescription.Height == bitmap.PixelHeight)) {
                             colorFrame.CopyConvertedFrameDataToIntPtr(
-                                kdc.ColorBitmap.BackBuffer,
-                                (uint) (colorFrameDescription.Width * colorFrameDescription.Height * 4),
+                                bitmap.BackBuffer,
+                                (uint) (colorFrameDescription.Width 
+                                * colorFrameDescription.Height * 4),
                                 ColorImageFormat.Bgra);
 
-                            kdc.ColorBitmap.AddDirtyRect(new Int32Rect(0, 0, kdc.ColorBitmap.PixelWidth, kdc.ColorBitmap.PixelHeight));
+                            bitmap.AddDirtyRect(new Int32Rect(0, 0,
+                                bitmap.PixelWidth,
+                                bitmap.PixelHeight));
                         }
-                        kdc.ColorBitmap.Unlock();
-                        ColorFrameArrived(this, new ColorFrameArrivedEventArgs());
+                        bitmap.Unlock();
+                        ColorFrameArrived(this, new ColorFrameArrivedEventArgs(bitmap));
                     }
                 }
             }
@@ -185,7 +208,8 @@ namespace RowingMonitor.Model
         public void StartReader()
         {
             if (this.multiSourceFrameReader != null) {
-                this.multiSourceFrameReader.MultiSourceFrameArrived += MultiSourceFrameReader_MultiSourceFrameArrived;
+                this.multiSourceFrameReader.MultiSourceFrameArrived += 
+                    MultiSourceFrameReader_MultiSourceFrameArrived;
             }
         }        
 

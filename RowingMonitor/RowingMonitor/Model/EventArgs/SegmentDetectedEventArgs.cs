@@ -10,11 +10,15 @@ namespace RowingMonitor.Model
     /// <summary>
     /// Represents the arguments for a detected segment event.
     /// </summary>
-    public class SegmentDetectedEventArgs : EventArgs        
+    public class SegmentDetectedEventArgs : EventArgs
     {
-        private KinectDataContainer kinectDataContainer = KinectDataContainer.Instance;
-        public KinectDataContainer KinectDataContainer { get => kinectDataContainer; }
+        private List<long> hitList;
 
-        public SegmentDetectedEventArgs(){}        
+        public SegmentDetectedEventArgs(List<long> hitList)
+        {
+            HitList = hitList;
+        }
+
+        public List<long> HitList { get => hitList; private set => hitList = value; }
     }
 }

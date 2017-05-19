@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -78,10 +79,13 @@ namespace RowingMonitor.Model
                 shiftedJoints.Add(joint.Key, newJoint);
             }
 
-            KinectDataContainer kdc = KinectDataContainer.Instance;
-            kdc.AddNewShiftedJointData(jointData.RelTimestamp, shiftedJoints, jointData.Index);
 
-            ShiftedFrameArrived(this, new ShiftedFrameArrivedEventArgs());
+            JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+                jointData,
+                DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
+                shiftedJoints);
+
+            ShiftedFrameArrived(this, new ShiftedFrameArrivedEventArgs(newJointData));
         }
     }
 }

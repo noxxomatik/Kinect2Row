@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace RowingMonitor.Model
 {
@@ -12,9 +13,14 @@ namespace RowingMonitor.Model
     /// </summary>
     public class ColorFrameArrivedEventArgs : EventArgs        
     {
-        private KinectDataContainer kinectDataContainer = KinectDataContainer.Instance;
-        public KinectDataContainer KinectDataContainer { get => kinectDataContainer; }
+        private WriteableBitmap colorBitmap;
 
-        public ColorFrameArrivedEventArgs(){}        
+        public ColorFrameArrivedEventArgs(WriteableBitmap colorBitmap)
+        {
+            ColorBitmap = colorBitmap;
+        }
+
+        public WriteableBitmap ColorBitmap { get => colorBitmap;
+            private set => colorBitmap = value; }
     }
 }

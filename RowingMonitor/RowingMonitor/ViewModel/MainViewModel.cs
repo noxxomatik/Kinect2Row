@@ -238,7 +238,7 @@ namespace RowingMonitor.ViewModel
             kleshnevVelocityCalculator.KleshnevCalculationFinished += KleshnevVelocityCalculator_KleshnevCalculationFinished;
 
             // start render loop
-            timer = new Timer(Render, null, 0, 33);
+            // timer = new Timer(Render, null, 0, 33);
         }        
 
         private void Render(object state)
@@ -254,114 +254,120 @@ namespace RowingMonitor.ViewModel
         /* Event Handler */
         void KinectReader_KinectFrameArrived(object sender, KinectFrameArrivedEventArgs e)
         {
-            //filter.Filter();
-            kinectJointFilter.UpdateFilter(e.KinectDataContainer.RawJointData.Last());
+            Task.Run(() => {
+                //filter.Filter();
+                kinectJointFilter.UpdateFilter(e.JointData);
+            });            
         }
 
         private void KinectReader_ColorFrameArrivedAsync(object sender, Model.ColorFrameArrivedEventArgs e)
         {
-            frontalView.UpdateColorImageAsync(e.KinectDataContainer.ColorBitmap);
+            frontalView.UpdateColorImageAsync(e.ColorBitmap);
             //RaisePropertyChanged("ColorImageSource");
         }
 
         private void Filter_SmoothedFrameArrivedAsync(object sender, SmoothedFrameArrivedEventArgs e)
         {
             //update frontal view skeleton
-            frontalView.UpdateSkeletonAsync(e.KinectDataContainer.SmoothedJointData.Last().Joints);
-            RaisePropertyChanged("BodyImageSource");
+            frontalView.UpdateSkeletonAsync(e.SmoothedJointData.Joints);
+            //RaisePropertyChanged("BodyImageSource");
 
             //update plot
-            int count = 0;
-            Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
-            dataPoints[SelectedJointName + " Smoothed"] = new List<Double[]>();
-            foreach (JointData jointData in e.KinectDataContainer.SmoothedJointData) {
-                Double[] values = new Double[2];
-                values[0] = jointData.AbsTimestamp / 1000;
-                values[1] = jointData.Joints[SelectedJointType].Position.Z;
-                dataPoints[SelectedJointName + " Smoothed"].Add(values);
-                count++;
-            }
+            //int count = 0;
+            //Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
+            //dataPoints[SelectedJointName + " Smoothed"] = new List<Double[]>();
+            //foreach (JointData jointData in e.SmoothedJointData) {
+            //    Double[] values = new Double[2];
+            //    values[0] = jointData.AbsTimestamp / 1000;
+            //    values[1] = jointData.Joints[SelectedJointType].Position.Z;
+            //    dataPoints[SelectedJointName + " Smoothed"].Add(values);
+            //    count++;
+            //}
 
-            dataPoints[SelectedJointName + " Raw"] = new List<Double[]>();
-            foreach (JointData jointData in e.KinectDataContainer.RawJointData) {
-                Double[] values = new Double[2];
-                values[0] = jointData.AbsTimestamp / 1000;
-                values[1] = jointData.Joints[SelectedJointType].Position.Z;
-                dataPoints[SelectedJointName + " Raw"].Add(values);
-                count++;
-            }
-            plot.UpdatePlot(dataPoints, SelectedJointName + " Z");
+            //dataPoints[SelectedJointName + " Raw"] = new List<Double[]>();
+            //foreach (JointData jointData in e.RawJointData) {
+            //    Double[] values = new Double[2];
+            //    values[0] = jointData.AbsTimestamp / 1000;
+            //    values[1] = jointData.Joints[SelectedJointType].Position.Z;
+            //    dataPoints[SelectedJointName + " Raw"].Add(values);
+            //    count++;
+            //}
+            //plot.UpdatePlot(dataPoints, SelectedJointName + " Z");
             //RaisePropertyChanged("Model");
 
-            shifter.ShiftAndRotate(e.KinectDataContainer.SmoothedJointData.Last());
+            shifter.ShiftAndRotate(e.SmoothedJointData);
         }
 
-        private void Shifter_ShiftedFrameArrivedAsync(object sender, ShiftedFrameArrivedEventArgs e)
+        private void Shifter_ShiftedFrameArrivedAsync(object sender, 
+            ShiftedFrameArrivedEventArgs e)
         {
             // calculate velocites
             //velCalc.CalculateVelocity(e.KinectDataContainer.ShiftedJointData);
-            velCalc.CalculateVelocity(e.KinectDataContainer.ShiftedJointData.Last());
+            velCalc.CalculateVelocity(e.ShiftedJointData);
 
             // show side view
-            sideView.UpdateSkeletonAsync(e.KinectDataContainer.ShiftedJointData.Last().Joints);
+            sideView.UpdateSkeletonAsync(e.ShiftedJointData.Joints);
         }       
 
-        private void VelCalc_CalculatedFrameArrivedAsync(object sender, CalculatedFrameArrivedEventArgs e)
+        private void VelCalc_CalculatedFrameArrivedAsync(object sender,
+            CalculatedFrameArrivedEventArgs e)
         {
             // check for segments
-            segmentDetector.SegmentByZeroCrossings(e.KinectDataContainer.VelocityJointData.Last(), JointType.HandRight, "Z");
+            segmentDetector.SegmentByZeroCrossings(e.CalculatedJointData, 
+                JointType.HandRight, "Z");
 
             // calculate Kleshnev
-            kleshnevVelocityCalculator.CalculateKleshnevVelocities(e.KinectDataContainer.VelocityJointData.Last());
+            kleshnevVelocityCalculator.CalculateKleshnevVelocities(e.CalculatedJointData);
 
             // update plot
-            int count = 0;
-            Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
-            dataPoints[SelectedJointName + " Velocity"] = new List<Double[]>();
-            dataPoints["Hits"] = new List<double[]>();
-            foreach (JointData jointData in e.KinectDataContainer.VelocityJointData) {
-                Double[] values = new Double[2];
-                values[0] = jointData.AbsTimestamp / 1000;
-                values[1] = jointData.Joints[SelectedJointType].Position.Z;
-                dataPoints[SelectedJointName + " Velocity"].Add(values);
+            //int count = 0;
+            //Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
+            //dataPoints[SelectedJointName + " Velocity"] = new List<Double[]>();
+            //dataPoints["Hits"] = new List<double[]>();
+            //foreach (JointData jointData in e.CalculatedJointData) {
+            //    Double[] values = new Double[2];
+            //    values[0] = jointData.AbsTimestamp / 1000;
+            //    values[1] = jointData.Joints[SelectedJointType].Position.Z;
+            //    dataPoints[SelectedJointName + " Velocity"].Add(values);
 
-                // check if index is hit
-                if (e.KinectDataContainer.Hits.Contains(jointData.Index)) {
-                    Double[] hit = new Double[2];
-                    hit[0] = jointData.AbsTimestamp / 1000;
-                    hit[1] = 0;
-                    dataPoints["Hits"].Add(hit);
-                }
+            //    // check if index is hit
+            //    if (e.KinectDataContainer.Hits.Contains(jointData.Index)) {
+            //        Double[] hit = new Double[2];
+            //        hit[0] = jointData.AbsTimestamp / 1000;
+            //        hit[1] = 0;
+            //        dataPoints["Hits"].Add(hit);
+            //    }
 
-                count++;
-            }
-            velPlot.UpdatePlot(dataPoints, SelectedJointName + " Velocity Z");
+            //    count++;
+            //}
+            //velPlot.UpdatePlot(dataPoints, SelectedJointName + " Velocity Z");
             //RaisePropertyChanged("VelModel");
         }
 
-        private void KleshnevVelocityCalculator_KleshnevCalculationFinished(object sender, KleshnevEventArgs e)
+        private void KleshnevVelocityCalculator_KleshnevCalculationFinished(
+            object sender, KleshnevEventArgs e)
         {
-            Dictionary<String, OxyColor> colors = new Dictionary<string, OxyColor>();
-            colors.Add(KleshnevVelocityType.ArmsLeft.ToString(), OxyColors.LightGreen);
-            colors.Add(KleshnevVelocityType.ArmsRight.ToString(), OxyColors.Green);
-            colors.Add(KleshnevVelocityType.HandleLeft.ToString(), OxyColors.Gray);
-            colors.Add(KleshnevVelocityType.HandleRight.ToString(), OxyColors.Black);
-            colors.Add(KleshnevVelocityType.Legs.ToString(), OxyColors.Red);
-            colors.Add(KleshnevVelocityType.Trunk.ToString(), OxyColors.Blue);
+            //Dictionary<String, OxyColor> colors = new Dictionary<string, OxyColor>();
+            //colors.Add(KleshnevVelocityType.ArmsLeft.ToString(), OxyColors.LightGreen);
+            //colors.Add(KleshnevVelocityType.ArmsRight.ToString(), OxyColors.Green);
+            //colors.Add(KleshnevVelocityType.HandleLeft.ToString(), OxyColors.Gray);
+            //colors.Add(KleshnevVelocityType.HandleRight.ToString(), OxyColors.Black);
+            //colors.Add(KleshnevVelocityType.Legs.ToString(), OxyColors.Red);
+            //colors.Add(KleshnevVelocityType.Trunk.ToString(), OxyColors.Blue);
 
-            Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
-            foreach (KleshnevVelocityType type in Enum.GetValues(typeof(KleshnevVelocityType))) {
-                dataPoints[type.ToString()] = new List<Double[]>();
-            }
-            foreach (KleshnevData kleshnevData in e.KleshnevData) {
-                foreach (KeyValuePair<KleshnevVelocityType, double> velocity in kleshnevData.Velocities) {
-                    Double[] values = new Double[2];
-                    values[0] = kleshnevData.AbsTimestamp / 1000;
-                    values[1] = velocity.Value;
-                    dataPoints[velocity.Key.ToString()].Add(values);
-                }
-            }
-            resultsPlot.UpdatePlot(dataPoints, "Kleshnev Velocities", colors);
+            //Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
+            //foreach (KleshnevVelocityType type in Enum.GetValues(typeof(KleshnevVelocityType))) {
+            //    dataPoints[type.ToString()] = new List<Double[]>();
+            //}
+            //foreach (KleshnevData kleshnevData in e.KleshnevData) {
+            //    foreach (KeyValuePair<KleshnevVelocityType, double> velocity in kleshnevData.Velocities) {
+            //        Double[] values = new Double[2];
+            //        values[0] = kleshnevData.AbsTimestamp / 1000;
+            //        values[1] = velocity.Value;
+            //        dataPoints[velocity.Key.ToString()].Add(values);
+            //    }
+            //}
+            //resultsPlot.UpdatePlot(dataPoints, "Kleshnev Velocities", colors);
         }
 
         private void SegmentDetector_SegmentDetected(object sender, SegmentDetectedEventArgs e)

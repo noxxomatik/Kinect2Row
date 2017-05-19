@@ -61,7 +61,7 @@ namespace RowingMonitor.Model.Pipeline
         private double relTimestamp;
         private double absTimestamp;
         private Dictionary<KleshnevVelocityType, double> velocities;
-        private int index;
+        private long index;
 
         public double RelTimestamp { get => relTimestamp; set => relTimestamp = value; }
         public double AbsTimestamp { get => absTimestamp; set => absTimestamp = value; }
@@ -69,6 +69,6 @@ namespace RowingMonitor.Model.Pipeline
         {
             get => velocities; set => velocities = value;
         }
-        public int Index { get => index; set => index = value; }
+        public long Index { get => index; set => index = value; }
     }
 }

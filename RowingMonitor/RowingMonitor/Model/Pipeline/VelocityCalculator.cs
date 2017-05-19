@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,12 @@ namespace RowingMonitor.Model
 {
     public class VelocityCalculator
     {
-        public delegate void CalculatedFrameArrivedEventHandler(Object sender, 
+        public delegate void CalculatedFrameArrivedEventHandler(Object sender,
             CalculatedFrameArrivedEventArgs e);
         public event CalculatedFrameArrivedEventHandler CalculatedFrameArrived;
 
         private JointData lastJointData;
-        private JointData penultimateJointData;        
+        private JointData penultimateJointData;
 
         /// <summary>
         /// Calculates the velocity as 1st derivative (gradient) of position.
@@ -29,7 +30,8 @@ namespace RowingMonitor.Model
             }
             // check if second value -> use the boundaries formula
             else if (penultimateJointData.RelTimestamp == 0) {
-                Dictionary<JointType, Joint> newJoints = new Dictionary<JointType, Joint>();
+                Dictionary<JointType, Joint> newJoints =
+                    new Dictionary<JointType, Joint>();
                 double time = (jointData.RelTimestamp - lastJointData.RelTimestamp) / 1000;
                 foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                     Joint newJoint = joint.Value;
@@ -44,14 +46,18 @@ namespace RowingMonitor.Model
                         - lastJointData.Joints[joint.Key].Position.Z) / time);
                     newJoints.Add(joint.Key, newJoint);
                 }
-                KinectDataContainer kdc = KinectDataContainer.Instance;
-                kdc.AddNewVelocityJointData(jointData.RelTimestamp, newJoints, lastJointData.Index);
+
+                JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+                    lastJointData,
+                    DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
+                    newJoints);                
 
                 // save to history
                 penultimateJointData = lastJointData;
                 lastJointData = jointData;
 
-                CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs());
+                CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs(
+                    newJointData));
             }
             // if two old values are present -> use interior formula
             else {
@@ -70,14 +76,18 @@ namespace RowingMonitor.Model
                         - penultimateJointData.Joints[joint.Key].Position.Z) / time);
                     newJoints.Add(joint.Key, newJoint);
                 }
-                KinectDataContainer kdc = KinectDataContainer.Instance;
-                kdc.AddNewVelocityJointData(jointData.RelTimestamp, newJoints, lastJointData.Index);
+
+                JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+                    lastJointData,
+                    DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
+                    newJoints);                
 
                 // save to history
                 penultimateJointData = lastJointData;
                 lastJointData = jointData;
 
-                CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs());
+                CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs(
+                    newJointData));
             }
         }
     }

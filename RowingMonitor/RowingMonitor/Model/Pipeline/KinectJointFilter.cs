@@ -2,6 +2,7 @@
 using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
+using RowingMonitor.Model.Util;
 
 namespace RowingMonitor.Model.Pipeline
 {
@@ -134,17 +135,19 @@ namespace RowingMonitor.Model.Pipeline
             }
 
             // update the KinectDataContainer and fire the event
-            Dictionary<JointType, Joint> newJointData = new Dictionary<JointType, Joint>();
+            Dictionary<JointType, Joint> newJoints = new Dictionary<JointType, Joint>();
             for (JointType jt = JointType.SpineBase; jt <= JointType.ThumbRight; jt++) {
                 Joint newJoint = jointData.Joints[jt];
                 newJoint.Position.X = m_pFilteredJoints[(int) jt].X;
                 newJoint.Position.Y = m_pFilteredJoints[(int) jt].Y;
                 newJoint.Position.Z = m_pFilteredJoints[(int) jt].Z;
-                newJointData.Add(jt, newJoint);
+                newJoints.Add(jt, newJoint);
             }
-            KinectDataContainer kdc = KinectDataContainer.Instance;
-            kdc.AddNewSmoothedJointData(jointData.RelTimestamp, newJointData, jointData.Index);
-            SmoothedFrameArrived(this, new SmoothedFrameArrivedEventArgs());
+            JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+                jointData, 
+                DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond, 
+                newJoints);          
+            SmoothedFrameArrived(this, new SmoothedFrameArrivedEventArgs(jointData, newJointData));
         }
 
         //--------------------------------------------------------------------------------------

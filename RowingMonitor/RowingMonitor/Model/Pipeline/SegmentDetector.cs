@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,21 +16,24 @@ namespace RowingMonitor.Model.Pipeline
 
         private JointData lastJointData;
 
-        public void SegmentByZeroCrossings(JointData jointData, JointType jointType, String axis)
+        private List<long> hitIndices = new List<long>();
+
+        public void SegmentByZeroCrossings(JointData jointData, JointType jointType, 
+            String axis)
         {
             if (lastJointData.RelTimestamp != 0) {
                 float value = GetJointDataValue(jointData, jointType, axis);
                 // if value is 0 then crossing is at this exact index
                 if (value == 0) {
-                    KinectDataContainer.Instance.Hits.Add(jointData.Index);
-                    SegmentDetected(this, new SegmentDetectedEventArgs());
+                    hitIndices.Add(jointData.Index);
+                    SegmentDetected(this, new SegmentDetectedEventArgs(hitIndices));
                 }
                 else {
                     float lastValue = GetJointDataValue(lastJointData, jointType, axis);
                     // if sign is negativ then crossing was between the two frames
                     if (value * lastValue < 0) {
-                        KinectDataContainer.Instance.Hits.Add(jointData.Index);
-                        SegmentDetected(this, new SegmentDetectedEventArgs());
+                        hitIndices.Add(jointData.Index);
+                        SegmentDetected(this, new SegmentDetectedEventArgs(hitIndices));
                     }
                 }
             }
