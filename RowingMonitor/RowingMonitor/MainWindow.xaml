@@ -51,7 +51,6 @@
 
         <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Name="statusBar"
                    VerticalAlignment="Bottom" Background="{StaticResource MediumGreyBrush}" Foreground="{StaticResource MediumGreyBrush}">
-            <StatusBarItem Content="{Binding StatusText}" />
         </StatusBar>
 
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Left" Margin="4 0 4 0">

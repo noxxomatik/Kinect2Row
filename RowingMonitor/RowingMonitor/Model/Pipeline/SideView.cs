@@ -17,7 +17,7 @@ namespace RowingMonitor.Model
             
         }
 
-        public override void UpdateSkeletonAsync(IReadOnlyDictionary<JointType, Joint> joints)
+        public override void UpdateSkeleton(IReadOnlyDictionary<JointType, Joint> joints)
         {
             DrawingGroup drawingGroup = new DrawingGroup();
             DrawingImage tmpImageSource = new DrawingImage(drawingGroup);

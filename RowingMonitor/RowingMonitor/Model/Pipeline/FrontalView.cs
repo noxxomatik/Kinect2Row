@@ -181,7 +181,7 @@ namespace RowingMonitor.Model
         /// <summary>
         /// Updates the view with new data.
         /// </summary>
-        public virtual void UpdateSkeletonAsync(IReadOnlyDictionary<JointType, Joint> joints)
+        public virtual void UpdateSkeleton(IReadOnlyDictionary<JointType, Joint> joints)
         {
             // TODO: make async
             DrawingGroup drawingGroup = new DrawingGroup();
@@ -217,14 +217,11 @@ namespace RowingMonitor.Model
             }
         }
 
-        public Task UpdateColorImageAsync(WriteableBitmap colorImage)
+        public void UpdateColorImage(WriteableBitmap colorImage)
         {
-            Task task = Task.Run(() => {
                 ColorImageSource = colorImage;
                 // freeze to avoid "Must create DependencySource on same Thread as the DependencyObject" error"
                 //colorImageSource.Freeze();
-            });
-            return task;
         }
 
         /// <summary>

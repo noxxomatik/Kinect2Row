@@ -4,13 +4,14 @@ using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RowingMonitor.Model
 {
-    class Plot
+    public class Plot
     {
         private PlotModel plotModel;
         private float range;
@@ -39,14 +40,14 @@ namespace RowingMonitor.Model
         /// </summary>
         /// <param name="dataPoints">Set of data points (x,y). The Key will be used as title of the line series.</param>
         /// <param name="title">Title of the plot.</param>
-        public void UpdatePlot(Dictionary<String, List<Double[]>> dataPoints, 
-            String title, 
+        public void UpdatePlot(Dictionary<String, List<Double[]>> dataPoints,
+            String title,
             Dictionary<String, OxyColor> colors = null)
         {
             PlotModel tmp = new PlotModel { Title = title != null ? title : "" };
             LinearAxis xAxis = new LinearAxis();
             xAxis.Position = AxisPosition.Bottom;
-            double maxXValue = 0;            
+            double maxXValue = 0;
 
             foreach (KeyValuePair<String, List<Double[]>> series in dataPoints) {
                 LineSeries lineSeries = new LineSeries {
@@ -99,7 +100,7 @@ namespace RowingMonitor.Model
             // check if series exists
             LineSeries existingSeries = null;
             foreach (Series ser in PlotModel.Series) {
-                if (ser.Title == series) {
+                if (ser != null && ser.Title == series) {
                     existingSeries = (LineSeries) ser;
                     break;
                 }
@@ -122,7 +123,7 @@ namespace RowingMonitor.Model
                 PlotModel.Series.Add(lineSeries);
             }
             // renew the axis minimum
-            maxXValue = maxXValue < values[0] ? values[0] : maxXValue;  
+            maxXValue = maxXValue < values[0] ? values[0] : maxXValue;
             foreach (Axis axis in PlotModel.Axes) {
                 if (axis.Position.Equals(AxisPosition.Bottom)) {
                     axis.Minimum = maxXValue - range;

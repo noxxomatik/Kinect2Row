@@ -108,6 +108,7 @@
     <Compile Include="Model\EventArgs\SegmentDetectedEventArgs.cs" />
     <Compile Include="Model\Pipeline\KinectJointFilter.cs" />
     <Compile Include="Model\Pipeline\KleshnevVelocityCalculator.cs" />
+    <Compile Include="Model\Pipeline\RowingMonitorPipeline.cs" />
     <Compile Include="Model\Pipeline\SegmentDetector.cs" />
     <Compile Include="Model\Util\BodyNotFullyTrackedException.cs" />
     <Compile Include="Model\EventArgs\ShiftedFrameArrivedEventArgs.cs" />

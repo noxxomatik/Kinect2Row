@@ -23,130 +23,35 @@ namespace RowingMonitor.ViewModel
     /// <summary>
     /// Represents the view-model for the main window.
     /// </summary>
-    class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Current status text to display
-        /// </summary>
-        private string statusText = null;
+        private RowingMonitorPipeline pipeline;
 
         // plot options
         private String selectedJointName;
         private JointType selectedJointType;
 
-        // filter
-        private OneEuroFilterSmoothing filter = new OneEuroFilterSmoothing();
-        private KinectJointFilter kinectJointFilter;
-
-        private KinectReader kinectReader;
-
-        private FrontalView frontalView;
-        private SideView sideView;
-
-        private Plot plot;
-        private Plot velPlot;
-        private Plot resultsPlot;
-
-        private VelocityCalculator velCalc;
-
-        private ImageSource bodyImageSource;
-
-        private ImageSource sideBodyImageSource;
-
         private Timer timer;
 
-        private Shifter shifter;
+        private PlotModel model;
+        private PlotModel velModel;
+        private PlotModel resultsModel;
 
-        private SegmentDetector segmentDetector;
+        private ImageSource bodyImageSource;
+        private ImageSource colorImageSource;
+        private ImageSource sideBodyImageSource;
 
-        private KleshnevVelocityCalculator kleshnevVelocityCalculator;
+        private double beta;
+        private double fcmin;
 
-
-        /* Properties */
-        /// <summary>
-        /// Gets the plot model.
-        /// </summary>
-        public PlotModel Model
+        public string SelectedJointName
         {
-            get {
-                return plot.PlotModel;
-            }
-        }
-        public PlotModel VelModel
-        {
-            get {
-                return velPlot.PlotModel;
-            }
-        }
-        public PlotModel ResultsModel
-        {
-            get {
-                return resultsPlot.PlotModel;
-            }
-        }
-
-        /// <summary>
-        /// Gets the bitmap to display
-        /// </summary>
-        public ImageSource BodyImageSource
-        {
-            get {
-                return frontalView.BodyImageSource;
-            }
-        }
-
-        public ImageSource ColorImageSource
-        {
-            get {
-                return frontalView.ColorImageSource;
-            }
-        }
-
-        public ImageSource SideBodyImageSource
-        {
-            get => sideView.BodyImageSource;
-        }
-
-        /// <summary>
-        /// Gets or sets the current status text to display
-        /// </summary>
-        public string StatusText
-        {
-            get {
-                return statusText;
-            }
-
+            get => selectedJointName;
             set {
-                if (statusText != value) {
-                    statusText = value;
-
-                    // notify any bound elements that the text has changed
-                    if (PropertyChanged != null) {
-                        PropertyChanged(this, new PropertyChangedEventArgs("StatusText"));
-                    }
-                }
+                selectedJointName = value;
+                pipeline.SelectedJointName = selectedJointName;
             }
         }
-
-        public double Beta
-        {
-            get => filter.Beta;
-            set {
-                filter.Beta = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Beta"));
-            }
-        }
-
-        public double Fcmin
-        {
-            get => filter.Fcmin;
-            set {
-                filter.Fcmin = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Fcmin"));
-            }
-        }
-
-        public string SelectedJointName { get => selectedJointName; set => selectedJointName = value; }
 
         public JointType SelectedJointType
         {
@@ -172,37 +77,28 @@ namespace RowingMonitor.ViewModel
 
         public ICommand WindowLoaded { get; private set; }
         public ICommand WindowClosing { get; private set; }
+        public PlotModel Model { get => model; set => model = value; }
+        public PlotModel VelModel { get => velModel; set => velModel = value; }
+        public PlotModel ResultsModel { get => resultsModel; set => resultsModel = value; }
+        public ImageSource BodyImageSource { get => bodyImageSource; set => bodyImageSource = value; }
+        public ImageSource SideBodyImageSource { get => sideBodyImageSource; set => sideBodyImageSource = value; }
+        public ImageSource ColorImageSource { get => colorImageSource; set => colorImageSource = value; }
+        public double Beta { get => beta; set => beta = value; }
+        public double Fcmin { get => fcmin; set => fcmin = value; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel" /> class.
         /// </summary>
         public MainViewModel()
         {
-            kinectReader = KinectReader.Instance;
+            pipeline = new RowingMonitorPipeline();
+            Model = pipeline.PositionPlot.PlotModel;
+            VelModel = pipeline.VelocityPlot.PlotModel;
+            ResultsModel = pipeline.KleshnevPlot.PlotModel;
 
-            // skeleton views
-            frontalView = new FrontalView(kinectReader.CoordinateMapper, kinectReader.DisplayWidth,
-                kinectReader.DisplayHeight);
-            sideView = new SideView(kinectReader.CoordinateMapper, kinectReader.DisplayWidth,
-                kinectReader.DisplayHeight);
-
-            plot = new Plot(10);
-            plot.Init("Raw and Smoothed Curves");
-            velPlot = new Plot(10);
-            velPlot.Init("Velocity");
-            resultsPlot = new Plot(3);
-            Dictionary<String, OxyColor> colors = new Dictionary<string, OxyColor>();
-            colors.Add(KleshnevVelocityType.ArmsLeft.ToString(), OxyColors.LightGreen);
-            colors.Add(KleshnevVelocityType.ArmsRight.ToString(), OxyColors.Green);
-            colors.Add(KleshnevVelocityType.HandleLeft.ToString(), OxyColors.Gray);
-            colors.Add(KleshnevVelocityType.HandleRight.ToString(), OxyColors.Black);
-            colors.Add(KleshnevVelocityType.Legs.ToString(), OxyColors.Red);
-            colors.Add(KleshnevVelocityType.Trunk.ToString(), OxyColors.Blue);
-            resultsPlot.Init("Kleshnev Velocities", colors);
-
-            // register event handler
-            kinectReader.KinectFrameArrived += KinectReader_KinectFrameArrived;
-            kinectReader.ColorFrameArrived += KinectReader_ColorFrameArrivedAsync;
+            ColorImageSource = pipeline.ColorBodyImageSource;
+            BodyImageSource = pipeline.FrontalBodyImageSource;
+            SideBodyImageSource = pipeline.SideBodyImageSource;
 
             // register commands
             WindowLoaded = new RelayCommand(WindowLoadedCommand, CommandCanExecute);
@@ -211,204 +107,39 @@ namespace RowingMonitor.ViewModel
             // set default plot option
             SelectedJointName = "SpineBase";
 
-            // init filter
-            //filter.SmoothedFrameArrived += Filter_SmoothedFrameArrivedAsync;
-            kinectJointFilter = new KinectJointFilter();
-            //kinectJointFilter.Init();   // suggested value
-            // Some smoothing with little latency (defaults).
-            // Only filters out small jitters.
-            // Good for gesture recognition in games.
-            //kinectJointFilter.Init(0.5f, 0.5f, 0.5f, 0.05f, 0.04f);
-            // Smoothed with some latency.
-            // Filters out medium jitters.
-            // Good for a menu system that needs to be smooth but
-            // doesn't need the reduced latency as much as gesture recognition does.
-            kinectJointFilter.Init(0.5f, 0.1f, 0.5f, 0.1f, 0.1f);
-            // Very smooth, but with a lot of latency.
-            // Filters out large jitters.
-            // Good for situations where smooth data is absolutely required
-            // and latency is not an issue.
-            //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
-            kinectJointFilter.SmoothedFrameArrived += Filter_SmoothedFrameArrivedAsync;
-
-            // init shifter
-            shifter = new Shifter();
-            shifter.ShiftedFrameArrived += Shifter_ShiftedFrameArrivedAsync;
-
-            // init velocity calculation
-            velCalc = new VelocityCalculator();
-            velCalc.CalculatedFrameArrived += VelCalc_CalculatedFrameArrivedAsync;
-
-            // init segment detector
-            segmentDetector = new SegmentDetector();
-            segmentDetector.SegmentDetected += SegmentDetector_SegmentDetected;
-
-            // init kleshnev analysis
-            kleshnevVelocityCalculator = new KleshnevVelocityCalculator();
-            kleshnevVelocityCalculator.KleshnevCalculationFinished += KleshnevVelocityCalculator_KleshnevCalculationFinished;
-
             // start render loop
             timer = new Timer(Render, null, 0, 33);
         }
 
         private void Render(object state)
         {
-            RaisePropertyChanged("VelModel");
-            RaisePropertyChanged("ColorImageSource");
-            RaisePropertyChanged("BodyImageSource");
-            RaisePropertyChanged("SideBodyImageSource");
-            RaisePropertyChanged("Model");
-            RaisePropertyChanged("ResultsModel");
-        }
-
-        /* Event Handler */
-        void KinectReader_KinectFrameArrived(object sender, KinectFrameArrivedEventArgs e)
-        {
-            //Task.Run(() => {
-            //filter.Filter();
-            kinectJointFilter.UpdateFilter(e.JointData);
-            //});            
-        }
-
-        private void KinectReader_ColorFrameArrivedAsync(object sender, Model.ColorFrameArrivedEventArgs e)
-        {
-            frontalView.UpdateColorImageAsync(e.ColorBitmap);
             //RaisePropertyChanged("ColorImageSource");
-        }
-
-        private void Filter_SmoothedFrameArrivedAsync(object sender, SmoothedFrameArrivedEventArgs e)
-        {
-            //update frontal view skeleton
-            frontalView.UpdateSkeletonAsync(e.SmoothedJointData.Joints);
             //RaisePropertyChanged("BodyImageSource");
-
-            //update plot
-            //int count = 0;
-            //Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
-            //dataPoints[SelectedJointName + " Smoothed"] = new List<Double[]>();
-            //foreach (JointData jointData in e.SmoothedJointData) {
-            //    Double[] values = new Double[2];
-            //    values[0] = jointData.AbsTimestamp / 1000;
-            //    values[1] = jointData.Joints[SelectedJointType].Position.Z;
-            //    dataPoints[SelectedJointName + " Smoothed"].Add(values);
-            //    count++;
-            //}
-            Double[] rawValues = new Double[2];
-            rawValues[0] = e.RawJointData.AbsTimestamp / 1000;
-            rawValues[1] = e.RawJointData.Joints[SelectedJointType].Position.Z;
-            plot.AddDataPoint(SelectedJointName + " Raw", rawValues);
-
-            Double[] smoothedValues = new Double[2];
-            smoothedValues[0] = e.SmoothedJointData.AbsTimestamp / 1000;
-            smoothedValues[1] = e.SmoothedJointData.Joints[SelectedJointType].Position.Z;
-            plot.AddDataPoint(SelectedJointName + " Smoothed", smoothedValues);
-
-            //dataPoints[SelectedJointName + " Raw"] = new List<Double[]>();
-            //foreach (JointData jointData in e.RawJointData) {
-            //    Double[] values = new Double[2];
-            //    values[0] = jointData.AbsTimestamp / 1000;
-            //    values[1] = jointData.Joints[SelectedJointType].Position.Z;
-            //    dataPoints[SelectedJointName + " Raw"].Add(values);
-            //    count++;
-            //}
-            //plot.UpdatePlot(dataPoints, SelectedJointName + " Z");
+            //RaisePropertyChanged("SideBodyImageSource");
             //RaisePropertyChanged("Model");
-
-
-
-            shifter.ShiftAndRotate(e.SmoothedJointData);
-        }
-
-        private void Shifter_ShiftedFrameArrivedAsync(object sender,
-            ShiftedFrameArrivedEventArgs e)
-        {
-            // calculate velocites
-            //velCalc.CalculateVelocity(e.KinectDataContainer.ShiftedJointData);
-            velCalc.CalculateVelocity(e.ShiftedJointData);
-
-            // show side view
-            sideView.UpdateSkeletonAsync(e.ShiftedJointData.Joints);
-        }
-
-        private void VelCalc_CalculatedFrameArrivedAsync(object sender,
-            CalculatedFrameArrivedEventArgs e)
-        {
-            // check for segments
-            segmentDetector.SegmentByZeroCrossings(e.CalculatedJointData,
-                JointType.HandRight, "Z");
-
-            // calculate Kleshnev
-            kleshnevVelocityCalculator.CalculateKleshnevVelocities(e.CalculatedJointData);
-
-            // update plot
-            //int count = 0;
-            //Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
-            //dataPoints[SelectedJointName + " Velocity"] = new List<Double[]>();
-            //dataPoints["Hits"] = new List<double[]>();
-            //foreach (JointData jointData in e.CalculatedJointData) {
-            //    Double[] values = new Double[2];
-            //    values[0] = jointData.AbsTimestamp / 1000;
-            //    values[1] = jointData.Joints[SelectedJointType].Position.Z;
-            //    dataPoints[SelectedJointName + " Velocity"].Add(values);
-
-            //    // check if index is hit
-            //    if (e.KinectDataContainer.Hits.Contains(jointData.Index)) {
-            //        Double[] hit = new Double[2];
-            //        hit[0] = jointData.AbsTimestamp / 1000;
-            //        hit[1] = 0;
-            //        dataPoints["Hits"].Add(hit);
-            //    }
-
-            //    count++;
-            //}
-            //velPlot.UpdatePlot(dataPoints, SelectedJointName + " Velocity Z");
             //RaisePropertyChanged("VelModel");
+            //RaisePropertyChanged("ResultsModel");
 
-            Double[] velocityValues = new Double[2];
-            velocityValues[0] = e.CalculatedJointData.AbsTimestamp / 1000;
-            velocityValues[1] = e.CalculatedJointData.Joints[SelectedJointType].Position.Z;
-            velPlot.AddDataPoint(SelectedJointName + " Velocity", velocityValues);
-        }
+            ColorImageSource = pipeline.ColorBodyImageSource;
+            if (ColorImageSource != null)
+                RaisePropertyChanged("ColorImageSource");
 
-        private void KleshnevVelocityCalculator_KleshnevCalculationFinished(
-            object sender, KleshnevEventArgs e)
-        {
-            //Dictionary<String, OxyColor> colors = new Dictionary<string, OxyColor>();
-            //colors.Add(KleshnevVelocityType.ArmsLeft.ToString(), OxyColors.LightGreen);
-            //colors.Add(KleshnevVelocityType.ArmsRight.ToString(), OxyColors.Green);
-            //colors.Add(KleshnevVelocityType.HandleLeft.ToString(), OxyColors.Gray);
-            //colors.Add(KleshnevVelocityType.HandleRight.ToString(), OxyColors.Black);
-            //colors.Add(KleshnevVelocityType.Legs.ToString(), OxyColors.Red);
-            //colors.Add(KleshnevVelocityType.Trunk.ToString(), OxyColors.Blue);
+            BodyImageSource = pipeline.FrontalBodyImageSource;
+            if (BodyImageSource != null)
+                RaisePropertyChanged("BodyImageSource");
 
-            //Dictionary<String, List<Double[]>> dataPoints = new Dictionary<string, List<Double[]>>();
-            //foreach (KleshnevVelocityType type in Enum.GetValues(typeof(KleshnevVelocityType))) {
-            //    dataPoints[type.ToString()] = new List<Double[]>();
-            //}
-            //foreach (KleshnevData kleshnevData in e.KleshnevData) {
-            //    foreach (KeyValuePair<KleshnevVelocityType, double> velocity in kleshnevData.Velocities) {
-            //        Double[] values = new Double[2];
-            //        values[0] = kleshnevData.AbsTimestamp / 1000;
-            //        values[1] = velocity.Value;
-            //        dataPoints[velocity.Key.ToString()].Add(values);
-            //    }
-            //}
-            //resultsPlot.UpdatePlot(dataPoints, "Kleshnev Velocities", colors);
+            SideBodyImageSource = pipeline.SideBodyImageSource;
+            if (SideBodyImageSource != null)
+                RaisePropertyChanged("SideBodyImageSource");
+            
+            //if (Model != null)
+            //    Model.InvalidatePlot(true);
 
-            foreach (KeyValuePair<KleshnevVelocityType, double> velocity in e.KleshnevData.Last().Velocities) {
-                Double[] values = new Double[2];
-                values[0] = e.KleshnevData.Last().AbsTimestamp / 1000;
-                values[1] = velocity.Value;
-                resultsPlot.AddDataPoint(velocity.Key.ToString(), values);
-            }
-        }
+            //if (VelModel != null)
+            //    VelModel.InvalidatePlot(true);
 
-        private void SegmentDetector_SegmentDetected(object sender, SegmentDetectedEventArgs e)
-        {
-            Double[] hitValues = new Double[2];
-            hitValues[0] = e.HitTimestamps.Last() / 1000;
-            hitValues[1] = 0;
-            velPlot.AddDataPoint(SelectedJointName + " Hits", hitValues);
+            //if (ResultsModel != null)
+            //    ResultsModel.InvalidatePlot(true);
         }
 
         /* UI Event Handler */
@@ -417,7 +148,7 @@ namespace RowingMonitor.ViewModel
         /// </summary>
         private void WindowLoadedCommand(object obj)
         {
-            kinectReader.StartReader();
+            pipeline.StartPipeline();
         }
 
         /// <summary>
@@ -425,8 +156,7 @@ namespace RowingMonitor.ViewModel
         /// </summary>
         private void WindowClosingCommand(object obj)
         {
-            kinectReader.StopReader();
-            kinectJointFilter.Shutdown();
+            pipeline.StopPipeline();
         }
 
         // need check for RelayCommand
@@ -435,7 +165,6 @@ namespace RowingMonitor.ViewModel
             return true;
         }
 
-        // for realtime oxyplot
         protected void RaisePropertyChanged(string property)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));

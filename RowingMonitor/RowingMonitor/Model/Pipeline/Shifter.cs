@@ -51,7 +51,7 @@ namespace RowingMonitor.Model
                 newJoints[JointType.SpineBase].Position.Y);
             // add another 90°
             //diffAngle += 1.5708;
-            Debug.WriteLine("diffAngle " + diffAngle);
+            //Debug.WriteLine("diffAngle " + diffAngle);
 
             // create the rotation matrix around x-axis
             double[,] rotMat = {
