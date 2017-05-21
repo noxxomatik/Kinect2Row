@@ -12,13 +12,15 @@ namespace RowingMonitor.Model
     /// </summary>
     public class SegmentDetectedEventArgs : EventArgs
     {
-        private List<long> hitList;
+        private List<long> hitIndices;
+        private List<double> hitTimestamps;
 
-        public SegmentDetectedEventArgs(List<long> hitList)
+        public SegmentDetectedEventArgs(List<long> hitIndices, List<double> hitTimestamps)
         {
-            HitList = hitList;
+            HitIndices = hitIndices;
+            HitTimestamps = hitTimestamps;
         }
-
-        public List<long> HitList { get => hitList; private set => hitList = value; }
+        public List<double> HitTimestamps { get => hitTimestamps; private set => hitTimestamps = value; }
+        public List<long> HitIndices { get => hitIndices; private set => hitIndices = value; }
     }
 }

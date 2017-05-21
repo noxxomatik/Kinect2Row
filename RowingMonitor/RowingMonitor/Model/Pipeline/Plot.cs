@@ -14,8 +14,8 @@ namespace RowingMonitor.Model
     {
         private PlotModel plotModel;
         private float range;
-
-        public PlotModel PlotModel { get => plotModel; }
+        private Dictionary<String, OxyColor> colors;
+        private double maxXValue = 0;
 
         /// <summary>
         /// Creates a plot for the view. 
@@ -28,6 +28,9 @@ namespace RowingMonitor.Model
         {
             this.range = range;
         }
+
+        public PlotModel PlotModel { get => plotModel; private set => plotModel = value; }
+        public Dictionary<string, OxyColor> Colors { get => colors; set => colors = value; }
 
         /// <summary>
         /// Draws a plot of given data points. 
@@ -70,7 +73,63 @@ namespace RowingMonitor.Model
             // set graph range by highest value from all data Points
             xAxis.Minimum = maxXValue - range;
             tmp.Axes.Add(xAxis);
-            plotModel = tmp;
+            PlotModel = tmp;
+        }
+
+        public void Init(String title, Dictionary<String, OxyColor> colors = null)
+        {
+            PlotModel tmp = new PlotModel { Title = title != null ? title : "" };
+
+            // colors
+            if (colors != null) {
+                Colors = colors;
+            }
+
+            // axis
+            LinearAxis xAxis = new LinearAxis();
+            xAxis.Position = AxisPosition.Bottom;
+            xAxis.Minimum = maxXValue - range;
+            tmp.Axes.Add(xAxis);
+
+            PlotModel = tmp;
+        }
+
+        public void AddDataPoint(string series, double[] values)
+        {
+            // check if series exists
+            LineSeries existingSeries = null;
+            foreach (Series ser in PlotModel.Series) {
+                if (ser.Title == series) {
+                    existingSeries = (LineSeries) ser;
+                    break;
+                }
+            }
+            if (existingSeries != null) {
+                // add values to the series
+                existingSeries.Points.Add(new DataPoint(values[0], values[1]));
+            }
+            else {
+                // create series and add point
+                LineSeries lineSeries = new LineSeries {
+                    Title = series,
+                    MarkerType = MarkerType.Circle
+                };
+                lineSeries.Points.Add(new DataPoint(values[0], values[1]));
+                // color
+                if (Colors != null && Colors.ContainsKey(series)) {
+                    lineSeries.Color = Colors[series];
+                }
+                PlotModel.Series.Add(lineSeries);
+            }
+            // renew the axis minimum
+            maxXValue = maxXValue < values[0] ? values[0] : maxXValue;  
+            foreach (Axis axis in PlotModel.Axes) {
+                if (axis.Position.Equals(AxisPosition.Bottom)) {
+                    axis.Minimum = maxXValue - range;
+                }
+            }
+            // refresh the plot
+            PlotModel.InvalidatePlot(true);
         }
     }
 }

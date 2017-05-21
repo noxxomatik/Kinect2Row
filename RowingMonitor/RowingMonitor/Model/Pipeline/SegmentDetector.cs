@@ -18,6 +18,8 @@ namespace RowingMonitor.Model.Pipeline
 
         private List<long> hitIndices = new List<long>();
 
+        private List<double> hitTimestamps = new List<double>();
+
         public void SegmentByZeroCrossings(JointData jointData, JointType jointType, 
             String axis)
         {
@@ -26,14 +28,16 @@ namespace RowingMonitor.Model.Pipeline
                 // if value is 0 then crossing is at this exact index
                 if (value == 0) {
                     hitIndices.Add(jointData.Index);
-                    SegmentDetected(this, new SegmentDetectedEventArgs(hitIndices));
+                    hitTimestamps.Add(jointData.AbsTimestamp);
+                    SegmentDetected(this, new SegmentDetectedEventArgs(hitIndices, hitTimestamps));
                 }
                 else {
                     float lastValue = GetJointDataValue(lastJointData, jointType, axis);
                     // if sign is negativ then crossing was between the two frames
                     if (value * lastValue < 0) {
                         hitIndices.Add(jointData.Index);
-                        SegmentDetected(this, new SegmentDetectedEventArgs(hitIndices));
+                        hitTimestamps.Add(jointData.AbsTimestamp);
+                        SegmentDetected(this, new SegmentDetectedEventArgs(hitIndices, hitTimestamps));
                     }
                 }
             }

@@ -187,8 +187,18 @@ namespace RowingMonitor.ViewModel
                 kinectReader.DisplayHeight);
 
             plot = new Plot(10);
+            plot.Init("Raw and Smoothed Curves");
             velPlot = new Plot(10);
+            velPlot.Init("Velocity");
             resultsPlot = new Plot(3);
+            Dictionary<String, OxyColor> colors = new Dictionary<string, OxyColor>();
+            colors.Add(KleshnevVelocityType.ArmsLeft.ToString(), OxyColors.LightGreen);
+            colors.Add(KleshnevVelocityType.ArmsRight.ToString(), OxyColors.Green);
+            colors.Add(KleshnevVelocityType.HandleLeft.ToString(), OxyColors.Gray);
+            colors.Add(KleshnevVelocityType.HandleRight.ToString(), OxyColors.Black);
+            colors.Add(KleshnevVelocityType.Legs.ToString(), OxyColors.Red);
+            colors.Add(KleshnevVelocityType.Trunk.ToString(), OxyColors.Blue);
+            resultsPlot.Init("Kleshnev Velocities", colors);
 
             // register event handler
             kinectReader.KinectFrameArrived += KinectReader_KinectFrameArrived;
@@ -238,8 +248,8 @@ namespace RowingMonitor.ViewModel
             kleshnevVelocityCalculator.KleshnevCalculationFinished += KleshnevVelocityCalculator_KleshnevCalculationFinished;
 
             // start render loop
-            // timer = new Timer(Render, null, 0, 33);
-        }        
+            timer = new Timer(Render, null, 0, 33);
+        }
 
         private void Render(object state)
         {
@@ -254,10 +264,10 @@ namespace RowingMonitor.ViewModel
         /* Event Handler */
         void KinectReader_KinectFrameArrived(object sender, KinectFrameArrivedEventArgs e)
         {
-            Task.Run(() => {
-                //filter.Filter();
-                kinectJointFilter.UpdateFilter(e.JointData);
-            });            
+            //Task.Run(() => {
+            //filter.Filter();
+            kinectJointFilter.UpdateFilter(e.JointData);
+            //});            
         }
 
         private void KinectReader_ColorFrameArrivedAsync(object sender, Model.ColorFrameArrivedEventArgs e)
@@ -283,6 +293,15 @@ namespace RowingMonitor.ViewModel
             //    dataPoints[SelectedJointName + " Smoothed"].Add(values);
             //    count++;
             //}
+            Double[] rawValues = new Double[2];
+            rawValues[0] = e.RawJointData.AbsTimestamp / 1000;
+            rawValues[1] = e.RawJointData.Joints[SelectedJointType].Position.Z;
+            plot.AddDataPoint(SelectedJointName + " Raw", rawValues);
+
+            Double[] smoothedValues = new Double[2];
+            smoothedValues[0] = e.SmoothedJointData.AbsTimestamp / 1000;
+            smoothedValues[1] = e.SmoothedJointData.Joints[SelectedJointType].Position.Z;
+            plot.AddDataPoint(SelectedJointName + " Smoothed", smoothedValues);
 
             //dataPoints[SelectedJointName + " Raw"] = new List<Double[]>();
             //foreach (JointData jointData in e.RawJointData) {
@@ -295,10 +314,12 @@ namespace RowingMonitor.ViewModel
             //plot.UpdatePlot(dataPoints, SelectedJointName + " Z");
             //RaisePropertyChanged("Model");
 
+
+
             shifter.ShiftAndRotate(e.SmoothedJointData);
         }
 
-        private void Shifter_ShiftedFrameArrivedAsync(object sender, 
+        private void Shifter_ShiftedFrameArrivedAsync(object sender,
             ShiftedFrameArrivedEventArgs e)
         {
             // calculate velocites
@@ -307,13 +328,13 @@ namespace RowingMonitor.ViewModel
 
             // show side view
             sideView.UpdateSkeletonAsync(e.ShiftedJointData.Joints);
-        }       
+        }
 
         private void VelCalc_CalculatedFrameArrivedAsync(object sender,
             CalculatedFrameArrivedEventArgs e)
         {
             // check for segments
-            segmentDetector.SegmentByZeroCrossings(e.CalculatedJointData, 
+            segmentDetector.SegmentByZeroCrossings(e.CalculatedJointData,
                 JointType.HandRight, "Z");
 
             // calculate Kleshnev
@@ -342,6 +363,11 @@ namespace RowingMonitor.ViewModel
             //}
             //velPlot.UpdatePlot(dataPoints, SelectedJointName + " Velocity Z");
             //RaisePropertyChanged("VelModel");
+
+            Double[] velocityValues = new Double[2];
+            velocityValues[0] = e.CalculatedJointData.AbsTimestamp / 1000;
+            velocityValues[1] = e.CalculatedJointData.Joints[SelectedJointType].Position.Z;
+            velPlot.AddDataPoint(SelectedJointName + " Velocity", velocityValues);
         }
 
         private void KleshnevVelocityCalculator_KleshnevCalculationFinished(
@@ -368,11 +394,21 @@ namespace RowingMonitor.ViewModel
             //    }
             //}
             //resultsPlot.UpdatePlot(dataPoints, "Kleshnev Velocities", colors);
+
+            foreach (KeyValuePair<KleshnevVelocityType, double> velocity in e.KleshnevData.Last().Velocities) {
+                Double[] values = new Double[2];
+                values[0] = e.KleshnevData.Last().AbsTimestamp / 1000;
+                values[1] = velocity.Value;
+                resultsPlot.AddDataPoint(velocity.Key.ToString(), values);
+            }
         }
 
         private void SegmentDetector_SegmentDetected(object sender, SegmentDetectedEventArgs e)
         {
-            Debug.WriteLine("*** SEGMENT DETECTED! ***");
+            Double[] hitValues = new Double[2];
+            hitValues[0] = e.HitTimestamps.Last() / 1000;
+            hitValues[1] = 0;
+            velPlot.AddDataPoint(SelectedJointName + " Hits", hitValues);
         }
 
         /* UI Event Handler */
