@@ -20,8 +20,8 @@ namespace RowingMonitor.Model.Util
         private List<int> s;
         private List<int> sPast;
         private double dMin;
-        private double tS;
-        private double tE;
+        private int tS;
+        private int tE;
         private int minSubsequenceLength;
 
         /// <summary>
@@ -135,8 +135,8 @@ namespace RowingMonitor.Model.Util
     public struct Subsequence
     {
         private double distance;
-        private double tStart;
-        private double tEnd;
+        private int tStart;
+        private int tEnd;
         private SubsequenceStatus status;
 
         /// <summary>
@@ -146,11 +146,11 @@ namespace RowingMonitor.Model.Util
         /// <summary>
         /// Starttime of data stream which fits to the template.
         /// </summary>
-        public double TStart { get => tStart; set => tStart = value; }
+        public int TStart { get => tStart; set => tStart = value; }
         /// <summary>
         /// Endtime of data stream which fits to the template.
         /// </summary>
-        public double TEnd { get => tEnd; set => tEnd = value; }
+        public int TEnd { get => tEnd; set => tEnd = value; }
         /// <summary>
         /// Status of detected subsequence.
         /// </summary>

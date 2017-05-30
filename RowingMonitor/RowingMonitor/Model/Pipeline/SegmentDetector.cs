@@ -8,43 +8,21 @@ using System.Threading.Tasks;
 
 namespace RowingMonitor.Model.Pipeline
 {
-    class SegmentDetector
+    abstract class SegmentDetector
     {
         public delegate void SegmentDetectedEventHandler(Object sender,
             SegmentDetectedEventArgs e);
         public event SegmentDetectedEventHandler SegmentDetected;
 
-        private JointData lastJointData;
+        protected List<long> hitIndices = new List<long>();
 
-        private List<long> hitIndices = new List<long>();
+        protected List<double> hitTimestamps = new List<double>();
 
-        private List<double> hitTimestamps = new List<double>();
+        public abstract void Update(JointData jointData, JointType jointType,
+            String axis);
 
-        public void SegmentByZeroCrossings(JointData jointData, JointType jointType, 
-            String axis)
-        {
-            if (lastJointData.RelTimestamp != 0) {
-                float value = GetJointDataValue(jointData, jointType, axis);
-                // if value is 0 then crossing is at this exact index
-                if (value == 0) {
-                    hitIndices.Add(jointData.Index);
-                    hitTimestamps.Add(jointData.AbsTimestamp);
-                    SegmentDetected(this, new SegmentDetectedEventArgs(hitIndices, hitTimestamps));
-                }
-                else {
-                    float lastValue = GetJointDataValue(lastJointData, jointType, axis);
-                    // if sign is negativ then crossing was between the two frames
-                    if (value * lastValue < 0) {
-                        hitIndices.Add(jointData.Index);
-                        hitTimestamps.Add(jointData.AbsTimestamp);
-                        SegmentDetected(this, new SegmentDetectedEventArgs(hitIndices, hitTimestamps));
-                    }
-                }
-            }
-            lastJointData = jointData;
-        }
-
-        private float GetJointDataValue(JointData jointData, JointType jointType, String axis)
+        protected float GetJointDataValue(JointData jointData, 
+            JointType jointType, String axis)
         {
             switch (axis) {
                 case "X":
@@ -56,6 +34,11 @@ namespace RowingMonitor.Model.Pipeline
                 default:
                     throw new Exception("Chose axis X, Y or Z.");
             }
+        }
+
+        protected virtual void OnSegmentDetected(SegmentDetectedEventArgs e)
+        {
+            SegmentDetected?.Invoke(this, e);
         }
     }
 }

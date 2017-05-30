@@ -50,24 +50,21 @@ namespace RowingMonitor.ViewModel
             set {
                 selectedJointName = value;
                 pipeline.SelectedJointName = selectedJointName;
-            }
-        }
-
-        public JointType SelectedJointType
-        {
-            get {
                 switch (SelectedJointName) {
                     case "SpineBase":
-                        return JointType.SpineBase;
+                        pipeline.SelectedJointType = JointType.SpineBase;
+                        break;
                     case "HandRight":
-                        return JointType.HandRight;
+                        pipeline.SelectedJointType = JointType.HandRight;
+                        break;
                     case "HandLeft":
-                        return JointType.HandLeft;
+                        pipeline.SelectedJointType = JointType.HandLeft;
+                        break;
                     default:
-                        return JointType.SpineBase;
+                        pipeline.SelectedJointType = JointType.SpineBase;
+                        break;
                 }
             }
-            set => selectedJointType = value;
         }
 
         /// <summary>

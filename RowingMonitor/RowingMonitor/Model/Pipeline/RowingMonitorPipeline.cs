@@ -119,7 +119,8 @@ namespace RowingMonitor.Model.Pipeline
             velCalc.CalculatedFrameArrived += VelCalc_CalculatedFrameArrivedAsync;
 
             // init segment detector
-            segmentDetector = new SegmentDetector();
+            //segmentDetector = new ZVCSegmentDetector();
+            segmentDetector = new DTWSegmentDetector();
             segmentDetector.SegmentDetected += SegmentDetector_SegmentDetected;
 
             // init kleshnev analysis
@@ -171,6 +172,9 @@ namespace RowingMonitor.Model.Pipeline
                 velCalc.CalculateVelocity(e.ShiftedJointData);
             //});
 
+            segmentDetector.Update(e.ShiftedJointData,
+                JointType.HandRight, "Z");
+
             // show side view
             sideView.UpdateSkeleton(e.ShiftedJointData.Joints);
             SideBodyImageSource = sideView.BodyImageSource;
@@ -180,13 +184,13 @@ namespace RowingMonitor.Model.Pipeline
             CalculatedFrameArrivedEventArgs e)
         {
             //Task.Run(() => {
-                // check for segments
-                segmentDetector.SegmentByZeroCrossings(e.CalculatedJointData,
-                    JointType.HandRight, "Z");
+            // check for segments
+            //segmentDetector.Update(e.CalculatedJointData,
+            //    JointType.HandRight, "Z");            
             //});
             //Task.Run(() => {
-                // calculate Kleshnev
-                kleshnevVelocityCalculator.CalculateKleshnevVelocities(
+            // calculate Kleshnev
+            kleshnevVelocityCalculator.CalculateKleshnevVelocities(
                 e.CalculatedJointData);
             //});
 
@@ -217,7 +221,7 @@ namespace RowingMonitor.Model.Pipeline
             Double[] hitValues = new Double[2];
             hitValues[0] = e.HitTimestamps.Last() / 1000;
             hitValues[1] = 0;
-            VelocityPlot.AddDataPoint(SelectedJointName + " Hits", hitValues);
+            PositionPlot.AddDataPoint(SelectedJointName + " Hits", hitValues);
         }
 
         public void StartPipeline()
