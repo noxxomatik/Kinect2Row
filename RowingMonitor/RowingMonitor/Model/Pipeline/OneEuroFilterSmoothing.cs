@@ -48,6 +48,7 @@ namespace RowingMonitor.Model
 
         public OneEuroFilterSmoothing()
         {
+            // TODO: try Mincutoff=3, Beta=0
             Beta = 0.001;
             Fcmin = 120;
             Mincutoff = InitCutoffDictionary(Fcmin);

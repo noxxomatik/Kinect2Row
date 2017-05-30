@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Kinect;
 using System.Linq;
 using System.Diagnostics;
+using RowingMonitor.Model.Util;
 
 namespace UnitTest
 {
@@ -26,7 +27,8 @@ namespace UnitTest
                 JointData joint = new JointData {
                     RelTimestamp = 1000 + i * 1000,
                     AbsTimestamp = 0 + i * 1000,
-                    Index = i
+                    Index = i,
+                    Timestamps = new List<double>()
                 };
                 Dictionary<JointType, Joint> joints = new Dictionary<JointType, Joint>();
                 Joint newJoint = new Joint();
@@ -53,8 +55,48 @@ namespace UnitTest
         private void Calc_CalculatedFrameArrived(object sender, CalculatedFrameArrivedEventArgs e)
         {
             Debug.WriteLine("Event");
-            returnedJointData[index] = e.KinectDataContainer.VelocityJointData.Last();
+            returnedJointData[index] = e.CalculatedJointData;
             index++;
+        }
+
+        [TestMethod]
+        public void TestSubsequenceDTW()
+        {
+            List<double> template = new List<double> { 11, 6, 9, 4 };
+            List<double> data = new List<double> { 5, 12, 6, 10, 6, 11, 6, 9, 4 };
+
+            List<Subsequence> resultSubsequences = new List<Subsequence>();
+            resultSubsequences.Add(new Subsequence {
+                Distance = 4,
+                TStart = 2,
+                TEnd = 5,
+                Status = SubsequenceStatus.OPTIMAL
+            });
+            resultSubsequences.Add(new Subsequence {
+                Distance = 0,
+                TStart = 6,
+                TEnd = 9,
+                Status = SubsequenceStatus.NOT_OPTIMAL
+            });
+
+            List<Subsequence> reportedSubsequences = new List<Subsequence>();
+
+            SubsequenceDTW dtw = new SubsequenceDTW(template, 15, 4);
+            for (int i = 0; i < data.Count; i++) {
+                Subsequence sequence = dtw.compareDataStream(data[i], i + 1);
+                if (sequence.Status == SubsequenceStatus.OPTIMAL)
+                    reportedSubsequences.Add(sequence);
+                else if (sequence.Status == SubsequenceStatus.NOT_OPTIMAL && i == data.Count - 1)
+                    reportedSubsequences.Add(sequence);
+            }
+
+            Assert.AreEqual(resultSubsequences.Count, reportedSubsequences.Count);
+            foreach (Subsequence sequence in reportedSubsequences) {
+                Assert.AreEqual(resultSubsequences[reportedSubsequences.IndexOf(sequence)].Distance, sequence.Distance);
+                Assert.AreEqual(resultSubsequences[reportedSubsequences.IndexOf(sequence)].TStart, sequence.TStart);
+                Assert.AreEqual(resultSubsequences[reportedSubsequences.IndexOf(sequence)].TEnd, sequence.TEnd);
+                Assert.AreEqual(resultSubsequences[reportedSubsequences.IndexOf(sequence)].Status, sequence.Status);
+            }            
         }
     }
 }
