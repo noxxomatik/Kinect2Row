@@ -178,6 +178,12 @@ namespace RowingMonitor.Model.Pipeline
             // show side view
             sideView.UpdateSkeleton(e.ShiftedJointData.Joints);
             SideBodyImageSource = sideView.BodyImageSource;
+
+            // sonificate the position
+            Task.Run(() =>
+            {
+                System.Console.Beep(2000 + (int)(1000 * e.ShiftedJointData.Joints[JointType.HandRight].Position.Z), 30);
+            });
         }
 
         private void VelCalc_CalculatedFrameArrivedAsync(object sender,
@@ -218,6 +224,11 @@ namespace RowingMonitor.Model.Pipeline
 
         private void SegmentDetector_SegmentDetected(object sender, SegmentDetectedEventArgs e)
         {
+            Double[] secondToLastHitValues = new Double[2];
+            secondToLastHitValues[0] = e.HitTimestamps[e.HitTimestamps.Count - 2] / 1000;
+            secondToLastHitValues[1] = 1;
+            PositionPlot.AddDataPoint(SelectedJointName + " Hits", secondToLastHitValues);
+
             Double[] hitValues = new Double[2];
             hitValues[0] = e.HitTimestamps.Last() / 1000;
             hitValues[1] = 0;
