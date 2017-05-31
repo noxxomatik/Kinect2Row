@@ -27,15 +27,7 @@ namespace RowingMonitor.ViewModel
     {
         private RowingMonitorPipeline pipeline;
 
-        // plot options
-        private String selectedJointName;
-        private JointType selectedJointType;
-
         private Timer timer;
-
-        private PlotModel model;
-        private PlotModel velModel;
-        private PlotModel resultsModel;
 
         private ImageSource bodyImageSource;
         private ImageSource colorImageSource;
@@ -44,44 +36,10 @@ namespace RowingMonitor.ViewModel
         private double beta;
         private double fcmin;
 
-        public string SelectedJointName
-        {
-            get => selectedJointName;
-            set {
-                selectedJointName = value;
-                pipeline.SelectedJointName = selectedJointName;
-                switch (SelectedJointName) {
-                    case "SpineBase":
-                        pipeline.SelectedJointType = JointType.SpineBase;
-                        break;
-                    case "HandRight":
-                        pipeline.SelectedJointType = JointType.HandRight;
-                        break;
-                    case "HandLeft":
-                        pipeline.SelectedJointType = JointType.HandLeft;
-                        break;
-                    default:
-                        pipeline.SelectedJointType = JointType.SpineBase;
-                        break;
-                }
-            }
-        }
-
         /// <summary>
         /// INotifyPropertyChangedPropertyChanged event to allow window controls to bind to changeable data
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public ICommand WindowLoaded { get; private set; }
-        public ICommand WindowClosing { get; private set; }
-        public PlotModel Model { get => model; set => model = value; }
-        public PlotModel VelModel { get => velModel; set => velModel = value; }
-        public PlotModel ResultsModel { get => resultsModel; set => resultsModel = value; }
-        public ImageSource BodyImageSource { get => bodyImageSource; set => bodyImageSource = value; }
-        public ImageSource SideBodyImageSource { get => sideBodyImageSource; set => sideBodyImageSource = value; }
-        public ImageSource ColorImageSource { get => colorImageSource; set => colorImageSource = value; }
-        public double Beta { get => beta; set => beta = value; }
-        public double Fcmin { get => fcmin; set => fcmin = value; }
+        public event PropertyChangedEventHandler PropertyChanged;        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel" /> class.
@@ -89,9 +47,6 @@ namespace RowingMonitor.ViewModel
         public MainViewModel()
         {
             pipeline = new RowingMonitorPipeline();
-            Model = pipeline.PositionPlot.PlotModel;
-            VelModel = pipeline.VelocityPlot.PlotModel;
-            ResultsModel = pipeline.KleshnevPlot.PlotModel;
 
             ColorImageSource = pipeline.ColorBodyImageSource;
             BodyImageSource = pipeline.FrontalBodyImageSource;
@@ -99,10 +54,7 @@ namespace RowingMonitor.ViewModel
 
             // register commands
             WindowLoaded = new RelayCommand(WindowLoadedCommand, CommandCanExecute);
-            WindowClosing = new RelayCommand(WindowClosingCommand, CommandCanExecute);
-
-            // set default plot option
-            SelectedJointName = "SpineBase";
+            WindowClosing = new RelayCommand(WindowClosingCommand, CommandCanExecute);            
 
             // start render loop
             timer = new Timer(Render, null, 0, 33);
@@ -110,13 +62,6 @@ namespace RowingMonitor.ViewModel
 
         private void Render(object state)
         {
-            //RaisePropertyChanged("ColorImageSource");
-            //RaisePropertyChanged("BodyImageSource");
-            //RaisePropertyChanged("SideBodyImageSource");
-            //RaisePropertyChanged("Model");
-            //RaisePropertyChanged("VelModel");
-            //RaisePropertyChanged("ResultsModel");
-
             ColorImageSource = pipeline.ColorBodyImageSource;
             if (ColorImageSource != null)
                 RaisePropertyChanged("ColorImageSource");
@@ -128,15 +73,10 @@ namespace RowingMonitor.ViewModel
             SideBodyImageSource = pipeline.SideBodyImageSource;
             if (SideBodyImageSource != null)
                 RaisePropertyChanged("SideBodyImageSource");
-            
-            //if (Model != null)
-            //    Model.InvalidatePlot(true);
 
-            //if (VelModel != null)
-            //    VelModel.InvalidatePlot(true);
-
-            //if (ResultsModel != null)
-            //    ResultsModel.InvalidatePlot(true);
+            RaisePropertyChanged("DefaultPlotModel");
+            RaisePropertyChanged("KlshLastSegmentPlotModel");
+            RaisePropertyChanged("KlshCurrentSegmentPlotModel");
         }
 
         /* UI Event Handler */
@@ -165,6 +105,57 @@ namespace RowingMonitor.ViewModel
         protected void RaisePropertyChanged(string property)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+        public ICommand WindowLoaded { get; private set; }
+        public ICommand WindowClosing { get; private set; }
+        public ImageSource BodyImageSource
+        {
+            get => bodyImageSource; set => bodyImageSource = value;
+        }
+        public ImageSource SideBodyImageSource
+        {
+            get => sideBodyImageSource; set => sideBodyImageSource = value;
+        }
+        public ImageSource ColorImageSource
+        {
+            get => colorImageSource; set => colorImageSource = value;
+        }
+        public double Beta
+        {
+            get => beta; set => beta = value;
+        }
+        public double Fcmin
+        {
+            get => fcmin; set => fcmin = value;
+        }
+        public List<JointType> PlotJointTypes
+        {
+            get => pipeline.PlotJointTypes; set => pipeline.PlotJointTypes = value;
+        }
+        public List<PlotOptionsMeasuredVariables> PlotMeasuredVariables
+        {
+            get => pipeline.PlotMeasuredVariables; set => pipeline.PlotMeasuredVariables = value;
+        }
+        public bool UseKinectJointFilter
+        {
+            get => pipeline.UseKinectJointFilter; set => pipeline.UseKinectJointFilter = value;
+        }
+        public bool UseZVC
+        {
+            get => pipeline.UseZVC; set => pipeline.UseZVC = value;
+        }
+        public PlotModel DefaultPlotModel
+        {
+            get => pipeline.DefaultPlotModel;
+        }
+        public PlotModel KlshLastSegmentPlotModel
+        {
+            get => pipeline.KlshLastSegmentPlotModel;
+        }
+        public PlotModel KlshCurrentSegmentPlotModel
+        {
+            get => pipeline.KlshCurrentSegmentPlotModel;
         }
     }
 }

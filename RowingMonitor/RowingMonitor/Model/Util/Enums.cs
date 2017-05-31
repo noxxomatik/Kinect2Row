@@ -15,4 +15,12 @@ namespace RowingMonitor.Model.Util
         ArmsRight,
         ArmsLeft
     }
+
+    public enum PlotOptionsMeasuredVariables
+    {
+        RawPosition,
+        SmoothedPosition,
+        Velocity,
+        SegmentHits
+    }
 }

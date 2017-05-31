@@ -19,6 +19,14 @@ namespace RowingMonitor.Model
         private double maxXValue = 0;
 
         /// <summary>
+        /// Creates a plot for the view.
+        /// </summary>
+        public Plot()
+        {
+            this.range = 0;
+        }
+
+        /// <summary>
         /// Creates a plot for the view. 
         /// 
         /// If the number data points for one line series reaches the max threshold, 
@@ -72,8 +80,11 @@ namespace RowingMonitor.Model
             }
 
             // set graph range by highest value from all data Points
-            xAxis.Minimum = maxXValue - range;
-            tmp.Axes.Add(xAxis);
+            if (range > 0) {
+                xAxis.Minimum = maxXValue - range;
+                tmp.Axes.Add(xAxis);
+            }
+            
             PlotModel = tmp;
         }
 
@@ -89,7 +100,10 @@ namespace RowingMonitor.Model
             // axis
             LinearAxis xAxis = new LinearAxis();
             xAxis.Position = AxisPosition.Bottom;
-            xAxis.Minimum = maxXValue - range;
+            if (range > 0)
+            {
+                xAxis.Minimum = maxXValue - range;
+            }
             tmp.Axes.Add(xAxis);
 
             PlotModel = tmp;
