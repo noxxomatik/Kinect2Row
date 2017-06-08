@@ -79,6 +79,10 @@ namespace RowingMonitor.Model.Pipeline
         private ImageSource sideBodyImageSource;
         private ImageSource colorBodyImageSource;
 
+        // Logger
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
+            System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public RowingMonitorPipeline()
         {
             kinectReader = KinectReader.Instance;
@@ -196,7 +200,7 @@ namespace RowingMonitor.Model.Pipeline
             velCalc.CalculateVelocity(e.ShiftedJointData);
 
             plotSmoothedPositionBuffer.Add(e.ShiftedJointData);
-            Debug.WriteLine(e.ShiftedJointData.Joints[JointType.HandRight].Position.Z);
+            log.Info(e.ShiftedJointData.Joints[JointType.HandRight].Position.Z);
 
             if (SegmentDetectorChanged)
             {
@@ -249,7 +253,8 @@ namespace RowingMonitor.Model.Pipeline
 
             plotVelocityBuffer.Add(e.SmoothedJointData);
 
-            Debug.WriteLine("Latency: " +
+
+            log.Info("Latency: " +
                 (e.SmoothedJointData.Timestamps.Last()
                 - e.SmoothedJointData.Timestamps[0]));
         }

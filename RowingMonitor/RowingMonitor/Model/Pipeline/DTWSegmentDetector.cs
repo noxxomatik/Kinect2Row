@@ -20,6 +20,10 @@ namespace RowingMonitor.Model.Pipeline
 
         private List<JointData> jointDataHistory = new List<JointData>();
 
+        // Logger
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
+            System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public DTWSegmentDetector()
         {
             subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), 3, 2);
@@ -37,7 +41,7 @@ namespace RowingMonitor.Model.Pipeline
 
             Subsequence subsequence = subsequenceDTW.compareDataStream(GetJointDataValue(jointData, jointType, axis), currentIndex);
             if (subsequence.Status == SubsequenceStatus.OPTIMAL) {
-                //Debug.WriteLine("Distance: " + subsequence.Distance);
+                log.Info("Distance: " + subsequence.Distance);
 
                 // -1 because index t of DTW starts with 1
                 int startIndex = subsequence.TStart + indexOffset - 1;

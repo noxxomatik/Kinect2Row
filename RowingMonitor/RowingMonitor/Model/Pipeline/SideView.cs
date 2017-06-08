@@ -12,6 +12,10 @@ namespace RowingMonitor.Model
 {
     class SideView : FrontalView
     {
+        // Logger
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
+            System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public SideView(CoordinateMapper mapper, int width, int height) : base(mapper, width, height)
         {
             
@@ -47,7 +51,7 @@ namespace RowingMonitor.Model
                     DepthSpacePoint depthSpacePoint = coordinateMapper.MapCameraPointToDepthSpace(
                         position);
 
-                    //Debug.WriteLine("X:" + position.X + " Y: " + position.Y + " Z: " + position.Z);
+                    //log.Info("X:" + position.X + " Y: " + position.Y + " Z: " + position.Z);
                     //jointPoints[jointType] = new Point(position.Z * 200 + 200, -(position.Y * 200 + 200));
                     jointPoints[jointType] = new Point(depthSpacePoint.X, depthSpacePoint.Y);
                 }

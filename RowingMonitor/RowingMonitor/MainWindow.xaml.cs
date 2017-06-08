@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using Xceed.Wpf.Toolkit;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+
 namespace RowingMonitor
 {
     /// <summary>

@@ -19,6 +19,10 @@ namespace RowingMonitor.Model
             ShiftedFrameArrivedEventArgs e);
         public event ShiftedFrameArrivedEventHandler ShiftedFrameArrived;
 
+        // Logger
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
+            System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public void ShiftAndRotate(JointData jointData)
         {
             if (jointData.Joints[JointType.AnkleLeft].TrackingState == TrackingState.NotTracked
@@ -51,7 +55,7 @@ namespace RowingMonitor.Model
                 newJoints[JointType.SpineBase].Position.Y);
             // add another 90°
             //diffAngle += 1.5708;
-            //Debug.WriteLine("diffAngle " + diffAngle);
+            //log.Info("diffAngle " + diffAngle);
 
             // create the rotation matrix around x-axis
             double[,] rotMat = {

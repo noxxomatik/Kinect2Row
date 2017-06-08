@@ -2,7 +2,6 @@
 using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +45,10 @@ namespace RowingMonitor.Model
             SmoothedFrameArrivedEventArgs e);
         public event SmoothedFrameArrivedEventHandler SmoothedFrameArrived;
 
+        // Logger
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
+            System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public OneEuroFilterSmoothing()
         {
             // TODO: try Mincutoff=3, Beta=0
@@ -88,7 +91,7 @@ namespace RowingMonitor.Model
             }
             Dictionary<JointType, Joint> edx = dxfilt.Filter(dx, Alpha(rate, dcutoff));
 
-            Debug.WriteLine("Beta: " + Beta + " Fcmin: " + Fcmin + " rate: " + rate);
+            log.Info("Beta: " + Beta + " Fcmin: " + Fcmin + " rate: " + rate);
             Dictionary<JointType, Dictionary<String, Double>> cutoff = 
                 new Dictionary<JointType, Dictionary<string, double>>();
             foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
