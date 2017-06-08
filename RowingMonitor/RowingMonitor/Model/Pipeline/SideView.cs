@@ -40,9 +40,9 @@ namespace RowingMonitor.Model
                     position.Y = joints[jointType].Position.Y;
                     // x is too near
                     position.Z = joints[jointType].Position.X + 2;
-                    if (position.X < 0) {
-                        position.X = InferredZPositionClamp;
-                    }
+                    //if (position.X < 0) {
+                    //    position.X = InferredZPositionClamp;
+                    //}
 
                     DepthSpacePoint depthSpacePoint = coordinateMapper.MapCameraPointToDepthSpace(
                         position);

@@ -30,6 +30,8 @@ namespace RowingMonitor.Model
         /// </summary>
         private const double JointThickness = 3;
 
+        private const double UntrackedJointThickness = 10;
+
         /// <summary>
         /// Thickness of clip edge rectangles
         /// </summary>
@@ -243,16 +245,19 @@ namespace RowingMonitor.Model
                 Brush drawBrush = null;
 
                 TrackingState trackingState = joints[jointType].TrackingState;
+                double jointThickness = UntrackedJointThickness;
 
                 if (trackingState == TrackingState.Tracked) {
                     drawBrush = new SolidColorBrush(Color.FromArgb(255, 68, 192, 68));
+                    jointThickness = JointThickness;
                 }
-                else if (trackingState == TrackingState.Inferred) {
+                else if (trackingState == TrackingState.Inferred || trackingState == TrackingState.NotTracked) {
                     drawBrush = Brushes.Yellow;
+                    jointThickness = UntrackedJointThickness;
                 }
 
                 if (drawBrush != null) {
-                    drawingContext.DrawEllipse(drawBrush, null, jointPoints[jointType], JointThickness, JointThickness);
+                    drawingContext.DrawEllipse(drawBrush, null, jointPoints[jointType], jointThickness, jointThickness);
                 }
             }
         }

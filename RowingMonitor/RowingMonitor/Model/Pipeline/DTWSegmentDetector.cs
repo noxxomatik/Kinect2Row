@@ -22,7 +22,7 @@ namespace RowingMonitor.Model.Pipeline
 
         public DTWSegmentDetector()
         {
-            subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), 20, 2);
+            subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), 3, 2);
         }
 
         public override void Update(JointData jointData, JointType jointType, 
@@ -37,7 +37,7 @@ namespace RowingMonitor.Model.Pipeline
 
             Subsequence subsequence = subsequenceDTW.compareDataStream(GetJointDataValue(jointData, jointType, axis), currentIndex);
             if (subsequence.Status == SubsequenceStatus.OPTIMAL) {
-                Debug.WriteLine("Distance: " + subsequence.Distance);
+                //Debug.WriteLine("Distance: " + subsequence.Distance);
 
                 // -1 because index t of DTW starts with 1
                 int startIndex = subsequence.TStart + indexOffset - 1;
@@ -79,7 +79,7 @@ namespace RowingMonitor.Model.Pipeline
             string[] splittedText = templateText.Split(',');
             
             foreach (string value in splittedText) {
-                template.Add(Double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat) / -100);
+                template.Add(Double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat));
             }
 
             return template;
