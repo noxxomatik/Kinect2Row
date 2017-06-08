@@ -31,6 +31,9 @@ namespace RowingMonitor.Model.Pipeline
             new OneEuroFilterSmoothing();
         private KinectJointFilter kinectJointFilter;
 
+        // velocity smoothing filter
+        private KinectJointFilter velocityFilter;
+
         // shift
         private Shifter shifter;
 
@@ -91,7 +94,6 @@ namespace RowingMonitor.Model.Pipeline
             // init plots
             defaultPlot = new Plot(PlotRange);
             defaultPlot.Init("Values");
-            //DefaultPlotModel = defaultPlot.PlotModel;    
 
             klshColors = new Dictionary<string, OxyColor>();
             klshColors.Add(KleshnevVelocityType.ArmsLeft.ToString(), OxyColors.LightGreen);
@@ -130,6 +132,10 @@ namespace RowingMonitor.Model.Pipeline
             //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
             kinectJointFilter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
 
+            velocityFilter = new KinectJointFilter();
+            velocityFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
+            velocityFilter.SmoothedFrameArrived += VelocityFilter_SmoothedFrameArrived;
+
             // init shifter
             shifter = new Shifter();
             shifter.ShiftedFrameArrived += Shifter_ShiftedFrameArrived;
@@ -154,7 +160,7 @@ namespace RowingMonitor.Model.Pipeline
             kleshnevVelocityCalculator = new KleshnevVelocityCalculator();
             kleshnevVelocityCalculator.KleshnevCalculationFinished +=
                 KleshnevVelocityCalculator_KleshnevCalculationFinished;
-        }
+        }       
 
         /* Event Handler */
         void KinectReader_KinectFrameArrived(object sender, KinectFrameArrivedEventArgs e)
@@ -176,24 +182,18 @@ namespace RowingMonitor.Model.Pipeline
 
         private void Filter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
         {
-            //Task.Run(() => {
             shifter.ShiftAndRotate(e.SmoothedJointData);
-            //});
 
             // update frontal view skeleton
             frontalView.UpdateSkeleton(e.SmoothedJointData.Joints);
             FrontalBodyImageSource = frontalView.BodyImageSource;
-
-            //plotSmoothedPositionBuffer.Add(e.SmoothedJointData);
         }
 
         private void Shifter_ShiftedFrameArrived(object sender,
             ShiftedFrameArrivedEventArgs e)
         {
-            //Task.Run(() => {
             // calculate velocites
             velCalc.CalculateVelocity(e.ShiftedJointData);
-            //});
 
             plotSmoothedPositionBuffer.Add(e.ShiftedJointData);
             Debug.WriteLine(e.ShiftedJointData.Joints[JointType.HandRight].Position.Z);
@@ -233,23 +233,25 @@ namespace RowingMonitor.Model.Pipeline
         private void VelCalc_CalculatedFrameArrivedAsync(object sender,
             CalculatedFrameArrivedEventArgs e)
         {
+            velocityFilter.UpdateFilter(e.CalculatedJointData);
+        }
+
+        private void VelocityFilter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
+        {
             if (UseZVC)
             {
-                segmentDetector.Update(e.CalculatedJointData,
+                segmentDetector.Update(e.SmoothedJointData,
                     JointType.HandRight, "Z");
             }
 
-            //Task.Run(() => {
-            // calculate Kleshnev
             kleshnevVelocityCalculator.CalculateKleshnevVelocities(
-                e.CalculatedJointData);
-            //});
+                e.SmoothedJointData);
 
-            plotVelocityBuffer.Add(e.CalculatedJointData);
+            plotVelocityBuffer.Add(e.SmoothedJointData);
 
-            //Debug.WriteLine("Latency: " +
-            //    (e.CalculatedJointData.Timestamps.Last()
-            //    - e.CalculatedJointData.Timestamps[0]));
+            Debug.WriteLine("Latency: " +
+                (e.SmoothedJointData.Timestamps.Last()
+                - e.SmoothedJointData.Timestamps[0]));
         }
 
         private void KleshnevVelocityCalculator_KleshnevCalculationFinished(
