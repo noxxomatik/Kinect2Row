@@ -74,7 +74,8 @@ namespace RowingMonitor.Model.Util
         public Subsequence compareDataStream(double xT, int t)
         {
             Subsequence report = new Subsequence {
-                Status = SubsequenceStatus.NOT_SET
+                Status = SubsequenceStatus.NOT_SET,
+                TDetected = t
             };
             s[0] = t;
 
@@ -138,6 +139,7 @@ namespace RowingMonitor.Model.Util
         private int tStart;
         private int tEnd;
         private SubsequenceStatus status;
+        private int tDetected;
 
         /// <summary>
         /// Calculates distance between the template and the data stream.
@@ -155,6 +157,10 @@ namespace RowingMonitor.Model.Util
         /// Status of detected subsequence.
         /// </summary>
         public SubsequenceStatus Status { get => status; set => status = value; }
+        /// <summary>
+        /// Time of detection.
+        /// </summary>
+        public int TDetected { get => tDetected; set => tDetected = value; }
     }
 
     /// <summary>

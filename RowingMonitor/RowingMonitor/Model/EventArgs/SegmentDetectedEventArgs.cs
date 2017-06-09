@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,13 @@ namespace RowingMonitor.Model
     /// </summary>
     public class SegmentDetectedEventArgs : EventArgs
     {
-        private List<long> hitIndices;
-        private List<double> hitTimestamps;
+        private List<SegmentHit> hits;
 
-        public SegmentDetectedEventArgs(List<long> hitIndices, List<double> hitTimestamps)
+        public SegmentDetectedEventArgs(List<SegmentHit> hits)
         {
-            HitIndices = hitIndices;
-            HitTimestamps = hitTimestamps;
+            Hits = hits;
         }
-        public List<double> HitTimestamps { get => hitTimestamps; private set => hitTimestamps = value; }
-        public List<long> HitIndices { get => hitIndices; private set => hitIndices = value; }
+
+        public List<SegmentHit> Hits { get => hits; private set => hits = value; }
     }
 }

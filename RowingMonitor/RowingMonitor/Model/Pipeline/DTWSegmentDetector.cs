@@ -24,9 +24,9 @@ namespace RowingMonitor.Model.Pipeline
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
             System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public DTWSegmentDetector()
+        public DTWSegmentDetector(float distanceThreshold, int minimumSubsequenceLength)
         {
-            subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), 3, 2);
+            subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), distanceThreshold, minimumSubsequenceLength);
         }
 
         public override void Update(JointData jointData, JointType jointType, 
@@ -40,23 +40,46 @@ namespace RowingMonitor.Model.Pipeline
             jointDataHistory.Add(jointData);
 
             Subsequence subsequence = subsequenceDTW.compareDataStream(GetJointDataValue(jointData, jointType, axis), currentIndex);
-            if (subsequence.Status == SubsequenceStatus.OPTIMAL) {
-                log.Info("Distance: " + subsequence.Distance);
-
+            if (subsequence.Status == SubsequenceStatus.OPTIMAL) {  
                 // -1 because index t of DTW starts with 1
                 int startIndex = subsequence.TStart + indexOffset - 1;
                 int endIndex = subsequence.TEnd + indexOffset - 1;
-                hitIndices.Add(startIndex);
-                hitIndices.Add(endIndex);
+                int detectionIndex = subsequence.TDetected + indexOffset - 1;
 
-                // split jointData Buffer in segment and ne past data
+                log.Info("Optimal subsequence detected with distance: " + subsequence.Distance 
+                    + " | Detection latency: " + (detectionIndex-endIndex));
+
+                if (detectionIndex != jointData.Index)
+                {
+                    throw new Exception("Index offset is faulty.");
+                }
+
+                SegmentHit startHit = new SegmentHit();
+                startHit.Index = startIndex;
+                startHit.DetectionIndex = jointData.Index;
+                startHit.DetectionAbsTimestamp = jointData.AbsTimestamp;
+                startHit.HitType = HitType.SegmentStart;
+
+                SegmentHit endHit = new SegmentHit();
+                endHit.Index = endIndex;
+                endHit.DetectionIndex = jointData.Index;
+                endHit.DetectionAbsTimestamp = jointData.AbsTimestamp;
+                endHit.HitType = HitType.SegmentEnd;
+
+                // split jointData buffer in the detected segment and new past data
                 List<JointData> segment = new List<JointData>();
                 List<JointData> buffer = new List<JointData>();
 
                 foreach (JointData data in jointDataHistory) {
                     if (data.Index >= startIndex && data.Index <= endIndex) {
-                        if (data.Index == startIndex || data.Index == endIndex)
-                            hitTimestamps.Add(data.AbsTimestamp);
+                        if (data.Index == startIndex)
+                        {
+                            startHit.AbsTimestamp = data.AbsTimestamp;
+                        }
+                        else if (data.Index == endIndex)
+                        {
+                            endHit.AbsTimestamp = data.AbsTimestamp;
+                        }
                         segment.Add(data);                        
                     }
                     else if(data.Index > endIndex) {
@@ -65,7 +88,9 @@ namespace RowingMonitor.Model.Pipeline
                 }
                 jointDataHistory = new List<JointData>(buffer);
 
-                OnSegmentDetected(new SegmentDetectedEventArgs(hitIndices, hitTimestamps));
+                hits.Add(startHit);
+                hits.Add(endHit);
+                OnSegmentDetected(new SegmentDetectedEventArgs(hits));
             }
 
             currentIndex++;

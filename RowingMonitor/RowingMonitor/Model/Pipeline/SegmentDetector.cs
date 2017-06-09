@@ -14,9 +14,7 @@ namespace RowingMonitor.Model.Pipeline
             SegmentDetectedEventArgs e);
         public event SegmentDetectedEventHandler SegmentDetected;
 
-        protected List<long> hitIndices = new List<long>();
-
-        protected List<double> hitTimestamps = new List<double>();
+        protected List<SegmentHit> hits = new List<SegmentHit>();
 
         public abstract void Update(JointData jointData, JointType jointType,
             String axis);
@@ -40,5 +38,5 @@ namespace RowingMonitor.Model.Pipeline
         {
             SegmentDetected?.Invoke(this, e);
         }
-    }
+    }    
 }

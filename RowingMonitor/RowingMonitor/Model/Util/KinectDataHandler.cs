@@ -118,4 +118,34 @@ namespace RowingMonitor.Model.Util
         /// </summary>
         public List<double> Timestamps { get => timestamps; set => timestamps = value; }
     }
+
+    public struct SegmentHit
+    {
+        private long index;
+        private long detectionIndex;
+        private double absTimestamp;
+        private double detectionAbsTimestamp;
+        private HitType hitType;
+
+        /// <summary>
+        /// Index of the joint data that this hit belongs to.
+        /// </summary>
+        public long Index { get => index; set => index = value; }
+        /// <summary>
+        /// Index of the joint data where this hit was detected.
+        /// </summary>
+        public long DetectionIndex { get => detectionIndex; set => detectionIndex = value; }
+        /// <summary>
+        /// Absolute timestamp of the joint data that this hit belongs to.
+        /// </summary>
+        public double AbsTimestamp { get => absTimestamp; set => absTimestamp = value; }
+        /// <summary>
+        /// Absolute timestamp of the joint data where this hit was detected.
+        /// </summary>
+        public double DetectionAbsTimestamp { get => detectionAbsTimestamp; set => detectionAbsTimestamp = value; }
+        /// <summary>
+        /// Type of this hit in the context of a segment.
+        /// </summary>
+        public HitType HitType { get => hitType; set => hitType = value; }
+    }
 }

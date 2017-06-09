@@ -23,4 +23,12 @@ namespace RowingMonitor.Model.Util
         Velocity,
         SegmentHits
     }
+
+    public enum HitType
+    {
+        SegmentStart,
+        SegmentInternal,
+        SegmentEnd,
+        SegmentEndStart
+    }
 }

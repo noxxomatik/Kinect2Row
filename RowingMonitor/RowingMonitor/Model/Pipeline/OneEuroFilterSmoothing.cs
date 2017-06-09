@@ -90,8 +90,7 @@ namespace RowingMonitor.Model
                 }
             }
             Dictionary<JointType, Joint> edx = dxfilt.Filter(dx, Alpha(rate, dcutoff));
-
-            log.Info("Beta: " + Beta + " Fcmin: " + Fcmin + " rate: " + rate);
+            
             Dictionary<JointType, Dictionary<String, Double>> cutoff = 
                 new Dictionary<JointType, Dictionary<string, double>>();
             foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
