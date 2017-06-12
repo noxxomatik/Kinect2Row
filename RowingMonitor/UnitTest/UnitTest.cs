@@ -15,6 +15,8 @@ namespace UnitTest
         JointData[] returnedJointData = new JointData[6];
         int index = 0;
 
+        JointData shiftedJointData;
+
         [TestMethod]
         public void TestCalculateVelocity()
         {
@@ -97,6 +99,68 @@ namespace UnitTest
                 Assert.AreEqual(resultSubsequences[reportedSubsequences.IndexOf(sequence)].TEnd, sequence.TEnd);
                 Assert.AreEqual(resultSubsequences[reportedSubsequences.IndexOf(sequence)].Status, sequence.Status);
             }            
+        }
+
+        [TestMethod]
+        public void TestShifter()
+        {
+            Shifter shifter = new Shifter();
+            shifter.ShiftedFrameArrived += Shifter_ShiftedFrameArrived;
+
+            JointData jointData = new JointData
+            {
+                RelTimestamp = 0,
+                AbsTimestamp = 0,
+                Index = 0,
+                Timestamps = new List<double>()
+            };
+
+            Dictionary<JointType, Joint> joints = new Dictionary<JointType, Joint>();
+
+            Joint ankleR = new Joint();
+            ankleR.Position.X = 1;
+            ankleR.Position.Y = 0;
+            ankleR.Position.Z = 0;
+            ankleR.TrackingState = TrackingState.Tracked;
+            joints.Add(JointType.AnkleRight, ankleR);
+
+            Joint ankleL = new Joint();
+            ankleL.Position.X = -1;
+            ankleL.Position.Y = 0;
+            ankleL.Position.Z = 0;
+            ankleL.TrackingState = TrackingState.Tracked;
+            joints.Add(JointType.AnkleLeft, ankleL);
+
+            Joint spine = new Joint();
+            spine.Position.X = 0;
+            spine.Position.Y = 2;
+            spine.Position.Z = 0;
+            joints.Add(JointType.SpineBase, spine);
+
+            jointData.Joints = joints;
+
+            shifter.ShiftAndRotate(jointData);
+
+            // wait for the results
+            System.Threading.Thread.Sleep(1000);
+
+            Joint spineComp = new Joint();
+            spineComp.Position.X = 0;
+            spineComp.Position.Y = 0;
+            spineComp.Position.Z = 2;
+
+            // convert to int because pi is not precise in the calculation
+            Assert.AreEqual(Convert.ToInt16(spineComp.Position.X),
+                Convert.ToInt16(shiftedJointData.Joints[JointType.SpineBase].Position.X));
+            Assert.AreEqual(Convert.ToInt16(spineComp.Position.Y),
+                Convert.ToInt16(shiftedJointData.Joints[JointType.SpineBase].Position.Y));
+            Assert.AreEqual(Convert.ToInt16(spineComp.Position.Z),
+                Convert.ToInt16(shiftedJointData.Joints[JointType.SpineBase].Position.Z));
+        }
+
+        private void Shifter_ShiftedFrameArrived(object sender, ShiftedFrameArrivedEventArgs e)
+        {
+            shiftedJointData = e.ShiftedJointData;            
         }
     }
 }

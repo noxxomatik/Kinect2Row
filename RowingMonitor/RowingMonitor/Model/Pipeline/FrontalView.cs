@@ -28,7 +28,7 @@ namespace RowingMonitor.Model
         /// <summary>
         /// Thickness of drawn joint lines
         /// </summary>
-        private const double JointThickness = 3;
+        protected const double JointThickness = 3;
 
         private const double UntrackedJointThickness = 10;
 
@@ -247,15 +247,17 @@ namespace RowingMonitor.Model
                 TrackingState trackingState = joints[jointType].TrackingState;
                 double jointThickness = UntrackedJointThickness;
 
+                // if joint is tracked make the brush a small red point
                 if (trackingState == TrackingState.Tracked) {
                     drawBrush = new SolidColorBrush(Color.FromArgb(255, 68, 192, 68));
                     jointThickness = JointThickness;
                 }
+                // if the joint is not fully tracked make the brush a big yellow point
                 else if (trackingState == TrackingState.Inferred || trackingState == TrackingState.NotTracked) {
                     drawBrush = Brushes.Yellow;
                     jointThickness = UntrackedJointThickness;
                 }
-
+                // draw the point if the brush is set
                 if (drawBrush != null) {
                     drawingContext.DrawEllipse(drawBrush, null, jointPoints[jointType], jointThickness, jointThickness);
                 }

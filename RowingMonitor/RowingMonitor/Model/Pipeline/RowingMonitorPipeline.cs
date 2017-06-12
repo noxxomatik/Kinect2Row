@@ -208,7 +208,6 @@ namespace RowingMonitor.Model.Pipeline
             velCalc.CalculateVelocity(e.ShiftedJointData);
 
             plotSmoothedPositionBuffer.Add(e.ShiftedJointData);
-            log.Info(e.ShiftedJointData.Joints[JointType.HandRight].Position.Z);
 
             if (SegmentDetectorChanged)
             {

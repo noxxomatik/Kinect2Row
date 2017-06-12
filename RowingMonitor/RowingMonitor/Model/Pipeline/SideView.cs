@@ -57,11 +57,30 @@ namespace RowingMonitor.Model
                 }
 
                 DrawBody(joints, jointPoints, dc, drawPen);
+                DrawHorizontalAxis(jointPoints, dc);
 
                 // prevent drawing outside of our render area
                 drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0, displayWidth, displayHeight));
                 BodyImageSource = tmpImageSource;
             }
+        }
+
+        private void DrawHorizontalAxis(IDictionary<JointType, Point> jointPoints, DrawingContext drawingContext)
+        {
+            Brush drawBrush = Brushes.Blue;
+
+            // draw a point at cankle (new origin)
+            Point ankleCenter = new Point();
+            ankleCenter.X = (jointPoints[JointType.AnkleLeft].X 
+                + jointPoints[JointType.AnkleRight].X) / 2;
+            ankleCenter.Y = (jointPoints[JointType.AnkleLeft].Y
+                + jointPoints[JointType.AnkleRight].Y) / 2;
+
+            drawingContext.DrawEllipse(drawBrush, null, ankleCenter, JointThickness, JointThickness);
+
+            // draw a line between cankle and spine base
+            Pen drawPen = new Pen(Brushes.Blue, 1);
+            drawingContext.DrawLine(drawPen, ankleCenter, jointPoints[JointType.SpineBase]);
         }
     }
 }
