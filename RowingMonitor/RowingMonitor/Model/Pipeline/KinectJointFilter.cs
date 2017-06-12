@@ -138,15 +138,15 @@ namespace RowingMonitor.Model.Pipeline
             Dictionary<JointType, Joint> newJoints = new Dictionary<JointType, Joint>();
             for (JointType jt = JointType.SpineBase; jt <= JointType.ThumbRight; jt++) {
                 Joint newJoint = jointData.Joints[jt];
-                newJoint.Position.X = m_pFilteredJoints[(int) jt].X;
-                newJoint.Position.Y = m_pFilteredJoints[(int) jt].Y;
-                newJoint.Position.Z = m_pFilteredJoints[(int) jt].Z;
+                newJoint.Position.X = m_pFilteredJoints[(int)jt].X;
+                newJoint.Position.Y = m_pFilteredJoints[(int)jt].Y;
+                newJoint.Position.Z = m_pFilteredJoints[(int)jt].Z;
                 newJoints.Add(jt, newJoint);
             }
             JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
-                jointData, 
-                DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond, 
-                newJoints);          
+                jointData,
+                DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
+                newJoints);
             SmoothedFrameArrived(this, new SmoothedFrameArrivedEventArgs(jointData, newJointData));
         }
 
@@ -241,27 +241,27 @@ namespace RowingMonitor.Model.Pipeline
             Microsoft.Kinect.Joint joint = jointData.Joints[jt];
 
             vRawPosition = joint.Position;
-            vPrevFilteredPosition = m_pHistory[(int) jt].m_vFilteredPosition;
-            vPrevTrend = m_pHistory[(int) jt].m_vTrend;
-            vPrevRawPosition = m_pHistory[(int) jt].m_vRawPosition;
+            vPrevFilteredPosition = m_pHistory[(int)jt].m_vFilteredPosition;
+            vPrevTrend = m_pHistory[(int)jt].m_vTrend;
+            vPrevRawPosition = m_pHistory[(int)jt].m_vRawPosition;
             bJointIsValid = JointPositionIsValid(vRawPosition);
 
             // If joint is invalid, reset the filter
             if (!bJointIsValid) {
-                m_pHistory[(int) jt].m_dwFrameCount = 0;
+                m_pHistory[(int)jt].m_dwFrameCount = 0;
             }
 
             // Initial start values
-            if (m_pHistory[(int) jt].m_dwFrameCount == 0) {
+            if (m_pHistory[(int)jt].m_dwFrameCount == 0) {
                 vFilteredPosition = vRawPosition;
                 vTrend = CSVectorZero();
-                m_pHistory[(int) jt].m_dwFrameCount++;
+                m_pHistory[(int)jt].m_dwFrameCount++;
             }
-            else if (m_pHistory[(int) jt].m_dwFrameCount == 1) {
+            else if (m_pHistory[(int)jt].m_dwFrameCount == 1) {
                 vFilteredPosition = CSVectorScale(CSVectorAdd(vRawPosition, vPrevRawPosition), 0.5f);
                 vDiff = CSVectorSubtract(vFilteredPosition, vPrevFilteredPosition);
                 vTrend = CSVectorAdd(CSVectorScale(vDiff, smoothingParams.fCorrection), CSVectorScale(vPrevTrend, 1.0f - smoothingParams.fCorrection));
-                m_pHistory[(int) jt].m_dwFrameCount++;
+                m_pHistory[(int)jt].m_dwFrameCount++;
             }
             else {
                 // First apply jitter filter
@@ -298,12 +298,12 @@ namespace RowingMonitor.Model.Pipeline
             }
 
             // Save the data from this frame
-            m_pHistory[(int) jt].m_vRawPosition = vRawPosition;
-            m_pHistory[(int) jt].m_vFilteredPosition = vFilteredPosition;
-            m_pHistory[(int) jt].m_vTrend = vTrend;
+            m_pHistory[(int)jt].m_vRawPosition = vRawPosition;
+            m_pHistory[(int)jt].m_vFilteredPosition = vFilteredPosition;
+            m_pHistory[(int)jt].m_vTrend = vTrend;
 
             // Output the data
-            m_pFilteredJoints[(int) jt] = vPredictedPosition;
+            m_pFilteredJoints[(int)jt] = vPredictedPosition;
         }
     }
 }

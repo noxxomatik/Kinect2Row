@@ -19,7 +19,7 @@ namespace RowingMonitor.Model
         // cutoff slope
         private double beta;
         // cutoff frequency for derivate
-        private Dictionary<JointType, Dictionary<String, Double>> dcutoff = 
+        private Dictionary<JointType, Dictionary<String, Double>> dcutoff =
             new Dictionary<JointType, Dictionary<string, double>>();
         // low pass filter
         LowPassFilter xfilt;
@@ -30,18 +30,22 @@ namespace RowingMonitor.Model
 
         /* Properties */
         public Double Beta { get => beta; set => beta = value; }
-        public double Fcmin {
+        public double Fcmin
+        {
             get => fcmin;
             set {
                 fcmin = value;
                 Mincutoff = InitCutoffDictionary(fcmin);
             }
         }
-        public Dictionary<JointType, Dictionary<string, double>> Mincutoff { get => mincutoff;
-            set => mincutoff = value; }
+        public Dictionary<JointType, Dictionary<string, double>> Mincutoff
+        {
+            get => mincutoff;
+            set => mincutoff = value;
+        }
 
         /* Events */
-        public delegate void SmoothedFrameArrivedEventHandler(Object sender, 
+        public delegate void SmoothedFrameArrivedEventHandler(Object sender,
             SmoothedFrameArrivedEventArgs e);
         public event SmoothedFrameArrivedEventHandler SmoothedFrameArrived;
 
@@ -82,16 +86,16 @@ namespace RowingMonitor.Model
                     Joint newJoint = joint.Value;
                     newJoint.Position.X = Convert.ToSingle((joint.Value.Position.X -
                         xfilt.Hatxprev[joint.Key].Position.X) * rate);
-                    newJoint.Position.Y = Convert.ToSingle((joint.Value.Position.Y - 
+                    newJoint.Position.Y = Convert.ToSingle((joint.Value.Position.Y -
                         xfilt.Hatxprev[joint.Key].Position.Y) * rate);
-                    newJoint.Position.Z = Convert.ToSingle((joint.Value.Position.Z - 
+                    newJoint.Position.Z = Convert.ToSingle((joint.Value.Position.Z -
                         xfilt.Hatxprev[joint.Key].Position.Z) * rate);
                     dx.Add(joint.Key, newJoint);
                 }
             }
             Dictionary<JointType, Joint> edx = dxfilt.Filter(dx, Alpha(rate, dcutoff));
-            
-            Dictionary<JointType, Dictionary<String, Double>> cutoff = 
+
+            Dictionary<JointType, Dictionary<String, Double>> cutoff =
                 new Dictionary<JointType, Dictionary<string, double>>();
             foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                 Dictionary<string, double> values = new Dictionary<string, double>();
@@ -107,7 +111,7 @@ namespace RowingMonitor.Model
                 x.Add(joint.Key, newJoint);
             }
 
-            Dictionary<JointType, Joint> result = xfilt.Filter(x, Alpha(rate, cutoff));            
+            Dictionary<JointType, Joint> result = xfilt.Filter(x, Alpha(rate, cutoff));
 
             JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
                 jointData,
@@ -118,7 +122,7 @@ namespace RowingMonitor.Model
 
             SmoothedFrameArrived(this, new SmoothedFrameArrivedEventArgs(jointData,
                 newJointData));
-        }      
+        }
 
         /// <summary>
         /// Alpha computation.
@@ -126,10 +130,10 @@ namespace RowingMonitor.Model
         /// <param name="rate">Data update rate in Hz.</param>
         /// <param name="cutoff">Cutoff frequency in Hz</param>
         /// <returns>Alpha value for low-pass filter.</returns>
-        private Dictionary<JointType, Dictionary<String, Double>> Alpha(double rate, 
+        private Dictionary<JointType, Dictionary<String, Double>> Alpha(double rate,
             Dictionary<JointType, Dictionary<String, Double>> cutoff)
         {
-            Dictionary<JointType, Dictionary<String, Double>> ret = 
+            Dictionary<JointType, Dictionary<String, Double>> ret =
                 new Dictionary<JointType, Dictionary<string, double>>();
             foreach (KeyValuePair<JointType, Dictionary<String, Double>> joint in cutoff) {
                 Dictionary<String, Double> values = new Dictionary<string, double>();
@@ -139,7 +143,7 @@ namespace RowingMonitor.Model
                     values.Add(entry.Key, 1.0 / (1.0 + tau / te));
                 }
                 ret.Add(joint.Key, values);
-            }            
+            }
             return ret;
         }
 
@@ -150,7 +154,7 @@ namespace RowingMonitor.Model
         /// <returns></returns>
         public static Dictionary<JointType, Dictionary<String, Double>> InitCutoffDictionary(Double value)
         {
-            Dictionary<JointType, Dictionary<String, Double>> ret = 
+            Dictionary<JointType, Dictionary<String, Double>> ret =
                 new Dictionary<JointType, Dictionary<string, double>>();
             foreach (JointType type in Enum.GetValues(typeof(JointType))) {
                 Dictionary<String, Double> values = new Dictionary<string, double>();

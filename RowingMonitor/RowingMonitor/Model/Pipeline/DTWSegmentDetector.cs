@@ -29,7 +29,7 @@ namespace RowingMonitor.Model.Pipeline
             subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), distanceThreshold, minimumSubsequenceLength);
         }
 
-        public override void Update(JointData jointData, JointType jointType, 
+        public override void Update(JointData jointData, JointType jointType,
             string axis)
         {
             // if first time of update, set the index offset
@@ -40,17 +40,16 @@ namespace RowingMonitor.Model.Pipeline
             jointDataHistory.Add(jointData);
 
             Subsequence subsequence = subsequenceDTW.compareDataStream(GetJointDataValue(jointData, jointType, axis), currentIndex);
-            if (subsequence.Status == SubsequenceStatus.OPTIMAL) {  
+            if (subsequence.Status == SubsequenceStatus.OPTIMAL) {
                 // -1 because index t of DTW starts with 1
                 int startIndex = subsequence.TStart + indexOffset - 1;
                 int endIndex = subsequence.TEnd + indexOffset - 1;
                 int detectionIndex = subsequence.TDetected + indexOffset - 1;
 
-                log.Info("Optimal subsequence detected with distance: " + subsequence.Distance 
-                    + " | Detection latency: " + (detectionIndex-endIndex));
+                log.Info("Optimal subsequence detected with distance: " + subsequence.Distance
+                    + " | Detection latency: " + (detectionIndex - endIndex));
 
-                if (detectionIndex != jointData.Index)
-                {
+                if (detectionIndex != jointData.Index) {
                     throw new Exception("Index offset is faulty.");
                 }
 
@@ -72,17 +71,15 @@ namespace RowingMonitor.Model.Pipeline
 
                 foreach (JointData data in jointDataHistory) {
                     if (data.Index >= startIndex && data.Index <= endIndex) {
-                        if (data.Index == startIndex)
-                        {
+                        if (data.Index == startIndex) {
                             startHit.AbsTimestamp = data.AbsTimestamp;
                         }
-                        else if (data.Index == endIndex)
-                        {
+                        else if (data.Index == endIndex) {
                             endHit.AbsTimestamp = data.AbsTimestamp;
                         }
-                        segment.Add(data);                        
+                        segment.Add(data);
                     }
-                    else if(data.Index > endIndex) {
+                    else if (data.Index > endIndex) {
                         buffer.Add(data);
                     }
                 }
@@ -106,7 +103,7 @@ namespace RowingMonitor.Model.Pipeline
             List<double> template = new List<double>();
             string templateText = Properties.Settings.Default.Template;
             string[] splittedText = templateText.Split(',');
-            
+
             foreach (string value in splittedText) {
                 template.Add(Double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat));
             }

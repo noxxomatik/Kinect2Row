@@ -50,7 +50,7 @@ namespace RowingMonitor.Model
                 JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
                     lastJointData,
                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
-                    newJoints);                
+                    newJoints);
 
                 // save to history
                 penultimateJointData = lastJointData;
@@ -80,7 +80,7 @@ namespace RowingMonitor.Model
                 JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
                     lastJointData,
                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
-                    newJoints);                
+                    newJoints);
 
                 // save to history
                 penultimateJointData = lastJointData;

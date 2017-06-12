@@ -19,7 +19,7 @@ namespace RowingMonitor.Model.Pipeline
         public abstract void Update(JointData jointData, JointType jointType,
             String axis);
 
-        protected float GetJointDataValue(JointData jointData, 
+        protected float GetJointDataValue(JointData jointData,
             JointType jointType, String axis)
         {
             switch (axis) {
@@ -38,5 +38,5 @@ namespace RowingMonitor.Model.Pipeline
         {
             SegmentDetected?.Invoke(this, e);
         }
-    }    
+    }
 }

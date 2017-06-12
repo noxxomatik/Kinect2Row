@@ -12,7 +12,7 @@ namespace RowingMonitor.Model
     /// <summary>
     /// Represents the arguments for a finished Kleshnev analysis.
     /// </summary>
-    public class KleshnevEventArgs : EventArgs        
+    public class KleshnevEventArgs : EventArgs
     {
         private List<KleshnevData> kleshnevData;
 

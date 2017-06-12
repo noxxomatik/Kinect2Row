@@ -115,7 +115,7 @@ namespace RowingMonitor.Model
             get => bodyImageSource;
             protected set {
                 bodyImageSource = value;
-                
+
             }
         }
         public WriteableBitmap ColorImageSource { get => colorImageSource; private set => colorImageSource = value; }
@@ -221,9 +221,9 @@ namespace RowingMonitor.Model
 
         public void UpdateColorImage(WriteableBitmap colorImage)
         {
-                ColorImageSource = colorImage;
-                // freeze to avoid "Must create DependencySource on same Thread as the DependencyObject" error"
-                //colorImageSource.Freeze();
+            ColorImageSource = colorImage;
+            // freeze to avoid "Must create DependencySource on same Thread as the DependencyObject" error"
+            //colorImageSource.Freeze();
         }
 
         /// <summary>

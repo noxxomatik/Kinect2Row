@@ -25,7 +25,7 @@ namespace RowingMonitor.Model.Util
                 return instance;
             }
         }
-        
+
         public double RelStartTime { get => relStartTime; set => relStartTime = value; }
         public long LastIndex { get => lastIndex; set => lastIndex = value; }
         public Body[] Bodies { get => bodies; set => bodies = value; }
@@ -38,8 +38,9 @@ namespace RowingMonitor.Model.Util
                 relStartTime = relTimestamp;
             }
 
-            JointData jointData = new JointData {
-                RelTimestamp = relTimestamp,                
+            JointData jointData = new JointData
+            {
+                RelTimestamp = relTimestamp,
                 AbsTimestamp = relTimestamp - relStartTime,
                 Index = LastIndex,
                 Joints = joints
@@ -56,7 +57,8 @@ namespace RowingMonitor.Model.Util
             double creationTimestamp,
             IReadOnlyDictionary<JointType, Joint> newJoints)
         {
-            JointData jointData = new JointData {
+            JointData jointData = new JointData
+            {
                 RelTimestamp = oldJointData.RelTimestamp,
                 AbsTimestamp = oldJointData.AbsTimestamp,
                 Timestamps = oldJointData.Timestamps,
@@ -66,7 +68,7 @@ namespace RowingMonitor.Model.Util
 
             // add the creationTimestamp to the right pipeline step
             jointData.Timestamps.Add(creationTimestamp);
-            
+
             return jointData;
         }
 

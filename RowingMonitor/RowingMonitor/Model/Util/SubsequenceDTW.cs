@@ -39,7 +39,7 @@ namespace RowingMonitor.Model.Util
             y = template;
             y.Insert(0, Double.PositiveInfinity);
 
-            d = new List<double>();            
+            d = new List<double>();
             dPast = new List<double>();
             d.Add(0);
             dPast.Add(0);
@@ -73,14 +73,15 @@ namespace RowingMonitor.Model.Util
         /// <returns></returns>A subsequence with its distance, starttime and endtime.
         public Subsequence compareDataStream(double xT, int t)
         {
-            Subsequence report = new Subsequence {
+            Subsequence report = new Subsequence
+            {
                 Status = SubsequenceStatus.NOT_SET,
                 TDetected = t
             };
             s[0] = t;
 
-            for ( int i = 1; i <= m; i++) {
-                double dBest = Math.Min(Math.Min(d[i - 1], dPast[i]), dPast[i-1]);
+            for (int i = 1; i <= m; i++) {
+                double dBest = Math.Min(Math.Min(d[i - 1], dPast[i]), dPast[i - 1]);
                 d[i] = Math.Abs(xT - y[i]) + dBest;
 
                 if (d[i - 1] == dBest)

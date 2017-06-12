@@ -18,7 +18,7 @@ namespace RowingMonitor.Model
     /// This class uses the singleton pattern with static initialization.
     /// </summary>
     public sealed class KinectReader
-    {        
+    {
         private static readonly KinectReader instance = new KinectReader();
 
         /// <summary>
@@ -63,11 +63,11 @@ namespace RowingMonitor.Model
         public string StatusText { get => statusText; }
 
         /* Events */
-        public delegate void KinectFrameArrivedEventHandler(Object sender, 
+        public delegate void KinectFrameArrivedEventHandler(Object sender,
             KinectFrameArrivedEventArgs e);
         public event KinectFrameArrivedEventHandler KinectFrameArrived;
 
-        public delegate void ColorFrameArrivedEventHandler(Object sender, 
+        public delegate void ColorFrameArrivedEventHandler(Object sender,
             ColorFrameArrivedEventArgs e);
         public event ColorFrameArrivedEventHandler ColorFrameArrived;
 
@@ -83,7 +83,7 @@ namespace RowingMonitor.Model
             coordinateMapper = kinectSensor.CoordinateMapper;
 
             // get the depth (display) extents
-            FrameDescription frameDescription = 
+            FrameDescription frameDescription =
                 kinectSensor.DepthFrameSource.FrameDescription;
 
             // get size of joint space
@@ -101,7 +101,7 @@ namespace RowingMonitor.Model
             kinectSensor.Open();
 
             // set the status text
-            statusText = kinectSensor.IsAvailable ? Properties.Resources.RunningStatusText 
+            statusText = kinectSensor.IsAvailable ? Properties.Resources.RunningStatusText
                 : Properties.Resources.NoSensorStatusText;
         }
 
@@ -110,8 +110,7 @@ namespace RowingMonitor.Model
         /// </summary>
         public static KinectReader Instance
         {
-            get 
-            {
+            get {
                 return instance;
             }
         }
@@ -134,12 +133,12 @@ namespace RowingMonitor.Model
         /// </summary>
         /// <param name="sender">Object sending the event.</param>
         /// <param name="e">Event arguments.</param>
-        private void MultiSourceFrameReader_MultiSourceFrameArrived(object sender, 
+        private void MultiSourceFrameReader_MultiSourceFrameArrived(object sender,
             MultiSourceFrameArrivedEventArgs e)
         {
             MultiSourceFrame multiSourceFrame = e.FrameReference.AcquireFrame();
 
-            using (BodyFrame bodyFrame = 
+            using (BodyFrame bodyFrame =
                 multiSourceFrame.BodyFrameReference.AcquireFrame()) {
                 if (bodyFrame != null) {
                     if (bodies == null) {
@@ -158,9 +157,9 @@ namespace RowingMonitor.Model
                     kdh.Bodies = bodies;
                     if (kdh.GetFirstTrackedBody() != null) {
                         IReadOnlyDictionary<JointType, Joint> joints =
-                            kdh.GetFirstTrackedBody().Joints;                        
+                            kdh.GetFirstTrackedBody().Joints;
                         // body frame available for other pipeline members
-                        KinectFrameArrived(this, 
+                        KinectFrameArrived(this,
                             new KinectFrameArrivedEventArgs(
                                 kdh.CreateNewJointData(
                                     bodyFrame.RelativeTime.TotalMilliseconds,
@@ -170,24 +169,24 @@ namespace RowingMonitor.Model
                 }
             }
 
-            using (ColorFrame colorFrame = 
+            using (ColorFrame colorFrame =
                 multiSourceFrame.ColorFrameReference.AcquireFrame()) {
                 if (colorFrame != null) {
                     FrameDescription colorFrameDescription = colorFrame.FrameDescription;
 
                     using (KinectBuffer colorBuffer = colorFrame.LockRawImageBuffer()) {
-                        WriteableBitmap bitmap =  new WriteableBitmap(
+                        WriteableBitmap bitmap = new WriteableBitmap(
                             colorFrameDescription.Width,
-                            colorFrameDescription.Height, 
+                            colorFrameDescription.Height,
                             96.0, 96.0, PixelFormats.Bgr32, null);
                         bitmap.Lock();
                         // verify data and write the new color frame data
                         // to the display bitmap
-                        if ((colorFrameDescription.Width == bitmap.PixelWidth) 
+                        if ((colorFrameDescription.Width == bitmap.PixelWidth)
                             && (colorFrameDescription.Height == bitmap.PixelHeight)) {
                             colorFrame.CopyConvertedFrameDataToIntPtr(
                                 bitmap.BackBuffer,
-                                (uint) (colorFrameDescription.Width 
+                                (uint)(colorFrameDescription.Width
                                 * colorFrameDescription.Height * 4),
                                 ColorImageFormat.Bgra);
 
@@ -208,10 +207,10 @@ namespace RowingMonitor.Model
         public void StartReader()
         {
             if (this.multiSourceFrameReader != null) {
-                this.multiSourceFrameReader.MultiSourceFrameArrived += 
+                this.multiSourceFrameReader.MultiSourceFrameArrived +=
                     MultiSourceFrameReader_MultiSourceFrameArrived;
             }
-        }        
+        }
 
         /// <summary>
         /// Stop the kinect reader and clean up.

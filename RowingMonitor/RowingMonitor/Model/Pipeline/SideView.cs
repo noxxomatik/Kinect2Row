@@ -18,7 +18,7 @@ namespace RowingMonitor.Model
 
         public SideView(CoordinateMapper mapper, int width, int height) : base(mapper, width, height)
         {
-            
+
         }
 
         public override void UpdateSkeleton(IReadOnlyDictionary<JointType, Joint> joints)
@@ -71,7 +71,7 @@ namespace RowingMonitor.Model
 
             // draw a point at cankle (new origin)
             Point ankleCenter = new Point();
-            ankleCenter.X = (jointPoints[JointType.AnkleLeft].X 
+            ankleCenter.X = (jointPoints[JointType.AnkleLeft].X
                 + jointPoints[JointType.AnkleRight].X) / 2;
             ankleCenter.Y = (jointPoints[JointType.AnkleLeft].Y
                 + jointPoints[JointType.AnkleRight].Y) / 2;

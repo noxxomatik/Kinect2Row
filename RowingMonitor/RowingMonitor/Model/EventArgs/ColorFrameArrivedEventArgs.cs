@@ -11,7 +11,7 @@ namespace RowingMonitor.Model
     /// <summary>
     /// Represents the arguments for a KinectReader's ColorFrameArrived event.
     /// </summary>
-    public class ColorFrameArrivedEventArgs : EventArgs        
+    public class ColorFrameArrivedEventArgs : EventArgs
     {
         private WriteableBitmap colorBitmap;
 
@@ -20,7 +20,10 @@ namespace RowingMonitor.Model
             ColorBitmap = colorBitmap;
         }
 
-        public WriteableBitmap ColorBitmap { get => colorBitmap;
-            private set => colorBitmap = value; }
+        public WriteableBitmap ColorBitmap
+        {
+            get => colorBitmap;
+            private set => colorBitmap = value;
+        }
     }
 }

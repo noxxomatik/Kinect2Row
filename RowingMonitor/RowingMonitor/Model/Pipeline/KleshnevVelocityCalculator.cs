@@ -12,14 +12,15 @@ namespace RowingMonitor.Model.Pipeline
     {
         public delegate void KleshnevCalculationFinishedEventHandler(Object sender,
             KleshnevEventArgs e);
-        public event KleshnevCalculationFinishedEventHandler KleshnevCalculationFinished;        
+        public event KleshnevCalculationFinishedEventHandler KleshnevCalculationFinished;
 
         private List<KleshnevData> kleshnevData = new List<KleshnevData>();
 
         public void CalculateKleshnevVelocities(JointData velocityJointData)
         {
             // copy JointData to KleshnevData
-            KleshnevData newKleshnevData = new KleshnevData {
+            KleshnevData newKleshnevData = new KleshnevData
+            {
                 RelTimestamp = velocityJointData.RelTimestamp,
                 AbsTimestamp = velocityJointData.AbsTimestamp,
                 Index = velocityJointData.Index

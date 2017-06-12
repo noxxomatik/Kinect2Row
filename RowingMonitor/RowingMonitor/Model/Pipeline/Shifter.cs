@@ -26,8 +26,7 @@ namespace RowingMonitor.Model
         public void ShiftAndRotate(JointData jointData)
         {
             if (jointData.Joints[JointType.AnkleLeft].TrackingState == TrackingState.NotTracked
-                || jointData.Joints[JointType.AnkleLeft].TrackingState == TrackingState.NotTracked)
-            {
+                || jointData.Joints[JointType.AnkleLeft].TrackingState == TrackingState.NotTracked) {
                 throw new BodyNotFullyTrackedException();
             }
 
@@ -50,14 +49,13 @@ namespace RowingMonitor.Model
 
             // transform all points that ankleCenter is origin
             Dictionary<JointType, Joint> newJoints = new Dictionary<JointType, Joint>();
-            foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints)
-            {
+            foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                 Joint newJoint = joint.Value;
                 newJoint.Position.X -= ankleCenter.X;
                 newJoint.Position.Y -= ankleCenter.Y;
                 newJoint.Position.Z -= ankleCenter.Z;
                 newJoints.Add(joint.Key, newJoint);
-            }            
+            }
 
             // get the angular difference between the line between ankleCenter and SpineBase
             // angle around x-axis
@@ -74,8 +72,7 @@ namespace RowingMonitor.Model
 
             // multiply (dot product) rotmat and position
             Dictionary<JointType, Joint> shiftedJoints = new Dictionary<JointType, Joint>();
-            foreach (KeyValuePair<JointType, Joint> joint in newJoints)
-            {
+            foreach (KeyValuePair<JointType, Joint> joint in newJoints) {
                 Joint newJoint = joint.Value;
                 double x = rotMat[0, 0] * joint.Value.Position.X
                     + rotMat[0, 1] * joint.Value.Position.Y

@@ -31,10 +31,10 @@ namespace RowingMonitor.Model.Pipeline
         public ZVCSegmentDetector(int minimumHitGap, bool startSegmentWithRisingVelocity = true)
         {
             minHitGap = minimumHitGap;
-            endStartHitIsRisingVelocity = startSegmentWithRisingVelocity ? true : false;            
+            endStartHitIsRisingVelocity = startSegmentWithRisingVelocity ? true : false;
         }
 
-        public override void Update(JointData jointData, 
+        public override void Update(JointData jointData,
             JointType jointType, String axis)
         {
             if (lastJointData.RelTimestamp != 0) {
@@ -44,19 +44,18 @@ namespace RowingMonitor.Model.Pipeline
 
                 // zero velocity crossing
                 // if value is 0 then crossing is at this exact index
-                if (value == 0)
-                {
+                if (value == 0) {
                     AddHits(jointData, value, lastValue, slopeRising);
                     lastSlopeRising = slopeRising;
                 }
-                else {                    
+                else {
                     // if sign is negativ then crossing was between the two frames
                     if (value * lastValue < 0) {
                         AddHits(jointData, value, lastValue, slopeRising);
                         lastSlopeRising = slopeRising;
                     }
                 }
-            }            
+            }
             lastJointData = jointData;
         }
 
@@ -64,27 +63,24 @@ namespace RowingMonitor.Model.Pipeline
         private void AddHits(JointData jointData, float value, float lastValue, bool slopeRising)
         {
             // check if it is the first hit
-            if (hits.Count == 0)
-            {
-                SegmentHit hit = new SegmentHit {
+            if (hits.Count == 0) {
+                SegmentHit hit = new SegmentHit
+                {
                     HitType = HitType.SegmentStart,
                     Index = jointData.Index,
                     DetectionIndex = jointData.Index,
                     AbsTimestamp = jointData.AbsTimestamp,
-                    DetectionAbsTimestamp = jointData.AbsTimestamp                    
+                    DetectionAbsTimestamp = jointData.AbsTimestamp
                 };
                 hits.Add(hit);
                 OnSegmentDetected(new SegmentDetectedEventArgs(hits));
             }
             // check if hit is beyond the minimum hit gap and has another slope
-            else if (jointData.Index - hits.Last().Index >= minHitGap)
-            {
+            else if (jointData.Index - hits.Last().Index >= minHitGap) {
                 // check the slope
-                if (slopeRising != lastSlopeRising)
-                {
+                if (slopeRising != lastSlopeRising) {
                     // determine the hit type
-                    if (slopeRising)
-                    {
+                    if (slopeRising) {
                         SegmentHit hit = new SegmentHit
                         {
                             HitType = endStartHitIsRisingVelocity ? HitType.SegmentEndStart : HitType.SegmentInternal,
@@ -96,8 +92,7 @@ namespace RowingMonitor.Model.Pipeline
                         hits.Add(hit);
                         OnSegmentDetected(new SegmentDetectedEventArgs(hits));
                     }
-                    else
-                    {
+                    else {
                         SegmentHit hit = new SegmentHit
                         {
                             HitType = endStartHitIsRisingVelocity ? HitType.SegmentInternal : HitType.SegmentEndStart,
@@ -108,15 +103,13 @@ namespace RowingMonitor.Model.Pipeline
                         };
                         hits.Add(hit);
                         OnSegmentDetected(new SegmentDetectedEventArgs(hits));
-                    }                    
+                    }
                 }
-                else
-                {
+                else {
                     log.Info("Hit dropped because it has the same slope as the last hit.");
                 }
             }
-            else
-            {
+            else {
                 log.Info("Hit dropped because it was inside the minimum hit gap.");
             }
         }

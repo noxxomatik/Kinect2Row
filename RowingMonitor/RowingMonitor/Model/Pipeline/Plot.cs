@@ -58,7 +58,8 @@ namespace RowingMonitor.Model
             double maxXValue = 0;
 
             foreach (KeyValuePair<String, List<Double[]>> series in dataPoints) {
-                LineSeries lineSeries = new LineSeries {
+                LineSeries lineSeries = new LineSeries
+                {
                     Title = series.Key,
                     MarkerType = MarkerType.Circle
                 };
@@ -84,7 +85,7 @@ namespace RowingMonitor.Model
                 xAxis.Minimum = maxXValue - range;
                 tmp.Axes.Add(xAxis);
             }
-            
+
             PlotModel = tmp;
         }
 
@@ -100,8 +101,7 @@ namespace RowingMonitor.Model
             // axis
             LinearAxis xAxis = new LinearAxis();
             xAxis.Position = AxisPosition.Bottom;
-            if (range > 0)
-            {
+            if (range > 0) {
                 xAxis.Minimum = maxXValue - range;
             }
             tmp.Axes.Add(xAxis);
@@ -115,7 +115,7 @@ namespace RowingMonitor.Model
             LineSeries existingSeries = null;
             foreach (Series ser in PlotModel.Series) {
                 if (ser != null && ser.Title == series) {
-                    existingSeries = (LineSeries) ser;
+                    existingSeries = (LineSeries)ser;
                     break;
                 }
             }
@@ -125,7 +125,8 @@ namespace RowingMonitor.Model
             }
             else {
                 // create series and add point
-                LineSeries lineSeries = new LineSeries {
+                LineSeries lineSeries = new LineSeries
+                {
                     Title = series,
                     MarkerType = MarkerType.Circle
                 };
