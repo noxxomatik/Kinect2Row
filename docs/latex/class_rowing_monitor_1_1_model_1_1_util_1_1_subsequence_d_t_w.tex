@@ -1,0 +1,78 @@
+\hypertarget{class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w}{}\section{Rowing\+Monitor.\+Model.\+Util.\+Subsequence\+D\+TW Class Reference}
+\label{class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w}\index{Rowing\+Monitor.\+Model.\+Util.\+Subsequence\+D\+TW@{Rowing\+Monitor.\+Model.\+Util.\+Subsequence\+D\+TW}}
+
+
+Compares an online data stream with a template stream. Uses the S\+P\+R\+I\+NG D\+TW algorithm.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w_a16ee898f6e11aee3d1b3ccfb482cdddb}{Subsequence\+D\+TW} (List$<$ double $>$ template, float distance\+Threshold, int minimum\+Subsequence\+Length=2)
+\begin{DoxyCompactList}\small\item\em Creates a new instance of the \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w}{Subsequence\+D\+TW} class. \end{DoxyCompactList}\item 
+\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence}{Subsequence} \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w_a2aa9afce49cbb11a86ee3e5791397416}{compare\+Data\+Stream} (double xT, int t)
+\begin{DoxyCompactList}\small\item\em Compare the value x at time t of the data stream with the template. Returns an unset, not optimal or optimal subsequence with its distance, starttime and endtime. Uses the S\+P\+R\+I\+NG D\+TW algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Compares an online data stream with a template stream. Uses the S\+P\+R\+I\+NG D\+TW algorithm. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w_a16ee898f6e11aee3d1b3ccfb482cdddb}\label{class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w_a16ee898f6e11aee3d1b3ccfb482cdddb}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Subsequence\+D\+TW@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Subsequence\+D\+TW}!Subsequence\+D\+TW@{Subsequence\+D\+TW}}
+\index{Subsequence\+D\+TW@{Subsequence\+D\+TW}!Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Subsequence\+D\+TW@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Subsequence\+D\+TW}}
+\subsubsection{\texorpdfstring{Subsequence\+D\+T\+W()}{SubsequenceDTW()}}
+{\footnotesize\ttfamily Rowing\+Monitor.\+Model.\+Util.\+Subsequence\+D\+T\+W.\+Subsequence\+D\+TW (\begin{DoxyParamCaption}\item[{List$<$ double $>$}]{template,  }\item[{float}]{distance\+Threshold,  }\item[{int}]{minimum\+Subsequence\+Length = {\ttfamily 2} }\end{DoxyParamCaption})}
+
+
+
+Creates a new instance of the \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w}{Subsequence\+D\+TW} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em template} & \\
+\hline
+\end{DoxyParams}
+Template stream for comparison. 
+\begin{DoxyParams}{Parameters}
+{\em distance\+Threshold} & \\
+\hline
+\end{DoxyParams}
+Distance threshold which describes the maximum distance that reports a detected subsequence. 
+\begin{DoxyParams}{Parameters}
+{\em minimum\+Subsequence\+Length} & \\
+\hline
+\end{DoxyParams}
+Minimum length of a detected subsequence. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w_a2aa9afce49cbb11a86ee3e5791397416}\label{class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w_a2aa9afce49cbb11a86ee3e5791397416}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Subsequence\+D\+TW@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Subsequence\+D\+TW}!compare\+Data\+Stream@{compare\+Data\+Stream}}
+\index{compare\+Data\+Stream@{compare\+Data\+Stream}!Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Subsequence\+D\+TW@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Subsequence\+D\+TW}}
+\subsubsection{\texorpdfstring{compare\+Data\+Stream()}{compareDataStream()}}
+{\footnotesize\ttfamily \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence}{Subsequence} Rowing\+Monitor.\+Model.\+Util.\+Subsequence\+D\+T\+W.\+compare\+Data\+Stream (\begin{DoxyParamCaption}\item[{double}]{xT,  }\item[{int}]{t }\end{DoxyParamCaption})}
+
+
+
+Compare the value x at time t of the data stream with the template. Returns an unset, not optimal or optimal subsequence with its distance, starttime and endtime. Uses the S\+P\+R\+I\+NG D\+TW algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xT} & \\
+\hline
+\end{DoxyParams}
+Value x of data stream at time t. 
+\begin{DoxyParams}{Parameters}
+{\em t} & \\
+\hline
+\end{DoxyParams}
+Time t of value x. Time starts with 1. \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+A subsequence with its distance, starttime and endtime. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Model/\+Util/\hyperlink{_subsequence_d_t_w_8cs}{Subsequence\+D\+T\+W.\+cs}\end{DoxyCompactItemize}

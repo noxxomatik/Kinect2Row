@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['calculatedframearrived',['CalculatedFrameArrived',['../class_rowing_monitor_1_1_model_1_1_velocity_calculator.html#a0da4ec78b2279bb46e43c9e35914e573',1,'RowingMonitor::Model::VelocityCalculator']]],
+  ['calculatedframearrivedeventargs',['CalculatedFrameArrivedEventArgs',['../class_rowing_monitor_1_1_model_1_1_calculated_frame_arrived_event_args.html',1,'RowingMonitor.Model.CalculatedFrameArrivedEventArgs'],['../class_rowing_monitor_1_1_model_1_1_calculated_frame_arrived_event_args.html#ab73cb44f37b699c76ed2a5b1d98338d3',1,'RowingMonitor.Model.CalculatedFrameArrivedEventArgs.CalculatedFrameArrivedEventArgs()']]],
+  ['calculatedframearrivedeventargs_2ecs',['CalculatedFrameArrivedEventArgs.cs',['../_calculated_frame_arrived_event_args_8cs.html',1,'']]],
+  ['calculatedframearrivedeventhandler',['CalculatedFrameArrivedEventHandler',['../class_rowing_monitor_1_1_model_1_1_velocity_calculator.html#aba102b7d4623af9933bfe091c2ad1d9b',1,'RowingMonitor::Model::VelocityCalculator']]],
+  ['calculatedjointdata',['CalculatedJointData',['../class_rowing_monitor_1_1_model_1_1_calculated_frame_arrived_event_args.html#ad2a6d96247f32cec46b5e5006b4a867b',1,'RowingMonitor::Model::CalculatedFrameArrivedEventArgs']]],
+  ['calculatekleshnevvelocities',['CalculateKleshnevVelocities',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_velocity_calculator.html#a69abee7723f70d572cc9ce6cd026c9fd',1,'RowingMonitor::Model::Pipeline::KleshnevVelocityCalculator']]],
+  ['calculatevelocity',['CalculateVelocity',['../class_rowing_monitor_1_1_model_1_1_velocity_calculator.html#a49c8bd67bb150dbd6e1e7c3ed31dc699',1,'RowingMonitor::Model::VelocityCalculator']]],
+  ['canexecute',['CanExecute',['../class_rowing_monitor_1_1_relay_command.html#a85fe9d9b44a1db38da8e1330d6715b30',1,'RowingMonitor::RelayCommand']]],
+  ['canexecutechanged',['CanExecuteChanged',['../class_rowing_monitor_1_1_relay_command.html#ae4dd035ea91a110089885a49c15fa525',1,'RowingMonitor::RelayCommand']]],
+  ['colorbitmap',['ColorBitmap',['../class_rowing_monitor_1_1_model_1_1_color_frame_arrived_event_args.html#a2332327334320a56103d13596128a841',1,'RowingMonitor::Model::ColorFrameArrivedEventArgs']]],
+  ['colorbodyimagesource',['ColorBodyImageSource',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_monitor_pipeline.html#affd26b0d4b0fd4fc310e3ed60e517db2',1,'RowingMonitor::Model::Pipeline::RowingMonitorPipeline']]],
+  ['colorframearrived',['ColorFrameArrived',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html#acfb84abd48dd27e54f3be804026d5682',1,'RowingMonitor::Model::KinectReader']]],
+  ['colorframearrivedeventargs',['ColorFrameArrivedEventArgs',['../class_rowing_monitor_1_1_model_1_1_color_frame_arrived_event_args.html',1,'RowingMonitor.Model.ColorFrameArrivedEventArgs'],['../class_rowing_monitor_1_1_model_1_1_color_frame_arrived_event_args.html#a228785b0fda3657a17d7c30fd429ba1c',1,'RowingMonitor.Model.ColorFrameArrivedEventArgs.ColorFrameArrivedEventArgs()']]],
+  ['colorframearrivedeventargs_2ecs',['ColorFrameArrivedEventArgs.cs',['../_color_frame_arrived_event_args_8cs.html',1,'']]],
+  ['colorframearrivedeventhandler',['ColorFrameArrivedEventHandler',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html#a2c9c0a937275cbabf12954725b54ddb8',1,'RowingMonitor::Model::KinectReader']]],
+  ['colorimagesource',['ColorImageSource',['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#a0f47cf3abfe77c81f15735301a04c5af',1,'RowingMonitor.Model.FrontalView.ColorImageSource()'],['../class_rowing_monitor_1_1_view_model_1_1_main_view_model.html#a6a3397050ea6774eabf6118819a183a0',1,'RowingMonitor.ViewModel.MainViewModel.ColorImageSource()']]],
+  ['colors',['Colors',['../class_rowing_monitor_1_1_model_1_1_plot.html#af5c811e7e98de0927650caede84921a5',1,'RowingMonitor::Model::Plot']]],
+  ['comparedatastream',['compareDataStream',['../class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w.html#a2aa9afce49cbb11a86ee3e5791397416',1,'RowingMonitor::Model::Util::SubsequenceDTW']]],
+  ['coordinatemapper',['CoordinateMapper',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html#a6e16165a91a0d690370503db49999c30',1,'RowingMonitor.Model.KinectReader.CoordinateMapper()'],['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#ad84cc9acd2d1b4115e6e629e846a3af5',1,'RowingMonitor.Model.FrontalView.coordinateMapper()']]],
+  ['createdelegate',['CreateDelegate',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#a8ec4c37e82d9f4e867e9655f4eac3a78',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper']]],
+  ['createinstance',['CreateInstance',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#aefb7a98fceb9c287cef4756942f441d1',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper']]],
+  ['createnewjointdata',['CreateNewJointData',['../class_rowing_monitor_1_1_model_1_1_util_1_1_kinect_data_handler.html#aad695db8966d25a7c4226c369bc6be32',1,'RowingMonitor::Model::Util::KinectDataHandler']]]
+];

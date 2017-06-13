@@ -1,6 +1,8 @@
 ﻿using OxyPlot;
+using OxyPlot.Annotations;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,7 +50,7 @@ namespace RowingMonitor.Model
         /// </summary>
         /// <param name="dataPoints">Set of data points (x,y). The Key will be used as title of the line series.</param>
         /// <param name="title">Title of the plot.</param>
-        public void UpdatePlot(Dictionary<String, List<Double[]>> dataPoints,
+        public void UpdatePlot(Dictionary<String, List<PlotData>> dataPoints,
             String title,
             Dictionary<String, OxyColor> colors = null)
         {
@@ -57,27 +59,48 @@ namespace RowingMonitor.Model
             xAxis.Position = AxisPosition.Bottom;
             double maxXValue = 0;
 
-            foreach (KeyValuePair<String, List<Double[]>> series in dataPoints) {
-                LineSeries lineSeries = new LineSeries
-                {
-                    Title = series.Key,
-                    MarkerType = MarkerType.Circle
-                };
+            LinearAxis yAxis = new LinearAxis();
+            yAxis.Position = AxisPosition.Left;
+            tmp.Axes.Add(yAxis);
 
-                // check if specific colors are set
-                if (colors != null && colors.Count() == dataPoints.Count()) {
-                    lineSeries.Color = colors[series.Key];
+            tmp.LegendPosition = LegendPosition.BottomLeft;
+
+            foreach (KeyValuePair<String, List<PlotData>> series in dataPoints) {
+                // use a vertical line for hits
+                if (series.Value.Count > 0 && 
+                    series.Value[0].DataStreamType == DataStreamType.SegmentHits) {
+                    int indexCount = series.Value.Count();
+                    for (int j = 0; j < indexCount; j++) {
+                        LineAnnotation annotation = new LineAnnotation();
+                        annotation.Type = LineAnnotationType.Vertical;
+                        annotation.X = series.Value[j].X;
+                        annotation.Text = series.Value[j].Annotation;
+                        annotation.Color = series.Value[j].Annotation == HitType.SegmentInternal.ToString() ? 
+                            OxyColors.Aqua : OxyColors.DarkRed; 
+                        tmp.Annotations.Add(annotation);
+                    }
                 }
+                // use a linear graph for all other streams
+                else {
+                    LineSeries lineSeries = new LineSeries
+                    {
+                        Title = series.Key,
+                        MarkerType = MarkerType.Circle
+                    };
 
-                int indexCount = series.Value.Count();
-                //int indexStart = indexCount > maxValues ? indexCount - maxValues : 0;
-                //for (int j = indexStart; j < indexCount; j++) {
-                for (int j = 0; j < indexCount; j++) {
-                    maxXValue = maxXValue < series.Value[j][0] ? series.Value[j][0] : maxXValue;
-                    lineSeries.Points.Add(new DataPoint(series.Value[j][0], series.Value[j][1]));
+                    // check if specific colors are set
+                    if (colors != null && colors.Count() == dataPoints.Count()) {
+                        lineSeries.Color = colors[series.Key];
+                    }
+
+                    int indexCount = series.Value.Count();
+                    for (int j = 0; j < indexCount; j++) {
+                        maxXValue = maxXValue < series.Value[j].X ? series.Value[j].X : maxXValue;
+                        lineSeries.Points.Add(new DataPoint(series.Value[j].X, series.Value[j].Y));
+                    }
+
+                    tmp.Series.Add(lineSeries);
                 }
-
-                tmp.Series.Add(lineSeries);
             }
 
             // set graph range by highest value from all data Points
@@ -147,5 +170,18 @@ namespace RowingMonitor.Model
             // refresh the plot
             PlotModel.InvalidatePlot(true);
         }
+    }
+
+    public struct PlotData
+    {
+        private double x;
+        private double y;
+        private string annotation;
+        private DataStreamType dataStreamType;
+
+        public double X { get => x; set => x = value; }
+        public double Y { get => y; set => y = value; }
+        public string Annotation { get => annotation; set => annotation = value; }
+        public DataStreamType DataStreamType { get => dataStreamType; set => dataStreamType = value; }
     }
 }

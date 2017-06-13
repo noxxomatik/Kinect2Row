@@ -1,0 +1,107 @@
+\hypertarget{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing}{}\section{Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing Class Reference}
+\label{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing}\index{Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+delegate void \hyperlink{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a22becc35eb5432a3a90b8e61d5c8171f}{Smoothed\+Frame\+Arrived\+Event\+Handler} (Object sender, \hyperlink{class_rowing_monitor_1_1_model_1_1_smoothed_frame_arrived_event_args}{Smoothed\+Frame\+Arrived\+Event\+Args} e)
+\item 
+\hyperlink{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a1c3c89d4e59552370c5c0d56edac8a19}{One\+Euro\+Filter\+Smoothing} ()
+\item 
+void \hyperlink{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a2dcb40fcf4cd02302a23f421f710ac8c}{Update\+Filter} (\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data} joint\+Data)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Dictionary$<$ Joint\+Type, Dictionary$<$ String, Double $>$ $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_ab5e23859c5dbb67cdafebec5fea702f5}{Init\+Cutoff\+Dictionary} (Double value)
+\begin{DoxyCompactList}\small\item\em Initliazies a dictionary of all joint types with a given value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Double \hyperlink{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_abbe908f1d7748febfc27336f42b95a6f}{Beta}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+double \hyperlink{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_ada991e92f7ecbde83ab171a585f6d6d2}{Fcmin}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+Dictionary$<$ Joint\+Type, Dictionary$<$ string, double $>$ $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a9763ac7c63ca0ad07c8a0a00f645a9fc}{Mincutoff}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+\subsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a22becc35eb5432a3a90b8e61d5c8171f}{Smoothed\+Frame\+Arrived\+Event\+Handler} \hyperlink{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_ad6eddf578afaace11e6d1f1a74ff018a}{Smoothed\+Frame\+Arrived}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a1c3c89d4e59552370c5c0d56edac8a19}\label{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a1c3c89d4e59552370c5c0d56edac8a19}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}!One\+Euro\+Filter\+Smoothing@{One\+Euro\+Filter\+Smoothing}}
+\index{One\+Euro\+Filter\+Smoothing@{One\+Euro\+Filter\+Smoothing}!Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}}
+\subsubsection{\texorpdfstring{One\+Euro\+Filter\+Smoothing()}{OneEuroFilterSmoothing()}}
+{\footnotesize\ttfamily Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing.\+One\+Euro\+Filter\+Smoothing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_ab5e23859c5dbb67cdafebec5fea702f5}\label{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_ab5e23859c5dbb67cdafebec5fea702f5}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}!Init\+Cutoff\+Dictionary@{Init\+Cutoff\+Dictionary}}
+\index{Init\+Cutoff\+Dictionary@{Init\+Cutoff\+Dictionary}!Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}}
+\subsubsection{\texorpdfstring{Init\+Cutoff\+Dictionary()}{InitCutoffDictionary()}}
+{\footnotesize\ttfamily static Dictionary$<$Joint\+Type, Dictionary$<$String, Double$>$ $>$ Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing.\+Init\+Cutoff\+Dictionary (\begin{DoxyParamCaption}\item[{Double}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initliazies a dictionary of all joint types with a given value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a22becc35eb5432a3a90b8e61d5c8171f}\label{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a22becc35eb5432a3a90b8e61d5c8171f}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}!Smoothed\+Frame\+Arrived\+Event\+Handler@{Smoothed\+Frame\+Arrived\+Event\+Handler}}
+\index{Smoothed\+Frame\+Arrived\+Event\+Handler@{Smoothed\+Frame\+Arrived\+Event\+Handler}!Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}}
+\subsubsection{\texorpdfstring{Smoothed\+Frame\+Arrived\+Event\+Handler()}{SmoothedFrameArrivedEventHandler()}}
+{\footnotesize\ttfamily delegate void Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing.\+Smoothed\+Frame\+Arrived\+Event\+Handler (\begin{DoxyParamCaption}\item[{Object}]{sender,  }\item[{\hyperlink{class_rowing_monitor_1_1_model_1_1_smoothed_frame_arrived_event_args}{Smoothed\+Frame\+Arrived\+Event\+Args}}]{e }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a2dcb40fcf4cd02302a23f421f710ac8c}\label{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a2dcb40fcf4cd02302a23f421f710ac8c}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}!Update\+Filter@{Update\+Filter}}
+\index{Update\+Filter@{Update\+Filter}!Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}}
+\subsubsection{\texorpdfstring{Update\+Filter()}{UpdateFilter()}}
+{\footnotesize\ttfamily void Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing.\+Update\+Filter (\begin{DoxyParamCaption}\item[{\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data}}]{joint\+Data }\end{DoxyParamCaption})}
+
+
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_abbe908f1d7748febfc27336f42b95a6f}\label{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_abbe908f1d7748febfc27336f42b95a6f}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}!Beta@{Beta}}
+\index{Beta@{Beta}!Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}}
+\subsubsection{\texorpdfstring{Beta}{Beta}}
+{\footnotesize\ttfamily Double Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing.\+Beta\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_ada991e92f7ecbde83ab171a585f6d6d2}\label{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_ada991e92f7ecbde83ab171a585f6d6d2}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}!Fcmin@{Fcmin}}
+\index{Fcmin@{Fcmin}!Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}}
+\subsubsection{\texorpdfstring{Fcmin}{Fcmin}}
+{\footnotesize\ttfamily double Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing.\+Fcmin\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a9763ac7c63ca0ad07c8a0a00f645a9fc}\label{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a9763ac7c63ca0ad07c8a0a00f645a9fc}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}!Mincutoff@{Mincutoff}}
+\index{Mincutoff@{Mincutoff}!Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}}
+\subsubsection{\texorpdfstring{Mincutoff}{Mincutoff}}
+{\footnotesize\ttfamily Dictionary$<$Joint\+Type, Dictionary$<$string, double$>$ $>$ Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing.\+Mincutoff\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+\subsection{Event Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_ad6eddf578afaace11e6d1f1a74ff018a}\label{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_ad6eddf578afaace11e6d1f1a74ff018a}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}!Smoothed\+Frame\+Arrived@{Smoothed\+Frame\+Arrived}}
+\index{Smoothed\+Frame\+Arrived@{Smoothed\+Frame\+Arrived}!Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing@{Rowing\+Monitor\+::\+Model\+::\+One\+Euro\+Filter\+Smoothing}}
+\subsubsection{\texorpdfstring{Smoothed\+Frame\+Arrived}{SmoothedFrameArrived}}
+{\footnotesize\ttfamily \hyperlink{class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing_a22becc35eb5432a3a90b8e61d5c8171f}{Smoothed\+Frame\+Arrived\+Event\+Handler} Rowing\+Monitor.\+Model.\+One\+Euro\+Filter\+Smoothing.\+Smoothed\+Frame\+Arrived}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Model/\+Pipeline/\hyperlink{_one_euro_filter_smoothing_8cs}{One\+Euro\+Filter\+Smoothing.\+cs}\end{DoxyCompactItemize}

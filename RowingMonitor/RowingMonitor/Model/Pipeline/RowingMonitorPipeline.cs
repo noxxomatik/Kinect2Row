@@ -41,6 +41,14 @@ namespace RowingMonitor.Model.Pipeline
         private SegmentDetector segmentDetector;
         private bool segmentDetectorChanged;
 
+        // DTW
+        float distanceThreshold = 3.0f;
+        int minimumSubsequenceLength = 10;
+
+        // ZVC
+        int minimumHitGap = 10;
+        bool startSegmentWithRisingVelocity = true;
+
         // calculations
         private VelocityCalculator velCalc;
         private KleshnevVelocityCalculator kleshnevVelocityCalculator;
@@ -53,7 +61,7 @@ namespace RowingMonitor.Model.Pipeline
         private Plot defaultPlot;
         // plot options
         private List<JointType> plotJointTypes = new List<JointType>();
-        private List<PlotOptionsMeasuredVariables> plotMeasuredVariables = new List<PlotOptionsMeasuredVariables>();
+        private List<Util.DataStreamType> plotMeasuredVariables = new List<Util.DataStreamType>();
         private bool useKinectJointFilter = true;
         private bool useZVC = false;
         private float plotRange = 10;
@@ -152,10 +160,10 @@ namespace RowingMonitor.Model.Pipeline
 
             // init segment detector
             if (UseZVC) {
-                segmentDetector = new ZVCSegmentDetector(10, true);
+                segmentDetector = new ZVCSegmentDetector(minimumHitGap, startSegmentWithRisingVelocity);
             }
             else {
-                segmentDetector = new DTWSegmentDetector(3.0f, 2);
+                segmentDetector = new DTWSegmentDetector(distanceThreshold, minimumSubsequenceLength);
             }
             segmentDetector.SegmentDetected += SegmentDetector_SegmentDetected;
             SegmentDetectorChanged = false;
@@ -188,7 +196,7 @@ namespace RowingMonitor.Model.Pipeline
 
         private void Filter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
         {
-            logLatency("Filter", e.SmoothedJointData.Timestamps[0], e.SmoothedJointData.Timestamps);
+            LogLatency("Filter", e.SmoothedJointData.Timestamps[0], e.SmoothedJointData.Timestamps);
 
             shifter.ShiftAndRotate(e.SmoothedJointData);
 
@@ -200,7 +208,7 @@ namespace RowingMonitor.Model.Pipeline
         private void Shifter_ShiftedFrameArrived(object sender,
             ShiftedFrameArrivedEventArgs e)
         {
-            logLatency("Shifter", e.ShiftedJointData.Timestamps[0], e.ShiftedJointData.Timestamps);
+            LogLatency("Shifter", e.ShiftedJointData.Timestamps[0], e.ShiftedJointData.Timestamps);
 
             // calculate velocites
             velCalc.CalculateVelocity(e.ShiftedJointData);
@@ -210,10 +218,10 @@ namespace RowingMonitor.Model.Pipeline
             if (SegmentDetectorChanged) {
                 segmentDetector.SegmentDetected -= SegmentDetector_SegmentDetected;
                 if (UseZVC) {
-                    segmentDetector = new ZVCSegmentDetector(10, true);
+                    segmentDetector = new ZVCSegmentDetector(minimumHitGap, startSegmentWithRisingVelocity);
                 }
                 else {
-                    segmentDetector = new DTWSegmentDetector(3, 2);
+                    segmentDetector = new DTWSegmentDetector(distanceThreshold, minimumSubsequenceLength);
                 }
                 segmentDetector.SegmentDetected += SegmentDetector_SegmentDetected;
                 SegmentDetectorChanged = false;
@@ -238,14 +246,14 @@ namespace RowingMonitor.Model.Pipeline
         private void VelCalc_CalculatedFrameArrivedAsync(object sender,
             CalculatedFrameArrivedEventArgs e)
         {
-            logLatency("Velocity Calculator", e.CalculatedJointData.Timestamps[0], e.CalculatedJointData.Timestamps);
+            LogLatency("Velocity Calculator", e.CalculatedJointData.Timestamps[0], e.CalculatedJointData.Timestamps);
 
             velocityFilter.UpdateFilter(e.CalculatedJointData);
         }
 
         private void VelocityFilter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
         {
-            logLatency("Velocity Filter", e.SmoothedJointData.Timestamps[0], e.SmoothedJointData.Timestamps);
+            LogLatency("Velocity Filter", e.SmoothedJointData.Timestamps[0], e.SmoothedJointData.Timestamps);
 
             if (UseZVC) {
                 segmentDetector.Update(e.SmoothedJointData,
@@ -261,66 +269,40 @@ namespace RowingMonitor.Model.Pipeline
         private void KleshnevVelocityCalculator_KleshnevCalculationFinished(
             object sender, KleshnevEventArgs e)
         {
-            logLatency("Kleshnev Velocity Calculator", startTimestamp);
+            LogLatency("Kleshnev Velocity Calculator", startTimestamp);
 
             plotKlshBuffer = e.KleshnevData;
         }
 
         private void SegmentDetector_SegmentDetected(object sender, SegmentDetectedEventArgs e)
         {
-            logLatency("Segment Detector", startTimestamp);
+            LogLatency("Segment Detector", startTimestamp);
 
             hits = e.Hits;
         }
 
         public void UpdateDefaultPlot()
         {
-            Dictionary<string, List<double[]>> plotData =
-                new Dictionary<string, List<double[]>>();
-            foreach (PlotOptionsMeasuredVariables measuredVariable in PlotMeasuredVariables) {
+            Dictionary<string, List<PlotData>> plotData =
+                new Dictionary<string, List<PlotData>>();
+            foreach (DataStreamType measuredVariable in PlotMeasuredVariables) {
                 switch (measuredVariable) {
-                    case PlotOptionsMeasuredVariables.RawPosition:
-                        foreach (JointType jointType in PlotJointTypes) {
-                            List<double[]> rawPoints = new List<double[]>();
-                            foreach (JointData jointData in plotRawPositionBuffer) {
-                                double[] point = new double[2];
-                                point[0] = jointData.AbsTimestamp / 1000;
-                                point[1] = jointData.Joints[jointType].Position.Z;
-                                rawPoints.Add(point);
-                            }
-                            plotData.Add("Raw position - " + jointType.ToString(), rawPoints);
-                        }
+                    case DataStreamType.RawPosition:
+                        AddLinearPlotData(plotData, plotRawPositionBuffer, measuredVariable);
                         break;
-                    case PlotOptionsMeasuredVariables.SmoothedPosition:
-                        foreach (JointType jointType in PlotJointTypes) {
-                            List<double[]> smoPoints = new List<double[]>();
-                            foreach (JointData jointData in plotSmoothedPositionBuffer) {
-                                double[] point = new double[2];
-                                point[0] = jointData.AbsTimestamp / 1000;
-                                point[1] = jointData.Joints[jointType].Position.Z;
-                                smoPoints.Add(point);
-                            }
-                            plotData.Add("Smoothed position - " + jointType.ToString(), smoPoints);
-                        }
+                    case DataStreamType.SmoothedPosition:
+                        AddLinearPlotData(plotData, plotSmoothedPositionBuffer, measuredVariable);
                         break;
-                    case PlotOptionsMeasuredVariables.Velocity:
-                        foreach (JointType jointType in PlotJointTypes) {
-                            List<double[]> valPoints = new List<double[]>();
-                            foreach (JointData jointData in plotVelocityBuffer) {
-                                double[] point = new double[2];
-                                point[0] = jointData.AbsTimestamp / 1000;
-                                point[1] = jointData.Joints[jointType].Position.Z;
-                                valPoints.Add(point);
-                            }
-                            plotData.Add("Velocity - " + jointType.ToString(), valPoints);
-                        }
+                    case DataStreamType.Velocity:
+                        AddLinearPlotData(plotData, plotVelocityBuffer, measuredVariable);
                         break;
-                    case PlotOptionsMeasuredVariables.SegmentHits:
-                        List<double[]> points = new List<double[]>();
+                    case DataStreamType.SegmentHits:
+                        List<PlotData> points = new List<PlotData>();
                         foreach (SegmentHit hit in hits) {
-                            double[] point = new double[2];
-                            point[0] = hit.AbsTimestamp / 1000;
-                            point[1] = UseZVC ? 0 : 1;
+                            PlotData point = new PlotData();
+                            point.X = hit.AbsTimestamp / 1000;
+                            point.Annotation = hit.HitType.ToString();
+                            point.DataStreamType = measuredVariable;
                             points.Add(point);
                         }
                         plotData.Add("Segment hits", points);
@@ -330,49 +312,108 @@ namespace RowingMonitor.Model.Pipeline
             defaultPlot.UpdatePlot(plotData, "Values");
         }
 
+        private void AddLinearPlotData(Dictionary<string, List<PlotData>> plotData, 
+            List<JointData> jointDataBuffer, 
+            DataStreamType dataStreamType)
+        {
+            foreach (JointType jointType in PlotJointTypes) {
+                List<PlotData> rawPoints = new List<PlotData>();
+                foreach (JointData jointData in jointDataBuffer) {
+                    PlotData point = new PlotData();
+                    point.X = jointData.AbsTimestamp / 1000;
+                    point.Y = jointData.Joints[jointType].Position.Z;
+                    point.DataStreamType = dataStreamType;
+                    rawPoints.Add(point);
+                }
+                plotData.Add(dataStreamType.ToString() + " - " + jointType.ToString(), rawPoints);
+            }
+        }
+
         public void UpdateKleshnevPlots()
         {
-            if (hits.Count > 2) {
-                long lastSegStartIndex = hits[hits.Count - 2].Index;
-                long lastSegEndIndex = hits.Last().Index;
+            long[] segmentBounds = GetLastSegmentStartEnd(hits);
+            if (segmentBounds != null) {
+                long lastSegStartIndex = segmentBounds[0];
+                long lastSegEndIndex = segmentBounds[1];
 
-                Dictionary<string, List<double[]>> lastPlotData = new Dictionary<string, List<double[]>>();
-                Dictionary<string, List<double[]>> currentPlotData = new Dictionary<string, List<double[]>>();
                 // prepare disctionary
+                Dictionary<string, List<PlotData>> lastPlotData = new Dictionary<string, List<PlotData>>();
+                Dictionary<string, List<PlotData>> currentPlotData = new Dictionary<string, List<PlotData>>();                
                 foreach (KleshnevVelocityType type in Enum.GetValues(typeof(KleshnevVelocityType))) {
-                    lastPlotData.Add(type.ToString(), new List<double[]>());
-                    currentPlotData.Add(type.ToString(), new List<double[]>());
+                    lastPlotData.Add(type.ToString(), new List<PlotData>());
+                    currentPlotData.Add(type.ToString(), new List<PlotData>());
                 }
+
                 foreach (KleshnevData klshData in plotKlshBuffer) {
                     if (klshData.Index >= lastSegStartIndex && klshData.Index <= lastSegEndIndex) {
                         foreach (KeyValuePair<KleshnevVelocityType, double> klshVel in klshData.Velocities) {
-                            double[] point = new double[2];
-                            point[0] = klshData.AbsTimestamp / 1000;
-                            point[1] = klshVel.Value;
+                            PlotData point = new PlotData();
+                            point.X = klshData.AbsTimestamp / 1000;
+                            point.Y = klshVel.Value;
+                            point.DataStreamType = DataStreamType.Other;
                             lastPlotData[klshVel.Key.ToString()].Add(point);
                         }
                     }
                     else if (klshData.Index > lastSegEndIndex) {
                         foreach (KeyValuePair<KleshnevVelocityType, double> klshVel in klshData.Velocities) {
-                            double[] point = new double[2];
-                            point[0] = klshData.AbsTimestamp / 1000;
-                            point[1] = klshVel.Value;
+                            PlotData point = new PlotData();
+                            point.X = klshData.AbsTimestamp / 1000;
+                            point.Y = klshVel.Value;
                             currentPlotData[klshVel.Key.ToString()].Add(point);
                         }
                     }
                 }
+
                 klshLastSegmentPlot.UpdatePlot(lastPlotData, "Kleshnev Velocities Last Segment", klshColors);
                 klshCurrentSegmentPlot.UpdatePlot(currentPlotData, "Kleshnev Velocity Current Segment", klshColors);
+
+                LogExtractedSegmentTemplate(plotSmoothedPositionBuffer, lastSegStartIndex, lastSegEndIndex);
             }
         }
 
-        private void logLatency(string pipelineElement, double startTimestamp, List<double> timestamps = null)
+        private long[] GetLastSegmentStartEnd(List<SegmentHit> hits)
+        {
+            long[] segmentBounds = { -1, -1 };
+
+            // segments can contain a start hit, an end hit, a end start hit and an internal hit
+            // get the index for the last complete segment
+            if (hits.Count >= 2) {
+                for (int i = hits.Count - 1; i >= 0; i--) {
+                    // find last end hit
+                    if (segmentBounds[1] == -1 && (hits[i].HitType == HitType.SegmentEnd 
+                        || hits[i].HitType == HitType.SegmentEndStart)) {
+                        segmentBounds[1] = hits[i].Index;
+                        continue;
+                    }
+                    // find last start hit after end hit was found
+                    if (segmentBounds[1] != -1 && (hits[i].HitType == HitType.SegmentStart 
+                        || hits[i].HitType == HitType.SegmentEndStart)) {
+                        segmentBounds[0] = hits[i].Index;
+                        return segmentBounds;
+                    }
+                }
+            }
+            
+            return null;
+        }
+
+        private void LogLatency(string pipelineElement, double startTimestamp, List<double> timestamps = null)
         {
             double now = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             log.Info(pipelineElement + " latency from start: " + (now - startTimestamp) + "ms");
             if (timestamps != null)
                 log.Info(pipelineElement + " latency from last module: "
                     + (timestamps.Last() - timestamps[timestamps.Count - 2]) + "ms");
+        }
+
+        private void LogExtractedSegmentTemplate(List<JointData> jointDataBuffer, long segmentStart, long segmentEnd)
+        {
+            string template = "";
+            foreach (JointData data in jointDataBuffer) {
+                if (data.Index >= segmentStart && data.Index <= segmentEnd)
+                template += data.Joints[JointType.HandRight].Position.Z + ";";
+            }
+            log.Info("Segment template: " + template);
         }
 
         public void StartPipeline()
@@ -406,7 +447,7 @@ namespace RowingMonitor.Model.Pipeline
         {
             get => plotJointTypes; set => plotJointTypes = value;
         }
-        public List<PlotOptionsMeasuredVariables> PlotMeasuredVariables
+        public List<Util.DataStreamType> PlotMeasuredVariables
         {
             get => plotMeasuredVariables; set => plotMeasuredVariables = value;
         }

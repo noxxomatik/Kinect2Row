@@ -16,12 +16,13 @@ namespace RowingMonitor.Model.Util
         ArmsLeft
     }
 
-    public enum PlotOptionsMeasuredVariables
+    public enum DataStreamType
     {
         RawPosition,
         SmoothedPosition,
         Velocity,
-        SegmentHits
+        SegmentHits,
+        Other
     }
 
     public enum HitType

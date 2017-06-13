@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="RowingMonitor.Model.Pipeline.\lKinectJointFilter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_filter.html",tooltip="Adapted default Kinect smoothing filter to work with the pipeline. https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk "];
+}

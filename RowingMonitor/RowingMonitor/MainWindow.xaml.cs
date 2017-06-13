@@ -71,42 +71,42 @@ namespace RowingMonitor
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            ((MainViewModel)DataContext).PlotMeasuredVariables.Add(PlotOptionsMeasuredVariables.RawPosition);
+            ((MainViewModel)DataContext).PlotMeasuredVariables.Add(DataStreamType.RawPosition);
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            ((MainViewModel)DataContext).PlotMeasuredVariables.Remove(PlotOptionsMeasuredVariables.RawPosition);
+            ((MainViewModel)DataContext).PlotMeasuredVariables.Remove(DataStreamType.RawPosition);
         }
 
         private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
         {
-            ((MainViewModel)DataContext).PlotMeasuredVariables.Add(PlotOptionsMeasuredVariables.SmoothedPosition);
+            ((MainViewModel)DataContext).PlotMeasuredVariables.Add(DataStreamType.SmoothedPosition);
         }
 
         private void CheckBox_Unchecked_1(object sender, RoutedEventArgs e)
         {
-            ((MainViewModel)DataContext).PlotMeasuredVariables.Remove(PlotOptionsMeasuredVariables.SmoothedPosition);
+            ((MainViewModel)DataContext).PlotMeasuredVariables.Remove(DataStreamType.SmoothedPosition);
         }
 
         private void CheckBox_Checked_2(object sender, RoutedEventArgs e)
         {
-            ((MainViewModel)DataContext).PlotMeasuredVariables.Add(PlotOptionsMeasuredVariables.Velocity);
+            ((MainViewModel)DataContext).PlotMeasuredVariables.Add(DataStreamType.Velocity);
         }
 
         private void CheckBox_Checked_3(object sender, RoutedEventArgs e)
         {
-            ((MainViewModel)DataContext).PlotMeasuredVariables.Add(PlotOptionsMeasuredVariables.SegmentHits);
+            ((MainViewModel)DataContext).PlotMeasuredVariables.Add(DataStreamType.SegmentHits);
         }
 
         private void CheckBox_Unchecked_2(object sender, RoutedEventArgs e)
         {
-            ((MainViewModel)DataContext).PlotMeasuredVariables.Remove(PlotOptionsMeasuredVariables.Velocity);
+            ((MainViewModel)DataContext).PlotMeasuredVariables.Remove(DataStreamType.Velocity);
         }
 
         private void CheckBox_Unchecked_3(object sender, RoutedEventArgs e)
         {
-            ((MainViewModel)DataContext).PlotMeasuredVariables.Remove(PlotOptionsMeasuredVariables.SegmentHits);
+            ((MainViewModel)DataContext).PlotMeasuredVariables.Remove(DataStreamType.SegmentHits);
         }
 
         private void CheckBox_Checked_4(object sender, RoutedEventArgs e)

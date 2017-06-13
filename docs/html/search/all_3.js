@@ -1,0 +1,13 @@
+var searchData=
+[
+  ['datastreamtype',['DataStreamType',['../struct_rowing_monitor_1_1_model_1_1_plot_data.html#a254e431007698194e2a440cba5fc48a5',1,'RowingMonitor.Model.PlotData.DataStreamType()'],['../namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f',1,'RowingMonitor.Model.Util.DataStreamType()']]],
+  ['defaultplotmodel',['DefaultPlotModel',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_monitor_pipeline.html#a91cb4d291d11eae9d5a89812d63ad393',1,'RowingMonitor.Model.Pipeline.RowingMonitorPipeline.DefaultPlotModel()'],['../class_rowing_monitor_1_1_view_model_1_1_main_view_model.html#a79c8374c2e47f0d83d1a7561a078c6c7',1,'RowingMonitor.ViewModel.MainViewModel.DefaultPlotModel()']]],
+  ['detectionabstimestamp',['DetectionAbsTimestamp',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ab9778fc572f014c1d75de5898f8c83d2',1,'RowingMonitor::Model::Util::SegmentHit']]],
+  ['detectionindex',['DetectionIndex',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ad943df68e8adfeaa2b76701701cef0df',1,'RowingMonitor::Model::Util::SegmentHit']]],
+  ['displayheight',['DisplayHeight',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html#aff2b7f5c2516877b8c935ba41407c8b6',1,'RowingMonitor.Model.KinectReader.DisplayHeight()'],['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#a92e19bf18d30a31c1c44d7072a5079aa',1,'RowingMonitor.Model.FrontalView.displayHeight()']]],
+  ['displaywidth',['DisplayWidth',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html#a533cac2f9a8e2aebf5251c5538598b6d',1,'RowingMonitor.Model.KinectReader.DisplayWidth()'],['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#afc81707e7875ed8b92615ab2dc15fc09',1,'RowingMonitor.Model.FrontalView.displayWidth()']]],
+  ['distance',['Distance',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence.html#a9f07ec73d4dcc7cb1d9e97f7e979fcc1',1,'RowingMonitor::Model::Util::Subsequence']]],
+  ['drawbody',['DrawBody',['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#af65ccffe0927daa614219f7db3765831',1,'RowingMonitor::Model::FrontalView']]],
+  ['dtwsegmentdetector',['DTWSegmentDetector',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_d_t_w_segment_detector.html',1,'RowingMonitor.Model.Pipeline.DTWSegmentDetector'],['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_d_t_w_segment_detector.html#abfb0a6199eaaf5bb079bbcf1c2eaecc5',1,'RowingMonitor.Model.Pipeline.DTWSegmentDetector.DTWSegmentDetector()']]],
+  ['dtwsegmentdetector_2ecs',['DTWSegmentDetector.cs',['../_d_t_w_segment_detector_8cs.html',1,'']]]
+];

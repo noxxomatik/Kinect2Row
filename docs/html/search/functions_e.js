@@ -1,0 +1,10 @@
+var searchData=
+[
+  ['update',['Update',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_d_t_w_segment_detector.html#a211aec92693f8a229d88dd6a5b059eb4',1,'RowingMonitor.Model.Pipeline.DTWSegmentDetector.Update()'],['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a24dcb2926660a6218af3052f147d82da',1,'RowingMonitor.Model.Pipeline.SegmentDetector.Update()'],['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_z_v_c_segment_detector.html#a81c28e4ede1561c2fe1eca29f63f0767',1,'RowingMonitor.Model.Pipeline.ZVCSegmentDetector.Update()']]],
+  ['updatecolorimage',['UpdateColorImage',['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#aa1fda6d35d7fa125830ce5c9c64f92d5',1,'RowingMonitor::Model::FrontalView']]],
+  ['updatedefaultplot',['UpdateDefaultPlot',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_monitor_pipeline.html#a383d38318d68d63b2f3fdf274a08e8fe',1,'RowingMonitor::Model::Pipeline::RowingMonitorPipeline']]],
+  ['updatefilter',['UpdateFilter',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_filter.html#a93d08940ef6304498c4ff9ad6262c266',1,'RowingMonitor.Model.Pipeline.KinectJointFilter.UpdateFilter()'],['../class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing.html#a2dcb40fcf4cd02302a23f421f710ac8c',1,'RowingMonitor.Model.OneEuroFilterSmoothing.UpdateFilter()']]],
+  ['updatekleshnevplots',['UpdateKleshnevPlots',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_monitor_pipeline.html#a22a2b4bee6eb1775ac01affba7e36857',1,'RowingMonitor::Model::Pipeline::RowingMonitorPipeline']]],
+  ['updateplot',['UpdatePlot',['../class_rowing_monitor_1_1_model_1_1_plot.html#a8adb8a568e1c387863ec524633008d36',1,'RowingMonitor::Model::Plot']]],
+  ['updateskeleton',['UpdateSkeleton',['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#a3dddfa75ba346fdcf99dbd763e9ea1ea',1,'RowingMonitor.Model.FrontalView.UpdateSkeleton()'],['../class_rowing_monitor_1_1_model_1_1_side_view.html#a2cfba6b08a666c71ed25a3cbeaabe138',1,'RowingMonitor.Model.SideView.UpdateSkeleton()']]]
+];

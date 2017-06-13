@@ -133,7 +133,7 @@ namespace RowingMonitor.ViewModel
         {
             get => pipeline.PlotJointTypes; set => pipeline.PlotJointTypes = value;
         }
-        public List<PlotOptionsMeasuredVariables> PlotMeasuredVariables
+        public List<Model.Util.DataStreamType> PlotMeasuredVariables
         {
             get => pipeline.PlotMeasuredVariables; set => pipeline.PlotMeasuredVariables = value;
         }

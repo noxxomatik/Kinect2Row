@@ -1,0 +1,190 @@
+\hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view}{}\section{Rowing\+Monitor.\+Model.\+Frontal\+View Class Reference}
+\label{class_rowing_monitor_1_1_model_1_1_frontal_view}\index{Rowing\+Monitor.\+Model.\+Frontal\+View@{Rowing\+Monitor.\+Model.\+Frontal\+View}}
+
+
+This class shows a frontal view of the tracked skeleton. Also it shows the color image sequence which is recorded by the kinect sensor.  
+
+
+Inheritance diagram for Rowing\+Monitor.\+Model.\+Frontal\+View\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_rowing_monitor_1_1_model_1_1_frontal_view}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_aa02b93cf606fc1d6fb0159ed39a53f5c}{Frontal\+View} (Coordinate\+Mapper mapper, int width, int height)
+\item 
+virtual void \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_a3dddfa75ba346fdcf99dbd763e9ea1ea}{Update\+Skeleton} (I\+Read\+Only\+Dictionary$<$ Joint\+Type, Joint $>$ joints)
+\begin{DoxyCompactList}\small\item\em Updates the view with new data. \end{DoxyCompactList}\item 
+void \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_aa1fda6d35d7fa125830ce5c9c64f92d5}{Update\+Color\+Image} (Writeable\+Bitmap color\+Image)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_af65ccffe0927daa614219f7db3765831}{Draw\+Body} (I\+Read\+Only\+Dictionary$<$ Joint\+Type, Joint $>$ joints, I\+Dictionary$<$ Joint\+Type, Point $>$ joint\+Points, Drawing\+Context drawing\+Context, Pen drawing\+Pen)
+\begin{DoxyCompactList}\small\item\em Draws a body \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const double \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_af0d4024f6496a4408e27f1d7bb4327b8}{Joint\+Thickness} = 3
+\begin{DoxyCompactList}\small\item\em Thickness of drawn joint lines \end{DoxyCompactList}\item 
+const float \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_a5f663eb0eda7d5561022fa1b048ff28c}{Inferred\+Z\+Position\+Clamp} = 0.\+1f
+\begin{DoxyCompactList}\small\item\em Constant for clamping Z values of camera space points from being negative \end{DoxyCompactList}\item 
+Coordinate\+Mapper \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_ad84cc9acd2d1b4115e6e629e846a3af5}{coordinate\+Mapper} = null
+\begin{DoxyCompactList}\small\item\em Coordinate mapper to map one type of point to another \end{DoxyCompactList}\item 
+int \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_afc81707e7875ed8b92615ab2dc15fc09}{display\+Width}
+\begin{DoxyCompactList}\small\item\em Width of display (depth space) \end{DoxyCompactList}\item 
+int \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_a92e19bf18d30a31c1c44d7072a5079aa}{display\+Height}
+\begin{DoxyCompactList}\small\item\em Height of display (depth space) \end{DoxyCompactList}\item 
+List$<$ Pen $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_a75389fa61ab8d54d93aadc11d5d5360e}{body\+Colors}
+\begin{DoxyCompactList}\small\item\em List of colors for each body tracked \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Drawing\+Image \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_a5761942e513e1b5389ca9c72da6e8b29}{Body\+Image\+Source}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\item 
+Writeable\+Bitmap \hyperlink{class_rowing_monitor_1_1_model_1_1_frontal_view_a0f47cf3abfe77c81f15735301a04c5af}{Color\+Image\+Source}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class shows a frontal view of the tracked skeleton. Also it shows the color image sequence which is recorded by the kinect sensor. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_aa02b93cf606fc1d6fb0159ed39a53f5c}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_aa02b93cf606fc1d6fb0159ed39a53f5c}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!Frontal\+View@{Frontal\+View}}
+\index{Frontal\+View@{Frontal\+View}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{Frontal\+View()}{FrontalView()}}
+{\footnotesize\ttfamily Rowing\+Monitor.\+Model.\+Frontal\+View.\+Frontal\+View (\begin{DoxyParamCaption}\item[{Coordinate\+Mapper}]{mapper,  }\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_af65ccffe0927daa614219f7db3765831}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_af65ccffe0927daa614219f7db3765831}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!Draw\+Body@{Draw\+Body}}
+\index{Draw\+Body@{Draw\+Body}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{Draw\+Body()}{DrawBody()}}
+{\footnotesize\ttfamily void Rowing\+Monitor.\+Model.\+Frontal\+View.\+Draw\+Body (\begin{DoxyParamCaption}\item[{I\+Read\+Only\+Dictionary$<$ Joint\+Type, Joint $>$}]{joints,  }\item[{I\+Dictionary$<$ Joint\+Type, Point $>$}]{joint\+Points,  }\item[{Drawing\+Context}]{drawing\+Context,  }\item[{Pen}]{drawing\+Pen }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Draws a body 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joints} & joints to draw\\
+\hline
+{\em joint\+Points} & translated positions of joints to draw\\
+\hline
+{\em drawing\+Context} & drawing context to draw to\\
+\hline
+{\em drawing\+Pen} & specifies color to draw a specific body\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_aa1fda6d35d7fa125830ce5c9c64f92d5}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_aa1fda6d35d7fa125830ce5c9c64f92d5}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!Update\+Color\+Image@{Update\+Color\+Image}}
+\index{Update\+Color\+Image@{Update\+Color\+Image}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{Update\+Color\+Image()}{UpdateColorImage()}}
+{\footnotesize\ttfamily void Rowing\+Monitor.\+Model.\+Frontal\+View.\+Update\+Color\+Image (\begin{DoxyParamCaption}\item[{Writeable\+Bitmap}]{color\+Image }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_a3dddfa75ba346fdcf99dbd763e9ea1ea}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_a3dddfa75ba346fdcf99dbd763e9ea1ea}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!Update\+Skeleton@{Update\+Skeleton}}
+\index{Update\+Skeleton@{Update\+Skeleton}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{Update\+Skeleton()}{UpdateSkeleton()}}
+{\footnotesize\ttfamily virtual void Rowing\+Monitor.\+Model.\+Frontal\+View.\+Update\+Skeleton (\begin{DoxyParamCaption}\item[{I\+Read\+Only\+Dictionary$<$ Joint\+Type, Joint $>$}]{joints }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Updates the view with new data. 
+
+
+
+Reimplemented in \hyperlink{class_rowing_monitor_1_1_model_1_1_side_view_a2cfba6b08a666c71ed25a3cbeaabe138}{Rowing\+Monitor.\+Model.\+Side\+View}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_a75389fa61ab8d54d93aadc11d5d5360e}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_a75389fa61ab8d54d93aadc11d5d5360e}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!body\+Colors@{body\+Colors}}
+\index{body\+Colors@{body\+Colors}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{body\+Colors}{bodyColors}}
+{\footnotesize\ttfamily List$<$Pen$>$ Rowing\+Monitor.\+Model.\+Frontal\+View.\+body\+Colors\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+List of colors for each body tracked 
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_ad84cc9acd2d1b4115e6e629e846a3af5}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_ad84cc9acd2d1b4115e6e629e846a3af5}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!coordinate\+Mapper@{coordinate\+Mapper}}
+\index{coordinate\+Mapper@{coordinate\+Mapper}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{coordinate\+Mapper}{coordinateMapper}}
+{\footnotesize\ttfamily Coordinate\+Mapper Rowing\+Monitor.\+Model.\+Frontal\+View.\+coordinate\+Mapper = null\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Coordinate mapper to map one type of point to another 
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_a92e19bf18d30a31c1c44d7072a5079aa}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_a92e19bf18d30a31c1c44d7072a5079aa}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!display\+Height@{display\+Height}}
+\index{display\+Height@{display\+Height}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{display\+Height}{displayHeight}}
+{\footnotesize\ttfamily int Rowing\+Monitor.\+Model.\+Frontal\+View.\+display\+Height\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Height of display (depth space) 
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_afc81707e7875ed8b92615ab2dc15fc09}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_afc81707e7875ed8b92615ab2dc15fc09}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!display\+Width@{display\+Width}}
+\index{display\+Width@{display\+Width}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{display\+Width}{displayWidth}}
+{\footnotesize\ttfamily int Rowing\+Monitor.\+Model.\+Frontal\+View.\+display\+Width\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Width of display (depth space) 
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_a5f663eb0eda7d5561022fa1b048ff28c}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_a5f663eb0eda7d5561022fa1b048ff28c}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!Inferred\+Z\+Position\+Clamp@{Inferred\+Z\+Position\+Clamp}}
+\index{Inferred\+Z\+Position\+Clamp@{Inferred\+Z\+Position\+Clamp}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{Inferred\+Z\+Position\+Clamp}{InferredZPositionClamp}}
+{\footnotesize\ttfamily const float Rowing\+Monitor.\+Model.\+Frontal\+View.\+Inferred\+Z\+Position\+Clamp = 0.\+1f\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Constant for clamping Z values of camera space points from being negative 
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_af0d4024f6496a4408e27f1d7bb4327b8}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_af0d4024f6496a4408e27f1d7bb4327b8}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!Joint\+Thickness@{Joint\+Thickness}}
+\index{Joint\+Thickness@{Joint\+Thickness}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{Joint\+Thickness}{JointThickness}}
+{\footnotesize\ttfamily const double Rowing\+Monitor.\+Model.\+Frontal\+View.\+Joint\+Thickness = 3\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Thickness of drawn joint lines 
+
+
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_a5761942e513e1b5389ca9c72da6e8b29}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_a5761942e513e1b5389ca9c72da6e8b29}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!Body\+Image\+Source@{Body\+Image\+Source}}
+\index{Body\+Image\+Source@{Body\+Image\+Source}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{Body\+Image\+Source}{BodyImageSource}}
+{\footnotesize\ttfamily Drawing\+Image Rowing\+Monitor.\+Model.\+Frontal\+View.\+Body\+Image\+Source\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected set]}}
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_frontal_view_a0f47cf3abfe77c81f15735301a04c5af}\label{class_rowing_monitor_1_1_model_1_1_frontal_view_a0f47cf3abfe77c81f15735301a04c5af}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}!Color\+Image\+Source@{Color\+Image\+Source}}
+\index{Color\+Image\+Source@{Color\+Image\+Source}!Rowing\+Monitor\+::\+Model\+::\+Frontal\+View@{Rowing\+Monitor\+::\+Model\+::\+Frontal\+View}}
+\subsubsection{\texorpdfstring{Color\+Image\+Source}{ColorImageSource}}
+{\footnotesize\ttfamily Writeable\+Bitmap Rowing\+Monitor.\+Model.\+Frontal\+View.\+Color\+Image\+Source\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Model/\+Pipeline/\hyperlink{_frontal_view_8cs}{Frontal\+View.\+cs}\end{DoxyCompactItemize}

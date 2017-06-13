@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['kinectdatahandler',['KinectDataHandler',['../class_rowing_monitor_1_1_model_1_1_util_1_1_kinect_data_handler.html',1,'RowingMonitor::Model::Util']]],
+  ['kinectdatahandler_2ecs',['KinectDataHandler.cs',['../_kinect_data_handler_8cs.html',1,'']]],
+  ['kinectframearrived',['KinectFrameArrived',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html#ae3bd87154cb1ed9a8fddf3d25db09a06',1,'RowingMonitor::Model::KinectReader']]],
+  ['kinectframearrivedeventargs',['KinectFrameArrivedEventArgs',['../class_rowing_monitor_1_1_model_1_1_kinect_frame_arrived_event_args.html',1,'RowingMonitor.Model.KinectFrameArrivedEventArgs'],['../class_rowing_monitor_1_1_model_1_1_kinect_frame_arrived_event_args.html#a6c0155b21bc19c9fe163c5ea9ef66b21',1,'RowingMonitor.Model.KinectFrameArrivedEventArgs.KinectFrameArrivedEventArgs()']]],
+  ['kinectframearrivedeventargs_2ecs',['KinectFrameArrivedEventArgs.cs',['../_kinect_frame_arrived_event_args_8cs.html',1,'']]],
+  ['kinectframearrivedeventhandler',['KinectFrameArrivedEventHandler',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html#ae6568e9b233e8878ac21662617702571',1,'RowingMonitor::Model::KinectReader']]],
+  ['kinectjointfilter',['KinectJointFilter',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_filter.html',1,'RowingMonitor.Model.Pipeline.KinectJointFilter'],['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_filter.html#a9da91926de15721cdc7631b6c9966ab7',1,'RowingMonitor.Model.Pipeline.KinectJointFilter.KinectJointFilter()']]],
+  ['kinectjointfilter_2ecs',['KinectJointFilter.cs',['../_kinect_joint_filter_8cs.html',1,'']]],
+  ['kinectreader',['KinectReader',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html',1,'RowingMonitor::Model']]],
+  ['kinectreader_2ecs',['KinectReader.cs',['../_kinect_reader_8cs.html',1,'']]],
+  ['kleshnevcalculationfinished',['KleshnevCalculationFinished',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_velocity_calculator.html#afc60a4e7b76e1bfd9c12b5aacda05a51',1,'RowingMonitor::Model::Pipeline::KleshnevVelocityCalculator']]],
+  ['kleshnevcalculationfinishedeventhandler',['KleshnevCalculationFinishedEventHandler',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_velocity_calculator.html#aa8c251dc416d32f364bf138f4abeada7',1,'RowingMonitor::Model::Pipeline::KleshnevVelocityCalculator']]],
+  ['kleshnevdata',['KleshnevData',['../struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_data.html',1,'RowingMonitor::Model::Pipeline']]],
+  ['kleshneveventargs',['KleshnevEventArgs',['../class_rowing_monitor_1_1_model_1_1_kleshnev_event_args.html',1,'RowingMonitor.Model.KleshnevEventArgs'],['../class_rowing_monitor_1_1_model_1_1_kleshnev_event_args.html#ad371c1b70b890d6991665a29120fb554',1,'RowingMonitor.Model.KleshnevEventArgs.KleshnevEventArgs()']]],
+  ['kleshneveventargs_2ecs',['KleshnevEventArgs.cs',['../_kleshnev_event_args_8cs.html',1,'']]],
+  ['kleshnevvelocitycalculator',['KleshnevVelocityCalculator',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_velocity_calculator.html',1,'RowingMonitor::Model::Pipeline']]],
+  ['kleshnevvelocitycalculator_2ecs',['KleshnevVelocityCalculator.cs',['../_kleshnev_velocity_calculator_8cs.html',1,'']]],
+  ['kleshnevvelocitytype',['KleshnevVelocityType',['../namespace_rowing_monitor_1_1_model_1_1_util.html#a45e0956b123d438555a1cb3997bd5cb4',1,'RowingMonitor::Model::Util']]],
+  ['klshcurrentsegmentplotmodel',['KlshCurrentSegmentPlotModel',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_monitor_pipeline.html#aa103ae2c7cff43766d4504d65f7b08c8',1,'RowingMonitor.Model.Pipeline.RowingMonitorPipeline.KlshCurrentSegmentPlotModel()'],['../class_rowing_monitor_1_1_view_model_1_1_main_view_model.html#a9534f6ef9053f21582f5e16da72441c0',1,'RowingMonitor.ViewModel.MainViewModel.KlshCurrentSegmentPlotModel()']]],
+  ['klshlastsegmentplotmodel',['KlshLastSegmentPlotModel',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_monitor_pipeline.html#a1ec7023f64fc4b08d54122a2a1f8c975',1,'RowingMonitor.Model.Pipeline.RowingMonitorPipeline.KlshLastSegmentPlotModel()'],['../class_rowing_monitor_1_1_view_model_1_1_main_view_model.html#a96719ac6ef51316ea6149ee4b2a0b299',1,'RowingMonitor.ViewModel.MainViewModel.KlshLastSegmentPlotModel()']]]
+];
