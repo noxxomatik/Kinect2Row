@@ -27,12 +27,11 @@ namespace RowingMonitor.Model.Pipeline
         private KinectReader kinectReader;
 
         // smoothing filter
-        private OneEuroFilterSmoothing oneEuroFilterSmoothing =
-            new OneEuroFilterSmoothing();
-        private KinectJointFilter kinectJointFilter;
+        private SmoothingFilter smoothingFilter;
+        private bool smoothingFilterChanged = false;
 
         // velocity smoothing filter
-        private KinectJointFilter velocityFilter;
+        private SmoothingFilter velocitySmoothingFilter;
 
         // shift
         private Shifter shifter;
@@ -61,7 +60,7 @@ namespace RowingMonitor.Model.Pipeline
         private Plot defaultPlot;
         // plot options
         private List<JointType> plotJointTypes = new List<JointType>();
-        private List<Util.DataStreamType> plotMeasuredVariables = new List<Util.DataStreamType>();
+        private List<DataStreamType> plotMeasuredVariables = new List<DataStreamType>();
         private bool useKinectJointFilter = true;
         private bool useZVC = false;
         private float plotRange = 10;
@@ -69,6 +68,7 @@ namespace RowingMonitor.Model.Pipeline
         // plot buffer
         List<JointData> plotRawPositionBuffer = new List<JointData>();
         List<JointData> plotSmoothedPositionBuffer = new List<JointData>();
+        List<JointData> plotShiftedPosiitionBuffer = new List<JointData>();
         List<JointData> plotVelocityBuffer = new List<JointData>();
         List<SegmentHit> hits = new List<SegmentHit>();
 
@@ -128,27 +128,39 @@ namespace RowingMonitor.Model.Pipeline
             kinectReader.ColorFrameArrived += KinectReader_ColorFrameArrivedAsync;
 
             // init filter
-            kinectJointFilter = new KinectJointFilter();
-            //kinectJointFilter.Init();   // suggested value
-            // Some smoothing with little latency (defaults).
-            // Only filters out small jitters.
-            // Good for gesture recognition in games.
-            //kinectJointFilter.Init(0.5f, 0.5f, 0.5f, 0.05f, 0.04f);
-            // Smoothed with some latency.
-            // Filters out medium jitters.
-            // Good for a menu system that needs to be smooth but
-            // doesn't need the reduced latency as much as gesture recognition does.
-            kinectJointFilter.Init(0.5f, 0.1f, 0.5f, 0.1f, 0.1f);
-            // Very smooth, but with a lot of latency.
-            // Filters out large jitters.
-            // Good for situations where smooth data is absolutely required
-            // and latency is not an issue.
-            //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
-            kinectJointFilter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
+            if (UseKinectJointFilter) {
+                smoothingFilter = new KinectJointSmoothingFilter();
+                //kinectJointFilter.Init();   // suggested value
+                // Some smoothing with little latency (defaults).
+                // Only filters out small jitters.
+                // Good for gesture recognition in games.
+                //kinectJointFilter.Init(0.5f, 0.5f, 0.5f, 0.05f, 0.04f);
+                // Smoothed with some latency.
+                // Filters out medium jitters.
+                // Good for a menu system that needs to be smooth but
+                // doesn't need the reduced latency as much as gesture recognition does.
+                ((KinectJointSmoothingFilter) smoothingFilter).Init(
+                    0.5f, 0.1f, 0.5f, 0.1f, 0.1f);
+                // Very smooth, but with a lot of latency.
+                // Filters out large jitters.
+                // Good for situations where smooth data is absolutely required
+                // and latency is not an issue.
+                //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);                
 
-            velocityFilter = new KinectJointFilter();
-            velocityFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
-            velocityFilter.SmoothedFrameArrived += VelocityFilter_SmoothedFrameArrived;
+                velocitySmoothingFilter = new KinectJointSmoothingFilter();
+                ((KinectJointSmoothingFilter)velocitySmoothingFilter).Init(
+                    0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
+                
+            }
+            else {
+                smoothingFilter = new OneEuroSmoothingFilter();
+                ((OneEuroSmoothingFilter)smoothingFilter).Beta = 0.0;
+                ((OneEuroSmoothingFilter)smoothingFilter).Fcmin = 1.0;
+            }
+            smoothingFilter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
+            velocitySmoothingFilter.SmoothedFrameArrived +=
+                    VelocityFilter_SmoothedFrameArrived;
+
 
             // init shifter
             shifter = new Shifter();
@@ -179,7 +191,53 @@ namespace RowingMonitor.Model.Pipeline
         /* Event Handler */
         void KinectReader_KinectFrameArrived(object sender, KinectFrameArrivedEventArgs e)
         {
-            kinectJointFilter.UpdateFilter(e.JointData);
+            if (SmoothingFilterChanged) {
+                smoothingFilter.SmoothedFrameArrived -= Filter_SmoothedFrameArrived;
+                velocitySmoothingFilter.SmoothedFrameArrived -= 
+                    VelocityFilter_SmoothedFrameArrived;
+
+                // init filter
+                if (UseKinectJointFilter) {
+                    log.Info("Changed to Kinect joint filter.");
+                    smoothingFilter = new KinectJointSmoothingFilter();
+                    //kinectJointFilter.Init();   // suggested value
+                    // Some smoothing with little latency (defaults).
+                    // Only filters out small jitters.
+                    // Good for gesture recognition in games.
+                    //kinectJointFilter.Init(0.5f, 0.5f, 0.5f, 0.05f, 0.04f);
+                    // Smoothed with some latency.
+                    // Filters out medium jitters.
+                    // Good for a menu system that needs to be smooth but
+                    // doesn't need the reduced latency as much as gesture recognition does.
+                    ((KinectJointSmoothingFilter)smoothingFilter).Init(
+                        0.5f, 0.1f, 0.5f, 0.1f, 0.1f);
+                    // Very smooth, but with a lot of latency.
+                    // Filters out large jitters.
+                    // Good for situations where smooth data is absolutely required
+                    // and latency is not an issue.
+                    //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);                
+
+                    velocitySmoothingFilter = new KinectJointSmoothingFilter();
+                    ((KinectJointSmoothingFilter)velocitySmoothingFilter).Init(
+                        0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
+                }
+                else {
+                    log.Info("Changed to 1€ filter.");
+                    smoothingFilter = new OneEuroSmoothingFilter();
+                    ((OneEuroSmoothingFilter)smoothingFilter).Beta = 0.0;
+                    ((OneEuroSmoothingFilter)smoothingFilter).Fcmin = 1.0;
+
+                    velocitySmoothingFilter = new OneEuroSmoothingFilter();
+                    ((OneEuroSmoothingFilter)velocitySmoothingFilter).Beta = 0.0;
+                    ((OneEuroSmoothingFilter)velocitySmoothingFilter).Fcmin = 1.0;
+                }
+                smoothingFilter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
+                velocitySmoothingFilter.SmoothedFrameArrived +=
+                        VelocityFilter_SmoothedFrameArrived;
+
+                SmoothingFilterChanged = false;
+            }
+            smoothingFilter.Update(e.JointData);
 
             plotRawPositionBuffer.Add(e.JointData);
 
@@ -198,6 +256,8 @@ namespace RowingMonitor.Model.Pipeline
         {
             LogLatency("Filter", e.SmoothedJointData.Timestamps[0], e.SmoothedJointData.Timestamps);
 
+            plotSmoothedPositionBuffer.Add(e.SmoothedJointData);
+
             shifter.ShiftAndRotate(e.SmoothedJointData);
 
             // update frontal view skeleton
@@ -213,7 +273,7 @@ namespace RowingMonitor.Model.Pipeline
             // calculate velocites
             velCalc.CalculateVelocity(e.ShiftedJointData);
 
-            plotSmoothedPositionBuffer.Add(e.ShiftedJointData);
+            plotShiftedPosiitionBuffer.Add(e.ShiftedJointData);
 
             if (SegmentDetectorChanged) {
                 segmentDetector.SegmentDetected -= SegmentDetector_SegmentDetected;
@@ -248,7 +308,7 @@ namespace RowingMonitor.Model.Pipeline
         {
             LogLatency("Velocity Calculator", e.CalculatedJointData.Timestamps[0], e.CalculatedJointData.Timestamps);
 
-            velocityFilter.UpdateFilter(e.CalculatedJointData);
+            velocitySmoothingFilter.Update(e.CalculatedJointData);
         }
 
         private void VelocityFilter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
@@ -293,6 +353,9 @@ namespace RowingMonitor.Model.Pipeline
                     case DataStreamType.SmoothedPosition:
                         AddLinearPlotData(plotData, plotSmoothedPositionBuffer, measuredVariable);
                         break;
+                    case DataStreamType.ShiftedPosition:
+                        AddLinearPlotData(plotData, plotShiftedPosiitionBuffer, measuredVariable);
+                        break;
                     case DataStreamType.Velocity:
                         AddLinearPlotData(plotData, plotVelocityBuffer, measuredVariable);
                         break;
@@ -312,8 +375,8 @@ namespace RowingMonitor.Model.Pipeline
             defaultPlot.UpdatePlot(plotData, "Values");
         }
 
-        private void AddLinearPlotData(Dictionary<string, List<PlotData>> plotData, 
-            List<JointData> jointDataBuffer, 
+        private void AddLinearPlotData(Dictionary<string, List<PlotData>> plotData,
+            List<JointData> jointDataBuffer,
             DataStreamType dataStreamType)
         {
             foreach (JointType jointType in PlotJointTypes) {
@@ -338,7 +401,7 @@ namespace RowingMonitor.Model.Pipeline
 
                 // prepare disctionary
                 Dictionary<string, List<PlotData>> lastPlotData = new Dictionary<string, List<PlotData>>();
-                Dictionary<string, List<PlotData>> currentPlotData = new Dictionary<string, List<PlotData>>();                
+                Dictionary<string, List<PlotData>> currentPlotData = new Dictionary<string, List<PlotData>>();
                 foreach (KleshnevVelocityType type in Enum.GetValues(typeof(KleshnevVelocityType))) {
                     lastPlotData.Add(type.ToString(), new List<PlotData>());
                     currentPlotData.Add(type.ToString(), new List<PlotData>());
@@ -380,20 +443,20 @@ namespace RowingMonitor.Model.Pipeline
             if (hits.Count >= 2) {
                 for (int i = hits.Count - 1; i >= 0; i--) {
                     // find last end hit
-                    if (segmentBounds[1] == -1 && (hits[i].HitType == HitType.SegmentEnd 
+                    if (segmentBounds[1] == -1 && (hits[i].HitType == HitType.SegmentEnd
                         || hits[i].HitType == HitType.SegmentEndStart)) {
                         segmentBounds[1] = hits[i].Index;
                         continue;
                     }
                     // find last start hit after end hit was found
-                    if (segmentBounds[1] != -1 && (hits[i].HitType == HitType.SegmentStart 
+                    if (segmentBounds[1] != -1 && (hits[i].HitType == HitType.SegmentStart
                         || hits[i].HitType == HitType.SegmentEndStart)) {
                         segmentBounds[0] = hits[i].Index;
                         return segmentBounds;
                     }
                 }
             }
-            
+
             return null;
         }
 
@@ -411,7 +474,7 @@ namespace RowingMonitor.Model.Pipeline
             string template = "";
             foreach (JointData data in jointDataBuffer) {
                 if (data.Index >= segmentStart && data.Index <= segmentEnd)
-                template += data.Joints[JointType.HandRight].Position.Z + ";";
+                    template += data.Joints[JointType.HandRight].Position.Z + ";";
             }
             log.Info("Segment template: " + template);
         }
@@ -424,7 +487,7 @@ namespace RowingMonitor.Model.Pipeline
         public void StopPipeline()
         {
             kinectReader.StopReader();
-            kinectJointFilter.Shutdown();
+            //kinectJointFilter.Shutdown();
         }
 
         public ImageSource FrontalBodyImageSource
@@ -453,11 +516,17 @@ namespace RowingMonitor.Model.Pipeline
         }
         public bool UseKinectJointFilter
         {
-            get => useKinectJointFilter; set => useKinectJointFilter = value;
+            get => useKinectJointFilter;
+            set {
+                useKinectJointFilter = value;
+                smoothingFilterChanged = true;
+            }
+
         }
         public bool UseZVC
         {
-            get => useZVC; set {
+            get => useZVC;
+            set {
                 useZVC = value;
                 SegmentDetectorChanged = true;
             }
@@ -471,6 +540,15 @@ namespace RowingMonitor.Model.Pipeline
             get => klshCurrentSegmentPlot.PlotModel;
         }
         public float PlotRange { get => plotRange; set => plotRange = value; }
-        public bool SegmentDetectorChanged { get => segmentDetectorChanged; set => segmentDetectorChanged = value; }
+        public bool SegmentDetectorChanged
+        {
+            get => segmentDetectorChanged;
+            set => segmentDetectorChanged = value;
+        }
+        public bool SmoothingFilterChanged
+        {
+            get => smoothingFilterChanged;
+            set => smoothingFilterChanged = value;
+        }
     }
 }

@@ -358,5 +358,15 @@ namespace RowingMonitor
         {
             ((MainViewModel)DataContext).PlotJointTypes.Remove(JointType.WristRight);
         }
+
+        private void CheckBox_Checked_29(object sender, RoutedEventArgs e)
+        {
+            ((MainViewModel)DataContext).PlotMeasuredVariables.Add(DataStreamType.ShiftedPosition);
+        }
+
+        private void CheckBox_Unchecked_29(object sender, RoutedEventArgs e)
+        {
+            ((MainViewModel)DataContext).PlotMeasuredVariables.Remove(DataStreamType.ShiftedPosition);
+        }
     }
 }

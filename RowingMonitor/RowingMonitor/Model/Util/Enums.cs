@@ -20,6 +20,7 @@ namespace RowingMonitor.Model.Util
     {
         RawPosition,
         SmoothedPosition,
+        ShiftedPosition,
         Velocity,
         SegmentHits,
         Other

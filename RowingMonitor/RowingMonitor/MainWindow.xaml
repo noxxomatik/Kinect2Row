@@ -75,6 +75,7 @@
             <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">Select measured variable:</TextBlock>
             <CheckBox IsChecked="True" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">Raw Position</CheckBox>
             <CheckBox IsChecked="True" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1">Smoothed Position</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_29" Unchecked="CheckBox_Unchecked_29">Shifted Position</CheckBox>
             <CheckBox Checked="CheckBox_Checked_2" Unchecked="CheckBox_Unchecked_2">Velocity</CheckBox>
             <CheckBox Checked="CheckBox_Checked_3" Unchecked="CheckBox_Unchecked_3">Segment Hits</CheckBox>
             <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">Select visible joints:</TextBlock>

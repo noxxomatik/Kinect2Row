@@ -17,6 +17,8 @@ namespace UnitTest
 
         JointData shiftedJointData;
 
+        List<JointData> filteredJointData = new List<JointData>();
+
         [TestMethod]
         public void TestCalculateVelocity()
         {
@@ -161,6 +163,71 @@ namespace UnitTest
         private void Shifter_ShiftedFrameArrived(object sender, ShiftedFrameArrivedEventArgs e)
         {
             shiftedJointData = e.ShiftedJointData;            
+        }
+
+        [TestMethod]
+        public void TestOneEuroFilter()
+        {
+            OneEuroFilter filter = new OneEuroFilter(1.0, 1.0);
+
+            // fake data
+            double[] timestamps = { 0.0, 0.1, 0.2, 0.4, 0.6, 1.0, 1.2, 1.4, 1.5, 1.8 };
+            double[] signals = { -1.0, -0.5, 0.0, 0.4, 0.6, 2.0, 2.1, 2.2, 2.0, 1.5 };
+            double[] results = { -1.0, -0.6760214152038321, -0.16850816525110807, 0.3105865482378153,
+                0.543105127768453, 1.875189088370876, 2.053657939176787, 2.1626524203690374,
+                2.0932515287064404, 1.6140895329959704 };
+
+            for (int i = 0; i < 10; i++) {
+                Assert.AreEqual(results[i],
+                    filter.Filter(signals[i], i == 0? 120.0 : (1.0/(timestamps[i] - timestamps[i-1]))));
+            }
+        }
+
+        [TestMethod]
+        public void TestOneEuroFilterSmoothing()
+        {
+            OneEuroFilterSmoothing filter = new OneEuroFilterSmoothing();
+
+            filter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
+
+            filter.Beta = 1.0;
+            filter.Fcmin = 1.0;
+
+            // fake data
+            double[] timestamps = { 0.0, 0.1, 0.2, 0.4, 0.6, 1.0, 1.2, 1.4, 1.5, 1.8 };
+            float[] signals = { -1.0f, -0.5f, 0.0f, 0.4f, 0.6f, 2.0f, 2.1f, 2.2f, 2.0f, 1.5f };
+            float[] results = { -1.0f, -0.6760214152038321f, -0.16850816525110807f, 0.3105865482378153f,
+                0.543105127768453f, 1.875189088370876f, 2.053657939176787f,
+                2.1626524203690374f, 2.0932515287064404f, 1.6140895329959704f };
+
+            for (int i = 0; i < 10; i++) {
+                // prepare data
+                Joint joint = new Joint();
+                joint.JointType = JointType.SpineBase;
+                joint.TrackingState = TrackingState.Tracked;
+                joint.Position.X = signals[i];
+                joint.Position.Y = signals[i];
+                joint.Position.Z = signals[i];
+
+                JointData jointData = new JointData();
+                jointData.RelTimestamp = timestamps[i] * 1000;
+                jointData.AbsTimestamp = 0.0;
+                jointData.Index = 0;
+                jointData.Timestamps = new List<double>();
+                Dictionary<JointType, Joint> joints = new Dictionary<JointType, Joint>();
+                joints.Add(JointType.SpineBase, joint);
+                jointData.Joints = joints;
+
+                filter.UpdateFilter(jointData);
+
+                Assert.AreEqual(results[i], 
+                    filteredJointData[i].Joints[JointType.SpineBase].Position.X, 0.000001);
+            }                        
+        }
+
+        private void Filter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
+        {
+            filteredJointData.Add(e.SmoothedJointData);
         }
     }
 }

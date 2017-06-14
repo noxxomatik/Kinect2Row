@@ -109,10 +109,11 @@
     </ApplicationDefinition>
     <Compile Include="Model\EventArgs\KleshnevEventArgs.cs" />
     <Compile Include="Model\EventArgs\SegmentDetectedEventArgs.cs" />
-    <Compile Include="Model\Pipeline\KinectJointFilter.cs" />
+    <Compile Include="Model\Pipeline\KinectJointSmoothingFilter.cs" />
     <Compile Include="Model\Pipeline\KleshnevVelocityCalculator.cs" />
     <Compile Include="Model\Pipeline\RowingMonitorPipeline.cs" />
     <Compile Include="Model\Pipeline\DTWSegmentDetector.cs" />
+    <Compile Include="Model\Pipeline\SmoothingFilter.cs" />
     <Compile Include="Model\Pipeline\ZVCSegmentDetector.cs" />
     <Compile Include="Model\Pipeline\SegmentDetector.cs" />
     <Compile Include="Model\Util\BodyNotFullyTrackedException.cs" />
@@ -128,8 +129,9 @@
     <Compile Include="Model\EventArgs\SmoothedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\EventArgs\KinectFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\KinectReader.cs" />
-    <Compile Include="Model\Pipeline\OneEuroFilterSmoothing.cs" />
+    <Compile Include="Model\Pipeline\OneEuroSmoothingFilter.cs" />
     <Compile Include="Model\Pipeline\Plot.cs" />
+    <Compile Include="Model\Util\OneEuroFilter.cs" />
     <Compile Include="Model\Util\RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
