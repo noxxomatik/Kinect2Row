@@ -191,60 +191,62 @@ namespace RowingMonitor.Model.Pipeline
         /* Event Handler */
         void KinectReader_KinectFrameArrived(object sender, KinectFrameArrivedEventArgs e)
         {
-            if (SmoothingFilterChanged) {
-                smoothingFilter.SmoothedFrameArrived -= Filter_SmoothedFrameArrived;
-                velocitySmoothingFilter.SmoothedFrameArrived -= 
-                    VelocityFilter_SmoothedFrameArrived;
-
-                // init filter
-                if (UseKinectJointFilter) {
-                    log.Info("Changed to Kinect joint filter.");
-                    smoothingFilter = new KinectJointSmoothingFilter();
-                    //kinectJointFilter.Init();   // suggested value
-                    // Some smoothing with little latency (defaults).
-                    // Only filters out small jitters.
-                    // Good for gesture recognition in games.
-                    //kinectJointFilter.Init(0.5f, 0.5f, 0.5f, 0.05f, 0.04f);
-                    // Smoothed with some latency.
-                    // Filters out medium jitters.
-                    // Good for a menu system that needs to be smooth but
-                    // doesn't need the reduced latency as much as gesture recognition does.
-                    ((KinectJointSmoothingFilter)smoothingFilter).Init(
-                        0.5f, 0.1f, 0.5f, 0.1f, 0.1f);
-                    // Very smooth, but with a lot of latency.
-                    // Filters out large jitters.
-                    // Good for situations where smooth data is absolutely required
-                    // and latency is not an issue.
-                    //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);                
-
-                    velocitySmoothingFilter = new KinectJointSmoothingFilter();
-                    ((KinectJointSmoothingFilter)velocitySmoothingFilter).Init(
-                        0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
-                }
-                else {
-                    log.Info("Changed to 1€ filter.");
-                    smoothingFilter = new OneEuroSmoothingFilter();
-                    ((OneEuroSmoothingFilter)smoothingFilter).Beta = 0.0;
-                    ((OneEuroSmoothingFilter)smoothingFilter).Fcmin = 1.0;
-
-                    velocitySmoothingFilter = new OneEuroSmoothingFilter();
-                    ((OneEuroSmoothingFilter)velocitySmoothingFilter).Beta = 0.0;
-                    ((OneEuroSmoothingFilter)velocitySmoothingFilter).Fcmin = 1.0;
-                }
-                smoothingFilter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
-                velocitySmoothingFilter.SmoothedFrameArrived +=
+            if (e.JointData.Timestamps != null) {
+                if (SmoothingFilterChanged) {
+                    smoothingFilter.SmoothedFrameArrived -= Filter_SmoothedFrameArrived;
+                    velocitySmoothingFilter.SmoothedFrameArrived -=
                         VelocityFilter_SmoothedFrameArrived;
 
-                SmoothingFilterChanged = false;
+                    // init filter
+                    if (UseKinectJointFilter) {
+                        log.Info("Changed to Kinect joint filter.");
+                        smoothingFilter = new KinectJointSmoothingFilter();
+                        //kinectJointFilter.Init();   // suggested value
+                        // Some smoothing with little latency (defaults).
+                        // Only filters out small jitters.
+                        // Good for gesture recognition in games.
+                        //kinectJointFilter.Init(0.5f, 0.5f, 0.5f, 0.05f, 0.04f);
+                        // Smoothed with some latency.
+                        // Filters out medium jitters.
+                        // Good for a menu system that needs to be smooth but
+                        // doesn't need the reduced latency as much as gesture recognition does.
+                        ((KinectJointSmoothingFilter)smoothingFilter).Init(
+                            0.5f, 0.1f, 0.5f, 0.1f, 0.1f);
+                        // Very smooth, but with a lot of latency.
+                        // Filters out large jitters.
+                        // Good for situations where smooth data is absolutely required
+                        // and latency is not an issue.
+                        //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);                
+
+                        velocitySmoothingFilter = new KinectJointSmoothingFilter();
+                        ((KinectJointSmoothingFilter)velocitySmoothingFilter).Init(
+                            0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
+                    }
+                    else {
+                        log.Info("Changed to 1€ filter.");
+                        smoothingFilter = new OneEuroSmoothingFilter();
+                        ((OneEuroSmoothingFilter)smoothingFilter).Beta = 0.0;
+                        ((OneEuroSmoothingFilter)smoothingFilter).Fcmin = 1.0;
+
+                        velocitySmoothingFilter = new OneEuroSmoothingFilter();
+                        ((OneEuroSmoothingFilter)velocitySmoothingFilter).Beta = 0.0;
+                        ((OneEuroSmoothingFilter)velocitySmoothingFilter).Fcmin = 1.0;
+                    }
+                    smoothingFilter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
+                    velocitySmoothingFilter.SmoothedFrameArrived +=
+                            VelocityFilter_SmoothedFrameArrived;
+
+                    SmoothingFilterChanged = false;
+                }
+                smoothingFilter.Update(e.JointData);
+
+                plotRawPositionBuffer.Add(e.JointData);
+
+                UpdateDefaultPlot();
+                UpdateKleshnevPlots();
+
+                startTimestamp = e.JointData.Timestamps[0];
             }
-            smoothingFilter.Update(e.JointData);
-
-            plotRawPositionBuffer.Add(e.JointData);
-
-            UpdateDefaultPlot();
-            UpdateKleshnevPlots();
-
-            startTimestamp = e.JointData.Timestamps[0];
         }
 
         private void KinectReader_ColorFrameArrivedAsync(object sender, ColorFrameArrivedEventArgs e)
@@ -254,76 +256,83 @@ namespace RowingMonitor.Model.Pipeline
 
         private void Filter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
         {
-            LogLatency("Filter", e.SmoothedJointData.Timestamps[0], e.SmoothedJointData.Timestamps);
+            if (e.SmoothedJointData.Timestamps != null) {
+                LogLatency("Filter", e.SmoothedJointData.Timestamps[0], e.SmoothedJointData.Timestamps);
 
-            plotSmoothedPositionBuffer.Add(e.SmoothedJointData);
+                plotSmoothedPositionBuffer.Add(e.SmoothedJointData);
 
-            shifter.ShiftAndRotate(e.SmoothedJointData);
+                shifter.Updata(e.SmoothedJointData);
 
-            // update frontal view skeleton
-            frontalView.UpdateSkeleton(e.SmoothedJointData.Joints);
-            FrontalBodyImageSource = frontalView.BodyImageSource;
+                // update frontal view skeleton
+                frontalView.UpdateSkeleton(e.SmoothedJointData.Joints);
+                FrontalBodyImageSource = frontalView.BodyImageSource;
+            }            
         }
 
         private void Shifter_ShiftedFrameArrived(object sender,
             ShiftedFrameArrivedEventArgs e)
         {
-            LogLatency("Shifter", e.ShiftedJointData.Timestamps[0], e.ShiftedJointData.Timestamps);
+            if (e.ShiftedJointData.Timestamps != null) {
+                LogLatency("Shifter", e.ShiftedJointData.Timestamps[0], e.ShiftedJointData.Timestamps);
 
-            // calculate velocites
-            velCalc.CalculateVelocity(e.ShiftedJointData);
+                // calculate velocites
+                velCalc.Update(e.ShiftedJointData);
 
-            plotShiftedPosiitionBuffer.Add(e.ShiftedJointData);
+                plotShiftedPosiitionBuffer.Add(e.ShiftedJointData);
 
-            if (SegmentDetectorChanged) {
-                segmentDetector.SegmentDetected -= SegmentDetector_SegmentDetected;
-                if (UseZVC) {
-                    segmentDetector = new ZVCSegmentDetector(minimumHitGap, startSegmentWithRisingVelocity);
+                if (SegmentDetectorChanged) {
+                    segmentDetector.SegmentDetected -= SegmentDetector_SegmentDetected;
+                    if (UseZVC) {
+                        segmentDetector = new ZVCSegmentDetector(minimumHitGap, startSegmentWithRisingVelocity);
+                    }
+                    else {
+                        segmentDetector = new DTWSegmentDetector(distanceThreshold, minimumSubsequenceLength);
+                    }
+                    segmentDetector.SegmentDetected += SegmentDetector_SegmentDetected;
+                    SegmentDetectorChanged = false;
                 }
-                else {
-                    segmentDetector = new DTWSegmentDetector(distanceThreshold, minimumSubsequenceLength);
+
+                if (!UseZVC) {
+                    segmentDetector.Update(e.ShiftedJointData,
+                        JointType.HandRight, "Z");
                 }
-                segmentDetector.SegmentDetected += SegmentDetector_SegmentDetected;
-                SegmentDetectorChanged = false;
+
+                // show side view
+                sideView.UpdateSkeleton(e.ShiftedJointData.Joints);
+                SideBodyImageSource = sideView.BodyImageSource;
+
+                // sonificate the position
+                Task.Run(() =>
+                {
+                    System.Console.Beep(2000 + (int)(1000 * e.ShiftedJointData.Joints[JointType.HandRight].Position.Z), 30);
+                });
             }
-
-            if (!UseZVC) {
-                segmentDetector.Update(e.ShiftedJointData,
-                    JointType.HandRight, "Z");
-            }
-
-            // show side view
-            sideView.UpdateSkeleton(e.ShiftedJointData.Joints);
-            SideBodyImageSource = sideView.BodyImageSource;
-
-            // sonificate the position
-            Task.Run(() =>
-            {
-                System.Console.Beep(2000 + (int)(1000 * e.ShiftedJointData.Joints[JointType.HandRight].Position.Z), 30);
-            });
         }
 
         private void VelCalc_CalculatedFrameArrivedAsync(object sender,
             CalculatedFrameArrivedEventArgs e)
         {
-            LogLatency("Velocity Calculator", e.CalculatedJointData.Timestamps[0], e.CalculatedJointData.Timestamps);
+            if (e.CalculatedJointData.Timestamps != null) {
+                LogLatency("Velocity Calculator", e.CalculatedJointData.Timestamps[0], e.CalculatedJointData.Timestamps);
 
-            velocitySmoothingFilter.Update(e.CalculatedJointData);
+                velocitySmoothingFilter.Update(e.CalculatedJointData);
+            }
         }
 
         private void VelocityFilter_SmoothedFrameArrived(object sender, SmoothedFrameArrivedEventArgs e)
         {
-            LogLatency("Velocity Filter", e.SmoothedJointData.Timestamps[0], e.SmoothedJointData.Timestamps);
+            if (e.SmoothedJointData.Timestamps != null) {
+                LogLatency("Velocity Filter", e.SmoothedJointData.Timestamps[0], e.SmoothedJointData.Timestamps);
 
-            if (UseZVC) {
-                segmentDetector.Update(e.SmoothedJointData,
-                    JointType.HandRight, "Z");
+                if (UseZVC) {
+                    segmentDetector.Update(e.SmoothedJointData,
+                        JointType.HandRight, "Z");
+                }
+
+                kleshnevVelocityCalculator.Update(e.SmoothedJointData);
+
+                plotVelocityBuffer.Add(e.SmoothedJointData);
             }
-
-            kleshnevVelocityCalculator.CalculateKleshnevVelocities(
-                e.SmoothedJointData);
-
-            plotVelocityBuffer.Add(e.SmoothedJointData);
         }
 
         private void KleshnevVelocityCalculator_KleshnevCalculationFinished(

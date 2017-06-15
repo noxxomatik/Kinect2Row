@@ -233,8 +233,8 @@ namespace RowingMonitor.Model
             ColorFrameArrived(this, new ColorFrameArrivedEventArgs(tuple.Item1));
 
             // start the pipeline
-            JointDataBlock.Post(tuple.Item2);
-            ColorFrameBlock.Post(tuple.Item1);
+            //JointDataBlock.Post(tuple.Item2);
+            //ColorFrameBlock.Post(tuple.Item1);
         }
 
         /// <summary>

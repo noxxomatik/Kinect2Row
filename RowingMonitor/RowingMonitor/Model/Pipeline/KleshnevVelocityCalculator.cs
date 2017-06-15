@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
@@ -14,9 +15,28 @@ namespace RowingMonitor.Model.Pipeline
             KleshnevEventArgs e);
         public event KleshnevCalculationFinishedEventHandler KleshnevCalculationFinished;
 
+        private TransformBlock<JointData, List<KleshnevData>> calculationBlock;
+
         private List<KleshnevData> kleshnevData = new List<KleshnevData>();
 
-        public void CalculateKleshnevVelocities(JointData velocityJointData)
+        public TransformBlock<JointData, List<KleshnevData>> CalculationBlock { get => calculationBlock; set => calculationBlock = value; }
+
+        public KleshnevVelocityCalculator()
+        {
+            CalculationBlock = new TransformBlock<JointData, List<KleshnevData>>(jointData =>
+            {
+                return CalculateKleshnevVelocities(jointData);
+            });
+        }
+
+        public void Update(JointData jointData)
+        {
+
+            KleshnevCalculationFinished(this, new KleshnevEventArgs(
+                CalculateKleshnevVelocities(jointData)));
+        }
+
+        public List<KleshnevData> CalculateKleshnevVelocities(JointData velocityJointData)
         {
             // copy JointData to KleshnevData
             KleshnevData newKleshnevData = new KleshnevData
@@ -53,7 +73,7 @@ namespace RowingMonitor.Model.Pipeline
 
             kleshnevData.Add(newKleshnevData);
 
-            KleshnevCalculationFinished(this, new KleshnevEventArgs(kleshnevData));
+            return kleshnevData;
         }
     }
 
