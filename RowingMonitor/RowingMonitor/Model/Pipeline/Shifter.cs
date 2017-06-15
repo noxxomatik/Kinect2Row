@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model
 {
@@ -19,11 +20,23 @@ namespace RowingMonitor.Model
             ShiftedFrameArrivedEventArgs e);
         public event ShiftedFrameArrivedEventHandler ShiftedFrameArrived;
 
+        private TransformBlock<JointData, JointData> shiftingBlock;
+
         // Logger
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
             System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public void ShiftAndRotate(JointData jointData)
+        public TransformBlock<JointData, JointData> ShiftingBlock { get => shiftingBlock; set => shiftingBlock = value; }
+
+        public Shifter()
+        {
+            ShiftingBlock = new TransformBlock<JointData, JointData>(jointData =>
+            {
+                return ShiftAndRotate(jointData);
+            });
+        }
+
+        public JointData ShiftAndRotate(JointData jointData)
         {
             if (jointData.Joints[JointType.AnkleLeft].TrackingState == TrackingState.NotTracked
                 || jointData.Joints[JointType.AnkleLeft].TrackingState == TrackingState.NotTracked) {
@@ -98,7 +111,13 @@ namespace RowingMonitor.Model
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                 shiftedJoints);
 
-            ShiftedFrameArrived(this, new ShiftedFrameArrivedEventArgs(newJointData));
+            return newJointData;
+        }
+
+        public void Updata(JointData jointData)
+        {
+            JointData shiftedJointData = ShiftAndRotate(jointData);
+            ShiftedFrameArrived(this, new ShiftedFrameArrivedEventArgs(shiftedJointData));
         }
     }
 }

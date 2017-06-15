@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
@@ -16,8 +17,15 @@ namespace RowingMonitor.Model.Pipeline
 
         protected List<SegmentHit> hits = new List<SegmentHit>();
 
+        private TransformBlock<SegmentDetectionParameter, List<SegmentHit>> detectionBlock;
+
+        public TransformBlock<SegmentDetectionParameter, List<SegmentHit>> DetectionBlock { get => detectionBlock; set => detectionBlock = value; }
+
         public abstract void Update(JointData jointData, JointType jointType,
             String axis);
+
+        public abstract List<SegmentHit> Detect(JointData jointData,
+            JointType jointType, String axis);
 
         protected float GetJointDataValue(JointData jointData,
             JointType jointType, String axis)
@@ -38,5 +46,18 @@ namespace RowingMonitor.Model.Pipeline
         {
             SegmentDetected?.Invoke(this, e);
         }
+    }
+
+
+
+    public struct SegmentDetectionParameter
+    {
+        private JointData jointData;
+        private JointType jointType;
+        private String axis;
+
+        public JointData JointData { get => jointData; set => jointData = value; }
+        public JointType JointType { get => jointType; set => jointType = value; }
+        public string Axis { get => axis; set => axis = value; }
     }
 }

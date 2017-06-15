@@ -247,7 +247,7 @@ namespace RowingMonitor.Model.Pipeline
             startTimestamp = e.JointData.Timestamps[0];
         }
 
-        private void KinectReader_ColorFrameArrivedAsync(object sender, Model.ColorFrameArrivedEventArgs e)
+        private void KinectReader_ColorFrameArrivedAsync(object sender, ColorFrameArrivedEventArgs e)
         {
             ColorBodyImageSource = e.ColorBitmap;
         }

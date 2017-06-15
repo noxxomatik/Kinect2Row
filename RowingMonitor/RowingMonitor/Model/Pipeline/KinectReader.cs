@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -71,6 +72,10 @@ namespace RowingMonitor.Model
             ColorFrameArrivedEventArgs e);
         public event ColorFrameArrivedEventHandler ColorFrameArrived;
 
+        /* Dataflow Block */
+        private TransformBlock<JointData, JointData> jointDataBlock;
+        private TransformBlock<WriteableBitmap, WriteableBitmap> colorFrameBlock;
+
         /// <summary>
         /// Initilizes the KinectReader class and establishes the connection to the sensor.
         /// </summary>
@@ -103,6 +108,17 @@ namespace RowingMonitor.Model
             // set the status text
             statusText = kinectSensor.IsAvailable ? Properties.Resources.RunningStatusText
                 : Properties.Resources.NoSensorStatusText;
+
+            // set the pieline blocks
+            JointDataBlock = new TransformBlock<JointData, JointData>(jointData =>
+            {
+                return jointData;
+            });
+
+            ColorFrameBlock = new TransformBlock<WriteableBitmap, WriteableBitmap>(bitmap =>
+            {
+                return bitmap;
+            });
         }
 
         /// <summary>
@@ -114,6 +130,9 @@ namespace RowingMonitor.Model
                 return instance;
             }
         }
+
+        public TransformBlock<JointData, JointData> JointDataBlock { get => jointDataBlock; set => jointDataBlock = value; }
+        public TransformBlock<WriteableBitmap, WriteableBitmap> ColorFrameBlock { get => colorFrameBlock; set => colorFrameBlock = value; }
 
         /// <summary>
         /// Handles the event which the sensor becomes unavailable 
@@ -128,15 +147,10 @@ namespace RowingMonitor.Model
                 : Properties.Resources.SensorNotAvailableStatusText;
         }
 
-        /// <summary>
-        /// Handles the multiple frame data arriving from sensor. 
-        /// </summary>
-        /// <param name="sender">Object sending the event.</param>
-        /// <param name="e">Event arguments.</param>
-        private void MultiSourceFrameReader_MultiSourceFrameArrived(object sender,
-            MultiSourceFrameArrivedEventArgs e)
+        private Tuple<WriteableBitmap, JointData> ReadMultiSourceFrame(MultiSourceFrame multiSourceFrame)
         {
-            MultiSourceFrame multiSourceFrame = e.FrameReference.AcquireFrame();
+            WriteableBitmap writableBitmap = null;
+            JointData jointData = new JointData();
 
             using (BodyFrame bodyFrame =
                 multiSourceFrame.BodyFrameReference.AcquireFrame()) {
@@ -158,13 +172,13 @@ namespace RowingMonitor.Model
                     if (kdh.GetFirstTrackedBody() != null) {
                         IReadOnlyDictionary<JointType, Joint> joints =
                             kdh.GetFirstTrackedBody().Joints;
+
                         // body frame available for other pipeline members
-                        KinectFrameArrived(this,
-                            new KinectFrameArrivedEventArgs(
-                                kdh.CreateNewJointData(
+                        jointData = kdh.CreateNewJointData(
                                     bodyFrame.RelativeTime.TotalMilliseconds,
                                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
-                                    joints)));
+                                    joints);
+                        
                     }
                 }
             }
@@ -195,10 +209,32 @@ namespace RowingMonitor.Model
                                 bitmap.PixelHeight));
                         }
                         bitmap.Unlock();
-                        ColorFrameArrived(this, new ColorFrameArrivedEventArgs(bitmap));
+                        writableBitmap = bitmap;
                     }
                 }
             }
+
+            return new Tuple<WriteableBitmap, JointData>(writableBitmap, jointData);
+        }
+
+        /// <summary>
+        /// Handles the multiple frame data arriving from sensor. 
+        /// </summary>
+        /// <param name="sender">Object sending the event.</param>
+        /// <param name="e">Event arguments.</param>
+        private void MultiSourceFrameReader_MultiSourceFrameArrived(object sender,
+            MultiSourceFrameArrivedEventArgs e)
+        {
+            // process the multi source frame
+            Tuple<WriteableBitmap, JointData> tuple = ReadMultiSourceFrame(e.FrameReference.AcquireFrame());
+
+            // trigger the events
+            KinectFrameArrived(this, new KinectFrameArrivedEventArgs(tuple.Item2));
+            ColorFrameArrived(this, new ColorFrameArrivedEventArgs(tuple.Item1));
+
+            // start the pipeline
+            JointDataBlock.Post(tuple.Item2);
+            ColorFrameBlock.Post(tuple.Item1);
         }
 
         /// <summary>

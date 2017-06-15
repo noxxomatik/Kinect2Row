@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
@@ -60,11 +61,71 @@ namespace RowingMonitor.Model.Pipeline
 
             xfilt = new LowPassFilter();
             dxfilt = new LowPassFilter();
+
+            SmoothingBlock = new TransformBlock<JointData, JointData>(jointData =>
+            {
+                return Smooth(jointData);
+            });
+        }
+        
+        public override void Update(JointData jointData)
+        {
+            JointData smoothedJointData = Smooth(jointData);
+
+            OnSmoothedFrameFinished(new SmoothedFrameArrivedEventArgs(jointData,
+                smoothedJointData));
+        }
+
+        /// <summary>
+        /// Alpha computation.
+        /// </summary>
+        /// <param name="rate">Data update rate in Hz.</param>
+        /// <param name="cutoff">Cutoff frequency in Hz</param>
+        /// <returns>Alpha value for low-pass filter.</returns>
+        private Dictionary<JointType, Dictionary<String, Double>> Alpha(double rate,
+            Dictionary<JointType, Dictionary<String, Double>> cutoff)
+        {
+            Dictionary<JointType, Dictionary<String, Double>> ret =
+                new Dictionary<JointType, Dictionary<string, double>>();
+            foreach (KeyValuePair<JointType, Dictionary<String, Double>> joint in cutoff) {
+                Dictionary<String, Double> values = new Dictionary<string, double>();
+                foreach (KeyValuePair<String, Double> entry in joint.Value) {
+                    double tau = 1.0 / (2 * Math.PI * entry.Value);
+                    double te = 1.0 / rate;
+                    values.Add(entry.Key, 1.0 / (1.0 + tau / te));
+                }
+                ret.Add(joint.Key, values);
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// Initliazies a dictionary of all joint types with a given value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Dictionary<JointType, Dictionary<String, Double>> InitCutoffDictionary(Double value)
+        {
+            Dictionary<JointType, Dictionary<String, Double>> ret =
+                new Dictionary<JointType, Dictionary<string, double>>();
+            foreach (JointType type in Enum.GetValues(typeof(JointType))) {
+                Dictionary<String, Double> values = new Dictionary<string, double>();
+                values.Add("X", value);
+                values.Add("Y", value);
+                values.Add("Z", value);
+                ret.Add(type, values);
+            }
+            return ret;
+        }
+
+        protected override void OnSmoothedFrameFinished(SmoothedFrameArrivedEventArgs e)
+        {
+            base.OnSmoothedFrameFinished(e);
         }
 
         // IN : Noisy sample value: x
         // OUT: Filtered sample value
-        public override void Update(JointData jointData)
+        public override JointData Smooth(JointData jointData)
         {
             Dictionary<JointType, Joint> dx = new Dictionary<JointType, Joint>();
             // if firstTime then
@@ -127,56 +188,7 @@ namespace RowingMonitor.Model.Pipeline
                 result);
 
             lastJointData = jointData;
-
-            OnSmoothedFrameFinished(new SmoothedFrameArrivedEventArgs(jointData,
-                newJointData));
-        }
-
-        /// <summary>
-        /// Alpha computation.
-        /// </summary>
-        /// <param name="rate">Data update rate in Hz.</param>
-        /// <param name="cutoff">Cutoff frequency in Hz</param>
-        /// <returns>Alpha value for low-pass filter.</returns>
-        private Dictionary<JointType, Dictionary<String, Double>> Alpha(double rate,
-            Dictionary<JointType, Dictionary<String, Double>> cutoff)
-        {
-            Dictionary<JointType, Dictionary<String, Double>> ret =
-                new Dictionary<JointType, Dictionary<string, double>>();
-            foreach (KeyValuePair<JointType, Dictionary<String, Double>> joint in cutoff) {
-                Dictionary<String, Double> values = new Dictionary<string, double>();
-                foreach (KeyValuePair<String, Double> entry in joint.Value) {
-                    double tau = 1.0 / (2 * Math.PI * entry.Value);
-                    double te = 1.0 / rate;
-                    values.Add(entry.Key, 1.0 / (1.0 + tau / te));
-                }
-                ret.Add(joint.Key, values);
-            }
-            return ret;
-        }
-
-        /// <summary>
-        /// Initliazies a dictionary of all joint types with a given value.
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static Dictionary<JointType, Dictionary<String, Double>> InitCutoffDictionary(Double value)
-        {
-            Dictionary<JointType, Dictionary<String, Double>> ret =
-                new Dictionary<JointType, Dictionary<string, double>>();
-            foreach (JointType type in Enum.GetValues(typeof(JointType))) {
-                Dictionary<String, Double> values = new Dictionary<string, double>();
-                values.Add("X", value);
-                values.Add("Y", value);
-                values.Add("Z", value);
-                ret.Add(type, values);
-            }
-            return ret;
-        }
-
-        protected override void OnSmoothedFrameFinished(SmoothedFrameArrivedEventArgs e)
-        {
-            base.OnSmoothedFrameFinished(e);
+            return newJointData;
         }
     }
 }

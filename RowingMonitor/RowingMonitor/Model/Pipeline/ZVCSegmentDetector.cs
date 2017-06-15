@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
@@ -32,31 +33,17 @@ namespace RowingMonitor.Model.Pipeline
         {
             minHitGap = minimumHitGap;
             endStartHitIsRisingVelocity = startSegmentWithRisingVelocity ? true : false;
+
+            DetectionBlock = new TransformBlock<SegmentDetectionParameter, List<SegmentHit>>(parameter =>
+            {
+                return Detect(parameter.JointData, parameter.JointType, parameter.Axis);
+            });
         }
 
         public override void Update(JointData jointData,
             JointType jointType, String axis)
         {
-            if (lastJointData.RelTimestamp != 0) {
-                float value = GetJointDataValue(jointData, jointType, axis);
-                float lastValue = GetJointDataValue(lastJointData, jointType, axis);
-                bool slopeRising = value - lastValue > 0 ? true : false;
-
-                // zero velocity crossing
-                // if value is 0 then crossing is at this exact index
-                if (value == 0) {
-                    AddHits(jointData, value, lastValue, slopeRising);
-                    lastSlopeRising = slopeRising;
-                }
-                else {
-                    // if sign is negativ then crossing was between the two frames
-                    if (value * lastValue < 0) {
-                        AddHits(jointData, value, lastValue, slopeRising);
-                        lastSlopeRising = slopeRising;
-                    }
-                }
-            }
-            lastJointData = jointData;
+            Detect(jointData, jointType, axis);
         }
 
         // select hits
@@ -117,6 +104,31 @@ namespace RowingMonitor.Model.Pipeline
         protected override void OnSegmentDetected(SegmentDetectedEventArgs e)
         {
             base.OnSegmentDetected(e);
+        }
+
+        public override List<SegmentHit> Detect(JointData jointData, JointType jointType, string axis)
+        {
+            if (lastJointData.RelTimestamp != 0) {
+                float value = GetJointDataValue(jointData, jointType, axis);
+                float lastValue = GetJointDataValue(lastJointData, jointType, axis);
+                bool slopeRising = value - lastValue > 0 ? true : false;
+
+                // zero velocity crossing
+                // if value is 0 then crossing is at this exact index
+                if (value == 0) {
+                    AddHits(jointData, value, lastValue, slopeRising);
+                    lastSlopeRising = slopeRising;
+                }
+                else {
+                    // if sign is negativ then crossing was between the two frames
+                    if (value * lastValue < 0) {
+                        AddHits(jointData, value, lastValue, slopeRising);
+                        lastSlopeRising = slopeRising;
+                    }
+                }
+            }
+            lastJointData = jointData;
+            return hits;
         }
     }
 }

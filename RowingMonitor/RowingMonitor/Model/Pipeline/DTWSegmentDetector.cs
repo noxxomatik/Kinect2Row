@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
@@ -27,10 +28,38 @@ namespace RowingMonitor.Model.Pipeline
         public DTWSegmentDetector(float distanceThreshold, int minimumSubsequenceLength)
         {
             subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), distanceThreshold, minimumSubsequenceLength);
+
+            DetectionBlock = new TransformBlock<SegmentDetectionParameter, List<SegmentHit>>(parameter =>
+            {
+                return Detect(parameter.JointData, parameter.JointType, parameter.Axis);
+            });
         }
 
         public override void Update(JointData jointData, JointType jointType,
             string axis)
+        {
+            Detect(jointData, jointType, axis);
+        }
+
+        protected override void OnSegmentDetected(SegmentDetectedEventArgs e)
+        {
+            base.OnSegmentDetected(e);
+        }
+
+        private List<double> GetTemplateFromSettings()
+        {
+            List<double> template = new List<double>();
+            string templateText = Properties.Settings.Default.Template;
+            string[] splittedText = templateText.Split(',');
+
+            foreach (string value in splittedText) {
+                template.Add(Double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat));
+            }
+
+            return template;
+        }
+
+        public override List<SegmentHit> Detect(JointData jointData, JointType jointType, string axis)
         {
             // if first time of update, set the index offset
             if (indexOffset == -1) {
@@ -91,24 +120,7 @@ namespace RowingMonitor.Model.Pipeline
             }
 
             currentIndex++;
-        }
-
-        protected override void OnSegmentDetected(SegmentDetectedEventArgs e)
-        {
-            base.OnSegmentDetected(e);
-        }
-
-        private List<double> GetTemplateFromSettings()
-        {
-            List<double> template = new List<double>();
-            string templateText = Properties.Settings.Default.Template;
-            string[] splittedText = templateText.Split(',');
-
-            foreach (string value in splittedText) {
-                template.Add(Double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat));
-            }
-
-            return template;
+            return hits;
         }
     }
 }

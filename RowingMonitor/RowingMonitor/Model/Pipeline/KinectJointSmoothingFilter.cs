@@ -3,6 +3,7 @@ using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
 using RowingMonitor.Model.Util;
+using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
@@ -47,6 +48,11 @@ namespace RowingMonitor.Model.Pipeline
             }
 
             Init();
+
+            SmoothingBlock = new TransformBlock<JointData, JointData>(jointData =>
+            {
+                return Smooth(jointData);
+            });
         }
 
         ~KinectJointSmoothingFilter()
@@ -103,46 +109,9 @@ namespace RowingMonitor.Model.Pipeline
         //--------------------------------------------------------------------------------------
         public override void Update(JointData jointData)
         {
-            if (jointData.RelTimestamp == 0) {
-                return;
-            }
+            JointData smoothedJointData = Smooth(jointData);
 
-            // Check for divide by zero. Use an epsilon of a 10th of a millimeter
-            m_fJitterRadius = Math.Max(0.0001f, m_fJitterRadius);
-
-            TRANSFORM_SMOOTH_PARAMETERS SmoothingParams;
-
-            for (JointType jt = JointType.SpineBase; jt <= JointType.ThumbRight; jt++) {
-                SmoothingParams.fSmoothing = m_fSmoothing;
-                SmoothingParams.fCorrection = m_fCorrection;
-                SmoothingParams.fPrediction = m_fPrediction;
-                SmoothingParams.fJitterRadius = m_fJitterRadius;
-                SmoothingParams.fMaxDeviationRadius = m_fMaxDeviationRadius;
-
-                // If inferred, we smooth a bit more by using a bigger jitter radius
-                Microsoft.Kinect.Joint joint = jointData.Joints[jt];
-                if (joint.TrackingState == TrackingState.Inferred) {
-                    SmoothingParams.fJitterRadius *= 2.0f;
-                    SmoothingParams.fMaxDeviationRadius *= 2.0f;
-                }
-
-                UpdateJoint(jointData, jt, SmoothingParams);
-            }
-
-            // update the KinectDataContainer and fire the event
-            Dictionary<JointType, Joint> newJoints = new Dictionary<JointType, Joint>();
-            for (JointType jt = JointType.SpineBase; jt <= JointType.ThumbRight; jt++) {
-                Joint newJoint = jointData.Joints[jt];
-                newJoint.Position.X = m_pFilteredJoints[(int)jt].X;
-                newJoint.Position.Y = m_pFilteredJoints[(int)jt].Y;
-                newJoint.Position.Z = m_pFilteredJoints[(int)jt].Z;
-                newJoints.Add(jt, newJoint);
-            }
-            JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
-                jointData,
-                DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
-                newJoints);
-            OnSmoothedFrameFinished(new SmoothedFrameArrivedEventArgs(jointData, newJointData));
+            OnSmoothedFrameFinished(new SmoothedFrameArrivedEventArgs(jointData, smoothedJointData));
         }
 
         //--------------------------------------------------------------------------------------
@@ -304,6 +273,51 @@ namespace RowingMonitor.Model.Pipeline
         protected override void OnSmoothedFrameFinished(SmoothedFrameArrivedEventArgs e)
         {
             base.OnSmoothedFrameFinished(e);
+        }
+
+        public override JointData Smooth(JointData jointData)
+        {
+            if (jointData.RelTimestamp == 0) {
+                return jointData;
+            }
+
+            // Check for divide by zero. Use an epsilon of a 10th of a millimeter
+            m_fJitterRadius = Math.Max(0.0001f, m_fJitterRadius);
+
+            TRANSFORM_SMOOTH_PARAMETERS SmoothingParams;
+
+            for (JointType jt = JointType.SpineBase; jt <= JointType.ThumbRight; jt++) {
+                SmoothingParams.fSmoothing = m_fSmoothing;
+                SmoothingParams.fCorrection = m_fCorrection;
+                SmoothingParams.fPrediction = m_fPrediction;
+                SmoothingParams.fJitterRadius = m_fJitterRadius;
+                SmoothingParams.fMaxDeviationRadius = m_fMaxDeviationRadius;
+
+                // If inferred, we smooth a bit more by using a bigger jitter radius
+                Microsoft.Kinect.Joint joint = jointData.Joints[jt];
+                if (joint.TrackingState == TrackingState.Inferred) {
+                    SmoothingParams.fJitterRadius *= 2.0f;
+                    SmoothingParams.fMaxDeviationRadius *= 2.0f;
+                }
+
+                UpdateJoint(jointData, jt, SmoothingParams);
+            }
+
+            // update the KinectDataContainer and fire the event
+            Dictionary<JointType, Joint> newJoints = new Dictionary<JointType, Joint>();
+            for (JointType jt = JointType.SpineBase; jt <= JointType.ThumbRight; jt++) {
+                Joint newJoint = jointData.Joints[jt];
+                newJoint.Position.X = m_pFilteredJoints[(int)jt].X;
+                newJoint.Position.Y = m_pFilteredJoints[(int)jt].Y;
+                newJoint.Position.Z = m_pFilteredJoints[(int)jt].Z;
+                newJoints.Add(jt, newJoint);
+            }
+            JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+                jointData,
+                DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
+                newJoints);
+
+            return newJointData;
         }
     }
 }

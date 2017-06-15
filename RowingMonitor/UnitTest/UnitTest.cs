@@ -6,6 +6,7 @@ using Microsoft.Kinect;
 using System.Linq;
 using System.Diagnostics;
 using RowingMonitor.Model.Util;
+using RowingMonitor.Model.Pipeline;
 
 namespace UnitTest
 {
@@ -44,10 +45,8 @@ namespace UnitTest
                 jointData[i] = joint;
             }
             for (int i = 0; i < 6; i++) {
-                calc.CalculateVelocity(jointData[i]);
+                calc.Update(jointData[i]);
             }
-            // wait for the results
-            System.Threading.Thread.Sleep(5000);
 
             // the last element cannot be tested since it needs one frame as buffer
             for (int i = 0; i < 5; i++) {
@@ -58,9 +57,10 @@ namespace UnitTest
 
         private void Calc_CalculatedFrameArrived(object sender, CalculatedFrameArrivedEventArgs e)
         {
-            Debug.WriteLine("Event");
-            returnedJointData[index] = e.CalculatedJointData;
-            index++;
+            if (e.CalculatedJointData.Timestamps != null) {
+                returnedJointData[index] = e.CalculatedJointData;
+                index++;
+            }
         }
 
         [TestMethod]
@@ -141,7 +141,7 @@ namespace UnitTest
 
             jointData.Joints = joints;
 
-            shifter.ShiftAndRotate(jointData);
+            shifter.Updata(jointData);
 
             // wait for the results
             System.Threading.Thread.Sleep(1000);
@@ -161,7 +161,7 @@ namespace UnitTest
         }
 
         private void Shifter_ShiftedFrameArrived(object sender, ShiftedFrameArrivedEventArgs e)
-        {
+        {           
             shiftedJointData = e.ShiftedJointData;            
         }
 
@@ -186,7 +186,7 @@ namespace UnitTest
         [TestMethod]
         public void TestOneEuroFilterSmoothing()
         {
-            OneEuroFilterSmoothing filter = new OneEuroFilterSmoothing();
+            OneEuroSmoothingFilter filter = new OneEuroSmoothingFilter();
 
             filter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
 
@@ -218,7 +218,7 @@ namespace UnitTest
                 joints.Add(JointType.SpineBase, joint);
                 jointData.Joints = joints;
 
-                filter.UpdateFilter(jointData);
+                filter.Update(jointData);
 
                 Assert.AreEqual(results[i], 
                     filteredJointData[i].Joints[JointType.SpineBase].Position.X, 0.000001);

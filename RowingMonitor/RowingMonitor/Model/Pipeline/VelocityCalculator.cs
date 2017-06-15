@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model
 {
@@ -17,16 +18,35 @@ namespace RowingMonitor.Model
         private JointData lastJointData;
         private JointData penultimateJointData;
 
+        private TransformBlock<JointData, JointData> calculationBlock;
+
+        public TransformBlock<JointData, JointData> CalculationBlock { get => calculationBlock; set => calculationBlock = value; }
+
+        public VelocityCalculator()
+        {
+            CalculationBlock = new TransformBlock<JointData, JointData>(jointData =>
+            {
+                return CalculateVelocity(jointData);
+            });
+        }
+
+        public void Update(JointData jointData)
+        {
+            CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs(
+                CalculateVelocity(jointData)));
+        }
+
         /// <summary>
         /// Calculates the velocity as 1st derivative (gradient) of position.
         /// Calculation needs one frame as buffer.
         /// </summary>
         /// <param name="jointData"></param>
-        public void CalculateVelocity(JointData jointData)
+        public JointData CalculateVelocity(JointData jointData)
         {
             // check if first value
             if (lastJointData.RelTimestamp == 0) {
                 lastJointData = jointData;
+                return new JointData();
             }
             // check if second value -> use the boundaries formula
             else if (penultimateJointData.RelTimestamp == 0) {
@@ -56,8 +76,7 @@ namespace RowingMonitor.Model
                 penultimateJointData = lastJointData;
                 lastJointData = jointData;
 
-                CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs(
-                    newJointData));
+                return newJointData;
             }
             // if two old values are present -> use interior formula
             else {
@@ -86,8 +105,7 @@ namespace RowingMonitor.Model
                 penultimateJointData = lastJointData;
                 lastJointData = jointData;
 
-                CalculatedFrameArrived(this, new CalculatedFrameArrivedEventArgs(
-                    newJointData));
+                return newJointData;
             }
         }
     }
