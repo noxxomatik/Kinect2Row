@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
-namespace RowingMonitor.Model
+namespace RowingMonitor.Model.Pipeline
 {
     public class VelocityCalculator
     {
@@ -18,13 +18,13 @@ namespace RowingMonitor.Model
         private JointData lastJointData;
         private JointData penultimateJointData;
 
-        private TransformBlock<JointData, JointData> calculationBlock;
+        private BroadcastBlock<JointData> calculationBlock;
 
-        public TransformBlock<JointData, JointData> CalculationBlock { get => calculationBlock; set => calculationBlock = value; }
+        public BroadcastBlock<JointData> CalculationBlock { get => calculationBlock; set => calculationBlock = value; }
 
         public VelocityCalculator()
         {
-            CalculationBlock = new TransformBlock<JointData, JointData>(jointData =>
+            CalculationBlock = new BroadcastBlock<JointData>(jointData =>
             {
                 return CalculateVelocity(jointData);
             });
@@ -46,7 +46,19 @@ namespace RowingMonitor.Model
             // check if first value
             if (lastJointData.RelTimestamp == 0) {
                 lastJointData = jointData;
-                return new JointData();
+
+                Dictionary<JointType, Joint> joints = new Dictionary<JointType, Joint>();
+                foreach(KeyValuePair<JointType, Joint> joint in jointData.Joints) {
+                    Joint newJoint = new Joint();
+                    newJoint.Position.X = newJoint.Position.Y = newJoint.Position.Z = 0;
+                    joints.Add(joint.Key, newJoint);
+                }
+                JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+                    lastJointData,
+                    DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
+                    joints, DataStreamType.Velocity);
+
+                return newJointData;
             }
             // check if second value -> use the boundaries formula
             else if (penultimateJointData.RelTimestamp == 0) {
@@ -70,7 +82,7 @@ namespace RowingMonitor.Model
                 JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
                     lastJointData,
                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
-                    newJoints);
+                    newJoints, DataStreamType.Velocity);
 
                 // save to history
                 penultimateJointData = lastJointData;
@@ -99,7 +111,7 @@ namespace RowingMonitor.Model
                 JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
                     lastJointData,
                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
-                    newJoints);
+                    newJoints, DataStreamType.Velocity);
 
                 // save to history
                 penultimateJointData = lastJointData;

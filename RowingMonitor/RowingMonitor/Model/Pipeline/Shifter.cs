@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
-namespace RowingMonitor.Model
+namespace RowingMonitor.Model.Pipeline
 {
     /// <summary>
     /// Shifts  the origin to the middle point between the foot ankle joints.
@@ -20,17 +20,17 @@ namespace RowingMonitor.Model
             ShiftedFrameArrivedEventArgs e);
         public event ShiftedFrameArrivedEventHandler ShiftedFrameArrived;
 
-        private TransformBlock<JointData, JointData> shiftingBlock;
+        private BroadcastBlock<JointData> shiftingBlock;
 
         // Logger
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
             System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public TransformBlock<JointData, JointData> ShiftingBlock { get => shiftingBlock; set => shiftingBlock = value; }
+        public BroadcastBlock<JointData> ShiftingBlock { get => shiftingBlock; set => shiftingBlock = value; }
 
         public Shifter()
         {
-            ShiftingBlock = new TransformBlock<JointData, JointData>(jointData =>
+            ShiftingBlock = new BroadcastBlock<JointData>(jointData =>
             {
                 return ShiftAndRotate(jointData);
             });
@@ -109,7 +109,7 @@ namespace RowingMonitor.Model
             JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
                 jointData,
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
-                shiftedJoints);
+                shiftedJoints, DataStreamType.ShiftedPosition);
 
             return newJointData;
         }

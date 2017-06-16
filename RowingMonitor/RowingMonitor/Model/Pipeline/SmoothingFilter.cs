@@ -14,9 +14,12 @@ namespace RowingMonitor.Model.Pipeline
             SmoothedFrameArrivedEventArgs e);
         public event SmoothedFrameArrivedEventHandler SmoothedFrameArrived;
 
-        private TransformBlock<JointData, JointData> smoothingBlock;
+        private BroadcastBlock<JointData> smoothingBlock;
+        private DataStreamType outputDataStreamType;
 
-        public TransformBlock<JointData, JointData> SmoothingBlock { get => smoothingBlock; set => smoothingBlock = value; }
+        public BroadcastBlock<JointData> SmoothingBlock { get => smoothingBlock; set => smoothingBlock = value; }
+        public DataStreamType OutputDataStreamType { get => outputDataStreamType; set => outputDataStreamType = value; }
+        
 
         public abstract JointData Smooth(JointData jointData);
 

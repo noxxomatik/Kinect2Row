@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace RowingMonitor.Model
+namespace RowingMonitor.Model.Pipeline
 {
     /// <summary>
     /// The KinectReader class connects the application to the Kinect device.
@@ -73,8 +73,8 @@ namespace RowingMonitor.Model
         public event ColorFrameArrivedEventHandler ColorFrameArrived;
 
         /* Dataflow Block */
-        private TransformBlock<JointData, JointData> jointDataBlock;
-        private TransformBlock<WriteableBitmap, WriteableBitmap> colorFrameBlock;
+        private BroadcastBlock<JointData> jointDataBlock;
+        private BroadcastBlock<WriteableBitmap> colorFrameBlock;
 
         /// <summary>
         /// Initilizes the KinectReader class and establishes the connection to the sensor.
@@ -110,12 +110,12 @@ namespace RowingMonitor.Model
                 : Properties.Resources.NoSensorStatusText;
 
             // set the pieline blocks
-            JointDataBlock = new TransformBlock<JointData, JointData>(jointData =>
+            JointDataBlock = new BroadcastBlock<JointData>(jointData =>
             {
                 return jointData;
             });
 
-            ColorFrameBlock = new TransformBlock<WriteableBitmap, WriteableBitmap>(bitmap =>
+            ColorFrameBlock = new BroadcastBlock<WriteableBitmap>(bitmap =>
             {
                 return bitmap;
             });
@@ -131,8 +131,8 @@ namespace RowingMonitor.Model
             }
         }
 
-        public TransformBlock<JointData, JointData> JointDataBlock { get => jointDataBlock; set => jointDataBlock = value; }
-        public TransformBlock<WriteableBitmap, WriteableBitmap> ColorFrameBlock { get => colorFrameBlock; set => colorFrameBlock = value; }
+        public BroadcastBlock<JointData> JointDataBlock { get => jointDataBlock; set => jointDataBlock = value; }
+        public BroadcastBlock<WriteableBitmap> ColorFrameBlock { get => colorFrameBlock; set => colorFrameBlock = value; }
 
         /// <summary>
         /// Handles the event which the sensor becomes unavailable 
@@ -229,12 +229,15 @@ namespace RowingMonitor.Model
             Tuple<WriteableBitmap, JointData> tuple = ReadMultiSourceFrame(e.FrameReference.AcquireFrame());
 
             // trigger the events
-            KinectFrameArrived(this, new KinectFrameArrivedEventArgs(tuple.Item2));
-            ColorFrameArrived(this, new ColorFrameArrivedEventArgs(tuple.Item1));
-
             // start the pipeline
-            //JointDataBlock.Post(tuple.Item2);
-            //ColorFrameBlock.Post(tuple.Item1);
+            if (tuple.Item1 != null) {
+                //ColorFrameArrived?(this, new ColorFrameArrivedEventArgs(tuple.Item1));
+                //ColorFrameBlock.Post(tuple.Item1);
+            }
+            if (tuple.Item2.Timestamps != null) {
+                //KinectFrameArrived?(this, new KinectFrameArrivedEventArgs(tuple.Item2));
+                JointDataBlock.Post(tuple.Item2);
+            }
         }
 
         /// <summary>

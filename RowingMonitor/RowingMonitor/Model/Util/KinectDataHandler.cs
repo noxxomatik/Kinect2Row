@@ -47,6 +47,7 @@ namespace RowingMonitor.Model.Util
             };
             jointData.Timestamps = new List<double>();
             jointData.Timestamps.Add(creationTimestamp);
+            jointData.DataStreamType = DataStreamType.RawPosition;
 
             LastIndex++;
             return jointData;
@@ -55,7 +56,8 @@ namespace RowingMonitor.Model.Util
         public static JointData ReplaceJointsInJointData(
             JointData oldJointData,
             double creationTimestamp,
-            IReadOnlyDictionary<JointType, Joint> newJoints)
+            IReadOnlyDictionary<JointType, Joint> newJoints,
+            DataStreamType dataStreamType)
         {
             JointData jointData = new JointData
             {
@@ -63,7 +65,8 @@ namespace RowingMonitor.Model.Util
                 AbsTimestamp = oldJointData.AbsTimestamp,
                 Timestamps = oldJointData.Timestamps,
                 Index = oldJointData.Index,
-                Joints = newJoints
+                Joints = newJoints,
+                DataStreamType = dataStreamType
             };
 
             // add the creationTimestamp to the right pipeline step
@@ -98,6 +101,7 @@ namespace RowingMonitor.Model.Util
         private IReadOnlyDictionary<JointType, Joint> joints;
         private long index;
         private List<double> timestamps;
+        private DataStreamType dataStreamType;
 
         /// <summary>
         /// Time since Kinect sensor started.
@@ -110,7 +114,8 @@ namespace RowingMonitor.Model.Util
         /// <summary>
         /// Positions of all joints.
         /// </summary>
-        public IReadOnlyDictionary<JointType, Joint> Joints { get => joints; set => joints = value; }
+        public IReadOnlyDictionary<JointType, Joint> Joints {
+            get => joints; set => joints = value; }
         /// <summary>
         /// Incrementing number of frames.
         /// </summary>
@@ -119,6 +124,11 @@ namespace RowingMonitor.Model.Util
         /// List of all timestamps that were set in the pipeline
         /// </summary>
         public List<double> Timestamps { get => timestamps; set => timestamps = value; }
+        /// <summary>
+        /// Type of the data.
+        /// </summary>
+        public DataStreamType DataStreamType {
+            get => dataStreamType; set => dataStreamType = value; }
     }
 
     public struct SegmentHit

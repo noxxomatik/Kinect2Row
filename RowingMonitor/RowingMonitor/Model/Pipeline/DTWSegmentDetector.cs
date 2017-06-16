@@ -29,9 +29,9 @@ namespace RowingMonitor.Model.Pipeline
         {
             subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), distanceThreshold, minimumSubsequenceLength);
 
-            DetectionBlock = new TransformBlock<SegmentDetectionParameter, List<SegmentHit>>(parameter =>
+            DetectionBlock = new TransformBlock<JointData, List<SegmentHit>>(jointData =>
             {
-                return Detect(parameter.JointData, parameter.JointType, parameter.Axis);
+                return Detect(jointData, DetectionJointType, DetectionAxis);
             });
         }
 

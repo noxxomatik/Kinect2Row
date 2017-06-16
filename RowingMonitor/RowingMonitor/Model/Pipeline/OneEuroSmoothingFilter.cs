@@ -51,8 +51,10 @@ namespace RowingMonitor.Model.Pipeline
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
             System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public OneEuroSmoothingFilter()
+        public OneEuroSmoothingFilter(DataStreamType outputDataStreamType)
         {
+            OutputDataStreamType = outputDataStreamType;
+
             Beta = 0.0;
             Fcmin = 1.0;
             Mincutoff = InitCutoffDictionary(Fcmin);
@@ -62,7 +64,7 @@ namespace RowingMonitor.Model.Pipeline
             xfilt = new LowPassFilter();
             dxfilt = new LowPassFilter();
 
-            SmoothingBlock = new TransformBlock<JointData, JointData>(jointData =>
+            SmoothingBlock = new BroadcastBlock<JointData>(jointData =>
             {
                 return Smooth(jointData);
             });
@@ -145,6 +147,8 @@ namespace RowingMonitor.Model.Pipeline
             else {
                 // dx = (x - xfilt.hatxprev()) * rate
                 rate = 1.0 / ((jointData.RelTimestamp - lastJointData.RelTimestamp) / 1000);
+                // can be infinity after the first value
+                rate = Double.IsInfinity(rate) ? 120 : rate;
 
                 foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                     Joint newJoint = joint.Value;
@@ -185,7 +189,7 @@ namespace RowingMonitor.Model.Pipeline
             JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
                 jointData,
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
-                result);
+                result, OutputDataStreamType);
 
             lastJointData = jointData;
             return newJointData;

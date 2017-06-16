@@ -17,9 +17,14 @@ namespace RowingMonitor.Model.Pipeline
 
         protected List<SegmentHit> hits = new List<SegmentHit>();
 
-        private TransformBlock<SegmentDetectionParameter, List<SegmentHit>> detectionBlock;
+        private TransformBlock<JointData, List<SegmentHit>> detectionBlock;
 
-        public TransformBlock<SegmentDetectionParameter, List<SegmentHit>> DetectionBlock { get => detectionBlock; set => detectionBlock = value; }
+        private JointType detectionJointType = JointType.HandRight;
+        private String detectionAxis = "Z";
+
+        public TransformBlock<JointData, List<SegmentHit>> DetectionBlock { get => detectionBlock; set => detectionBlock = value; }
+        public JointType DetectionJointType { get => detectionJointType; set => detectionJointType = value; }
+        public string DetectionAxis { get => detectionAxis; set => detectionAxis = value; }
 
         public abstract void Update(JointData jointData, JointType jointType,
             String axis);
@@ -46,18 +51,5 @@ namespace RowingMonitor.Model.Pipeline
         {
             SegmentDetected?.Invoke(this, e);
         }
-    }
-
-
-
-    public struct SegmentDetectionParameter
-    {
-        private JointData jointData;
-        private JointType jointType;
-        private String axis;
-
-        public JointData JointData { get => jointData; set => jointData = value; }
-        public JointType JointType { get => jointType; set => jointType = value; }
-        public string Axis { get => axis; set => axis = value; }
-    }
+    }   
 }

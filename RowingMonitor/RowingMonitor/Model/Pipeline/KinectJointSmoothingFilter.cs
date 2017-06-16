@@ -37,10 +37,12 @@ namespace RowingMonitor.Model.Pipeline
         float m_fCorrection;
         float m_fPrediction;
         float m_fJitterRadius;
-        float m_fMaxDeviationRadius;
+        float m_fMaxDeviationRadius;        
 
-        public KinectJointSmoothingFilter()
+        public KinectJointSmoothingFilter(DataStreamType outputDataStreamType)
         {
+            OutputDataStreamType = outputDataStreamType;
+
             m_pFilteredJoints = new CameraSpacePoint[Body.JointCount];
             m_pHistory = new FilterDoubleExponentialData[Body.JointCount];
             for (int i = 0; i < Body.JointCount; i++) {
@@ -49,7 +51,7 @@ namespace RowingMonitor.Model.Pipeline
 
             Init();
 
-            SmoothingBlock = new TransformBlock<JointData, JointData>(jointData =>
+            SmoothingBlock = new BroadcastBlock<JointData>(jointData =>
             {
                 return Smooth(jointData);
             });
@@ -315,7 +317,7 @@ namespace RowingMonitor.Model.Pipeline
             JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
                 jointData,
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
-                newJoints);
+                newJoints, OutputDataStreamType);
 
             return newJointData;
         }

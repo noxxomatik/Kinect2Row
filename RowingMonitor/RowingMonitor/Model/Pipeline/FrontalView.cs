@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace RowingMonitor.Model
+namespace RowingMonitor.Model.Pipeline
 {
     /// <summary>
     /// This class shows a frontal view of the tracked skeleton.

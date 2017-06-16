@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Diagnostics;
 
-namespace RowingMonitor.Model
+namespace RowingMonitor.Model.Pipeline
 {
     class SideView : FrontalView
     {

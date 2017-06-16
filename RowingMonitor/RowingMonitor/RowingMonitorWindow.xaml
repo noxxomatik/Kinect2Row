@@ -1,0 +1,95 @@
+﻿<Window x:Class="RowingMonitor.RowingMonitorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RowingMonitor"
+        xmlns:vm="clr-namespace:RowingMonitor.ViewModel"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        mc:Ignorable="d"
+        Title="Rowing Monitor" Height="900" Width="1250" Loaded="Window_Loaded">
+
+    <Window.DataContext>
+        <vm:RowingMonitorViewModel x:Name="ViewModel"/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
+        <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
+        <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2" />
+    </Window.Resources>
+
+    <Grid x:Name="grid" Margin="4 4 4 4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Frame x:Name="frame1" Grid.Row="0" Grid.Column="0"/>
+
+        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Center" Margin="4 0 4 0">
+            <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="18">Options</TextBlock>
+            <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Smoothing Filter</TextBlock>
+            <RadioButton GroupName="SmoothingFilter" Content="1€ Filter" Checked="RadioButton_Checked"></RadioButton>
+            <RadioButton GroupName="SmoothingFilter" Content="Kinect Joint Filter" IsChecked="True" Checked="RadioButton_Checked_1"></RadioButton>
+            <!--<TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16"></TextBlock>
+            <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">beta:</TextBlock>
+            <xctk:ButtonSpinner Name="betaUpDown" HorizontalAlignment="Right" Spin="betaUpDown_Spin">
+                <TextBox Text="{Binding Beta}" HorizontalAlignment="Right"/>
+            </xctk:ButtonSpinner>
+            <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">fcmin:</TextBlock>
+            <xctk:ButtonSpinner Name="fcminUpDown" HorizontalAlignment="Right" Spin="fcminUpDown_Spin">
+                <TextBox Text="{Binding Fcmin}" HorizontalAlignment="Right"/>
+            </xctk:ButtonSpinner>-->
+            <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Segment Detection</TextBlock>
+            <RadioButton GroupName="SegmentDetection" Content="Zero Velocity Crossing" Checked="RadioButton_Checked_2"></RadioButton>
+            <RadioButton GroupName="SegmentDetection" Content="Subsequence DTW" IsChecked="True" Checked="RadioButton_Checked_3"></RadioButton>
+            <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Plot Options</TextBlock>
+            <!--<TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16"></TextBlock>-->
+            <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">Select measured variable:</TextBlock>
+            <CheckBox IsChecked="True" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">Raw Position</CheckBox>
+            <CheckBox IsChecked="True" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1">Smoothed Position</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_29" Unchecked="CheckBox_Unchecked_29">Shifted Position</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_2" Unchecked="CheckBox_Unchecked_2">Velocity</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_3" Unchecked="CheckBox_Unchecked_3">Segment Hits</CheckBox>
+            <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">Select visible joints:</TextBlock>
+            <!--<ComboBox x:Name="jointComboBox" Text="{Binding SelectedJointName}">
+                <ComboBoxItem>SpineBase</ComboBoxItem>
+                <ComboBoxItem>HandLeft</ComboBoxItem>
+                <ComboBoxItem>HandRight</ComboBoxItem>
+            </ComboBox>-->
+            <CheckBox Checked="CheckBox_Checked_4" Unchecked="CheckBox_Unchecked_4">AnkleLeft</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_5" Unchecked="CheckBox_Unchecked_5">AnkleRight</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_6" Unchecked="CheckBox_Unchecked_6">ElbowLeft</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_7" Unchecked="CheckBox_Unchecked_7">ElbowRight</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_8" Unchecked="CheckBox_Unchecked_8">FootLeft</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_9" Unchecked="CheckBox_Unchecked_9">FootRight</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_10" Unchecked="CheckBox_Unchecked_10">HandLeft</CheckBox>
+            <CheckBox IsChecked="True" Checked="CheckBox_Checked_11" Unchecked="CheckBox_Unchecked_11">HandRight</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_12" Unchecked="CheckBox_Unchecked_12">HandTipLeft</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_13" Unchecked="CheckBox_Unchecked_13">HandTipRight</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_14" Unchecked="CheckBox_Unchecked_14">Head</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_15" Unchecked="CheckBox_Unchecked_15">HipLeft</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_16" Unchecked="CheckBox_Unchecked_16">HipRight</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_18" Unchecked="CheckBox_Unchecked_18">KneeLeft</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_19" Unchecked="CheckBox_Unchecked_19">KneeRight</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_17" Unchecked="CheckBox_Unchecked_17">Neck</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_20" Unchecked="CheckBox_Unchecked_20">ShoulderLeft</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_21" Unchecked="CheckBox_Unchecked_21">ShoulderRight</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_22" Unchecked="CheckBox_Unchecked_22">SpineBase</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_23" Unchecked="CheckBox_Unchecked_23">SpineMid</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_24" Unchecked="CheckBox_Unchecked_24">SpineShoulder</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_25" Unchecked="CheckBox_Unchecked_25">ThumbLeft</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_26" Unchecked="CheckBox_Unchecked_26">ThumbRight</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_27" Unchecked="CheckBox_Unchecked_27">WristLeft</CheckBox>
+            <CheckBox Checked="CheckBox_Checked_28" Unchecked="CheckBox_Unchecked_28">WristRight</CheckBox>
+        </StackPanel>
+    </Grid>
+</Window>

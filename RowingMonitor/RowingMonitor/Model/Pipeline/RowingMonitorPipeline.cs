@@ -129,7 +129,7 @@ namespace RowingMonitor.Model.Pipeline
 
             // init filter
             if (UseKinectJointFilter) {
-                smoothingFilter = new KinectJointSmoothingFilter();
+                smoothingFilter = new KinectJointSmoothingFilter(DataStreamType.SmoothedPosition);
                 //kinectJointFilter.Init();   // suggested value
                 // Some smoothing with little latency (defaults).
                 // Only filters out small jitters.
@@ -147,13 +147,13 @@ namespace RowingMonitor.Model.Pipeline
                 // and latency is not an issue.
                 //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);                
 
-                velocitySmoothingFilter = new KinectJointSmoothingFilter();
+                velocitySmoothingFilter = new KinectJointSmoothingFilter(DataStreamType.Other);
                 ((KinectJointSmoothingFilter)velocitySmoothingFilter).Init(
                     0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
                 
             }
             else {
-                smoothingFilter = new OneEuroSmoothingFilter();
+                smoothingFilter = new OneEuroSmoothingFilter(DataStreamType.SmoothedPosition);
                 ((OneEuroSmoothingFilter)smoothingFilter).Beta = 0.0;
                 ((OneEuroSmoothingFilter)smoothingFilter).Fcmin = 1.0;
             }
@@ -200,7 +200,7 @@ namespace RowingMonitor.Model.Pipeline
                     // init filter
                     if (UseKinectJointFilter) {
                         log.Info("Changed to Kinect joint filter.");
-                        smoothingFilter = new KinectJointSmoothingFilter();
+                        smoothingFilter = new KinectJointSmoothingFilter(DataStreamType.SmoothedPosition);
                         //kinectJointFilter.Init();   // suggested value
                         // Some smoothing with little latency (defaults).
                         // Only filters out small jitters.
@@ -218,17 +218,17 @@ namespace RowingMonitor.Model.Pipeline
                         // and latency is not an issue.
                         //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);                
 
-                        velocitySmoothingFilter = new KinectJointSmoothingFilter();
+                        velocitySmoothingFilter = new KinectJointSmoothingFilter(DataStreamType.Other);
                         ((KinectJointSmoothingFilter)velocitySmoothingFilter).Init(
                             0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
                     }
                     else {
                         log.Info("Changed to 1€ filter.");
-                        smoothingFilter = new OneEuroSmoothingFilter();
+                        smoothingFilter = new OneEuroSmoothingFilter(DataStreamType.SmoothedPosition);
                         ((OneEuroSmoothingFilter)smoothingFilter).Beta = 0.0;
                         ((OneEuroSmoothingFilter)smoothingFilter).Fcmin = 1.0;
 
-                        velocitySmoothingFilter = new OneEuroSmoothingFilter();
+                        velocitySmoothingFilter = new OneEuroSmoothingFilter(DataStreamType.Other);
                         ((OneEuroSmoothingFilter)velocitySmoothingFilter).Beta = 0.0;
                         ((OneEuroSmoothingFilter)velocitySmoothingFilter).Fcmin = 1.0;
                     }
