@@ -50,8 +50,8 @@ namespace UnitTest
 
             // the last element cannot be tested since it needs one frame as buffer
             for (int i = 0; i < 5; i++) {
-                Assert.AreEqual(returnedJointData[i].Joints[JointType.AnkleLeft].Position.X,
-                    results[i]);
+                Assert.AreEqual(results[i],
+                    returnedJointData[i+1].Joints[JointType.AnkleLeft].Position.X);
             }
         }
 
@@ -186,7 +186,7 @@ namespace UnitTest
         [TestMethod]
         public void TestOneEuroFilterSmoothing()
         {
-            OneEuroSmoothingFilter filter = new OneEuroSmoothingFilter();
+            OneEuroSmoothingFilter filter = new OneEuroSmoothingFilter(DataStreamType.Other);
 
             filter.SmoothedFrameArrived += Filter_SmoothedFrameArrived;
 

@@ -24,11 +24,9 @@ namespace RowingMonitor.Model.Pipeline
 
         private float range;
 
-        private bool updatePlot = false;
-
         // plot view
-        JointDataPlotView view;
-        JointDataPlotViewModel viewModel;
+        private JointDataPlotView view;
+        private JointDataPlotViewModel viewModel;
 
         // plot options
         private List<JointType> plotJointTypes = new List<JointType>();
@@ -105,8 +103,7 @@ namespace RowingMonitor.Model.Pipeline
                 else {
                     LineSeries lineSeries = new LineSeries
                     {
-                        Title = series.Key,
-                        MarkerType = MarkerType.Circle
+                        Title = series.Key
                     };
 
                     // check if specific colors are set
@@ -120,6 +117,7 @@ namespace RowingMonitor.Model.Pipeline
                         lineSeries.Points.Add(new DataPoint(series.Value[j].X, series.Value[j].Y));
                     }
 
+                    lineSeries.Smooth = false;
                     tmp.Series.Add(lineSeries);
                 }
             }

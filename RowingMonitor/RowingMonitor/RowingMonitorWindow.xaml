@@ -32,8 +32,6 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Frame x:Name="frame1" Grid.Row="0" Grid.Column="0"/>
-
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Center" Margin="4 0 4 0">
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="18">Options</TextBlock>
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Smoothing Filter</TextBlock>

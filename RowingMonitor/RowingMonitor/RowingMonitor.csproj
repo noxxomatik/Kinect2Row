@@ -114,9 +114,12 @@
     <Compile Include="Model\EventArgs\SegmentDetectedEventArgs.cs" />
     <Compile Include="Model\Pipeline\JointDataPlot.cs" />
     <Compile Include="Model\Pipeline\KinectJointSmoothingFilter.cs" />
+    <Compile Include="Model\Pipeline\KleshnevPlot.cs" />
     <Compile Include="Model\Pipeline\KleshnevVelocityCalculator.cs" />
     <Compile Include="Model\Pipeline\RowingMonitorPipeline.cs" />
     <Compile Include="Model\Pipeline\DTWSegmentDetector.cs" />
+    <Compile Include="Model\Pipeline\SkeletonSideDisplay.cs" />
+    <Compile Include="Model\Pipeline\SkeletonFrontalDisplay.cs" />
     <Compile Include="Model\Pipeline\SmoothingFilter.cs" />
     <Compile Include="Model\Pipeline\ZVCSegmentDetector.cs" />
     <Compile Include="Model\Pipeline\SegmentDetector.cs" />
@@ -140,9 +143,21 @@
     <Compile Include="RowingMonitorWindow.xaml.cs">
       <DependentUpon>RowingMonitorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\KleshnevPlotViewModel.cs" />
     <Compile Include="ViewModel\RowingMonitorViewModel.cs" />
+    <Compile Include="ViewModel\SkeletonSideViewModel.cs" />
+    <Compile Include="ViewModel\SkeletonFrontalViewModel.cs" />
     <Compile Include="View\JointDataPlotView.xaml.cs">
       <DependentUpon>JointDataPlotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KleshnevPlotView.xaml.cs">
+      <DependentUpon>KleshnevPlotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SkeletonSideView.xaml.cs">
+      <DependentUpon>SkeletonSideView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SkeletonFrontalView.xaml.cs">
+      <DependentUpon>SkeletonFrontalView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -165,6 +180,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\JointDataPlotView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\KleshnevPlotView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SkeletonSideView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SkeletonFrontalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

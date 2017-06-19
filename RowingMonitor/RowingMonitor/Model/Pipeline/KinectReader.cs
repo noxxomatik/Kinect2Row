@@ -210,6 +210,7 @@ namespace RowingMonitor.Model.Pipeline
                         }
                         bitmap.Unlock();
                         writableBitmap = bitmap;
+                        writableBitmap.Freeze();
                     }
                 }
             }
@@ -232,7 +233,7 @@ namespace RowingMonitor.Model.Pipeline
             // start the pipeline
             if (tuple.Item1 != null) {
                 //ColorFrameArrived?(this, new ColorFrameArrivedEventArgs(tuple.Item1));
-                //ColorFrameBlock.Post(tuple.Item1);
+                ColorFrameBlock.Post(tuple.Item1);
             }
             if (tuple.Item2.Timestamps != null) {
                 //KinectFrameArrived?(this, new KinectFrameArrivedEventArgs(tuple.Item2));

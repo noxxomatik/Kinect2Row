@@ -7,6 +7,7 @@ using OxyPlot;
 using System.Threading.Tasks.Dataflow;
 using RowingMonitor.Model.Util;
 using System.ComponentModel;
+using System.Windows;
 
 namespace RowingMonitor.ViewModel
 {
@@ -20,7 +21,10 @@ namespace RowingMonitor.ViewModel
         
         public void Update(PlotModel plotModel)
         {
-            PlotModel = plotModel;
+            Application.Current?.Dispatcher.Invoke(new Action(() =>
+            {
+                PlotModel = plotModel;
+            }));            
         }
 
         /// <summary>

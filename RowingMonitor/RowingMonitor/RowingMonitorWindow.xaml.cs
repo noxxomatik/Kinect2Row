@@ -25,27 +25,31 @@ namespace RowingMonitor
         {
             InitializeComponent();
 
-            ViewModel.Frame1 = frame1;
+            ViewModel.Grid = grid;
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             ViewModel.UseKinectJointFilter = false;
+            ViewModel.ChangeSmoothingFilter();
         }
 
         private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
         {
             ViewModel.UseKinectJointFilter = true;
+            ViewModel.ChangeSmoothingFilter();
         }
 
         private void RadioButton_Checked_2(object sender, RoutedEventArgs e)
         {
             ViewModel.UseZVC = true;
+            ViewModel.ChangeSegmentDetector();
         }
 
         private void RadioButton_Checked_3(object sender, RoutedEventArgs e)
         {
             ViewModel.UseZVC = false;
+            ViewModel.ChangeSegmentDetector();
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
