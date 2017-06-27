@@ -72,6 +72,14 @@ namespace RowingMonitor.Model.Pipeline
         /// </summary>
         private const double HandSize = 30;
 
+        public void Render()
+        {
+            View.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                ViewModel.Render();
+            }));
+        }
+
         public SkeletonFrontalDisplay(CoordinateMapper mapper, int displayWidth,
             int displayHeight)
         {

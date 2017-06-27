@@ -48,9 +48,11 @@ namespace RowingMonitor.Model.Pipeline
                 lastJointData = jointData;
 
                 Dictionary<JointType, Joint> joints = new Dictionary<JointType, Joint>();
-                foreach(KeyValuePair<JointType, Joint> joint in jointData.Joints) {
+                foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                     Joint newJoint = new Joint();
-                    newJoint.Position.X = newJoint.Position.Y = newJoint.Position.Z = 0;
+                    newJoint.Position.X = 0.0f;
+                    newJoint.Position.Y = 0.0f;
+                    newJoint.Position.Z = 0.0f;
                     joints.Add(joint.Key, newJoint);
                 }
                 JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(

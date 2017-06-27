@@ -279,9 +279,9 @@ namespace RowingMonitor.Model.Pipeline
 
         public override JointData Smooth(JointData jointData)
         {
-            if (jointData.RelTimestamp == 0) {
-                return jointData;
-            }
+            //if (jointData.RelTimestamp == 0) {
+            //    return jointData;
+            //}
 
             // Check for divide by zero. Use an epsilon of a 10th of a millimeter
             m_fJitterRadius = Math.Max(0.0001f, m_fJitterRadius);

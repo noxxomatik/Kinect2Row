@@ -113,6 +113,14 @@ namespace RowingMonitor.Model.Pipeline
             });
         }
 
+        public void Render()
+        {
+            View.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                ViewModel.Render();
+            }));
+        }
+
         /// <summary>
         /// Updates the view with new data.
         /// </summary>

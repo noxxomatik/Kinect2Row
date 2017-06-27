@@ -18,17 +18,18 @@ namespace RowingMonitor.ViewModel
 
         }
 
+        public void Render()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SkeletonImageSource"));
+        }
+
         public void UpdateSkeletonImage(DrawingImage skeletonImageSource)
         {
             skeletonImageSource.Freeze();
-
-            // DependencyObjects can only be assigned in the UI Thread
-            Application.Current?.Dispatcher.Invoke(new Action(() =>
-            {
-                if (skeletonImageSource != null) {
-                    SkeletonImageSource = skeletonImageSource;
-                }
-            }));
+            
+            if (skeletonImageSource != null) {
+                SkeletonImageSource = skeletonImageSource;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -38,7 +39,6 @@ namespace RowingMonitor.ViewModel
             get => skeletonImageSource;
             set {
                 skeletonImageSource = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SkeletonImageSource"));
             }
         }
     }

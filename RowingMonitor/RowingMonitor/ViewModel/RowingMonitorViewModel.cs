@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using System.Windows.Controls;
@@ -60,14 +61,17 @@ namespace RowingMonitor.ViewModel
         private IDisposable smoothingLink;
         private IDisposable velocitySmoothingLink;
 
+        // render timer
+        private Timer timer;
+
         public RowingMonitorViewModel()
         {
             // create the pipeline elements
             kinectReader = KinectReader.Instance;
-            smoothingFilter = new OneEuroSmoothingFilter(DataStreamType.SmoothedPosition);
+            //smoothingFilter = new OneEuroSmoothingFilter(DataStreamType.SmoothedPosition);
             shifter = new Shifter();
             velocityCalculator = new VelocityCalculator();
-            velocitySmoothingFilter = new OneEuroSmoothingFilter(DataStreamType.Velocity);
+            //velocitySmoothingFilter = new OneEuroSmoothingFilter(DataStreamType.Velocity);
             segmentDetector = new ZVCSegmentDetector(minimumHitGap, startSegmentWithRisingVelocity);
             kleshnevVelocityCalculator = new KleshnevVelocityCalculator();
 
@@ -90,8 +94,8 @@ namespace RowingMonitor.ViewModel
             shifter.ShiftingBlock.LinkTo(jointDataPlot.PlotJointDataBlock);
             shifter.ShiftingBlock.LinkTo(skeletonSideDisplay.SkeletonBlock);
 
-            velocityCalculator.CalculationBlock.LinkTo(
-                velocitySmoothingFilter.SmoothingBlock);
+            //velocityCalculator.CalculationBlock.LinkTo(
+            //    velocitySmoothingFilter.SmoothingBlock);
 
             //velocitySmoothingFilter.SmoothingBlock.LinkTo(kleshnevVelocityCalculator.CalculationBlock);
             ////velocitySmoothingFilter.SmoothingBlock.LinkTo(segmentDetector.DetectionInputBlock);
@@ -104,6 +108,16 @@ namespace RowingMonitor.ViewModel
 
             ChangeSegmentDetector();
             ChangeSmoothingFilter();
+
+            timer = new Timer(Render, null, 0, 40);
+        }
+
+        private void Render(object state)
+        {
+            jointDataPlot.Render();
+            kleshnevPlot.Render();
+            skeletonSideDisplay.Render();
+            skeletonFrontalDisplay.Render();
         }
 
         public void WindowLoaded()

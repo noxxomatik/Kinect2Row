@@ -67,6 +67,14 @@ namespace RowingMonitor.Model.Pipeline
             });
         }
 
+        public void Render()
+        {
+            View.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                viewModel.Render();
+            }));
+        }
+
         private void Update()
         {
             // update last segment plot if new hits were detected

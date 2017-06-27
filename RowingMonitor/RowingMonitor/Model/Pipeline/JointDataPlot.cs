@@ -57,16 +57,24 @@ namespace RowingMonitor.Model.Pipeline
             PlotJointDataBlock = new ActionBlock<JointData>(jointData =>
             {
                 if (AddPlotData(jointData)) {
-                    viewModel.PlotModel = UpdatePlot(plotData, "Values");
+                    viewModel.Update(UpdatePlot(plotData, "Values"));
                 }
             });
 
             PlotHitsBlock = new ActionBlock<List<SegmentHit>>(hits =>
             {
                 if (AddPlotData(hits)) {
-                    viewModel.PlotModel = UpdatePlot(plotData, "Values");
+                    viewModel.Update(UpdatePlot(plotData, "Values"));
                 }
             });
+        }
+
+        public void Render()
+        {
+            View.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                viewModel.Render();
+            }));
         }
 
         private PlotModel UpdatePlot(ConcurrentDictionary<String, List<PlotData>> dataPoints,

@@ -15,9 +15,9 @@ namespace RowingMonitor.Model.Pipeline
     {
         private SubsequenceDTW subsequenceDTW;
 
-        private int indexOffset = -1;
+        //private int indexOffset = -1;
 
-        private int currentIndex = 1;
+        //private int currentIndex = 1;
 
         private List<JointData> jointDataHistory = new List<JointData>();
 
@@ -67,25 +67,27 @@ namespace RowingMonitor.Model.Pipeline
         public override List<SegmentHit> Detect(JointData jointData, JointType jointType, string axis)
         {
             // if first time of update, set the index offset
-            if (indexOffset == -1) {
+            /*if (indexOffset == -1) {
                 indexOffset = (int)jointData.Index;
-            }
+            }*/
 
             jointDataHistory.Add(jointData);
 
-            Subsequence subsequence = subsequenceDTW.compareDataStream(GetJointDataValue(jointData, jointType, axis), currentIndex);
+            Subsequence subsequence = subsequenceDTW.compareDataStream(
+                GetJointDataValue(jointData, jointType, axis), 
+                (int)jointData.Index + 1);
             if (subsequence.Status == SubsequenceStatus.OPTIMAL) {
                 // -1 because index t of DTW starts with 1
-                int startIndex = subsequence.TStart + indexOffset - 1;
-                int endIndex = subsequence.TEnd + indexOffset - 1;
-                int detectionIndex = subsequence.TDetected + indexOffset - 1;
+                int startIndex = subsequence.TStart  - 1;
+                int endIndex = subsequence.TEnd - 1;
+                int detectionIndex = subsequence.TDetected - 1;
 
                 log.Info("Optimal subsequence detected with distance: " + subsequence.Distance
                     + " | Detection latency: " + (detectionIndex - endIndex));
 
-                if (detectionIndex != jointData.Index) {
-                    throw new Exception("Index offset is faulty.");
-                }
+                //if (detectionIndex != jointData.Index) {
+                //    throw new Exception("Index offset is faulty.");
+                //}
 
                 SegmentHit startHit = new SegmentHit();
                 startHit.Index = startIndex;
@@ -124,7 +126,7 @@ namespace RowingMonitor.Model.Pipeline
                 OnSegmentDetected(new SegmentDetectedEventArgs(hits));
             }
 
-            currentIndex++;
+            //currentIndex++;
             return hits;
         }
     }

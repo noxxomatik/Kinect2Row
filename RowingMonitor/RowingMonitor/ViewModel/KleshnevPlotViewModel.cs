@@ -18,34 +18,32 @@ namespace RowingMonitor.ViewModel
 
         public KleshnevPlotViewModel() { }
 
+        public void Render()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastSegmentPlotModel"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentSegmentPlotModel"));
+        }
+
         public void UpdateLastSegmentPlot(PlotModel lastSegmentPlot)
         {
-            Application.Current?.Dispatcher.Invoke(new Action(() =>
-            {
-                LastSegmentPlotModel = lastSegmentPlot;
-            }));
+            LastSegmentPlotModel = lastSegmentPlot;
         }
 
         public void UpdateCurrentSegmentPlot(PlotModel currentSegmentPlot)
         {
-            Application.Current?.Dispatcher.Invoke(new Action(() =>
-            {
-                CurrentSegmentPlotModel = currentSegmentPlot;
-            }));
+            CurrentSegmentPlotModel = currentSegmentPlot;
         }
 
         public PlotModel LastSegmentPlotModel
         {
             get => lastSegmentPlotModel; set {
                 lastSegmentPlotModel = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastSegmentPlotModel"));
             }
         }
         public PlotModel CurrentSegmentPlotModel
         {
             get => currentSegmentPlotModel; set {
                 currentSegmentPlotModel = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentSegmentPlotModel"));
             }
         }
     }
