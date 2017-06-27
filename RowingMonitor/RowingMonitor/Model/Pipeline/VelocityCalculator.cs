@@ -18,15 +18,21 @@ namespace RowingMonitor.Model.Pipeline
         private JointData lastJointData;
         private JointData penultimateJointData;
 
-        private BroadcastBlock<JointData> calculationBlock;
+        private ActionBlock<JointData> input;
+        private BroadcastBlock<JointData> output;
 
-        public BroadcastBlock<JointData> CalculationBlock { get => calculationBlock; set => calculationBlock = value; }
+        public BroadcastBlock<JointData> Output { get => output; set => output = value; }
+        public ActionBlock<JointData> Input { get => input; set => input = value; }
 
         public VelocityCalculator()
         {
-            CalculationBlock = new BroadcastBlock<JointData>(jointData =>
+            Input = new ActionBlock<JointData>(jointData =>
             {
-                return CalculateVelocity(jointData);
+                Output.Post(CalculateVelocity(jointData));
+            });
+            Output = new BroadcastBlock<JointData>(jointData =>
+            {
+                return jointData;
             });
         }
 
@@ -43,6 +49,11 @@ namespace RowingMonitor.Model.Pipeline
         /// <param name="jointData"></param>
         public JointData CalculateVelocity(JointData jointData)
         {
+            // check if jointData is NaN
+            if (jointData.Joints[JointType.SpineBase].Position.X == float.NaN) {
+                int x = 0;
+            }
+
             // check if first value
             if (lastJointData.RelTimestamp == 0) {
                 lastJointData = jointData;

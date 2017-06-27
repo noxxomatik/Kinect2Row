@@ -29,12 +29,12 @@ namespace RowingMonitor.Model.Pipeline
         {
             subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), distanceThreshold, minimumSubsequenceLength);
 
-            DetectionInputBlock = new ActionBlock<JointData>(jointData =>
+            Input = new ActionBlock<JointData>(jointData =>
             {
-                DetectionOutputBlock.Post(Detect(jointData, DetectionJointType, DetectionAxis));
+                Output.Post(Detect(jointData, DetectionJointType, DetectionAxis));
             });
 
-            DetectionOutputBlock = new BroadcastBlock<List<SegmentHit>>(hits =>
+            Output = new BroadcastBlock<List<SegmentHit>>(hits =>
             {
                 return hits;
             });

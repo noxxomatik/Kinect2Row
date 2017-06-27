@@ -90,9 +90,9 @@ namespace RowingMonitor.ViewModel
             //smoothingFilter.SmoothingBlock.LinkTo(shifter.ShiftingBlock);
             //smoothingFilter.SmoothingBlock.LinkTo(jointDataPlot.PlotJointDataBlock);
 
-            shifter.ShiftingBlock.LinkTo(velocityCalculator.CalculationBlock);
-            shifter.ShiftingBlock.LinkTo(jointDataPlot.PlotJointDataBlock);
-            shifter.ShiftingBlock.LinkTo(skeletonSideDisplay.SkeletonBlock);
+            shifter.Output.LinkTo(velocityCalculator.Input);
+            shifter.Output.LinkTo(jointDataPlot.PlotJointDataBlock);
+            shifter.Output.LinkTo(skeletonSideDisplay.SkeletonBlock);
 
             //velocityCalculator.CalculationBlock.LinkTo(
             //    velocitySmoothingFilter.SmoothingBlock);
@@ -101,7 +101,7 @@ namespace RowingMonitor.ViewModel
             ////velocitySmoothingFilter.SmoothingBlock.LinkTo(segmentDetector.DetectionInputBlock);
             //velocitySmoothingFilter.SmoothingBlock.LinkTo(jointDataPlot.PlotJointDataBlock);
 
-            kleshnevVelocityCalculator.CalculationBlock.LinkTo(kleshnevPlot.KleshnevDataBlock);
+            kleshnevVelocityCalculator.Output.LinkTo(kleshnevPlot.KleshnevDataBlock);
 
             //segmentDetector.DetectionOutputBlock.LinkTo(jointDataPlot.PlotHitsBlock);
             //segmentDetector.DetectionOutputBlock.LinkTo(kleshnevPlot.PlotHitsBlock);
@@ -160,19 +160,19 @@ namespace RowingMonitor.ViewModel
             if (UseZVC) {
                 segmentDetector = new ZVCSegmentDetector(minimumHitGap, 
                     startSegmentWithRisingVelocity);
-                segmentationLink = velocitySmoothingFilter.SmoothingBlock.LinkTo(
-                    segmentDetector.DetectionInputBlock);
+                segmentationLink = velocitySmoothingFilter.Output.LinkTo(
+                    segmentDetector.Input);
             }
             else {
                 segmentDetector = new DTWSegmentDetector(distanceThreshold,
                     minimumSubsequenceLength);
-                segmentationLink = shifter.ShiftingBlock.LinkTo(
-                    segmentDetector.DetectionInputBlock);
+                segmentationLink = shifter.Output.LinkTo(
+                    segmentDetector.Input);
             }
 
             // rewire the pipeline
-            segmentDetector.DetectionOutputBlock.LinkTo(jointDataPlot.PlotHitsBlock);
-            segmentDetector.DetectionOutputBlock.LinkTo(kleshnevPlot.PlotHitsBlock);
+            segmentDetector.Output.LinkTo(jointDataPlot.PlotHitsBlock);
+            segmentDetector.Output.LinkTo(kleshnevPlot.PlotHitsBlock);
         }
 
         public void ChangeSmoothingFilter()
@@ -202,7 +202,7 @@ namespace RowingMonitor.ViewModel
                 //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);                
 
                 velocitySmoothingFilter = new KinectJointSmoothingFilter(
-                    DataStreamType.Other);
+                    DataStreamType.Velocity);
                 ((KinectJointSmoothingFilter)velocitySmoothingFilter).Init(
                     0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
 
@@ -212,25 +212,27 @@ namespace RowingMonitor.ViewModel
                     DataStreamType.SmoothedPosition);
                 ((OneEuroSmoothingFilter)smoothingFilter).Beta = 0.0;
                 ((OneEuroSmoothingFilter)smoothingFilter).Fcmin = 1.0;
+
+                velocitySmoothingFilter = new OneEuroSmoothingFilter(
+                    DataStreamType.Velocity);
+                ((OneEuroSmoothingFilter)velocitySmoothingFilter).Beta = 0.0;
+                ((OneEuroSmoothingFilter)velocitySmoothingFilter).Fcmin = 1.0;
             }
 
-            smoothingLink = kinectReader.JointDataBlock.LinkTo(
-                smoothingFilter.SmoothingBlock);
-            velocitySmoothingLink = velocityCalculator.CalculationBlock.LinkTo(
-                velocitySmoothingFilter.SmoothingBlock);
+            // link inputs of filters
+            smoothingLink = kinectReader.JointDataBlock.LinkTo(smoothingFilter.Input);
+            velocitySmoothingLink = velocityCalculator.Output.LinkTo(velocitySmoothingFilter.Input);
 
-            // rewire the pipeline
-            smoothingFilter.SmoothingBlock.LinkTo(shifter.ShiftingBlock);
-            smoothingFilter.SmoothingBlock.LinkTo(jointDataPlot.PlotJointDataBlock);
-
-            velocitySmoothingFilter.SmoothingBlock.LinkTo(
-                kleshnevVelocityCalculator.CalculationBlock);            
-            velocitySmoothingFilter.SmoothingBlock.LinkTo(
-                jointDataPlot.PlotJointDataBlock);
+            // link ouptuts of filters
+            smoothingFilter.Output.LinkTo(shifter.Input);
+            smoothingFilter.Output.LinkTo(jointDataPlot.PlotJointDataBlock);
+            velocitySmoothingFilter.Output.LinkTo(kleshnevVelocityCalculator.Input);            
+            velocitySmoothingFilter.Output.LinkTo(jointDataPlot.PlotJointDataBlock);
 
             if (UseZVC) {
-                velocitySmoothingFilter.SmoothingBlock.LinkTo(
-                    segmentDetector.DetectionInputBlock);
+                segmentationLink.Dispose();
+                segmentationLink = velocitySmoothingFilter.Output.LinkTo(
+                    segmentDetector.Input);
             }
         }
 

@@ -17,16 +17,16 @@ namespace RowingMonitor.Model.Pipeline
 
         protected List<SegmentHit> hits = new List<SegmentHit>();
 
-        private ActionBlock<JointData> detectionInputBlock;
-        private BroadcastBlock<List<SegmentHit>> detectionOutputBlock;
+        private ActionBlock<JointData> input;
+        private BroadcastBlock<List<SegmentHit>> output;
 
         private JointType detectionJointType = JointType.HandRight;
         private String detectionAxis = "Z";
 
-        public BroadcastBlock<List<SegmentHit>> DetectionOutputBlock { get => detectionOutputBlock; set => detectionOutputBlock = value; }
+        public BroadcastBlock<List<SegmentHit>> Output { get => output; set => output = value; }
         public JointType DetectionJointType { get => detectionJointType; set => detectionJointType = value; }
         public string DetectionAxis { get => detectionAxis; set => detectionAxis = value; }
-        public ActionBlock<JointData> DetectionInputBlock { get => detectionInputBlock; set => detectionInputBlock = value; }
+        public ActionBlock<JointData> Input { get => input; set => input = value; }
 
         public abstract void Update(JointData jointData, JointType jointType,
             String axis);

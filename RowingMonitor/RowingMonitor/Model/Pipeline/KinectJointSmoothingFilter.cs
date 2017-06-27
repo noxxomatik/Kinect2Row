@@ -51,9 +51,14 @@ namespace RowingMonitor.Model.Pipeline
 
             Init();
 
-            SmoothingBlock = new BroadcastBlock<JointData>(jointData =>
+            Input = new ActionBlock<JointData>(jointData =>
             {
-                return Smooth(jointData);
+                Output.Post(Smooth(jointData));
+            });
+
+            Output = new BroadcastBlock<JointData>(jointData =>
+            {
+                return jointData;
             });
         }
 

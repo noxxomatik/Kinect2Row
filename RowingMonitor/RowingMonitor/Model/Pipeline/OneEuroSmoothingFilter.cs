@@ -64,9 +64,14 @@ namespace RowingMonitor.Model.Pipeline
             xfilt = new LowPassFilter();
             dxfilt = new LowPassFilter();
 
-            SmoothingBlock = new BroadcastBlock<JointData>(jointData =>
+            Input = new ActionBlock<JointData>(jointData =>
             {
-                return Smooth(jointData);
+                Output.Post(Smooth(jointData));
+            });
+
+            Output = new BroadcastBlock<JointData>(jointData =>
+            {
+                return jointData;
             });
         }
         

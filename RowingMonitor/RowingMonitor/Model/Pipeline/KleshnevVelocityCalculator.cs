@@ -15,17 +15,23 @@ namespace RowingMonitor.Model.Pipeline
             KleshnevEventArgs e);
         public event KleshnevCalculationFinishedEventHandler KleshnevCalculationFinished;
 
-        private TransformBlock<JointData, KleshnevData> calculationBlock;
+        private ActionBlock<JointData> input;
+        private BroadcastBlock<KleshnevData> output;
 
         private List<KleshnevData> kleshnevData = new List<KleshnevData>();
 
-        public TransformBlock<JointData, KleshnevData> CalculationBlock { get => calculationBlock; set => calculationBlock = value; }
+        public BroadcastBlock<KleshnevData> Output { get => output; set => output = value; }
+        public ActionBlock<JointData> Input { get => input; set => input = value; }
 
         public KleshnevVelocityCalculator()
         {
-            CalculationBlock = new TransformBlock<JointData, KleshnevData>(jointData =>
+            Input = new ActionBlock<JointData>(jointData =>
             {
-                return CalculateKleshnevVelocities(jointData).Last();
+                Output.Post(CalculateKleshnevVelocities(jointData).Last());
+            });
+            Output = new BroadcastBlock<KleshnevData>(kleshnevData =>
+            {
+                return kleshnevData;
             });
         }
 

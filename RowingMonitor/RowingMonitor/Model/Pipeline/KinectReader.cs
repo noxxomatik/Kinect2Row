@@ -57,6 +57,8 @@ namespace RowingMonitor.Model.Pipeline
         /// </summary>
         private Body[] bodies = null;
 
+        private long lastBroadcastedIndex = -1;
+
         /* Properties */
         public CoordinateMapper CoordinateMapper { get => coordinateMapper; }
         public int DisplayWidth { get => displayWidth; }

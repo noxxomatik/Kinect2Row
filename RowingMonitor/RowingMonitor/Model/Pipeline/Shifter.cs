@@ -20,19 +20,25 @@ namespace RowingMonitor.Model.Pipeline
             ShiftedFrameArrivedEventArgs e);
         public event ShiftedFrameArrivedEventHandler ShiftedFrameArrived;
 
-        private BroadcastBlock<JointData> shiftingBlock;
+        private ActionBlock<JointData> input;
+        private BroadcastBlock<JointData> output;
 
         // Logger
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
             System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public BroadcastBlock<JointData> ShiftingBlock { get => shiftingBlock; set => shiftingBlock = value; }
+        public BroadcastBlock<JointData> Output { get => output; set => output = value; }
+        public ActionBlock<JointData> Input { get => input; set => input = value; }
 
         public Shifter()
         {
-            ShiftingBlock = new BroadcastBlock<JointData>(jointData =>
+            Input = new ActionBlock<JointData>(jointData =>
             {
-                return ShiftAndRotate(jointData);
+                Output.Post(ShiftAndRotate(jointData));
+            });
+            Output = new BroadcastBlock<JointData>(jointData =>
+            {
+                return jointData;
             });
         }
 

@@ -34,13 +34,13 @@ namespace RowingMonitor.Model.Pipeline
             minHitGap = minimumHitGap;
             endStartHitIsRisingVelocity = startSegmentWithRisingVelocity ? true : false;
 
-            DetectionInputBlock = new ActionBlock<JointData>(jointData =>
+            Input = new ActionBlock<JointData>(jointData =>
             {
-                DetectionOutputBlock.Post(Detect(jointData, DetectionJointType,
+                Output.Post(Detect(jointData, DetectionJointType,
                     DetectionAxis));
             });
 
-            DetectionOutputBlock = new BroadcastBlock<List<SegmentHit>>(hits =>
+            Output = new BroadcastBlock<List<SegmentHit>>(hits =>
             {
                 return hits;
             });

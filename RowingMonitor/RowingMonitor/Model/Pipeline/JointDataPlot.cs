@@ -13,6 +13,7 @@ using OxyPlot.Annotations;
 using OxyPlot.Series;
 using Microsoft.Kinect;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 
 namespace RowingMonitor.Model.Pipeline
 {
