@@ -126,6 +126,7 @@
     <Compile Include="Model\Util\BodyNotFullyTrackedException.cs" />
     <Compile Include="Model\EventArgs\ShiftedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\FrontalView.cs" />
+    <Compile Include="Model\Util\CircularBuffer.cs" />
     <Compile Include="Model\Util\Enums.cs" />
     <Compile Include="Model\EventArgs\ColorFrameArrivedEventArgs.cs" />
     <Compile Include="Model\EventArgs\CalculatedFrameArrivedEventArgs.cs" />

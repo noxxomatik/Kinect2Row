@@ -65,6 +65,18 @@ namespace RowingMonitor.Model.Pipeline
         /// </summary>
         private const double HandSize = 30;
 
+        private const int PointsBufferCapacity = 50;
+
+        // hand trajectory
+        private bool showHandTrajectory = true;
+        private CircularBuffer handPoints = new CircularBuffer(PointsBufferCapacity);
+
+        // body mass center trajectory
+        private bool showBodyMassCenterTrajectory;
+        private CircularBuffer bodyMassCenterPoints = new CircularBuffer(PointsBufferCapacity);
+
+        private bool showFootHipConnection;
+
         public SkeletonSideDisplay()
         {
             View = new SkeletonSideView();
@@ -153,8 +165,19 @@ namespace RowingMonitor.Model.Pipeline
                     jointPoints[jointType] = new Point(x, y);
                 }
 
+                // update point queues
+                UpdateHandPoints(jointPoints);
+
                 DrawBody(joints, jointPoints, dc, drawPen);
-                DrawHorizontalAxis(jointPoints, dc);
+
+                if (ShowFootHipConnection) {
+                    DrawHorizontalAxis(jointPoints, dc);
+                }
+                if (ShowHandTrajectory) {
+                    DrawHandTrajectory(dc);
+                }
+                
+
 
                 // prevent drawing outside of our render area
                 drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0,
@@ -321,6 +344,46 @@ namespace RowingMonitor.Model.Pipeline
             drawingContext.DrawLine(drawPen, ankleCenter, jointPoints[JointType.SpineBase]);
         }
 
+        private void UpdateHandPoints(IDictionary<JointType, Point> jointPoints)
+        {
+            Point handPoint = new Point();
+            handPoint.X = (jointPoints[JointType.HandRight].X 
+                + jointPoints[JointType.HandLeft].X) / 2;
+            handPoint.Y = (jointPoints[JointType.HandRight].Y
+                + jointPoints[JointType.HandLeft].Y) / 2;
+            handPoints.Enqueue(handPoint);
+        }
+
+        private void DrawHandTrajectory(DrawingContext drawingContext)
+        {
+            // convert an array of objects to an array of points
+            Point[] points = Array.ConvertAll(handPoints.ToArray(), x => (Point)x);
+            DrawTrajectory(points, drawingContext);
+        }
+
+        private void DrawTrajectory(Point[] points ,DrawingContext drawingContext)
+        {
+            int i = 0;
+            foreach(Point point in points) {
+                if (i > 0) {
+                    Brush drawBrush = new SolidColorBrush()
+                    {
+                        Color = Colors.DarkBlue,
+                        Opacity = 1.0 / PointsBufferCapacity * i
+                    };
+                    Pen drawPen = new Pen(drawBrush, 3.0);
+
+                    drawingContext.DrawLine(drawPen, points[i-1],  point);
+                }
+                i++;
+            }
+        }
+
+        private void UpdateBodyMassCenterPoints(IReadOnlyDictionary<JointType, Joint> joints)
+        {
+
+        }
+
         public ActionBlock<JointData> SkeletonBlock
         {
             get => skeletonBlock; set => skeletonBlock = value;
@@ -329,5 +392,8 @@ namespace RowingMonitor.Model.Pipeline
         public SkeletonSideView View { get => view; set => view = value; }
         internal SkeletonSideViewModel ViewModel { get => viewModel; set => viewModel = value; }
         public float AreaWidth { get => areaWidth; set => areaWidth = value; }
+        public bool ShowHandTrajectory { get => showHandTrajectory; set => showHandTrajectory = value; }
+        public bool ShowBodyMassCenterTrajectory { get => showBodyMassCenterTrajectory; set => showBodyMassCenterTrajectory = value; }
+        public bool ShowFootHipConnection { get => showFootHipConnection; set => showFootHipConnection = value; }
     }
 }
