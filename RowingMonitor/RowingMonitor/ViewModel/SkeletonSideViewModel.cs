@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.ComponentModel;
 using System.Windows;
+using RowingMonitor.Model.Pipeline;
 
 namespace RowingMonitor.ViewModel
 {
     class SkeletonSideViewModel : INotifyPropertyChanged
     {
         private ImageSource skeletonImageSource;
+
+        private SkeletonSideDisplay model;
 
         public SkeletonSideViewModel()
         {
@@ -41,5 +44,7 @@ namespace RowingMonitor.ViewModel
                 skeletonImageSource = value;
             }
         }
+
+        public SkeletonSideDisplay Model { get => model; set => model = value; }
     }
 }

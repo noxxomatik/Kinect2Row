@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:RowingMonitor.ViewModel"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="Rowing Monitor" Height="900" Width="1250" Loaded="Window_Loaded">
+        Title="Rowing Monitor" Height="720" Width="1280" Loaded="Window_Loaded">
 
     <Window.DataContext>
         <vm:RowingMonitorViewModel x:Name="ViewModel"/>
@@ -35,8 +35,8 @@
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Center" Margin="4 0 4 0">
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="18">Options</TextBlock>
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Smoothing Filter</TextBlock>
-            <RadioButton GroupName="SmoothingFilter" Content="1€ Filter" Checked="RadioButton_Checked"></RadioButton>
-            <RadioButton GroupName="SmoothingFilter" Content="Kinect Joint Filter" IsChecked="True" Checked="RadioButton_Checked_1"></RadioButton>
+            <RadioButton GroupName="SmoothingFilter" Content="1€ Filter" IsChecked="True" Checked="RadioButton_Checked"></RadioButton>
+            <RadioButton GroupName="SmoothingFilter" Content="Kinect Joint Filter" IsChecked="False" Checked="RadioButton_Checked_1"></RadioButton>
             <!--<TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16"></TextBlock>
             <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">beta:</TextBlock>
             <xctk:ButtonSpinner Name="betaUpDown" HorizontalAlignment="Right" Spin="betaUpDown_Spin">
@@ -47,8 +47,8 @@
                 <TextBox Text="{Binding Fcmin}" HorizontalAlignment="Right"/>
             </xctk:ButtonSpinner>-->
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Segment Detection</TextBlock>
-            <RadioButton GroupName="SegmentDetection" Content="Zero Velocity Crossing" Checked="RadioButton_Checked_2"></RadioButton>
-            <RadioButton GroupName="SegmentDetection" Content="Subsequence DTW" IsChecked="True" Checked="RadioButton_Checked_3"></RadioButton>
+            <RadioButton GroupName="SegmentDetection" Content="Zero Velocity Crossing" IsChecked="True" Checked="RadioButton_Checked_2"></RadioButton>
+            <RadioButton GroupName="SegmentDetection" Content="Subsequence DTW" IsChecked="False" Checked="RadioButton_Checked_3"></RadioButton>
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Plot Options</TextBlock>
             <!--<TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16"></TextBlock>-->
             <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">Select measured variable:</TextBlock>

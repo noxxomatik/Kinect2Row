@@ -17,7 +17,7 @@ namespace RowingMonitor.Model.Pipeline
     public class SkeletonSideDisplay
     {
         // width of area in m
-        private const float areaWidth = 2.5f;
+        private float areaWidth = 3.5f;
 
         private ActionBlock<JointData> skeletonBlock;
 
@@ -69,6 +69,7 @@ namespace RowingMonitor.Model.Pipeline
         {
             View = new SkeletonSideView();
             ViewModel = (SkeletonSideViewModel)View.DataContext;
+            ViewModel.Model = this;
 
             // a bone defined as a line between two joints
             bones = new List<Tuple<JointType, JointType>>();
@@ -139,8 +140,8 @@ namespace RowingMonitor.Model.Pipeline
                 // convert the joint points to display space
                 Dictionary<JointType, Point> jointPoints = new Dictionary<JointType, Point>();
 
-                float scale = (float)View.ActualWidth / areaWidth;
-                // origin is 50cm from both edges
+                float scale = (float)View.ActualWidth / AreaWidth;
+                // origin is 0.5m from both edges
                 float originOffsetX = 0.5f * scale;
                 float originOffsetY = (float)View.ActualHeight - 0.5f * scale;
 
@@ -327,5 +328,6 @@ namespace RowingMonitor.Model.Pipeline
 
         public SkeletonSideView View { get => view; set => view = value; }
         internal SkeletonSideViewModel ViewModel { get => viewModel; set => viewModel = value; }
+        public float AreaWidth { get => areaWidth; set => areaWidth = value; }
     }
 }

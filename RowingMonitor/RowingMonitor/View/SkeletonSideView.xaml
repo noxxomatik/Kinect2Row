@@ -14,7 +14,7 @@
     </Page.DataContext>
 
     <Grid x:Name="viewGrid">
-        <Viewbox HorizontalAlignment="Center">
+        <Viewbox HorizontalAlignment="Center" MouseWheel="Viewbox_MouseWheel">
             <Image Source="{Binding SkeletonImageSource}" Stretch="UniformToFill"/>
         </Viewbox>
     </Grid>

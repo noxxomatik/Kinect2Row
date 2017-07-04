@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RowingMonitor.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace RowingMonitor.View
         public SkeletonSideView()
         {
             InitializeComponent();
+        }
+
+        private void Viewbox_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ((SkeletonSideViewModel)DataContext).Model.AreaWidth += e.Delta / 100 * 0.1f;
         }
     }
 }
