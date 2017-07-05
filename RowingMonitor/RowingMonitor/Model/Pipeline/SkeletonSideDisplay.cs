@@ -4,6 +4,7 @@ using RowingMonitor.View;
 using RowingMonitor.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,10 +71,12 @@ namespace RowingMonitor.Model.Pipeline
         // hand trajectory
         private bool showHandTrajectory = true;
         private CircularBuffer handPoints = new CircularBuffer(PointsBufferCapacity);
+        private Color handTrajectoryColor = Colors.DarkBlue;
 
-        // body mass center trajectory
-        private bool showBodyMassCenterTrajectory;
-        private CircularBuffer bodyMassCenterPoints = new CircularBuffer(PointsBufferCapacity);
+        // body center of mass trajectory
+        private bool showBodyCOMTrajectory = true;
+        private CircularBuffer bodyCOMPoints = new CircularBuffer(PointsBufferCapacity);
+        private Color bodyCOMTrajectoryColor = Colors.DarkGreen;
 
         private bool showFootHipConnection;
 
@@ -157,7 +160,6 @@ namespace RowingMonitor.Model.Pipeline
                 float originOffsetX = 0.5f * scale;
                 float originOffsetY = (float)View.ActualHeight - 0.5f * scale;
 
-
                 foreach (JointType jointType in joints.Keys) {
                     int x = (int)(originOffsetX + joints[jointType].Position.Z * scale);
                     int y = (int)(originOffsetY - joints[jointType].Position.Y * scale);
@@ -165,7 +167,13 @@ namespace RowingMonitor.Model.Pipeline
                     jointPoints[jointType] = new Point(x, y);
                 }
 
+                // convert center of mass
+                CameraSpacePoint bodyCOM3D = CalculateBodyCOM(joints);
+                int cx = (int)(originOffsetX + bodyCOM3D.Z * scale);
+                int cy = (int)(originOffsetY - bodyCOM3D.Y * scale);
+
                 // update point queues
+                UpdateBodyCOMPoints(new Point(cx, cy));
                 UpdateHandPoints(jointPoints);
 
                 DrawBody(joints, jointPoints, dc, drawPen);
@@ -176,12 +184,13 @@ namespace RowingMonitor.Model.Pipeline
                 if (ShowHandTrajectory) {
                     DrawHandTrajectory(dc);
                 }
-                
-
+                if (ShowBodyCOMTrajectory) {
+                    DrawBodyCOMTrajectory(dc);
+                }
 
                 // prevent drawing outside of our render area
                 drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0,
-                    View.ActualWidth, View.ActualHeight));  
+                    View.ActualWidth, View.ActualHeight));
             }
             ViewModel.UpdateSkeletonImage(tmpImageSource);
         }
@@ -344,10 +353,204 @@ namespace RowingMonitor.Model.Pipeline
             drawingContext.DrawLine(drawPen, ankleCenter, jointPoints[JointType.SpineBase]);
         }
 
+        private void UpdateBodyCOMPoints(Point bodyCOM)
+        {
+            bodyCOMPoints.Enqueue(bodyCOM);
+        }
+
+        private CameraSpacePoint CalculateBodyCOM(IReadOnlyDictionary<JointType, Joint> joints)
+        {
+            // calculate 3D center of mass
+            // calculate segments
+            CameraSpacePoint footCOMRight = new CameraSpacePoint();
+            footCOMRight.X = joints[JointType.AnkleRight].Position.X
+                + (joints[JointType.FootRight].Position.X
+                - joints[JointType.AnkleRight].Position.X)
+                * 0.429f;
+            footCOMRight.Y = joints[JointType.AnkleRight].Position.Y
+                + (joints[JointType.FootRight].Position.Y
+                - joints[JointType.AnkleRight].Position.Y)
+                * 0.429f;
+            footCOMRight.Z = joints[JointType.AnkleRight].Position.Z
+                + (joints[JointType.FootRight].Position.Z
+                - joints[JointType.AnkleRight].Position.Z)
+                * 0.429f;
+
+            CameraSpacePoint footCOMLeft = new CameraSpacePoint();
+            footCOMLeft.X = joints[JointType.AnkleLeft].Position.X
+                + (joints[JointType.FootLeft].Position.X
+                - joints[JointType.AnkleLeft].Position.X)
+                * 0.429f;
+            footCOMLeft.Y = joints[JointType.AnkleLeft].Position.Y
+                + (joints[JointType.FootLeft].Position.Y
+                - joints[JointType.AnkleLeft].Position.Y)
+                * 0.429f;
+            footCOMLeft.Z = joints[JointType.AnkleLeft].Position.Z
+                + (joints[JointType.FootLeft].Position.Z
+                - joints[JointType.AnkleLeft].Position.Z)
+                * 0.429f;
+
+            CameraSpacePoint shankCOMRight = new CameraSpacePoint();
+            shankCOMRight.X = joints[JointType.KneeRight].Position.X
+                + (joints[JointType.AnkleRight].Position.X
+                - joints[JointType.KneeRight].Position.X)
+                * 0.433f;
+            shankCOMRight.Y = joints[JointType.KneeRight].Position.Y
+                + (joints[JointType.AnkleRight].Position.Y
+                - joints[JointType.KneeRight].Position.Y)
+                * 0.433f;
+            shankCOMRight.Z = joints[JointType.KneeRight].Position.Z
+                + (joints[JointType.AnkleRight].Position.Z
+                - joints[JointType.KneeRight].Position.Z)
+                * 0.433f;
+
+            CameraSpacePoint shankCOMLeft = new CameraSpacePoint();
+            shankCOMLeft.X = joints[JointType.KneeLeft].Position.X
+                + (joints[JointType.AnkleLeft].Position.X
+                - joints[JointType.KneeLeft].Position.X)
+                * 0.433f;
+            shankCOMLeft.Y = joints[JointType.KneeLeft].Position.Y
+                + (joints[JointType.AnkleLeft].Position.Y
+                - joints[JointType.KneeLeft].Position.Y)
+                * 0.433f;
+            shankCOMLeft.Z = joints[JointType.KneeLeft].Position.Z
+                + (joints[JointType.AnkleLeft].Position.Z
+                - joints[JointType.KneeLeft].Position.Z)
+                * 0.433f;
+
+            CameraSpacePoint thighCOMRight = new CameraSpacePoint();
+            thighCOMRight.X = joints[JointType.HipRight].Position.X
+                + (joints[JointType.KneeRight].Position.X
+                - joints[JointType.HipRight].Position.X)
+                * 0.433f;
+            thighCOMRight.Y = joints[JointType.HipRight].Position.Y
+                + (joints[JointType.KneeRight].Position.Y
+                - joints[JointType.HipRight].Position.Y)
+                * 0.433f;
+            thighCOMRight.Z = joints[JointType.HipRight].Position.Z
+                + (joints[JointType.KneeRight].Position.Z
+                - joints[JointType.HipRight].Position.Z)
+                * 0.433f;
+
+            CameraSpacePoint thighCOMLeft = new CameraSpacePoint();
+            thighCOMLeft.X = joints[JointType.HipLeft].Position.X
+                + (joints[JointType.KneeLeft].Position.X
+                - joints[JointType.HipLeft].Position.X)
+                * 0.433f;
+            thighCOMLeft.Y = joints[JointType.HipLeft].Position.Y
+                + (joints[JointType.KneeLeft].Position.Y
+                - joints[JointType.HipLeft].Position.Y)
+                * 0.433f;
+            thighCOMLeft.Z = joints[JointType.HipLeft].Position.Z
+                + (joints[JointType.KneeLeft].Position.Z
+                - joints[JointType.HipLeft].Position.Z)
+                * 0.433f;
+
+            CameraSpacePoint forearmCOMRight = new CameraSpacePoint();
+            forearmCOMRight.X = joints[JointType.ElbowRight].Position.X
+                + (joints[JointType.WristRight].Position.X
+                - joints[JointType.ElbowRight].Position.X)
+                * 0.682f;
+            forearmCOMRight.Y = joints[JointType.ElbowRight].Position.Y
+                + (joints[JointType.WristRight].Position.Y
+                - joints[JointType.ElbowRight].Position.Y)
+                * 0.682f;
+            forearmCOMRight.Z = joints[JointType.ElbowRight].Position.Z
+                + (joints[JointType.WristRight].Position.Z
+                - joints[JointType.ElbowRight].Position.Z)
+                * 0.682f;
+
+            CameraSpacePoint forearmCOMLeft = new CameraSpacePoint();
+            forearmCOMLeft.X = joints[JointType.ElbowLeft].Position.X
+                + (joints[JointType.WristLeft].Position.X
+                - joints[JointType.ElbowLeft].Position.X)
+                * 0.682f;
+            forearmCOMLeft.Y = joints[JointType.ElbowLeft].Position.Y
+                + (joints[JointType.WristLeft].Position.Y
+                - joints[JointType.ElbowLeft].Position.Y)
+                * 0.682f;
+            forearmCOMLeft.Z = joints[JointType.ElbowLeft].Position.Z
+                + (joints[JointType.WristLeft].Position.Z
+                - joints[JointType.ElbowLeft].Position.Z)
+                * 0.682f;
+
+            CameraSpacePoint upperArmCOMRight = new CameraSpacePoint();
+            upperArmCOMRight.X = joints[JointType.ShoulderRight].Position.X
+                + (joints[JointType.ElbowRight].Position.X
+                - joints[JointType.ShoulderRight].Position.X)
+                * 0.436f;
+            upperArmCOMRight.Y = joints[JointType.ShoulderRight].Position.Y
+                + (joints[JointType.ElbowRight].Position.Y
+                - joints[JointType.ShoulderRight].Position.Y)
+                * 0.436f;
+            upperArmCOMRight.Z = joints[JointType.ShoulderRight].Position.Z
+                + (joints[JointType.ElbowRight].Position.Z
+                - joints[JointType.ShoulderRight].Position.Z)
+                * 0.436f;
+
+            CameraSpacePoint upperArmCOMLeft = new CameraSpacePoint();
+            upperArmCOMLeft.X = joints[JointType.ShoulderLeft].Position.X
+                + (joints[JointType.ElbowLeft].Position.X
+                - joints[JointType.ShoulderLeft].Position.X)
+                * 0.436f;
+            upperArmCOMLeft.Y = joints[JointType.ShoulderLeft].Position.Y
+                + (joints[JointType.ElbowLeft].Position.Y
+                - joints[JointType.ShoulderLeft].Position.Y)
+                * 0.436f;
+            upperArmCOMLeft.Z = joints[JointType.ShoulderLeft].Position.Z
+                + (joints[JointType.ElbowLeft].Position.Z
+                - joints[JointType.ShoulderLeft].Position.Z)
+                * 0.436f;
+
+            CameraSpacePoint trunkCOM = new CameraSpacePoint();
+            trunkCOM.X = joints[JointType.SpineBase].Position.X
+                + (joints[JointType.SpineShoulder].Position.X
+                - joints[JointType.SpineBase].Position.X)
+                * 0.54f;
+            trunkCOM.Y = joints[JointType.SpineBase].Position.Y
+                + (joints[JointType.SpineShoulder].Position.Y
+                - joints[JointType.SpineBase].Position.Y)
+                * 0.54f;
+            trunkCOM.Z = joints[JointType.SpineBase].Position.Z
+                + (joints[JointType.SpineShoulder].Position.Z
+                - joints[JointType.SpineBase].Position.Z)
+                * 0.54f;
+
+            // calculate  body center of mass by adding all segments with their respective weights
+            CameraSpacePoint bodyCOM = new CameraSpacePoint();
+            bodyCOM.X = footCOMRight.X * 0.019f + footCOMLeft.X * 0.019f
+                + shankCOMRight.X * 0.044f + shankCOMLeft.X * 0.044f
+                + thighCOMRight.X * 0.115f + thighCOMLeft.X * 0.115f
+                + forearmCOMRight.X * 0.025f + forearmCOMLeft.X * 0.025f
+                + upperArmCOMRight.X * 0.031f + upperArmCOMLeft.X * 0.031f
+                + trunkCOM.X * 0.532f;
+            bodyCOM.Y = footCOMRight.Y * 0.019f + footCOMLeft.Y * 0.019f
+                + shankCOMRight.Y * 0.044f + shankCOMLeft.Y * 0.044f
+                + thighCOMRight.Y * 0.115f + thighCOMLeft.Y * 0.115f
+                + forearmCOMRight.Y * 0.025f + forearmCOMLeft.Y * 0.025f
+                + upperArmCOMRight.Y * 0.031f + upperArmCOMLeft.Y * 0.031f
+                + trunkCOM.Y * 0.532f;
+            bodyCOM.Z = footCOMRight.Z * 0.019f + footCOMLeft.Z * 0.019f
+                + shankCOMRight.Z * 0.044f + shankCOMLeft.Z * 0.044f
+                + thighCOMRight.Z * 0.115f + thighCOMLeft.Z * 0.115f
+                + forearmCOMRight.Z * 0.025f + forearmCOMLeft.Z * 0.025f
+                + upperArmCOMRight.Z * 0.031f + upperArmCOMLeft.Z * 0.031f
+                + trunkCOM.Z * 0.532f;
+
+            return bodyCOM;
+        }
+
+        private void DrawBodyCOMTrajectory(DrawingContext drawingContext)
+        {
+            Point[] points = Array.ConvertAll(bodyCOMPoints.ToArray(), x => (Point)x);
+            DrawTrajectory(points, drawingContext, bodyCOMTrajectoryColor);
+            DrawLegend(0, "Body center of mass trajectory", drawingContext, bodyCOMTrajectoryColor);
+        }
+
         private void UpdateHandPoints(IDictionary<JointType, Point> jointPoints)
         {
             Point handPoint = new Point();
-            handPoint.X = (jointPoints[JointType.HandRight].X 
+            handPoint.X = (jointPoints[JointType.HandRight].X
                 + jointPoints[JointType.HandLeft].X) / 2;
             handPoint.Y = (jointPoints[JointType.HandRight].Y
                 + jointPoints[JointType.HandLeft].Y) / 2;
@@ -358,25 +561,44 @@ namespace RowingMonitor.Model.Pipeline
         {
             // convert an array of objects to an array of points
             Point[] points = Array.ConvertAll(handPoints.ToArray(), x => (Point)x);
-            DrawTrajectory(points, drawingContext);
+            DrawTrajectory(points, drawingContext, handTrajectoryColor);
+            DrawLegend(1, "Handle trajectory", drawingContext, handTrajectoryColor);
         }
 
-        private void DrawTrajectory(Point[] points ,DrawingContext drawingContext)
+        private void DrawTrajectory(Point[] points, DrawingContext drawingContext, Color color)
         {
             int i = 0;
-            foreach(Point point in points) {
+            foreach (Point point in points) {
                 if (i > 0) {
                     Brush drawBrush = new SolidColorBrush()
                     {
-                        Color = Colors.DarkBlue,
+                        Color = color,
                         Opacity = 1.0 / PointsBufferCapacity * i
                     };
                     Pen drawPen = new Pen(drawBrush, 3.0);
 
-                    drawingContext.DrawLine(drawPen, points[i-1],  point);
+                    drawingContext.DrawLine(drawPen, points[i - 1], point);
                 }
                 i++;
             }
+        }
+
+        private void DrawLegend(int position, string name, DrawingContext drawingContext,
+            Color color)
+        {
+            Pen drawPen = new Pen(new SolidColorBrush() { Color = color }, 3.0);
+            drawingContext.DrawLine(drawPen,
+                new Point(2, View.ActualHeight - 4 * (position + 1) - 10 * position),
+                new Point(12, View.ActualHeight - 4 * (position + 1) - 10 * position));
+
+            FormattedText text = new FormattedText(
+                name,
+                CultureInfo.GetCultureInfo("en-us"),
+                FlowDirection.LeftToRight,
+                new Typeface("Verdana"),
+                10,
+                Brushes.Black);
+            drawingContext.DrawText(text, new Point(14, View.ActualHeight - 12 * (position + 1)));
         }
 
         private void UpdateBodyMassCenterPoints(IReadOnlyDictionary<JointType, Joint> joints)
@@ -393,7 +615,7 @@ namespace RowingMonitor.Model.Pipeline
         internal SkeletonSideViewModel ViewModel { get => viewModel; set => viewModel = value; }
         public float AreaWidth { get => areaWidth; set => areaWidth = value; }
         public bool ShowHandTrajectory { get => showHandTrajectory; set => showHandTrajectory = value; }
-        public bool ShowBodyMassCenterTrajectory { get => showBodyMassCenterTrajectory; set => showBodyMassCenterTrajectory = value; }
+        public bool ShowBodyCOMTrajectory { get => showBodyCOMTrajectory; set => showBodyCOMTrajectory = value; }
         public bool ShowFootHipConnection { get => showFootHipConnection; set => showFootHipConnection = value; }
     }
 }
