@@ -47,6 +47,7 @@ namespace RowingMonitor.ViewModel
         private SkeletonFrontalDisplay skeletonFrontalDisplay;
         private SkeletonSideDisplay skeletonSideDisplay;
         private KleshnevPlot kleshnevPlot;
+        private TrunkAngleDisplay trunkAngleDisplay;
 
         /* GUI */
         private Grid grid;
@@ -80,6 +81,7 @@ namespace RowingMonitor.ViewModel
                 kinectReader.DisplayWidth, kinectReader.DisplayHeight);
             skeletonSideDisplay = new SkeletonSideDisplay();
             kleshnevPlot = new KleshnevPlot(KleshnevPlotRange);
+            trunkAngleDisplay = new TrunkAngleDisplay();
 
             // link pipeline together
             //kinectReader.JointDataBlock.LinkTo(smoothingFilter.SmoothingBlock);
@@ -93,6 +95,7 @@ namespace RowingMonitor.ViewModel
             shifter.Output.LinkTo(velocityCalculator.Input);
             shifter.Output.LinkTo(jointDataPlot.PlotJointDataBlock);
             shifter.Output.LinkTo(skeletonSideDisplay.SkeletonBlock);
+            shifter.Output.LinkTo(trunkAngleDisplay.Input);
 
             //velocityCalculator.CalculationBlock.LinkTo(
             //    velocitySmoothingFilter.SmoothingBlock);
@@ -118,6 +121,7 @@ namespace RowingMonitor.ViewModel
             kleshnevPlot.Render();
             skeletonSideDisplay.Render();
             skeletonFrontalDisplay.Render();
+            trunkAngleDisplay.Render();
         }
 
         public void WindowLoaded()
@@ -147,6 +151,12 @@ namespace RowingMonitor.ViewModel
             kleshnevPlotFrame.SetValue(Grid.ColumnProperty, 0);
             kleshnevPlotFrame.SetValue(Grid.ColumnSpanProperty, 2);
             Grid.Children.Add(kleshnevPlotFrame);
+
+            Frame trunkAngleFrame = new Frame();
+            trunkAngleFrame.Content = trunkAngleDisplay.View;
+            trunkAngleFrame.SetValue(Grid.RowProperty, 1);
+            trunkAngleFrame.SetValue(Grid.ColumnProperty, 1);
+            Grid.Children.Add(trunkAngleFrame);
 
             // start the pipeline
             kinectReader.StartReader();

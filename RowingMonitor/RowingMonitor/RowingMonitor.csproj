@@ -121,12 +121,14 @@
     <Compile Include="Model\Pipeline\SkeletonSideDisplay.cs" />
     <Compile Include="Model\Pipeline\SkeletonFrontalDisplay.cs" />
     <Compile Include="Model\Pipeline\SmoothingFilter.cs" />
+    <Compile Include="Model\Pipeline\TrunkAngleDisplay.cs" />
     <Compile Include="Model\Pipeline\ZVCSegmentDetector.cs" />
     <Compile Include="Model\Pipeline\SegmentDetector.cs" />
     <Compile Include="Model\Util\BodyNotFullyTrackedException.cs" />
     <Compile Include="Model\EventArgs\ShiftedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\FrontalView.cs" />
     <Compile Include="Model\Util\CircularBuffer.cs" />
+    <Compile Include="Model\Util\Degrees.cs" />
     <Compile Include="Model\Util\Enums.cs" />
     <Compile Include="Model\EventArgs\ColorFrameArrivedEventArgs.cs" />
     <Compile Include="Model\EventArgs\CalculatedFrameArrivedEventArgs.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="ViewModel\RowingMonitorViewModel.cs" />
     <Compile Include="ViewModel\SkeletonSideViewModel.cs" />
     <Compile Include="ViewModel\SkeletonFrontalViewModel.cs" />
+    <Compile Include="ViewModel\TrunkAngleViewModel.cs" />
     <Compile Include="View\JointDataPlotView.xaml.cs">
       <DependentUpon>JointDataPlotView.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,13 @@
     <Compile Include="View\SkeletonFrontalView.xaml.cs">
       <DependentUpon>SkeletonFrontalView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TrunkAngleView.xaml.cs">
+      <DependentUpon>TrunkAngleView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Images\trunk_angle_gauge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -193,6 +203,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\SkeletonFrontalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TrunkAngleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,5 +251,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Images\trunk_angle_gauge.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
