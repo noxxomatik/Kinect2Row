@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using RowingMonitor.Model.Util;
 using System.Threading.Tasks.Dataflow;
+using System.Linq;
+using System.Diagnostics;
 
 namespace RowingMonitor.Model.Pipeline
 {
@@ -37,7 +39,8 @@ namespace RowingMonitor.Model.Pipeline
         float m_fCorrection;
         float m_fPrediction;
         float m_fJitterRadius;
-        float m_fMaxDeviationRadius;        
+        float m_fMaxDeviationRadius;
+        private List<double> timeLog = new List<double>();
 
         public KinectJointSmoothingFilter(DataStreamType outputDataStreamType)
         {
@@ -53,7 +56,19 @@ namespace RowingMonitor.Model.Pipeline
 
             Input = new ActionBlock<JointData>(jointData =>
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 Output.Post(Smooth(jointData));
+
+                stopwatch.Stop();
+                // log times
+                timeLog.Add(stopwatch.Elapsed.TotalMilliseconds);
+                if (timeLog.Count == 100) {
+                    Logger.LogTimes(timeLog, this.ToString(),
+                        "mean time to smooth for " + OutputDataStreamType);
+                    timeLog = new List<double>();
+                }
             });
 
             Output = new BroadcastBlock<JointData>(jointData =>
@@ -322,7 +337,7 @@ namespace RowingMonitor.Model.Pipeline
             JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
                 jointData,
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
-                newJoints, OutputDataStreamType);
+                newJoints, OutputDataStreamType);            
 
             return newJointData;
         }

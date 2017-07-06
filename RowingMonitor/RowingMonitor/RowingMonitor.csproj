@@ -133,6 +133,7 @@
     <Compile Include="Model\EventArgs\ColorFrameArrivedEventArgs.cs" />
     <Compile Include="Model\EventArgs\CalculatedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Util\KinectDataHandler.cs" />
+    <Compile Include="Model\Util\Logger.cs" />
     <Compile Include="Model\Util\LowPassFilter.cs" />
     <Compile Include="Model\Pipeline\Shifter.cs" />
     <Compile Include="Model\Pipeline\SideView.cs" />

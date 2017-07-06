@@ -2,6 +2,7 @@
 using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace RowingMonitor.Model.Pipeline
         private ActionBlock<JointData> input;
         private BroadcastBlock<JointData> output;
 
+        private List<double> timeLog = new List<double>();
+
         public BroadcastBlock<JointData> Output { get => output; set => output = value; }
         public ActionBlock<JointData> Input { get => input; set => input = value; }
 
@@ -28,7 +31,19 @@ namespace RowingMonitor.Model.Pipeline
         {
             Input = new ActionBlock<JointData>(jointData =>
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 Output.Post(CalculateVelocity(jointData));
+
+                stopwatch.Stop();
+                // log times
+                timeLog.Add(stopwatch.Elapsed.TotalMilliseconds);
+                if (timeLog.Count == 100) {
+                    Logger.LogTimes(timeLog, this.ToString(),
+                        "mean time to calculate the velocity");
+                    timeLog = new List<double>();
+                }
             });
             Output = new BroadcastBlock<JointData>(jointData =>
             {
@@ -100,6 +115,13 @@ namespace RowingMonitor.Model.Pipeline
                 // save to history
                 penultimateJointData = lastJointData;
                 lastJointData = jointData;
+
+                // log times
+                timeLog.Add(newJointData.Timestamps.Last());
+                if (timeLog.Count == 100) {
+                    Logger.LogTimes(timeLog, this.ToString(), "mean time to calculate velocity");
+                    timeLog = new List<double>();
+                }
 
                 return newJointData;
             }

@@ -20,10 +20,7 @@ namespace RowingMonitor.Model.Pipeline
         //private int currentIndex = 1;
 
         private List<JointData> jointDataHistory = new List<JointData>();
-
-        // Logger
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
-            System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private List<double> timeLog = new List<double>();
 
         public DTWSegmentDetector(float distanceThreshold, int minimumSubsequenceLength)
         {
@@ -31,7 +28,19 @@ namespace RowingMonitor.Model.Pipeline
 
             Input = new ActionBlock<JointData>(jointData =>
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 Output.Post(Detect(jointData, DetectionJointType, DetectionAxis));
+
+                stopwatch.Stop();
+                // log times
+                timeLog.Add(stopwatch.Elapsed.TotalMilliseconds);
+                if (timeLog.Count == 100) {
+                    Logger.LogTimes(timeLog, this.ToString(),
+                        "mean time to detect hits");
+                    timeLog = new List<double>();
+                }
             });
 
             Output = new BroadcastBlock<List<SegmentHit>>(hits =>
@@ -82,7 +91,7 @@ namespace RowingMonitor.Model.Pipeline
                 int endIndex = subsequence.TEnd - 1;
                 int detectionIndex = subsequence.TDetected - 1;
 
-                log.Info("Optimal subsequence detected with distance: " + subsequence.Distance
+                Logger.Log(this.ToString() ,"Optimal subsequence detected with distance: " + subsequence.Distance
                     + " | Detection latency: " + (detectionIndex - endIndex));
 
                 //if (detectionIndex != jointData.Index) {

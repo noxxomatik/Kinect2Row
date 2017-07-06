@@ -2,6 +2,7 @@
 using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,11 +46,9 @@ namespace RowingMonitor.Model.Pipeline
         {
             get => mincutoff;
             set => mincutoff = value;
-        }
+        }       
 
-        // Logger
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
-            System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private List<double> timeLog = new List<double>();
 
         public OneEuroSmoothingFilter(DataStreamType outputDataStreamType)
         {
@@ -66,7 +65,19 @@ namespace RowingMonitor.Model.Pipeline
 
             Input = new ActionBlock<JointData>(jointData =>
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 Output.Post(Smooth(jointData));
+
+                stopwatch.Stop();
+                // log times
+                timeLog.Add(stopwatch.Elapsed.TotalMilliseconds);
+                if (timeLog.Count == 100) {
+                    Logger.LogTimes(timeLog, this.ToString(),
+                        "mean time to smooth for " + OutputDataStreamType);
+                    timeLog = new List<double>();
+                }
             });
 
             Output = new BroadcastBlock<JointData>(jointData =>
@@ -196,7 +207,8 @@ namespace RowingMonitor.Model.Pipeline
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                 result, OutputDataStreamType);
 
-            lastJointData = jointData;
+            lastJointData = jointData;           
+
             return newJointData;
         }
     }

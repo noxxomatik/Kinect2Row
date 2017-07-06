@@ -78,6 +78,9 @@ namespace RowingMonitor.Model.Pipeline
         private BroadcastBlock<JointData> jointDataBlock;
         private BroadcastBlock<WriteableBitmap> colorFrameBlock;
 
+        // log times
+        private List<double> timeLog = new List<double>();
+
         /// <summary>
         /// Initilizes the KinectReader class and establishes the connection to the sensor.
         /// </summary>
@@ -229,7 +232,7 @@ namespace RowingMonitor.Model.Pipeline
             MultiSourceFrameArrivedEventArgs e)
         {
             // process the multi source frame
-            Tuple<WriteableBitmap, JointData> tuple = ReadMultiSourceFrame(e.FrameReference.AcquireFrame());
+            Tuple<WriteableBitmap, JointData> tuple = ReadMultiSourceFrame(e.FrameReference.AcquireFrame());            
 
             // trigger the events
             // start the pipeline
@@ -240,6 +243,13 @@ namespace RowingMonitor.Model.Pipeline
             if (tuple.Item2.Timestamps != null) {
                 //KinectFrameArrived?(this, new KinectFrameArrivedEventArgs(tuple.Item2));
                 JointDataBlock.Post(tuple.Item2);
+
+                // log times
+                timeLog.Add(tuple.Item2.AbsTimestamp);
+                if (timeLog.Count == 100) {
+                    Logger.LogTimestamps(timeLog, this.ToString(), "mean arrival of new frame");
+                    timeLog = new List<double>();
+                }
             }
         }
 
@@ -252,6 +262,8 @@ namespace RowingMonitor.Model.Pipeline
                 this.multiSourceFrameReader.MultiSourceFrameArrived +=
                     MultiSourceFrameReader_MultiSourceFrameArrived;
             }
+
+            Logger.Log(this.ToString(), "##### New Session #####");
         }
 
         /// <summary>

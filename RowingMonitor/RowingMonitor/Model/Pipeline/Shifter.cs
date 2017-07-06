@@ -23,18 +23,28 @@ namespace RowingMonitor.Model.Pipeline
         private ActionBlock<JointData> input;
         private BroadcastBlock<JointData> output;
 
-        // Logger
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
-            System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public BroadcastBlock<JointData> Output { get => output; set => output = value; }
         public ActionBlock<JointData> Input { get => input; set => input = value; }
+
+        private List<double> timeLog = new List<double>();
 
         public Shifter()
         {
             Input = new ActionBlock<JointData>(jointData =>
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 Output.Post(ShiftAndRotate(jointData));
+
+                stopwatch.Stop();
+                // log times
+                timeLog.Add(stopwatch.Elapsed.TotalMilliseconds);
+                if (timeLog.Count == 100) {
+                    Logger.LogTimes(timeLog, this.ToString(),
+                        "mean time to shift the system");
+                    timeLog = new List<double>();
+                }
             });
             Output = new BroadcastBlock<JointData>(jointData =>
             {
@@ -80,7 +90,6 @@ namespace RowingMonitor.Model.Pipeline
             // angle around x-axis
             double diffAngle = Math.Atan2(newJoints[JointType.SpineBase].Position.Y,
                 newJoints[JointType.SpineBase].Position.Z);
-            log.Info("Angle difference: " + (diffAngle * (180.0 / Math.PI)) + " degrees");
 
             // create the rotation matrix around x-axis (counter clockwise)
             double[,] rotMat = {

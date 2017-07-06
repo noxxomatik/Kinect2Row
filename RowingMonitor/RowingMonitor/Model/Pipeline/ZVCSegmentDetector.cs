@@ -2,6 +2,7 @@
 using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,7 @@ namespace RowingMonitor.Model.Pipeline
 
         private int minHitGap;
 
-        // Logger
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
-            System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private List<double> timeLog = new List<double>();
 
         /// <summary>
         /// Creates a new zero velocity segment detector.
@@ -36,8 +35,20 @@ namespace RowingMonitor.Model.Pipeline
 
             Input = new ActionBlock<JointData>(jointData =>
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 Output.Post(Detect(jointData, DetectionJointType,
                     DetectionAxis));
+
+                stopwatch.Stop();
+                // log times
+                timeLog.Add(stopwatch.Elapsed.TotalMilliseconds);
+                if (timeLog.Count == 100) {
+                    Logger.LogTimes(timeLog, this.ToString(),
+                        "mean time to detect hits");
+                    timeLog = new List<double>();
+                }
             });
 
             Output = new BroadcastBlock<List<SegmentHit>>(hits =>
@@ -99,11 +110,11 @@ namespace RowingMonitor.Model.Pipeline
                     }
                 }
                 else {
-                    log.Info("Hit dropped because it has the same slope as the last hit.");
+                    Logger.Log(this.ToString(), "Hit dropped because it has the same slope as the last hit.");
                 }
             }
             else {
-                log.Info("Hit dropped because it was inside the minimum hit gap.");
+                Logger.Log(this.ToString() ,"Hit dropped because it was inside the minimum hit gap.");
             }
         }
 

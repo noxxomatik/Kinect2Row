@@ -2,6 +2,7 @@
 using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace RowingMonitor.Model.Pipeline
         private BroadcastBlock<KleshnevData> output;
 
         private List<KleshnevData> kleshnevData = new List<KleshnevData>();
+        private List<double> timeLog = new List<double>();
 
         public BroadcastBlock<KleshnevData> Output { get => output; set => output = value; }
         public ActionBlock<JointData> Input { get => input; set => input = value; }
@@ -27,7 +29,19 @@ namespace RowingMonitor.Model.Pipeline
         {
             Input = new ActionBlock<JointData>(jointData =>
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 Output.Post(CalculateKleshnevVelocities(jointData).Last());
+
+                stopwatch.Stop();
+                // log times
+                timeLog.Add(stopwatch.Elapsed.TotalMilliseconds);
+                if (timeLog.Count == 100) {
+                    Logger.LogTimes(timeLog, this.ToString(),
+                        "mean time to calculate Kleshnev velocities");
+                    timeLog = new List<double>();
+                }
             });
             Output = new BroadcastBlock<KleshnevData>(kleshnevData =>
             {
