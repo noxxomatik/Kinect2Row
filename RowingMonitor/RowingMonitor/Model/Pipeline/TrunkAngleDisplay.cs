@@ -94,17 +94,17 @@ namespace RowingMonitor.Model.Pipeline
         {
             Pen drawPen = new Pen(new SolidColorBrush() { Color = color }, 3.0);
             drawingContext.DrawLine(drawPen,
-                new Point(6, View.ActualHeight - 4 * (position + 1) - 10 * position),
-                new Point(16, View.ActualHeight - 4 * (position + 1) - 10 * position));
+                new Point(2, View.ActualHeight - 8 * (position + 1) - 10 * position),
+                new Point(12, View.ActualHeight - 8 * (position + 1) - 10 * position));
 
             FormattedText text = new FormattedText(
-                name + angle,
+                name + (int)angle + "°",
                 CultureInfo.GetCultureInfo("en-us"),
                 FlowDirection.LeftToRight,
                 new Typeface("Verdana"),
                 10,
-                Brushes.Black);
-            drawingContext.DrawText(text, new Point(14, View.ActualHeight - 12 * (position + 1)));
+                Brushes.White);
+            drawingContext.DrawText(text, new Point(14, View.ActualHeight - 16 * (position + 1)));
         }
 
         private void DrawAngle(double angle, Color color, DrawingContext drawingContext, Point origin)

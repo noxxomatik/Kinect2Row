@@ -90,7 +90,7 @@
                     <Canvas.RenderTransform>
                         <TranslateTransform X="0" Y="-802.36214"/>
                     </Canvas.RenderTransform>
-                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path5610" Fill="#FF00FF00">
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path5610" Fill="#FF00FF00" Opacity="1">
                         <Path.Data>
                             <PathGeometry Figures="M 0 1052.3622 A 250 250 0 0 1 250.00001 802.36218 250 250 0 0 1 500 1052.3622 l -250 0 z" FillRule="nonzero"/>
                         </Path.Data>
@@ -99,7 +99,21 @@
                     <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="0" Canvas.Top="802.36218" Width="250" Height="250" Name="rect4158" Fill="{StaticResource linearGradient4160}" StrokeThickness="0.89099997" StrokeMiterLimit="4" Opacity="1"/>
                     <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="250" Canvas.Top="802.36218" Width="250" Height="250" Name="rect4166" Fill="{StaticResource linearGradient4168}" StrokeThickness="0.89099997" StrokeMiterLimit="4" Opacity="1"/>
                     <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="250" Canvas.Top="802.36218" Width="250" Height="250" Name="rect4170" Fill="{StaticResource linearGradient4172}" StrokeThickness="0.89099997" StrokeMiterLimit="4" Opacity="1"/>
-                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="rect4251" Fill="#FFFDFFFF" StrokeThickness="0.89099997" StrokeMiterLimit="4" Opacity="1">
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="rect4251" Fill="#FFFFFFFF" StrokeThickness="0.89099997" Stroke="#FFFFFFFF" StrokeMiterLimit="4" Opacity="1">
+                        <Path.Data>
+                            <PathGeometry Figures="M 0 802.36133 0 1052.3613 C 1.6568541e-5 914.29015 111.92882 802.36133 250 802.36133 l -250 0 z m 250 0 c 138.07118 0 249.99998 111.92882 250 249.99997 l 0 -249.99997 -250 0 z" FillRule="evenodd"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4259" Fill="#FF00FF00" Opacity="1">
+                        <Path.Data>
+                            <PathGeometry Figures="M 0 1052.3622 A 250 250 0 0 1 250.00001 802.36218 250 250 0 0 1 500 1052.3622 l -250 0 z" FillRule="nonzero"/>
+                        </Path.Data>
+                    </Path>
+                    <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="0" Canvas.Top="802.36218" Width="250" Height="250" Name="rect4261" Fill="{StaticResource linearGradient4154}" StrokeThickness="0.89099997" StrokeMiterLimit="4" Opacity="1"/>
+                    <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="0" Canvas.Top="802.36218" Width="250" Height="250" Name="rect4263" Fill="{StaticResource linearGradient4160}" StrokeThickness="0.89099997" StrokeMiterLimit="4" Opacity="1"/>
+                    <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="250" Canvas.Top="802.36218" Width="250" Height="250" Name="rect4265" Fill="{StaticResource linearGradient4168}" StrokeThickness="0.89099997" StrokeMiterLimit="4" Opacity="1"/>
+                    <Rectangle xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="250" Canvas.Top="802.36218" Width="250" Height="250" Name="rect4267" Fill="{StaticResource linearGradient4172}" StrokeThickness="0.89099997" StrokeMiterLimit="4" Opacity="1"/>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4269" Fill="#FFFFFFFF" StrokeThickness="0.89099997" Stroke="#FFFFFFFF" StrokeMiterLimit="4" Opacity="1">
                         <Path.Data>
                             <PathGeometry Figures="M 0 802.36133 0 1052.3613 C 1.6568541e-5 914.29015 111.92882 802.36133 250 802.36133 l -250 0 z m 250 0 c 138.07118 0 249.99998 111.92882 250 249.99997 l 0 -249.99997 -250 0 z" FillRule="evenodd"/>
                         </Path.Data>
