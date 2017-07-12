@@ -40,7 +40,8 @@ namespace UnitTest
                 newJoint.Position.X = values[i];
                 newJoint.Position.Y = values[i];
                 newJoint.Position.Z = values[i];
-                joints.Add(JointType.AnkleLeft, newJoint);
+                // use SpineBase joint because the calculator tests for its values 
+                joints.Add(JointType.SpineBase, newJoint);
                 joint.Joints = joints;
                 jointData[i] = joint;
             }
@@ -51,7 +52,7 @@ namespace UnitTest
             // the last element cannot be tested since it needs one frame as buffer
             for (int i = 0; i < 5; i++) {
                 Assert.AreEqual(results[i],
-                    returnedJointData[i+1].Joints[JointType.AnkleLeft].Position.X);
+                    returnedJointData[i+1].Joints[JointType.SpineBase].Position.X);
             }
         }
 
