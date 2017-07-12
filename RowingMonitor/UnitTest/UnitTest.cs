@@ -229,5 +229,26 @@ namespace UnitTest
         {
             filteredJointData.Add(e.SmoothedJointData);
         }
+
+        [TestMethod]
+        public void TestCurveFitting()
+        {
+            double[] x = { 0, 1, 4 };
+            double[] y = { -1, 0, 2 };
+
+            double a = -0.08333333;
+            double b = 1.08333333;
+            double c = -1;
+            double xMax = 6.5;
+            double yMax = 2.5208;
+
+            CurveFitting.QuadraticFunctionParameters param = CurveFitting.QuadraticFunctionFit(x, y);
+
+            Assert.AreEqual(a, param.A, 0.00000001);
+            Assert.AreEqual(b, param.B, 0.00000001);
+            Assert.AreEqual(c, param.C, 0.00000001);
+            Assert.AreEqual(xMax, param.XMax, 0.0001);
+            Assert.AreEqual(yMax, param.YMax, 0.0001);
+        }
     }
 }

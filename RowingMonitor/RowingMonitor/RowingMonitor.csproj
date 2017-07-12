@@ -56,6 +56,9 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Numerics, Version=3.19.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.19.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
@@ -131,6 +134,7 @@
     <Compile Include="Model\EventArgs\ShiftedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\FrontalView.cs" />
     <Compile Include="Model\Util\CircularBuffer.cs" />
+    <Compile Include="Model\Util\CurveFitting.cs" />
     <Compile Include="Model\Util\Degrees.cs" />
     <Compile Include="Model\Util\Enums.cs" />
     <Compile Include="Model\EventArgs\ColorFrameArrivedEventArgs.cs" />
