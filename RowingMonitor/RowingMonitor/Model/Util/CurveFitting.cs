@@ -36,6 +36,11 @@ namespace RowingMonitor.Model.Util
             return a * Math.Pow(x, 2) + b * x + c;
         }
 
+        public static double QuadraticFunction(double x, QuadraticFunctionParameters param)
+        {
+            return QuadraticFunction(x, param.A, param.B, param.C);
+        }
+
         public struct QuadraticFunctionParameters
         {
             double a;

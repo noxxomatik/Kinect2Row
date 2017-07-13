@@ -89,7 +89,8 @@ namespace RowingMonitor.Model.Pipeline
 
             LinearAxis yAxis = new LinearAxis();
             yAxis.Position = AxisPosition.Left;
-            tmp.Axes.Add(yAxis);
+            yAxis.ExtraGridlines = new double[] { 0 };
+            tmp.Axes.Add(yAxis);     
 
             tmp.LegendPosition = LegendPosition.BottomLeft;
 

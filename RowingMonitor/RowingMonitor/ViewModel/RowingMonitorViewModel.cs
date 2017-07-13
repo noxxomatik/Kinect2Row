@@ -150,6 +150,7 @@ namespace RowingMonitor.ViewModel
             kleshnevPlotFrame.SetValue(Grid.RowProperty, 2);
             kleshnevPlotFrame.SetValue(Grid.ColumnProperty, 0);
             kleshnevPlotFrame.SetValue(Grid.ColumnSpanProperty, 2);
+            kleshnevPlotFrame.SetValue(Grid.RowSpanProperty, 2);
             Grid.Children.Add(kleshnevPlotFrame);
 
             Frame trunkAngleFrame = new Frame();
