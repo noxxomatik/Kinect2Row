@@ -81,7 +81,7 @@ namespace RowingMonitor.Model.Pipeline
                     newJoint.Position.Z = 0.0f;
                     joints.Add(joint.Key, newJoint);
                 }
-                JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+                JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
                     lastJointData,
                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                     joints, DataStreamType.Velocity);
@@ -107,7 +107,7 @@ namespace RowingMonitor.Model.Pipeline
                     newJoints.Add(joint.Key, newJoint);
                 }
 
-                JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+                JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
                     lastJointData,
                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                     newJoints, DataStreamType.Velocity);
@@ -143,7 +143,7 @@ namespace RowingMonitor.Model.Pipeline
                     newJoints.Add(joint.Key, newJoint);
                 }
 
-                JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+                JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
                     lastJointData,
                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                     newJoints, DataStreamType.Velocity);

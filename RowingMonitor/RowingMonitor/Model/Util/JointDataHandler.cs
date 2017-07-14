@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace RowingMonitor.Model.Util
 {
-    public class KinectDataHandler
+    public class JointDataHandler
     {
-        private static readonly KinectDataHandler instance = new KinectDataHandler();
+        private static readonly JointDataHandler instance = new JointDataHandler();
 
         private Body[] bodies;
 
@@ -17,9 +17,9 @@ namespace RowingMonitor.Model.Util
 
         private double relStartTime = -1;
 
-        private KinectDataHandler() { }
+        private JointDataHandler() { }
 
-        public static KinectDataHandler Instance
+        public static JointDataHandler Instance
         {
             get {
                 return instance;
@@ -104,11 +104,11 @@ namespace RowingMonitor.Model.Util
         private DataStreamType dataStreamType;
 
         /// <summary>
-        /// Time since Kinect sensor started.
+        /// Time in milliseconds since Kinect sensor started.
         /// </summary>
         public double RelTimestamp { get => relTimestamp; set => relTimestamp = value; }
         /// <summary>
-        /// Time since first frame.
+        /// Time in milliseconds since first frame.
         /// </summary>
         public double AbsTimestamp { get => absTimestamp; set => absTimestamp = value; }
         /// <summary>
@@ -129,35 +129,5 @@ namespace RowingMonitor.Model.Util
         /// </summary>
         public DataStreamType DataStreamType {
             get => dataStreamType; set => dataStreamType = value; }
-    }
-
-    public struct SegmentHit
-    {
-        private long index;
-        private long detectionIndex;
-        private double absTimestamp;
-        private double detectionAbsTimestamp;
-        private HitType hitType;
-
-        /// <summary>
-        /// Index of the joint data that this hit belongs to.
-        /// </summary>
-        public long Index { get => index; set => index = value; }
-        /// <summary>
-        /// Index of the joint data where this hit was detected.
-        /// </summary>
-        public long DetectionIndex { get => detectionIndex; set => detectionIndex = value; }
-        /// <summary>
-        /// Absolute timestamp of the joint data that this hit belongs to.
-        /// </summary>
-        public double AbsTimestamp { get => absTimestamp; set => absTimestamp = value; }
-        /// <summary>
-        /// Absolute timestamp of the joint data where this hit was detected.
-        /// </summary>
-        public double DetectionAbsTimestamp { get => detectionAbsTimestamp; set => detectionAbsTimestamp = value; }
-        /// <summary>
-        /// Type of this hit in the context of a segment.
-        /// </summary>
-        public HitType HitType { get => hitType; set => hitType = value; }
-    }
+    }    
 }

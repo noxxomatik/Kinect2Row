@@ -202,7 +202,7 @@ namespace RowingMonitor.Model.Pipeline
 
             Dictionary<JointType, Joint> result = xfilt.Filter(x, Alpha(rate, cutoff));
 
-            JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+            JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
                 jointData,
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                 result, OutputDataStreamType);

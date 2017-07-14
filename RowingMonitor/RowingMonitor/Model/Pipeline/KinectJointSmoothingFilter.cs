@@ -334,7 +334,7 @@ namespace RowingMonitor.Model.Pipeline
                 newJoint.Position.Z = m_pFilteredJoints[(int)jt].Z;
                 newJoints.Add(jt, newJoint);
             }
-            JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+            JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
                 jointData,
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                 newJoints, OutputDataStreamType);            

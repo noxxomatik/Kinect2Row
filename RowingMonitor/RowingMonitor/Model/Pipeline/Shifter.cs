@@ -121,7 +121,7 @@ namespace RowingMonitor.Model.Pipeline
             }
 
 
-            JointData newJointData = KinectDataHandler.ReplaceJointsInJointData(
+            JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
                 jointData,
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                 shiftedJoints, DataStreamType.ShiftedPosition);

@@ -122,7 +122,7 @@
     <Compile Include="Model\Pipeline\KinectJointSmoothingFilter.cs" />
     <Compile Include="Model\Pipeline\KleshnevPlot.cs" />
     <Compile Include="Model\Pipeline\KleshnevVelocityCalculator.cs" />
-    <Compile Include="Model\Pipeline\RowingMonitorPipeline.cs" />
+    <Compile Include="Model\Pipeline\RowingMetaData.cs" />
     <Compile Include="Model\Pipeline\DTWSegmentDetector.cs" />
     <Compile Include="Model\Pipeline\SkeletonSideDisplay.cs" />
     <Compile Include="Model\Pipeline\SkeletonFrontalDisplay.cs" />
@@ -132,25 +132,24 @@
     <Compile Include="Model\Pipeline\SegmentDetector.cs" />
     <Compile Include="Model\Util\BodyNotFullyTrackedException.cs" />
     <Compile Include="Model\EventArgs\ShiftedFrameArrivedEventArgs.cs" />
-    <Compile Include="Model\Pipeline\FrontalView.cs" />
     <Compile Include="Model\Util\CircularBuffer.cs" />
     <Compile Include="Model\Util\CurveFitting.cs" />
     <Compile Include="Model\Util\Degrees.cs" />
     <Compile Include="Model\Util\Enums.cs" />
     <Compile Include="Model\EventArgs\ColorFrameArrivedEventArgs.cs" />
     <Compile Include="Model\EventArgs\CalculatedFrameArrivedEventArgs.cs" />
-    <Compile Include="Model\Util\KinectDataHandler.cs" />
+    <Compile Include="Model\Util\JointDataHandler.cs" />
     <Compile Include="Model\Util\Logger.cs" />
     <Compile Include="Model\Util\LowPassFilter.cs" />
     <Compile Include="Model\Pipeline\Shifter.cs" />
-    <Compile Include="Model\Pipeline\SideView.cs" />
     <Compile Include="Model\EventArgs\SmoothedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\EventArgs\KinectFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\KinectReader.cs" />
     <Compile Include="Model\Pipeline\OneEuroSmoothingFilter.cs" />
-    <Compile Include="Model\Pipeline\Plot.cs" />
     <Compile Include="Model\Util\OneEuroFilter.cs" />
+    <Compile Include="Model\Util\PlotDataHandler.cs" />
     <Compile Include="Model\Util\RelayCommand.cs" />
+    <Compile Include="Model\Util\SegmentHitHandler.cs" />
     <Compile Include="RowingMonitorWindow.xaml.cs">
       <DependentUpon>RowingMonitorWindow.xaml</DependentUpon>
     </Compile>
@@ -178,10 +177,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -189,11 +184,6 @@
     <Compile Include="Model\Pipeline\VelocityCalculator.cs" />
     <Compile Include="Model\Util\SubsequenceDTW.cs" />
     <Compile Include="ViewModel\JointDataPlotViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Page Include="RowingMonitorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

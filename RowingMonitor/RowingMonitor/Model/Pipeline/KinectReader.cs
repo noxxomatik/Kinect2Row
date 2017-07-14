@@ -172,7 +172,7 @@ namespace RowingMonitor.Model.Pipeline
                     bodyFrame.GetAndRefreshBodyData(bodies);
 
                     // update the kinect data container
-                    KinectDataHandler kdh = KinectDataHandler.Instance;
+                    JointDataHandler kdh = JointDataHandler.Instance;
                     kdh.Bodies = bodies;
                     if (kdh.GetFirstTrackedBody() != null) {
                         IReadOnlyDictionary<JointType, Joint> joints =

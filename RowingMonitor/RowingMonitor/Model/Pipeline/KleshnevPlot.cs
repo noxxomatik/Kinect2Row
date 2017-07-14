@@ -99,7 +99,7 @@ namespace RowingMonitor.Model.Pipeline
                     newSegmentHits = true;
 
                     // check if segment started for peak detection
-                    newSegmentStarted = CheckIfNewSegmentStarted(newHits);
+                    newSegmentStarted = SegmentHitHandler.CheckIfNewSegmentStarted(newHits);
                     if (newSegmentStarted) {
                         segmentStartX = newHits.Last().AbsTimestamp / 1000;
                         currentSegmentKleshnevValues =
@@ -124,7 +124,7 @@ namespace RowingMonitor.Model.Pipeline
         {
             // update last segment plot if new hits were detected
             if (newSegmentHits) {
-                long[] segmentBounds = GetLastSegmentStartEnd(hits);
+                long[] segmentBounds = SegmentHitHandler.GetLastSegmentStartEnd(hits);
                 if (segmentBounds != null) {
                     Dictionary<string, List<PlotData>> lastSegmentPlotData =
                         new Dictionary<string, List<PlotData>>();
@@ -309,47 +309,7 @@ namespace RowingMonitor.Model.Pipeline
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// Return the bounding time values of the last complete segment.
-        /// </summary>
-        /// <param name="hits"></param>
-        /// <returns></returns>
-        private long[] GetLastSegmentStartEnd(List<SegmentHit> hits)
-        {
-            long[] segmentBounds = { -1, -1 };
-
-            // segments can contain a start hit, an end hit, a end start hit and an internal hit
-            // get the index for the last complete segment
-            if (hits.Count >= 2) {
-                for (int i = hits.Count - 1; i >= 0; i--) {
-                    // find last end hit
-                    if (segmentBounds[1] == -1 && (hits[i].HitType == HitType.SegmentEnd
-                        || hits[i].HitType == HitType.SegmentEndStart)) {
-                        segmentBounds[1] = hits[i].Index;
-                        continue;
-                    }
-                    // find last start hit after end hit was found
-                    if (segmentBounds[1] != -1 && (hits[i].HitType == HitType.SegmentStart
-                        || hits[i].HitType == HitType.SegmentEndStart)) {
-                        segmentBounds[0] = hits[i].Index;
-                        return segmentBounds;
-                    }
-                }
-            }
-            return null;
-        }
-
-        private bool CheckIfNewSegmentStarted(List<SegmentHit> hits)
-        {
-            if (hits.Count > 0 &&
-                (hits.Last().HitType == HitType.SegmentEndStart ||
-                hits.Last().HitType == HitType.SegmentStart)) {
-                return true;
-            }
-            return false;
-        }
+        }       
 
         public float Range { get => range; set => range = value; }
         public ActionBlock<KleshnevData> KleshnevDataBlock { get => kleshnevDataBlock; set => kleshnevDataBlock = value; }
