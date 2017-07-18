@@ -40,7 +40,7 @@ namespace RowingMonitor.Model.Pipeline
         private List<SegmentHit> hits;
 
         // data to identify the peaks
-        private bool showDebugPlots = true;
+        private bool showDebugPlots = false;
         private bool newSegmentStarted = false;
         private Dictionary<String, OxyColor> debugKleshnevColors;
         private KleshnevVelocityType[] peakTypes = {

@@ -114,8 +114,10 @@ namespace RowingMonitor.Model.Util
         /// <summary>
         /// Positions of all joints.
         /// </summary>
-        public IReadOnlyDictionary<JointType, Joint> Joints {
-            get => joints; set => joints = value; }
+        public IReadOnlyDictionary<JointType, Joint> Joints
+        {
+            get => joints; set => joints = value;
+        }
         /// <summary>
         /// Incrementing number of frames.
         /// </summary>
@@ -127,7 +129,19 @@ namespace RowingMonitor.Model.Util
         /// <summary>
         /// Type of the data.
         /// </summary>
-        public DataStreamType DataStreamType {
-            get => dataStreamType; set => dataStreamType = value; }
-    }    
+        public DataStreamType DataStreamType
+        {
+            get => dataStreamType; set => dataStreamType = value;
+        }
+        /// <summary>
+        /// Returns true if this element conatins no joint data.
+        /// </summary>
+        public bool IsEmpty
+        {
+            get {
+                if (joints == null) { return true; }
+                else { return false; }
+            }
+        }
+    }
 }

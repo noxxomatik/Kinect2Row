@@ -122,8 +122,10 @@
     <Compile Include="Model\Pipeline\KinectJointSmoothingFilter.cs" />
     <Compile Include="Model\Pipeline\KleshnevPlot.cs" />
     <Compile Include="Model\Pipeline\KleshnevVelocityCalculator.cs" />
-    <Compile Include="Model\Pipeline\RowingMetaData.cs" />
+    <Compile Include="Model\Pipeline\RowingMetaDataCalculator.Calculations.cs" />
+    <Compile Include="Model\Pipeline\RowingMetaDataCalculator.cs" />
     <Compile Include="Model\Pipeline\DTWSegmentDetector.cs" />
+    <Compile Include="Model\Pipeline\RowingMetaDataDisplay.cs" />
     <Compile Include="Model\Pipeline\SkeletonSideDisplay.cs" />
     <Compile Include="Model\Pipeline\SkeletonFrontalDisplay.cs" />
     <Compile Include="Model\Pipeline\SmoothingFilter.cs" />
@@ -146,14 +148,21 @@
     <Compile Include="Model\EventArgs\KinectFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\KinectReader.cs" />
     <Compile Include="Model\Pipeline\OneEuroSmoothingFilter.cs" />
+    <Compile Include="Model\Util\RowingMetaDataHandler.cs" />
     <Compile Include="Model\Util\OneEuroFilter.cs" />
     <Compile Include="Model\Util\PlotDataHandler.cs" />
     <Compile Include="Model\Util\RelayCommand.cs" />
     <Compile Include="Model\Util\SegmentHitHandler.cs" />
+    <Compile Include="Properties\Resources.de-DE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.de-DE.resx</DependentUpon>
+    </Compile>
     <Compile Include="RowingMonitorWindow.xaml.cs">
       <DependentUpon>RowingMonitorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\KleshnevPlotViewModel.cs" />
+    <Compile Include="ViewModel\RowingMetaDataViewModel.cs" />
     <Compile Include="ViewModel\RowingMonitorViewModel.cs" />
     <Compile Include="ViewModel\SkeletonSideViewModel.cs" />
     <Compile Include="ViewModel\SkeletonFrontalViewModel.cs" />
@@ -163,6 +172,9 @@
     </Compile>
     <Compile Include="View\KleshnevPlotView.xaml.cs">
       <DependentUpon>KleshnevPlotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RowingMetaDataView.xaml.cs">
+      <DependentUpon>RowingMetaDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SkeletonSideView.xaml.cs">
       <DependentUpon>SkeletonSideView.xaml</DependentUpon>
@@ -196,6 +208,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\RowingMetaDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SkeletonSideView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -223,8 +239,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.de-DE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de-DE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />

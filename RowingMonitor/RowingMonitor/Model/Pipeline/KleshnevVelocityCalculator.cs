@@ -110,5 +110,15 @@ namespace RowingMonitor.Model.Pipeline
             get => velocities; set => velocities = value;
         }
         public long Index { get => index; set => index = value; }
+        /// <summary>
+        /// Returns true if this element conatains no Kleshnev velocities.
+        /// </summary>
+        public bool IsEmpty
+        {
+            get {
+                if (velocities == null) { return true; }
+                else { return false; }
+            }
+        }
     }
 }

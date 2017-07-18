@@ -33,4 +33,11 @@ namespace RowingMonitor.Model.Util
         SegmentEnd,
         SegmentEndStart
     }
+
+    public enum SegmentState
+    {
+        SegmentStarted,
+        SegmentEnded,
+        NoSegment
+    }
 }

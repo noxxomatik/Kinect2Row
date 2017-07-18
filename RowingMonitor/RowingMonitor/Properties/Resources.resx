@@ -117,16 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CatchFactor" xml:space="preserve">
+    <value>Catch factor</value>
+  </data>
   <data name="FailedScreenshotStatusTextFormat" xml:space="preserve">
     <value>Failed to write screenshot to {0}</value>
+  </data>
+  <data name="FrameIndex" xml:space="preserve">
+    <value>Frame index</value>
+  </data>
+  <data name="MaxArmsVelocity" xml:space="preserve">
+    <value>Maximum arms velocity (m/s)</value>
+  </data>
+  <data name="MaxCatchTrunkAngle" xml:space="preserve">
+    <value>Maximum catch trunk angle (°)</value>
+  </data>
+  <data name="MaxFinishTrunkAngle" xml:space="preserve">
+    <value>Maximum finish trunk angle (°)</value>
+  </data>
+  <data name="MaxHandleVelocity" xml:space="preserve">
+    <value>Maximum handle velocity (m/s)</value>
+  </data>
+  <data name="MaxLegsVelocity" xml:space="preserve">
+    <value>Maximum legs velocity (m/s)</value>
+  </data>
+  <data name="MaxTrunkVelocity" xml:space="preserve">
+    <value>Maximum trunk velocity (m/s)</value>
+  </data>
+  <data name="MeanMaxArmsVelocity" xml:space="preserve">
+    <value>Mean maximum arms velocity (m/s)</value>
+  </data>
+  <data name="MeanMaxHandleVelocity" xml:space="preserve">
+    <value>Mean maximum handle velocity (m/s)</value>
+  </data>
+  <data name="MeanMaxLegsVelocity" xml:space="preserve">
+    <value>Mean maximum legs velocity (m/s)</value>
+  </data>
+  <data name="MeanMaxTrunkVelocity" xml:space="preserve">
+    <value>Mean maximum trunk velocity (m/s)</value>
+  </data>
+  <data name="MeanSeatTravelDistance" xml:space="preserve">
+    <value>Mean seat travelled (m)</value>
+  </data>
+  <data name="MeanStrokeLength" xml:space="preserve">
+    <value>Mean stroke length (m)</value>
+  </data>
+  <data name="MeanStrokeTime" xml:space="preserve">
+    <value>Mean stroke time (s)</value>
   </data>
   <data name="NoSensorStatusText" xml:space="preserve">
     <value>No ready Kinect found!</value>
   </data>
+  <data name="RowingStyleFactor" xml:space="preserve">
+    <value>Rowing style factor</value>
+  </data>
   <data name="RunningStatusText" xml:space="preserve">
     <value>Running</value>
   </data>
+  <data name="SeatTravelDistance" xml:space="preserve">
+    <value>Seat travelled (m)</value>
+  </data>
   <data name="SensorNotAvailableStatusText" xml:space="preserve">
     <value>Kinect not available!</value>
+  </data>
+  <data name="SessionTime" xml:space="preserve">
+    <value>Session duration in (m)</value>
+  </data>
+  <data name="StrokeCount" xml:space="preserve">
+    <value>Number of strokes</value>
+  </data>
+  <data name="StrokeLength" xml:space="preserve">
+    <value>Stroke length (m)</value>
+  </data>
+  <data name="StrokeRate" xml:space="preserve">
+    <value>Stroke rate</value>
+  </data>
+  <data name="StrokesPerMinute" xml:space="preserve">
+    <value>Strokes per minute</value>
+  </data>
+  <data name="StrokeTime" xml:space="preserve">
+    <value>Stroke time (s)</value>
+  </data>
+  <data name="TrunkAngle" xml:space="preserve">
+    <value>Trunk angle (°)</value>
   </data>
 </root>

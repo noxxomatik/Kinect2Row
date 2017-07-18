@@ -22,7 +22,7 @@ namespace RowingMonitor.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace RowingMonitor.Properties {
         ///   Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RowingMonitor.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace RowingMonitor.Properties {
         ///   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,38 +61,254 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Catch factor ähnelt.
+        /// </summary>
+        public static string CatchFactor {
+            get {
+                return ResourceManager.GetString("CatchFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Failed to write screenshot to {0} ähnelt.
         /// </summary>
-        internal static string FailedScreenshotStatusTextFormat {
+        public static string FailedScreenshotStatusTextFormat {
             get {
                 return ResourceManager.GetString("FailedScreenshotStatusTextFormat", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Frame index ähnelt.
+        /// </summary>
+        public static string FrameIndex {
+            get {
+                return ResourceManager.GetString("FrameIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Maximum arms velocity (m/s) ähnelt.
+        /// </summary>
+        public static string MaxArmsVelocity {
+            get {
+                return ResourceManager.GetString("MaxArmsVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Maximum catch trunk angle (°) ähnelt.
+        /// </summary>
+        public static string MaxCatchTrunkAngle {
+            get {
+                return ResourceManager.GetString("MaxCatchTrunkAngle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Maximum finish trunk angle (°) ähnelt.
+        /// </summary>
+        public static string MaxFinishTrunkAngle {
+            get {
+                return ResourceManager.GetString("MaxFinishTrunkAngle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Maximum handle velocity (m/s) ähnelt.
+        /// </summary>
+        public static string MaxHandleVelocity {
+            get {
+                return ResourceManager.GetString("MaxHandleVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Maximum legs velocity (m/s) ähnelt.
+        /// </summary>
+        public static string MaxLegsVelocity {
+            get {
+                return ResourceManager.GetString("MaxLegsVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Maximum trunk velocity (m/s) ähnelt.
+        /// </summary>
+        public static string MaxTrunkVelocity {
+            get {
+                return ResourceManager.GetString("MaxTrunkVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean maximum arms velocity (m/s) ähnelt.
+        /// </summary>
+        public static string MeanMaxArmsVelocity {
+            get {
+                return ResourceManager.GetString("MeanMaxArmsVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean maximum handle velocity (m/s) ähnelt.
+        /// </summary>
+        public static string MeanMaxHandleVelocity {
+            get {
+                return ResourceManager.GetString("MeanMaxHandleVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean maximum legs velocity (m/s) ähnelt.
+        /// </summary>
+        public static string MeanMaxLegsVelocity {
+            get {
+                return ResourceManager.GetString("MeanMaxLegsVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean maximum trunk velocity (m/s) ähnelt.
+        /// </summary>
+        public static string MeanMaxTrunkVelocity {
+            get {
+                return ResourceManager.GetString("MeanMaxTrunkVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean seat travelled (m) ähnelt.
+        /// </summary>
+        public static string MeanSeatTravelDistance {
+            get {
+                return ResourceManager.GetString("MeanSeatTravelDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean stroke length (m) ähnelt.
+        /// </summary>
+        public static string MeanStrokeLength {
+            get {
+                return ResourceManager.GetString("MeanStrokeLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean stroke time (s) ähnelt.
+        /// </summary>
+        public static string MeanStrokeTime {
+            get {
+                return ResourceManager.GetString("MeanStrokeTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No ready Kinect found! ähnelt.
         /// </summary>
-        internal static string NoSensorStatusText {
+        public static string NoSensorStatusText {
             get {
                 return ResourceManager.GetString("NoSensorStatusText", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Rowing style factor ähnelt.
+        /// </summary>
+        public static string RowingStyleFactor {
+            get {
+                return ResourceManager.GetString("RowingStyleFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Running ähnelt.
         /// </summary>
-        internal static string RunningStatusText {
+        public static string RunningStatusText {
             get {
                 return ResourceManager.GetString("RunningStatusText", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Seat travelled (m) ähnelt.
+        /// </summary>
+        public static string SeatTravelDistance {
+            get {
+                return ResourceManager.GetString("SeatTravelDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Kinect not available! ähnelt.
         /// </summary>
-        internal static string SensorNotAvailableStatusText {
+        public static string SensorNotAvailableStatusText {
             get {
                 return ResourceManager.GetString("SensorNotAvailableStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Session duration in (m) ähnelt.
+        /// </summary>
+        public static string SessionTime {
+            get {
+                return ResourceManager.GetString("SessionTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Number of strokes ähnelt.
+        /// </summary>
+        public static string StrokeCount {
+            get {
+                return ResourceManager.GetString("StrokeCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Stroke length (m) ähnelt.
+        /// </summary>
+        public static string StrokeLength {
+            get {
+                return ResourceManager.GetString("StrokeLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Stroke rate ähnelt.
+        /// </summary>
+        public static string StrokeRate {
+            get {
+                return ResourceManager.GetString("StrokeRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Strokes per minute ähnelt.
+        /// </summary>
+        public static string StrokesPerMinute {
+            get {
+                return ResourceManager.GetString("StrokesPerMinute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Stroke time (s) ähnelt.
+        /// </summary>
+        public static string StrokeTime {
+            get {
+                return ResourceManager.GetString("StrokeTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Trunk angle (°) ähnelt.
+        /// </summary>
+        public static string TrunkAngle {
+            get {
+                return ResourceManager.GetString("TrunkAngle", resourceCulture);
             }
         }
     }

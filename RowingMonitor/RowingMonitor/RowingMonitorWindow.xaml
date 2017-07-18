@@ -21,6 +21,7 @@
 
     <Grid x:Name="grid" Margin="4 4 4 4">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="200"/>
@@ -33,7 +34,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Center" Margin="4 0 4 0">
+        <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" HorizontalAlignment="Center" Margin="4 0 4 0">
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="18">Options</TextBlock>
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Smoothing Filter</TextBlock>
             <RadioButton GroupName="SmoothingFilter" Content="1€ Filter" IsChecked="True" Checked="RadioButton_Checked"></RadioButton>
@@ -53,11 +54,11 @@
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Plot Options</TextBlock>
             <!--<TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16"></TextBlock>-->
             <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">Select measured variable:</TextBlock>
-            <CheckBox IsChecked="True" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">Raw Position</CheckBox>
-            <CheckBox IsChecked="True" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1">Smoothed Position</CheckBox>
-            <CheckBox Checked="CheckBox_Checked_29" Unchecked="CheckBox_Unchecked_29">Shifted Position</CheckBox>
-            <CheckBox Checked="CheckBox_Checked_2" Unchecked="CheckBox_Unchecked_2">Velocity</CheckBox>
-            <CheckBox Checked="CheckBox_Checked_3" Unchecked="CheckBox_Unchecked_3">Segment Hits</CheckBox>
+            <CheckBox IsChecked="False" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">Raw Position</CheckBox>
+            <CheckBox IsChecked="False" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1">Smoothed Position</CheckBox>
+            <CheckBox IsChecked="True" Checked="CheckBox_Checked_29" Unchecked="CheckBox_Unchecked_29">Shifted Position</CheckBox>
+            <CheckBox IsChecked="False" Checked="CheckBox_Checked_2" Unchecked="CheckBox_Unchecked_2">Velocity</CheckBox>
+            <CheckBox IsChecked="True" Checked="CheckBox_Checked_3" Unchecked="CheckBox_Unchecked_3">Segment Hits</CheckBox>
             <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">Select visible joints:</TextBlock>
             <!--<ComboBox x:Name="jointComboBox" Text="{Binding SelectedJointName}">
                 <ComboBoxItem>SpineBase</ComboBoxItem>

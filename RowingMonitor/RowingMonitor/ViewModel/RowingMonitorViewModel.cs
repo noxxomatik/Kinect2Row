@@ -42,12 +42,16 @@ namespace RowingMonitor.ViewModel
         private VelocityCalculator velocityCalculator;
         private KleshnevVelocityCalculator kleshnevVelocityCalculator;
 
+        // meta data
+        private RowingMetaDataCalculator metaDataCalculator;
+
         // outputs
         private JointDataPlot jointDataPlot;
         private SkeletonFrontalDisplay skeletonFrontalDisplay;
         private SkeletonSideDisplay skeletonSideDisplay;
         private KleshnevPlot kleshnevPlot;
         private TrunkAngleDisplay trunkAngleDisplay;
+        private RowingMetaDataDisplay metaDataDisplay;
 
         /* GUI */
         private Grid grid;
@@ -75,6 +79,7 @@ namespace RowingMonitor.ViewModel
             //velocitySmoothingFilter = new OneEuroSmoothingFilter(DataStreamType.Velocity);
             segmentDetector = new ZVCSegmentDetector(minimumHitGap, startSegmentWithRisingVelocity);
             kleshnevVelocityCalculator = new KleshnevVelocityCalculator();
+            metaDataCalculator = new RowingMetaDataCalculator();
 
             jointDataPlot = new JointDataPlot(PlotRange);
             skeletonFrontalDisplay = new SkeletonFrontalDisplay(kinectReader.CoordinateMapper,
@@ -82,6 +87,7 @@ namespace RowingMonitor.ViewModel
             skeletonSideDisplay = new SkeletonSideDisplay();
             kleshnevPlot = new KleshnevPlot(KleshnevPlotRange);
             trunkAngleDisplay = new TrunkAngleDisplay();
+            metaDataDisplay = new RowingMetaDataDisplay();
 
             // link pipeline together
             //kinectReader.JointDataBlock.LinkTo(smoothingFilter.SmoothingBlock);
@@ -96,6 +102,7 @@ namespace RowingMonitor.ViewModel
             shifter.Output.LinkTo(jointDataPlot.PlotJointDataBlock);
             shifter.Output.LinkTo(skeletonSideDisplay.SkeletonBlock);
             shifter.Output.LinkTo(trunkAngleDisplay.Input);
+            shifter.Output.LinkTo(metaDataCalculator.Input);
 
             //velocityCalculator.CalculationBlock.LinkTo(
             //    velocitySmoothingFilter.SmoothingBlock);
@@ -105,9 +112,12 @@ namespace RowingMonitor.ViewModel
             //velocitySmoothingFilter.SmoothingBlock.LinkTo(jointDataPlot.PlotJointDataBlock);
 
             kleshnevVelocityCalculator.Output.LinkTo(kleshnevPlot.KleshnevDataBlock);
+            kleshnevVelocityCalculator.Output.LinkTo(metaDataCalculator.InputKleshnevData);
 
             //segmentDetector.DetectionOutputBlock.LinkTo(jointDataPlot.PlotHitsBlock);
             //segmentDetector.DetectionOutputBlock.LinkTo(kleshnevPlot.PlotHitsBlock);
+
+            metaDataCalculator.Output.LinkTo(metaDataDisplay.Input);
 
             ChangeSegmentDetector();
             ChangeSmoothingFilter();
@@ -122,6 +132,7 @@ namespace RowingMonitor.ViewModel
             skeletonSideDisplay.Render();
             skeletonFrontalDisplay.Render();
             trunkAngleDisplay.Render();
+            metaDataDisplay.Render();
         }
 
         public void WindowLoaded()
@@ -130,25 +141,25 @@ namespace RowingMonitor.ViewModel
             Frame plotFrame = new Frame();
             plotFrame.Content = jointDataPlot.View;
             plotFrame.SetValue(Grid.RowProperty, 1);
-            plotFrame.SetValue(Grid.ColumnProperty, 0);
+            plotFrame.SetValue(Grid.ColumnProperty, 1);
             Grid.Children.Add(plotFrame);
 
             Frame frontalDisplayFrame = new Frame();
             frontalDisplayFrame.Content = skeletonFrontalDisplay.View;
             frontalDisplayFrame.SetValue(Grid.RowProperty, 0);
-            frontalDisplayFrame.SetValue(Grid.ColumnProperty, 0);
+            frontalDisplayFrame.SetValue(Grid.ColumnProperty, 1);
             Grid.Children.Add(frontalDisplayFrame);
 
             Frame sideDisplayFrame = new Frame();
             sideDisplayFrame.Content = skeletonSideDisplay.View;
             sideDisplayFrame.SetValue(Grid.RowProperty, 0);
-            sideDisplayFrame.SetValue(Grid.ColumnProperty, 1);
+            sideDisplayFrame.SetValue(Grid.ColumnProperty, 2);
             Grid.Children.Add(sideDisplayFrame);
 
             Frame kleshnevPlotFrame = new Frame();
             kleshnevPlotFrame.Content = kleshnevPlot.View;
             kleshnevPlotFrame.SetValue(Grid.RowProperty, 2);
-            kleshnevPlotFrame.SetValue(Grid.ColumnProperty, 0);
+            kleshnevPlotFrame.SetValue(Grid.ColumnProperty, 1);
             kleshnevPlotFrame.SetValue(Grid.ColumnSpanProperty, 2);
             kleshnevPlotFrame.SetValue(Grid.RowSpanProperty, 2);
             Grid.Children.Add(kleshnevPlotFrame);
@@ -156,8 +167,15 @@ namespace RowingMonitor.ViewModel
             Frame trunkAngleFrame = new Frame();
             trunkAngleFrame.Content = trunkAngleDisplay.View;
             trunkAngleFrame.SetValue(Grid.RowProperty, 1);
-            trunkAngleFrame.SetValue(Grid.ColumnProperty, 1);
+            trunkAngleFrame.SetValue(Grid.ColumnProperty, 2);
             Grid.Children.Add(trunkAngleFrame);
+
+            Frame metaDataFrame = new Frame();
+            metaDataFrame.Content = metaDataDisplay.View;
+            metaDataFrame.SetValue(Grid.RowProperty, 0);
+            metaDataFrame.SetValue(Grid.ColumnProperty, 0);
+            metaDataFrame.SetValue(Grid.RowSpanProperty, 3);
+            Grid.Children.Add(metaDataFrame);
 
             // start the pipeline
             kinectReader.StartReader();
@@ -184,6 +202,7 @@ namespace RowingMonitor.ViewModel
             // rewire the pipeline
             segmentDetector.Output.LinkTo(jointDataPlot.PlotHitsBlock);
             segmentDetector.Output.LinkTo(kleshnevPlot.PlotHitsBlock);
+            segmentDetector.Output.LinkTo(metaDataCalculator.InputSegmentHits);
         }
 
         public void ChangeSmoothingFilter()
