@@ -81,14 +81,20 @@ namespace RowingMonitor.Model.Pipeline
         // hand trajectory
         private bool showHandTrajectory = true;
         private CircularBuffer handPoints = new CircularBuffer(PointsBufferCapacity);
-        private Color handTrajectoryColor = Colors.DarkBlue;
+        private Color handTrajectoryColor = Colors.Blue;
 
         // body center of mass trajectory
         private bool showBodyCOMTrajectory = true;
         private CircularBuffer bodyCOMPoints = new CircularBuffer(PointsBufferCapacity);
-        private Color bodyCOMTrajectoryColor = Colors.DarkGreen;
+        private Color bodyCOMTrajectoryColor = Colors.Black;
 
-        private bool showFootHipConnection;
+        // knee trajectory
+        private bool showKneeTrajectory = true;
+        private CircularBuffer kneePoints = new CircularBuffer(PointsBufferCapacity);
+        private Color kneeTrajectoryColor = Colors.Violet;
+
+        // debug foot hip connection
+        private bool showFootHipConnection = false;
 
         public SkeletonSideDisplay()
         {
@@ -182,6 +188,7 @@ namespace RowingMonitor.Model.Pipeline
                 // update point queues
                 UpdateBodyCOMPoints(new Point(cx, cy));
                 UpdateHandPoints(jointPoints);
+                UpdateKneePoints(jointPoints);
 
                 DrawBody(joints, jointPoints, dc);
 
@@ -193,6 +200,9 @@ namespace RowingMonitor.Model.Pipeline
                 }
                 if (ShowBodyCOMTrajectory) {
                     DrawBodyCOMTrajectory(dc);
+                }
+                if (ShowKneeTrajectory) {
+                    DrawKneeTrajectory(dc);
                 }
 
                 // prevent drawing outside of our render area
@@ -562,12 +572,30 @@ namespace RowingMonitor.Model.Pipeline
             handPoints.Enqueue(handPoint);
         }
 
+        private void UpdateKneePoints(IDictionary<JointType, Point> jointPoints)
+        {
+            Point kneePoint = new Point();
+            kneePoint.X = (jointPoints[JointType.KneeRight].X
+                + jointPoints[JointType.KneeLeft].X) / 2;
+            kneePoint.Y = (jointPoints[JointType.KneeRight].Y
+                + jointPoints[JointType.KneeLeft].Y) / 2;
+            kneePoints.Enqueue(kneePoint);
+        }
+
         private void DrawHandTrajectory(DrawingContext drawingContext)
         {
             // convert an array of objects to an array of points
             Point[] points = Array.ConvertAll(handPoints.ToArray(), x => (Point)x);
             DrawTrajectory(points, drawingContext, handTrajectoryColor);
             DrawLegend(1, "Handle trajectory", drawingContext, handTrajectoryColor);
+        }
+
+        private void DrawKneeTrajectory(DrawingContext drawingContext)
+        {
+            // convert an array of objects to an array of points
+            Point[] points = Array.ConvertAll(kneePoints.ToArray(), x => (Point)x);
+            DrawTrajectory(points, drawingContext, kneeTrajectoryColor);
+            DrawLegend(2, "Knee trajectory", drawingContext, kneeTrajectoryColor);
         }
 
         private void DrawTrajectory(Point[] points, DrawingContext drawingContext, Color color)
@@ -622,5 +650,6 @@ namespace RowingMonitor.Model.Pipeline
         public bool ShowHandTrajectory { get => showHandTrajectory; set => showHandTrajectory = value; }
         public bool ShowBodyCOMTrajectory { get => showBodyCOMTrajectory; set => showBodyCOMTrajectory = value; }
         public bool ShowFootHipConnection { get => showFootHipConnection; set => showFootHipConnection = value; }
+        public bool ShowKneeTrajectory { get => showKneeTrajectory; set => showKneeTrajectory = value; }
     }
 }
