@@ -66,7 +66,7 @@ namespace RowingMonitor.Model.Pipeline
         {
             // check if jointData is NaN
             if (jointData.Joints[JointType.SpineBase].Position.X == float.NaN) {
-                int x = 0;
+                throw new Exception("Joint data position is not a number.");
             }
 
             // check if first value

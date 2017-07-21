@@ -34,18 +34,26 @@ namespace RowingMonitor.Model.Pipeline
         // definition of bones
         private List<Tuple<JointType, JointType>> bones;
 
-        private Pen bodyColor = new Pen(Brushes.Red, 6);
-
         /// <summary>
         /// Constant for clamping Z values of camera space points from being negative
         /// </summary>
         protected const float InferredZPositionClamp = 0.1f;
 
-        /// <summary>
-        /// Thickness of drawn joint lines
-        /// </summary>
-        protected const double JointThickness = 3;
-        protected const double UntrackedJointThickness = 10;
+        // colors and thicknesses
+        private const double TrackedBoneThickness = 6;
+        private readonly Color trackedBoneColor = Colors.LightGreen;
+        private const double TrackedJointThickness = 3;
+        private readonly Color trackedJointColor = Colors.Green;
+
+        private const double InferredBoneThickness = 4;
+        private readonly Color inferredBoneColor = Colors.Yellow;
+        private const double InferredJointThickness = 8;
+        private readonly Color inferredJointColor = Colors.Orange;
+
+        private const double NotTrackedBoneThickness = 2;
+        private readonly Color notTrackedBoneColor = Colors.OrangeRed;
+        private const double NotTrackedJointThickness = 10;
+        private readonly Color notTrackedJointColor = Colors.Red;
 
         /// <summary>
         /// Brush used for drawing hands that are currently tracked as closed
@@ -148,9 +156,6 @@ namespace RowingMonitor.Model.Pipeline
             using (DrawingContext dc = drawingGroup.Open()) {
                 dc.DrawRectangle(Brushes.Transparent, null, new Rect(0.0, 0.0, width, height));
 
-                //int penIndex = 0;
-                Pen drawPen = bodyColor;
-
                 // convert the joint points to depth (display) space
                 Dictionary<JointType, Point> jointPoints = new Dictionary<JointType, Point>();
 
@@ -168,7 +173,7 @@ namespace RowingMonitor.Model.Pipeline
                     jointPoints[jointType] = new Point(depthSpacePoint.X, depthSpacePoint.Y);
                 }
 
-                DrawBody(joints, jointPoints, dc, drawPen);
+                DrawBody(joints, jointPoints, dc);
 
                 // prevent drawing outside of our render area
                 drawingGroup.ClipGeometry = new RectangleGeometry(
@@ -188,39 +193,34 @@ namespace RowingMonitor.Model.Pipeline
         /// <param name="joints">joints to draw</param>
         /// <param name="jointPoints">translated positions of joints to draw</param>
         /// <param name="drawingContext">drawing context to draw to</param>
-        /// <param name="drawingPen">specifies color to draw a specific body</param>
         protected void DrawBody(IReadOnlyDictionary<JointType, Joint> joints,
-            IDictionary<JointType, Point> jointPoints, DrawingContext drawingContext,
-            Pen drawingPen)
+            IDictionary<JointType, Point> jointPoints, DrawingContext drawingContext)
         {
             // Draw the bones
             foreach (var bone in bones) {
-                DrawBone(joints, jointPoints, bone.Item1, bone.Item2, drawingContext, drawingPen);
+                DrawBone(joints, jointPoints, bone.Item1, bone.Item2, drawingContext);
             }
 
             // Draw the joints
             foreach (JointType jointType in joints.Keys) {
-                Brush drawBrush = null;
+                // dafault: if joint is not tracked: red joint
+                Brush drawBrush = new SolidColorBrush(notTrackedJointColor);
+                double jointThickness = NotTrackedJointThickness;
 
                 TrackingState trackingState = joints[jointType].TrackingState;
-                double jointThickness = UntrackedJointThickness;
 
-                // if joint is tracked make the brush a small red point
-                if (trackingState == TrackingState.Tracked) {
-                    drawBrush = new SolidColorBrush(Color.FromArgb(255, 68, 192, 68));
-                    jointThickness = JointThickness;
+                // if joint is inferred: yellow joint
+                if (trackingState == TrackingState.Inferred) {
+                    drawBrush = new SolidColorBrush(inferredJointColor);
+                    jointThickness = InferredJointThickness;
                 }
-                // if the joint is not fully tracked make the brush a big yellow point
-                else if (trackingState == TrackingState.Inferred || trackingState ==
-                    TrackingState.NotTracked) {
-                    drawBrush = Brushes.Yellow;
-                    jointThickness = UntrackedJointThickness;
+                // if jointis tracked: green joint
+                else if (trackingState == TrackingState.Tracked) {
+                    drawBrush = new SolidColorBrush(trackedJointColor);
+                    jointThickness = TrackedJointThickness;
                 }
-                // draw the point if the brush is set
-                if (drawBrush != null) {
-                    drawingContext.DrawEllipse(drawBrush, null, jointPoints[jointType],
+                drawingContext.DrawEllipse(drawBrush, null, jointPoints[jointType],
                         jointThickness, jointThickness);
-                }
             }
         }
 
@@ -232,24 +232,27 @@ namespace RowingMonitor.Model.Pipeline
         /// <param name="jointType0">first joint of bone to draw</param>
         /// <param name="jointType1">second joint of bone to draw</param>
         /// <param name="drawingContext">drawing context to draw to</param>
-        /// /// <param name="drawingPen">specifies color to draw a specific bone</param>
         private void DrawBone(IReadOnlyDictionary<JointType, Joint> joints,
             IDictionary<JointType, Point> jointPoints, JointType jointType0,
-            JointType jointType1, DrawingContext drawingContext, Pen drawingPen)
+            JointType jointType1, DrawingContext drawingContext)
         {
             Joint joint0 = joints[jointType0];
             Joint joint1 = joints[jointType1];
 
-            // If we can't find either of these joints, exit
-            if (joint0.TrackingState == TrackingState.NotTracked ||
-                joint1.TrackingState == TrackingState.NotTracked) {
-                return;
-            }
+            // default pen: one of the brushes is not tracked: red bone
+            Pen drawPen = new Pen(new SolidColorBrush(notTrackedBoneColor), NotTrackedBoneThickness);
 
-            // We assume all drawn bones are inferred unless BOTH joints are tracked
-            Pen drawPen = new Pen(Brushes.Gray, 1);
-            if ((joint0.TrackingState == TrackingState.Tracked) && (joint1.TrackingState == TrackingState.Tracked)) {
-                drawPen = new Pen(Brushes.Red, 6);
+            // if both joints are tracked: green bone
+            if ((joint0.TrackingState == TrackingState.Tracked) &&
+                (joint1.TrackingState == TrackingState.Tracked)) {
+                drawPen = new Pen(new SolidColorBrush(trackedBoneColor), TrackedBoneThickness);
+            }
+            // if both joints are inferred or one is inferred an one is tracked: yellow bone
+            else if ((joint0.TrackingState == TrackingState.Inferred ||
+                joint0.TrackingState == TrackingState.Tracked) && (
+                joint1.TrackingState == TrackingState.Inferred ||
+                joint1.TrackingState == TrackingState.Tracked)) {
+                drawPen = new Pen(new SolidColorBrush(inferredBoneColor), InferredBoneThickness);
             }
 
             drawingContext.DrawLine(drawPen, jointPoints[jointType0], jointPoints[jointType1]);
