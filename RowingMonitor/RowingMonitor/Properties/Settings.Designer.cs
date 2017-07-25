@@ -31,5 +31,14 @@ namespace RowingMonitor.Properties {
                 return ((string)(this["Template"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.1")]
+        public float FootSpineBaseOffset {
+            get {
+                return ((float)(this["FootSpineBaseOffset"]));
+            }
+        }
     }
 }

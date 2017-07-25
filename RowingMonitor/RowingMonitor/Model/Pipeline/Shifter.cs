@@ -11,7 +11,7 @@ using System.Threading.Tasks.Dataflow;
 namespace RowingMonitor.Model.Pipeline
 {
     /// <summary>
-    /// Shifts  the origin to the middle point between the foot ankle joints.
+    /// Shifts  the origin to the middle point between the foot joints plus an offset from foot to hip joint.
     /// Also rotates all joints until origin and hip joint form a horizontal line.
     /// </summary>
     public class Shifter
@@ -54,8 +54,8 @@ namespace RowingMonitor.Model.Pipeline
 
         public JointData ShiftAndRotate(JointData jointData)
         {
-            if (jointData.Joints[JointType.AnkleLeft].TrackingState == TrackingState.NotTracked
-                || jointData.Joints[JointType.AnkleLeft].TrackingState == TrackingState.NotTracked) {
+            if (jointData.Joints[JointType.FootLeft].TrackingState == TrackingState.NotTracked
+                || jointData.Joints[JointType.FootRight].TrackingState == TrackingState.NotTracked) {
                 throw new BodyNotFullyTrackedException();
             }
 
@@ -67,22 +67,23 @@ namespace RowingMonitor.Model.Pipeline
              * 1 unit = 1 meter
             */
 
-            // create the cankle
-            Vector4 ankleCenter = new Vector4();
-            ankleCenter.X = (jointData.Joints[JointType.AnkleLeft].Position.X
-                + jointData.Joints[JointType.AnkleRight].Position.X) / 2;
-            ankleCenter.Y = (jointData.Joints[JointType.AnkleLeft].Position.Y
-                + jointData.Joints[JointType.AnkleRight].Position.Y) / 2;
-            ankleCenter.Z = (jointData.Joints[JointType.AnkleLeft].Position.Z
-                + jointData.Joints[JointType.AnkleRight].Position.Z) / 2;
+            // create the cfoot joint
+            Vector4 footCenter = new Vector4();
+            footCenter.X = (jointData.Joints[JointType.FootLeft].Position.X
+                + jointData.Joints[JointType.FootRight].Position.X) / 2;
+            footCenter.Y = (jointData.Joints[JointType.FootLeft].Position.Y
+                + jointData.Joints[JointType.FootRight].Position.Y) / 2
+                + Properties.Settings.Default.FootSpineBaseOffset;
+            footCenter.Z = (jointData.Joints[JointType.FootLeft].Position.Z
+                + jointData.Joints[JointType.FootRight].Position.Z) / 2;            
 
-            // transform all points that ankleCenter is origin
+            // transform all points so that footCenter + the FootSpineBaseOffset in y is origin
             Dictionary<JointType, Joint> newJoints = new Dictionary<JointType, Joint>();
             foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                 Joint newJoint = joint.Value;
-                newJoint.Position.X -= ankleCenter.X;
-                newJoint.Position.Y -= ankleCenter.Y;
-                newJoint.Position.Z -= ankleCenter.Z;
+                newJoint.Position.X -= footCenter.X;
+                newJoint.Position.Y -= footCenter.Y;
+                newJoint.Position.Z -= footCenter.Z;
                 newJoints.Add(joint.Key, newJoint);
             }
 

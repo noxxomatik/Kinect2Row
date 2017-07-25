@@ -171,7 +171,7 @@ namespace RowingMonitor.Model.Pipeline
                 float scale = (float)View.ActualWidth / AreaWidth;
                 // origin is 0.5m from both edges
                 float originOffsetX = 0.5f * scale;
-                float originOffsetY = (float)View.ActualHeight - 0.5f * scale;
+                float originOffsetY = (float)View.ActualHeight - (0.5f + Properties.Settings.Default.FootSpineBaseOffset) * scale;
 
                 foreach (JointType jointType in joints.Keys) {
                     int x = (int)(originOffsetX + joints[jointType].Position.Z * scale);
@@ -193,7 +193,7 @@ namespace RowingMonitor.Model.Pipeline
                 DrawBody(joints, jointPoints, dc);
 
                 if (ShowFootHipConnection) {
-                    DrawHorizontalAxis(jointPoints, dc);
+                    DrawHorizontalAxis(jointPoints, scale, dc);
                 }
                 if (ShowHandTrajectory) {
                     DrawHandTrajectory(dc);
@@ -350,22 +350,23 @@ namespace RowingMonitor.Model.Pipeline
             }
         }
 
-        private void DrawHorizontalAxis(IDictionary<JointType, Point> jointPoints, DrawingContext drawingContext)
+        private void DrawHorizontalAxis(IDictionary<JointType, Point> jointPoints, float scale, DrawingContext drawingContext)
         {
             Brush drawBrush = Brushes.Blue;
 
-            // draw a point at cankle (new origin)
-            Point ankleCenter = new Point();
-            ankleCenter.X = (jointPoints[JointType.AnkleLeft].X
-                + jointPoints[JointType.AnkleRight].X) / 2;
-            ankleCenter.Y = (jointPoints[JointType.AnkleLeft].Y
-                + jointPoints[JointType.AnkleRight].Y) / 2;
+            // draw a point at cfoot (new origin)
+            Point footCenter = new Point();
+            footCenter.X = (jointPoints[JointType.FootLeft].X
+                + jointPoints[JointType.FootRight].X) / 2;
+            footCenter.Y = (jointPoints[JointType.FootLeft].Y
+                + jointPoints[JointType.FootRight].Y) / 2
+                - Properties.Settings.Default.FootSpineBaseOffset * scale;
 
-            drawingContext.DrawEllipse(drawBrush, null, ankleCenter, AxisThickness, AxisThickness);
+            drawingContext.DrawEllipse(drawBrush, null, footCenter, AxisThickness, AxisThickness);
 
             // draw a line between cankle and spine base
             Pen drawPen = new Pen(Brushes.Blue, 1);
-            drawingContext.DrawLine(drawPen, ankleCenter, jointPoints[JointType.SpineBase]);
+            drawingContext.DrawLine(drawPen, footCenter, jointPoints[JointType.SpineBase]);
         }
 
         private void UpdateBodyCOMPoints(Point bodyCOM)
@@ -558,7 +559,7 @@ namespace RowingMonitor.Model.Pipeline
         private void DrawBodyCOMTrajectory(DrawingContext drawingContext)
         {
             Point[] points = Array.ConvertAll(bodyCOMPoints.ToArray(), x => (Point)x);
-            DrawTrajectory(points, drawingContext, bodyCOMTrajectoryColor);
+            DrawTrajectory(points, drawingContext, bodyCOMTrajectoryColor, true);
             DrawLegend(0, "Body center of mass trajectory", drawingContext, bodyCOMTrajectoryColor);
         }
 
@@ -586,7 +587,7 @@ namespace RowingMonitor.Model.Pipeline
         {
             // convert an array of objects to an array of points
             Point[] points = Array.ConvertAll(handPoints.ToArray(), x => (Point)x);
-            DrawTrajectory(points, drawingContext, handTrajectoryColor);
+            DrawTrajectory(points, drawingContext, handTrajectoryColor, false);
             DrawLegend(1, "Handle trajectory", drawingContext, handTrajectoryColor);
         }
 
@@ -594,11 +595,12 @@ namespace RowingMonitor.Model.Pipeline
         {
             // convert an array of objects to an array of points
             Point[] points = Array.ConvertAll(kneePoints.ToArray(), x => (Point)x);
-            DrawTrajectory(points, drawingContext, kneeTrajectoryColor);
+            DrawTrajectory(points, drawingContext, kneeTrajectoryColor, false);
             DrawLegend(2, "Knee trajectory", drawingContext, kneeTrajectoryColor);
         }
 
-        private void DrawTrajectory(Point[] points, DrawingContext drawingContext, Color color)
+        private void DrawTrajectory(Point[] points, DrawingContext drawingContext, 
+            Color color, bool markCurrentPoint)
         {
             int i = 0;
             foreach (Point point in points) {
@@ -613,6 +615,10 @@ namespace RowingMonitor.Model.Pipeline
                     drawingContext.DrawLine(drawPen, points[i - 1], point);
                 }
                 i++;
+            }
+            if (markCurrentPoint) {
+                drawingContext.DrawEllipse(new SolidColorBrush(color), null,
+                        points.Last(), AxisThickness, AxisThickness);
             }
         }
 
@@ -632,11 +638,6 @@ namespace RowingMonitor.Model.Pipeline
                 10,
                 Brushes.Black);
             drawingContext.DrawText(text, new Point(14, View.ActualHeight - 12 * (position + 1)));
-        }
-
-        private void UpdateBodyMassCenterPoints(IReadOnlyDictionary<JointType, Joint> joints)
-        {
-
         }
 
         public ActionBlock<JointData> SkeletonBlock
