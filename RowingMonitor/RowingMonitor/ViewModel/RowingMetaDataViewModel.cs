@@ -53,8 +53,7 @@ namespace RowingMonitor.ViewModel
                 MaxArmsVelocity = metaData.MaxArmsVelocity.ToString("0.00");
                 MaxTrunkVelocity = metaData.MaxTrunkVelocity.ToString("0.00");
                 TrunkAngle = Degrees.RadianToDegree(metaData.TrunkAngle).ToString("0.00");
-                CatchFactor = metaData.CatchFactor.ToString("0.00");
-                RowingStyleFactor = metaData.RowingStyleFactor.ToString("0.00");
+                CatchFactor = metaData.CatchFactor.ToString("0.00");                
             }
             else {
                 StrokeCount = metaData.StrokeCount.ToString();
@@ -70,6 +69,7 @@ namespace RowingMonitor.ViewModel
                 MaxCatchTrunkAngle = Degrees.RadianToDegree(metaData.MaxCatchTrunkAngle).ToString("0.00");
                 MaxFinishTrunkAngle = Degrees.RadianToDegree(metaData.MaxFinishTrunkAngle).ToString("0.00");
                 MeanCatchFactor = metaData.MeanCatchFactor.ToString("0.00");
+                RowingStyleFactor = (metaData.RowingStyleFactor * 100).ToString("0.00");
                 MeanRowingStyleFactor = metaData.RowingStyleFactor.ToString("0.00");
             }
         }

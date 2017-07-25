@@ -55,9 +55,11 @@ namespace RowingMonitor.Model.Pipeline
         private KleshnevData lastKleshnevData = new KleshnevData();
         private double lastCatchFactor = 0;
         private List<double> catchFactors = new List<double>();
-        private long lastIndexChecked = -1;
         private double seatCrossedTimestamp = -1;
         private double handleCrossedTimestamp = -1;
+
+        // rowing style factor (legs trunk factor)
+        private List<double> rowingStyleFactors = new List<double>();
 
         /// <summary>
         /// Calculate the values, which can be obtained in realtime.
@@ -215,8 +217,7 @@ namespace RowingMonitor.Model.Pipeline
             metaData.SegmentState = SegmentState.SegmentEnded;
 
             strokeCount++;
-            metaData.StrokeCount = strokeCount;            
-            metaData.RowingStyleFactor = GetRowingStyleFactor();
+            metaData.StrokeCount = strokeCount;
 
             metaData.MeanStrokeLength = GetMeanStrokeLength();
             metaData.MeanStrokeTime = GetMeanStrokeTime(metaData);
@@ -232,9 +233,17 @@ namespace RowingMonitor.Model.Pipeline
 
             metaData.MeanCatchFactor = GetMeanCatchFactor();
 
+            metaData.RowingStyleFactor = GetRowingStyleFactor();
+            metaData.MeanRowingStyleFactor = GetMeanRowingStyleFactor();
+
             ResetSegmentData();
 
             return metaData;
+        }
+
+        private double GetMeanRowingStyleFactor()
+        {
+            return rowingStyleFactors.Sum() / rowingStyleFactors.Count;
         }
 
         private double GetMeanCatchFactor()
@@ -320,8 +329,43 @@ namespace RowingMonitor.Model.Pipeline
 
         private double GetRowingStyleFactor()
         {
-            // TODO
-            return -1;
+            //rowing style factor needs internal hits for calculation
+            long internalHitIndex = SegmentHitHandler.GetLastSegmentInternal(segmentHitsBuffer);
+            long[] bounds = SegmentHitHandler.GetLastSegmentStartEnd(segmentHitsBuffer);
+            if (bounds[0] == -1 || bounds[1] == -1 || internalHitIndex == -1) {
+                return -1;
+            }
+
+            bounds[1] = internalHitIndex;
+            List<JointData> segmentJointData = FilterLastSegmentJointData(jointDataBuffer, bounds);
+            double handleTravel = CalculateHandleTravelDistance(segmentJointData);
+
+            // get joint data until 20% of handle travel is reached
+            double handleTravelThreshold = handleTravel * 0.2;
+            List<JointData> choppedJointData = new List<JointData>();
+            double minZ = Double.PositiveInfinity;
+            double maxZ = Double.NegativeInfinity;
+            foreach (JointData jointData in segmentJointData) {
+                // calculate handle position as mean of LeftHand and RightHand
+                double meanZ = (jointData.Joints[JointType.HandLeft].Position.Z
+                    + jointData.Joints[JointType.HandRight].Position.Z) / 2;
+                minZ = meanZ < minZ ? meanZ : minZ;
+                maxZ = meanZ > maxZ ? meanZ : maxZ;
+                
+                choppedJointData.Add(jointData);
+                if ((maxZ - minZ) > handleTravelThreshold) {
+                    break;
+                }
+            }
+
+            // get the seat travel distance and hand travel distance again
+            // TODO: interpolate the travel value until 20% is reached
+            handleTravel = CalculateHandleTravelDistance(choppedJointData);
+            double seatTravel = CalculateSeatTravelDistance(choppedJointData);
+
+            // calculate rowing style factor
+            rowingStyleFactors.Add(seatTravel / handleTravel);
+            return seatTravel / handleTravel;
         }
 
         private double GetCatchFactor()

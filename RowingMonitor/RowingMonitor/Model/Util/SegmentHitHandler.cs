@@ -23,8 +23,8 @@ namespace RowingMonitor.Model.Util
         /// <summary>
         /// Return the bounding indices values of the last complete segment.
         /// </summary>
-        /// <param name="hits"></param>
-        /// <returns></returns>
+        /// <param name="hits">List of detected hits.</param>
+        /// <returns>Start an d end index of the lastdetected segment.</returns>
         public static long[] GetLastSegmentStartEnd(List<SegmentHit> hits)
         {
             long[] segmentBounds = { -1, -1 };
@@ -48,7 +48,24 @@ namespace RowingMonitor.Model.Util
                 }
             }
             return null;
-        }       
+        }
+
+        /// <summary>
+        /// Returns the index of the last detected internal segment hit.
+        /// </summary>
+        /// <param name="hits">List of detected hits.</param>
+        /// <returns>Index of last detected internal segment hit.</returns>
+        public static long GetLastSegmentInternal(List<SegmentHit> hits)
+        {
+            if (hits.Count > 2) {
+                for (int i = hits.Count - 1; i >= 0; i--) {
+                    if (hits[i].HitType == HitType.SegmentInternal) {
+                        return hits[i].Index;
+                    }
+                }
+            }
+            return -1;
+        }
     }
 
     public struct SegmentHit
