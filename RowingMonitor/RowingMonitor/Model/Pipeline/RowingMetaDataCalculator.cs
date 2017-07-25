@@ -9,6 +9,9 @@ using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
+    /// <summary>
+    /// Calculates all needed rowing analysis values and makes them accessible to the pipeline.
+    /// </summary>
     public partial class RowingMetaDataCalculator
     {
         // dataflow connections
@@ -33,6 +36,9 @@ namespace RowingMonitor.Model.Pipeline
         private bool kleshnevDataRecieved = false;
         private bool segmentHitsRecieved = false;
 
+        /// <summary>
+        /// Creates a new rowing meta data calculator instance.
+        /// </summary>
         public RowingMetaDataCalculator()
         {
             Input = new ActionBlock<JointData>(jointData =>
@@ -53,7 +59,7 @@ namespace RowingMonitor.Model.Pipeline
                 kleshnevDataRecieved = true;
             });
 
-            // segment detector is the last element in the data sream pipeline,
+            // segment detector is the last element in the data stream pipeline,
             // so do all the calculations here
             InputSegmentHits = new ActionBlock<List<SegmentHit>>(segmentHits =>
             {

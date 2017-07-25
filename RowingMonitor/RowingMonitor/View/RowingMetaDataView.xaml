@@ -44,6 +44,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <TextBlock Text="{x:Static resx:Resources.FrameIndex}" Grid.Row="0" Grid.Column="0"/>
@@ -117,5 +119,11 @@
 
         <TextBlock Text="{x:Static resx:Resources.MaxFinishTrunkAngle}" Grid.Row="23" Grid.Column="0"/>
         <TextBlock Text="{Binding MaxFinishTrunkAngle}" Grid.Row="23" Grid.Column="1" TextAlignment="Right"/>
+
+        <TextBlock Text="{x:Static resx:Resources.MeanCatchFactor}" Grid.Row="24" Grid.Column="0"/>
+        <TextBlock Text="{Binding MeanCatchFactor}" Grid.Row="24" Grid.Column="1" TextAlignment="Right"/>
+
+        <TextBlock Text="{x:Static resx:Resources.MeanRowingStyleFactor}" Grid.Row="25" Grid.Column="0"/>
+        <TextBlock Text="{Binding MeanRowingStyleFactor}" Grid.Row="25" Grid.Column="1" TextAlignment="Right"/>
     </Grid>
 </Page>

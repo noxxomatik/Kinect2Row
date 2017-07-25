@@ -16,7 +16,9 @@ namespace RowingMonitor.ViewModel
         private string strokeCount;
         private string strokeRate;
         private string catchFactor;
+        private string meanCatchFactor;
         private string rowingStyleFactor;
+        private string meanRowingStyleFactor;
         private string strokeLength;
         private string meanStrokeLength;
         private string strokeTime;
@@ -50,13 +52,13 @@ namespace RowingMonitor.ViewModel
                 MaxLegsVelocity = metaData.MaxLegsVelocity.ToString("0.00");
                 MaxArmsVelocity = metaData.MaxArmsVelocity.ToString("0.00");
                 MaxTrunkVelocity = metaData.MaxTrunkVelocity.ToString("0.00");
-                TrunkAngle = Degrees.RadianToDegree(metaData.TrunkAngle).ToString("0.00");                
+                TrunkAngle = Degrees.RadianToDegree(metaData.TrunkAngle).ToString("0.00");
+                CatchFactor = metaData.CatchFactor.ToString("0.00");
+                RowingStyleFactor = metaData.RowingStyleFactor.ToString("0.00");
             }
             else {
                 StrokeCount = metaData.StrokeCount.ToString();
                 StrokeRate = metaData.StrokeRate.ToString("0.00");
-                CatchFactor = metaData.CatchFactor.ToString("0.00");
-                RowingStyleFactor = metaData.RowingStyleFactor.ToString("0.00");
                 MeanStrokeLength = metaData.MeanStrokeLength.ToString("0.00");
                 MeanStrokeTime = (metaData.MeanStrokeTime / 1000).ToString("0.00");
                 MeanSeatTravelDistance = metaData.MeanSeatTravelDistance.ToString("0.00");
@@ -67,6 +69,8 @@ namespace RowingMonitor.ViewModel
                 StrokesPerMinute = metaData.StrokesPerMinute.ToString("0.00");
                 MaxCatchTrunkAngle = Degrees.RadianToDegree(metaData.MaxCatchTrunkAngle).ToString("0.00");
                 MaxFinishTrunkAngle = Degrees.RadianToDegree(metaData.MaxFinishTrunkAngle).ToString("0.00");
+                MeanCatchFactor = metaData.MeanCatchFactor.ToString("0.00");
+                MeanRowingStyleFactor = metaData.RowingStyleFactor.ToString("0.00");
             }
         }
 
@@ -244,5 +248,8 @@ namespace RowingMonitor.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public string MeanCatchFactor { get => meanCatchFactor; set => meanCatchFactor = value; }
+        public string MeanRowingStyleFactor { get => meanRowingStyleFactor; set => meanRowingStyleFactor = value; }
     }
 }

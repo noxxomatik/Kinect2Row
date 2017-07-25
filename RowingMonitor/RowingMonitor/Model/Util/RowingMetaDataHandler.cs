@@ -24,7 +24,9 @@ namespace RowingMonitor.Model.Util
         private int strokeCount;
         private double strokeRate;
         private double catchFactor;
+        private double meanCatchFactor;
         private double rowingStyleFactor;
+        private double meanRowingStyleFactor;
         private double strokeLength;
         private double meanStrokeLength;
         private double strokeTime;
@@ -73,13 +75,23 @@ namespace RowingMonitor.Model.Util
         /// </summary>
         public double StrokeRate { get => strokeRate; set => strokeRate = value; }
         /// <summary>
-        /// ???
+        /// Time in milliseconds between the change of direction of the seat and the handle.
+        /// Also known as Catch Timing Factor.
         /// </summary>
         public double CatchFactor { get => catchFactor; set => catchFactor = value; }
         /// <summary>
-        /// ???
+        /// Mean time in milliseconds between the change of direction of the seat and the handle.
+        /// </summary>
+        public double MeanCatchFactor { get => meanCatchFactor; set => meanCatchFactor = value; }
+        /// <summary>
+        /// The ratio of the seat and handle travels during the first 20% of the drive.
+        /// Also known as Legs Trunk Factor.
         /// </summary>
         public double RowingStyleFactor { get => rowingStyleFactor; set => rowingStyleFactor = value; }
+        /// <summary>
+        /// The mean ratio of the seat and handle travels during the first 20% of the drive.
+        /// </summary>
+        public double MeanRowingStyleFactor { get => meanRowingStyleFactor; set => meanRowingStyleFactor = value; }
         /// <summary>
         /// Length in meter of the stroke in this segment.
         /// </summary>

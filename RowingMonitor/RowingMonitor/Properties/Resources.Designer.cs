@@ -61,7 +61,7 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Catch factor ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Catch factor (ms) ähnelt.
         /// </summary>
         public static string CatchFactor {
             get {
@@ -142,6 +142,15 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean catch factor (ms) ähnelt.
+        /// </summary>
+        public static string MeanCatchFactor {
+            get {
+                return ResourceManager.GetString("MeanCatchFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Mean maximum arms velocity (m/s) ähnelt.
         /// </summary>
         public static string MeanMaxArmsVelocity {
@@ -174,6 +183,15 @@ namespace RowingMonitor.Properties {
         public static string MeanMaxTrunkVelocity {
             get {
                 return ResourceManager.GetString("MeanMaxTrunkVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean rowing style factor (%) ähnelt.
+        /// </summary>
+        public static string MeanRowingStyleFactor {
+            get {
+                return ResourceManager.GetString("MeanRowingStyleFactor", resourceCulture);
             }
         }
         
@@ -214,7 +232,7 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Rowing style factor ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Rowing style factor (%) ähnelt.
         /// </summary>
         public static string RowingStyleFactor {
             get {

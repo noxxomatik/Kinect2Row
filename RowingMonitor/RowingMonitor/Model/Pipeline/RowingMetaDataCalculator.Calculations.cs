@@ -51,7 +51,13 @@ namespace RowingMonitor.Model.Pipeline
         private double maxCatchAngleSeg = 0;
         private double maxFinishAngleSeg = 0;
 
-
+        // catch factor
+        private KleshnevData lastKleshnevData = new KleshnevData();
+        private double lastCatchFactor = 0;
+        private List<double> catchFactors = new List<double>();
+        private long lastIndexChecked = -1;
+        private double seatCrossedTimestamp = -1;
+        private double handleCrossedTimestamp = -1;
 
         /// <summary>
         /// Calculate the values, which can be obtained in realtime.
@@ -77,6 +83,8 @@ namespace RowingMonitor.Model.Pipeline
             metaData.TrunkAngle = GetTrunkAngle(metaData);
             metaData.MaxCatchTrunkAngle = maxCatchAngleSeg;
             metaData.MaxFinishTrunkAngle = maxFinishAngleSeg;
+
+            metaData.CatchFactor = GetCatchFactor();
 
             return metaData;
         }
@@ -207,8 +215,7 @@ namespace RowingMonitor.Model.Pipeline
             metaData.SegmentState = SegmentState.SegmentEnded;
 
             strokeCount++;
-            metaData.StrokeCount = strokeCount;
-            metaData.CatchFactor = GetCatchFactor();
+            metaData.StrokeCount = strokeCount;            
             metaData.RowingStyleFactor = GetRowingStyleFactor();
 
             metaData.MeanStrokeLength = GetMeanStrokeLength();
@@ -223,9 +230,16 @@ namespace RowingMonitor.Model.Pipeline
 
             metaData.StrokesPerMinute = GetStrokesPerMinute(metaData);
 
+            metaData.MeanCatchFactor = GetMeanCatchFactor();
+
             ResetSegmentData();
 
             return metaData;
+        }
+
+        private double GetMeanCatchFactor()
+        {
+            return catchFactors.Sum() / catchFactors.Count;
         }
 
         private double GetStrokesPerMinute(RowingMetaData metaData)
@@ -312,8 +326,58 @@ namespace RowingMonitor.Model.Pipeline
 
         private double GetCatchFactor()
         {
-            // TODO
-            return -1;
+            if (lastKleshnevData.IsEmpty) {
+                lastKleshnevData = kleshnevDataBuffer.Last();
+                return -1;
+            }
+            KleshnevData currentKleshnevData = kleshnevDataBuffer.Last();
+            // check for zero crossings
+            // only crossings that travel from negative to positive are required
+            // seat crossing
+            if (lastKleshnevData.Velocities[KleshnevVelocityType.Legs] < 0 
+                && currentKleshnevData.Velocities[KleshnevVelocityType.Legs] >= 0) {
+                if (currentKleshnevData.Velocities[KleshnevVelocityType.Legs] == 0) {
+                    seatCrossedTimestamp = currentKleshnevData.AbsTimestamp;
+                }
+                else {
+                    // get the timestamp between the two points
+                    // y = m * x + b
+                    // y = 0 -> x = -(b / m)
+                    // m = (y2 - y1) / (x2- x1)
+                    // b = y2 - m * x2
+                    double m = (currentKleshnevData.Velocities[KleshnevVelocityType.Legs]
+                        - lastKleshnevData.Velocities[KleshnevVelocityType.Legs])
+                        / (currentKleshnevData.AbsTimestamp - lastKleshnevData.AbsTimestamp);
+                    double b = currentKleshnevData.Velocities[KleshnevVelocityType.Legs]
+                        - m * currentKleshnevData.AbsTimestamp;
+                    seatCrossedTimestamp = -(b / m);
+                }
+            }
+            // handle crossing
+            if (lastKleshnevData.Velocities[KleshnevVelocityType.HandleRight] < 0
+                && currentKleshnevData.Velocities[KleshnevVelocityType.HandleRight] >= 0) {
+                if (currentKleshnevData.Velocities[KleshnevVelocityType.HandleRight] == 0) {
+                    handleCrossedTimestamp = currentKleshnevData.AbsTimestamp;
+                }
+                else {
+                    double m = (currentKleshnevData.Velocities[KleshnevVelocityType.HandleRight]
+                        - lastKleshnevData.Velocities[KleshnevVelocityType.HandleRight])
+                        / (currentKleshnevData.AbsTimestamp - lastKleshnevData.AbsTimestamp);
+                    double b = currentKleshnevData.Velocities[KleshnevVelocityType.HandleRight]
+                        - m * currentKleshnevData.AbsTimestamp;
+                    handleCrossedTimestamp = -(b / m);
+                }
+            }
+            // if both timestamps are set calculate the catch factor
+            if (seatCrossedTimestamp != -1 && handleCrossedTimestamp != -1) {
+                double catchFactor = seatCrossedTimestamp - handleCrossedTimestamp;
+                catchFactors.Add(catchFactor);
+                seatCrossedTimestamp = -1;
+                handleCrossedTimestamp = -1;
+                lastCatchFactor = catchFactor;
+            }
+            lastKleshnevData = kleshnevDataBuffer.Last();
+            return lastCatchFactor;
         }
 
         /// <summary>

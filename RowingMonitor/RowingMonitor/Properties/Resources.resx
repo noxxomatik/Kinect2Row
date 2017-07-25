@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CatchFactor" xml:space="preserve">
-    <value>Catch factor</value>
+    <value>Catch factor (ms)</value>
   </data>
   <data name="FailedScreenshotStatusTextFormat" xml:space="preserve">
     <value>Failed to write screenshot to {0}</value>
@@ -169,7 +169,7 @@
     <value>No ready Kinect found!</value>
   </data>
   <data name="RowingStyleFactor" xml:space="preserve">
-    <value>Rowing style factor</value>
+    <value>Rowing style factor (%)</value>
   </data>
   <data name="RunningStatusText" xml:space="preserve">
     <value>Running</value>
@@ -200,5 +200,11 @@
   </data>
   <data name="TrunkAngle" xml:space="preserve">
     <value>Trunk angle (°)</value>
+  </data>
+  <data name="MeanCatchFactor" xml:space="preserve">
+    <value>Mean catch factor (ms)</value>
+  </data>
+  <data name="MeanRowingStyleFactor" xml:space="preserve">
+    <value>Mean rowing style factor (%)</value>
   </data>
 </root>
