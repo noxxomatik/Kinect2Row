@@ -70,6 +70,42 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start tracking with the dashboard layout for coaches. ähnelt.
+        /// </summary>
+        public static string CoachMessage {
+            get {
+                return ResourceManager.GetString("CoachMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Coach view ähnelt.
+        /// </summary>
+        public static string CoachTitle {
+            get {
+                return ResourceManager.GetString("CoachTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start tracking and show all available evaluation elements. ähnelt.
+        /// </summary>
+        public static string DebugMessage {
+            get {
+                return ResourceManager.GetString("DebugMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Debug view ähnelt.
+        /// </summary>
+        public static string DebugTitle {
+            get {
+                return ResourceManager.GetString("DebugTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Failed to write screenshot to {0} ähnelt.
         /// </summary>
         public static string FailedScreenshotStatusTextFormat {
@@ -84,6 +120,42 @@ namespace RowingMonitor.Properties {
         public static string FrameIndex {
             get {
                 return ResourceManager.GetString("FrameIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Choose a view ähnelt.
+        /// </summary>
+        public static string HomeTitle {
+            get {
+                return ResourceManager.GetString("HomeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Find a position for the Kinect sensor and trainee. The skeleton should stay green for the complete stroke to get the best results. ähnelt.
+        /// </summary>
+        public static string KinectCalibrationMessage {
+            get {
+                return ResourceManager.GetString("KinectCalibrationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Kinect calibration ähnelt.
+        /// </summary>
+        public static string KinectCalibrationTitle {
+            get {
+                return ResourceManager.GetString("KinectCalibrationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Kinect not connected. ähnelt.
+        /// </summary>
+        public static string KinectNotFoundMessage {
+            get {
+                return ResourceManager.GetString("KinectNotFoundMessage", resourceCulture);
             }
         }
         
@@ -277,6 +349,15 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Settings ähnelt.
+        /// </summary>
+        public static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Number of strokes ähnelt.
         /// </summary>
         public static string StrokeCount {
@@ -318,6 +399,24 @@ namespace RowingMonitor.Properties {
         public static string StrokeTime {
             get {
                 return ResourceManager.GetString("StrokeTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start tracking with the dashboard layout for trainees. ähnelt.
+        /// </summary>
+        public static string TraineeMessage {
+            get {
+                return ResourceManager.GetString("TraineeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Trainee view ähnelt.
+        /// </summary>
+        public static string TraineeTitle {
+            get {
+                return ResourceManager.GetString("TraineeTitle", resourceCulture);
             }
         }
         

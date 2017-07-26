@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:RowingMonitor.ViewModel"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="Kinect2Row" Height="920" Width="1280" Loaded="Window_Loaded">
+        Title="Kinect2Row" Height="820" Width="1280" Loaded="Window_Loaded">
 
     <Window.DataContext>
         <vm:RowingMonitorViewModel x:Name="ViewModel"/>
@@ -34,7 +34,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" HorizontalAlignment="Center" Margin="4 0 4 0">
+        <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" HorizontalAlignment="Center" Margin="4 0 4 0">
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="18">Options</TextBlock>
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Smoothing Filter</TextBlock>
             <RadioButton GroupName="SmoothingFilter" Content="1€ Filter" IsChecked="True" Checked="RadioButton_Checked"></RadioButton>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -20,6 +21,16 @@ namespace RowingMonitor
             System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
             RowingMonitor.Properties.Resources.Culture = new CultureInfo(culture);
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {    
+            // change the theme and accent
+            ThemeManager.ChangeAppStyle(Application.Current,
+                                        ThemeManager.GetAccent("Blue"),
+                                        ThemeManager.GetAppTheme("BaseLight"));
+
+            base.OnStartup(e);
         }
     }
 }
