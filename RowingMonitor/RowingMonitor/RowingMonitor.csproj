@@ -132,6 +132,7 @@
     <Compile Include="Model\Pipeline\RowingMetaDataCalculator.cs" />
     <Compile Include="Model\Pipeline\DTWSegmentDetector.cs" />
     <Compile Include="Model\Pipeline\RowingMetaDataDisplay.cs" />
+    <Compile Include="Model\Pipeline\RowingSonification.cs" />
     <Compile Include="Model\Pipeline\SkeletonSideDisplay.cs" />
     <Compile Include="Model\Pipeline\SkeletonFrontalDisplay.cs" />
     <Compile Include="Model\Pipeline\SmoothingFilter.cs" />

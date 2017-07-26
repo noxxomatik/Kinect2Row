@@ -52,6 +52,7 @@ namespace RowingMonitor.ViewModel
         private KleshnevPlot kleshnevPlot;
         private TrunkAngleDisplay trunkAngleDisplay;
         private RowingMetaDataDisplay metaDataDisplay;
+        private RowingSonification rowingSonification;
 
         /* GUI */
         private Grid grid;
@@ -88,6 +89,7 @@ namespace RowingMonitor.ViewModel
             kleshnevPlot = new KleshnevPlot(KleshnevPlotRange);
             trunkAngleDisplay = new TrunkAngleDisplay();
             metaDataDisplay = new RowingMetaDataDisplay();
+            rowingSonification = new RowingSonification();
 
             // link pipeline together
             //kinectReader.JointDataBlock.LinkTo(smoothingFilter.SmoothingBlock);
@@ -113,6 +115,7 @@ namespace RowingMonitor.ViewModel
 
             kleshnevVelocityCalculator.Output.LinkTo(kleshnevPlot.KleshnevDataBlock);
             kleshnevVelocityCalculator.Output.LinkTo(metaDataCalculator.InputKleshnevData);
+            kleshnevVelocityCalculator.Output.LinkTo(rowingSonification.Input);
 
             //segmentDetector.DetectionOutputBlock.LinkTo(jointDataPlot.PlotHitsBlock);
             //segmentDetector.DetectionOutputBlock.LinkTo(kleshnevPlot.PlotHitsBlock);
@@ -203,6 +206,7 @@ namespace RowingMonitor.ViewModel
             segmentDetector.Output.LinkTo(jointDataPlot.PlotHitsBlock);
             segmentDetector.Output.LinkTo(kleshnevPlot.PlotHitsBlock);
             segmentDetector.Output.LinkTo(metaDataCalculator.InputSegmentHits);
+            segmentDetector.Output.LinkTo(rowingSonification.InputSegmentHits);
         }
 
         public void ChangeSmoothingFilter()

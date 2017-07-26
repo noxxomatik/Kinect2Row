@@ -125,14 +125,14 @@ namespace UnitTest
             ankleR.Position.Y = 0;
             ankleR.Position.Z = 0;
             ankleR.TrackingState = TrackingState.Tracked;
-            joints.Add(JointType.AnkleRight, ankleR);
+            joints.Add(JointType.FootRight, ankleR);
 
             Joint ankleL = new Joint();
             ankleL.Position.X = -1;
             ankleL.Position.Y = 0;
             ankleL.Position.Z = 0;
             ankleL.TrackingState = TrackingState.Tracked;
-            joints.Add(JointType.AnkleLeft, ankleL);
+            joints.Add(JointType.FootLeft, ankleL);
 
             Joint spine = new Joint();
             spine.Position.X = 0;
