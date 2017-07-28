@@ -10,18 +10,18 @@ using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
-    public class RowingMetaDataDisplay
+    public class RowingMetaDataDebugDisplay
     {
         ActionBlock<RowingMetaData> input;
         RowingMetaData tmpMetaData;
 
-        private RowingMetaDataView view;
-        private RowingMetaDataViewModel viewModel;
+        private RowingMetaDataDebugView view;
+        private RowingMetaDataDebugViewModel viewModel;
 
-        public RowingMetaDataDisplay()
+        public RowingMetaDataDebugDisplay()
         {
-            View = new RowingMetaDataView();
-            ViewModel = (RowingMetaDataViewModel)View.DataContext;
+            View = new RowingMetaDataDebugView();
+            ViewModel = (RowingMetaDataDebugViewModel)View.DataContext;
 
             Input = new ActionBlock<RowingMetaData>(metaData =>
             {
@@ -38,7 +38,7 @@ namespace RowingMonitor.Model.Pipeline
         }
 
         public ActionBlock<RowingMetaData> Input { get => input; set => input = value; }
-        public RowingMetaDataView View { get => view; set => view = value; }
-        internal RowingMetaDataViewModel ViewModel { get => viewModel; set => viewModel = value; }
+        public RowingMetaDataDebugView View { get => view; set => view = value; }
+        internal RowingMetaDataDebugViewModel ViewModel { get => viewModel; set => viewModel = value; }
     }
 }

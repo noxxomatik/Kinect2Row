@@ -51,8 +51,9 @@ namespace RowingMonitor.ViewModel
         private SkeletonSideDisplay skeletonSideDisplay;
         private KleshnevPlot kleshnevPlot;
         private TrunkAngleDisplay trunkAngleDisplay;
-        private RowingMetaDataDisplay metaDataDisplay;
+        private RowingMetaDataDebugDisplay metaDataDisplay;
         private RowingSonification rowingSonification;
+        private RowingMetaDataWidgetsDisplay widgetsDisplay;
 
         /* GUI */
         private Grid grid;
@@ -88,8 +89,9 @@ namespace RowingMonitor.ViewModel
             skeletonSideDisplay = new SkeletonSideDisplay();
             kleshnevPlot = new KleshnevPlot(KleshnevPlotRange);
             trunkAngleDisplay = new TrunkAngleDisplay();
-            metaDataDisplay = new RowingMetaDataDisplay();
+            metaDataDisplay = new RowingMetaDataDebugDisplay();
             rowingSonification = new RowingSonification();
+            widgetsDisplay = new RowingMetaDataWidgetsDisplay();
 
             // link pipeline together
             //kinectReader.JointDataBlock.LinkTo(smoothingFilter.SmoothingBlock);
@@ -121,6 +123,7 @@ namespace RowingMonitor.ViewModel
             //segmentDetector.DetectionOutputBlock.LinkTo(kleshnevPlot.PlotHitsBlock);
 
             metaDataCalculator.Output.LinkTo(metaDataDisplay.Input);
+            metaDataCalculator.Output.LinkTo(widgetsDisplay.Input);
 
             ChangeSegmentDetector();
             ChangeSmoothingFilter();
@@ -136,6 +139,7 @@ namespace RowingMonitor.ViewModel
             skeletonFrontalDisplay.Render();
             trunkAngleDisplay.Render();
             metaDataDisplay.Render();
+            widgetsDisplay.Render();
         }
 
         public void WindowLoaded()
@@ -167,11 +171,11 @@ namespace RowingMonitor.ViewModel
             kleshnevPlotFrame.SetValue(Grid.RowSpanProperty, 2);
             Grid.Children.Add(kleshnevPlotFrame);
 
-            Frame trunkAngleFrame = new Frame();
-            trunkAngleFrame.Content = trunkAngleDisplay.View;
-            trunkAngleFrame.SetValue(Grid.RowProperty, 1);
-            trunkAngleFrame.SetValue(Grid.ColumnProperty, 2);
-            Grid.Children.Add(trunkAngleFrame);
+            //Frame trunkAngleFrame = new Frame();
+            //trunkAngleFrame.Content = trunkAngleDisplay.View;
+            //trunkAngleFrame.SetValue(Grid.RowProperty, 1);
+            //trunkAngleFrame.SetValue(Grid.ColumnProperty, 2);
+            //Grid.Children.Add(trunkAngleFrame);
 
             Frame metaDataFrame = new Frame();
             metaDataFrame.Content = metaDataDisplay.View;
@@ -179,6 +183,12 @@ namespace RowingMonitor.ViewModel
             metaDataFrame.SetValue(Grid.ColumnProperty, 0);
             metaDataFrame.SetValue(Grid.RowSpanProperty, 3);
             Grid.Children.Add(metaDataFrame);
+
+            Frame widgetsFrame = new Frame();
+            widgetsFrame.Content = widgetsDisplay.View;
+            widgetsFrame.SetValue(Grid.RowProperty, 1);
+            widgetsFrame.SetValue(Grid.ColumnProperty, 2);
+            Grid.Children.Add(widgetsFrame);
 
             // start the pipeline
             kinectReader.StartReader();

@@ -137,7 +137,8 @@
     <Compile Include="Model\Pipeline\RowingMetaDataCalculator.Calculations.cs" />
     <Compile Include="Model\Pipeline\RowingMetaDataCalculator.cs" />
     <Compile Include="Model\Pipeline\DTWSegmentDetector.cs" />
-    <Compile Include="Model\Pipeline\RowingMetaDataDisplay.cs" />
+    <Compile Include="Model\Pipeline\RowingMetaDataDebugDisplay.cs" />
+    <Compile Include="Model\Pipeline\RowingMetaDataWidgetsDisplay.cs" />
     <Compile Include="Model\Pipeline\RowingSonification.cs" />
     <Compile Include="Model\Pipeline\SkeletonSideDisplay.cs" />
     <Compile Include="Model\Pipeline\SkeletonFrontalDisplay.cs" />
@@ -175,7 +176,8 @@
       <DependentUpon>RowingMonitorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\KleshnevPlotViewModel.cs" />
-    <Compile Include="ViewModel\RowingMetaDataViewModel.cs" />
+    <Compile Include="ViewModel\RowingMetaDataDebugViewModel.cs" />
+    <Compile Include="ViewModel\RowingMetaDataWidgetsViewModel.cs" />
     <Compile Include="ViewModel\RowingMonitorViewModel.cs" />
     <Compile Include="ViewModel\SkeletonSideViewModel.cs" />
     <Compile Include="ViewModel\SkeletonFrontalViewModel.cs" />
@@ -186,8 +188,11 @@
     <Compile Include="View\KleshnevPlotView.xaml.cs">
       <DependentUpon>KleshnevPlotView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RowingMetaDataView.xaml.cs">
-      <DependentUpon>RowingMetaDataView.xaml</DependentUpon>
+    <Compile Include="View\RowingMetaDataDebugView.xaml.cs">
+      <DependentUpon>RowingMetaDataDebugView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RowingMetaDataWidgetsView.xaml.cs">
+      <DependentUpon>RowingMetaDataWidgetsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SkeletonSideView.xaml.cs">
       <DependentUpon>SkeletonSideView.xaml</DependentUpon>
@@ -225,7 +230,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RowingMetaDataView.xaml">
+    <Page Include="View\RowingMetaDataDebugView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RowingMetaDataWidgetsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

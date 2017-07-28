@@ -1,4 +1,4 @@
-﻿<Page x:Class="RowingMonitor.View.RowingMetaDataView"
+﻿<Page x:Class="RowingMonitor.View.RowingMetaDataDebugView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,7 +11,7 @@
       Title="RowingMetaDataView">
 
     <Page.DataContext>
-        <vm:RowingMetaDataViewModel x:Name="ViewModel"/>
+        <vm:RowingMetaDataDebugViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
     <Grid>
