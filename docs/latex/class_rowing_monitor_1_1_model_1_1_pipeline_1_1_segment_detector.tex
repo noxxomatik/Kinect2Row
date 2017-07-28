@@ -12,6 +12,8 @@ Inheritance diagram for Rowing\+Monitor.\+Model.\+Pipeline.\+Segment\+Detector\+
 delegate void \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_aee5283f7fa49f68c5c4195449442093c}{Segment\+Detected\+Event\+Handler} (Object sender, \hyperlink{class_rowing_monitor_1_1_model_1_1_segment_detected_event_args}{Segment\+Detected\+Event\+Args} e)
 \item 
 abstract void \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a24dcb2926660a6218af3052f147d82da}{Update} (\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data} joint\+Data, Joint\+Type joint\+Type, String axis)
+\item 
+abstract List$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit} $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a28a3c23d7d350c0e37e9a58ff9a4e16b}{Detect} (\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data} joint\+Data, Joint\+Type joint\+Type, String axis)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -25,6 +27,17 @@ virtual void \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_
 \item 
 List$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit} $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a567492ea6e393bed7c946359cdf7c866}{hits} = new List$<$\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit}$>$()
 \end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Broadcast\+Block$<$ List$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit} $>$ $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a2f9933aa3e7251629d0b1676b73a336a}{Output}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+Joint\+Type \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a0bc85068e6ac401713535e38c0f1e18d}{Detection\+Joint\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+string \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_ae8b2b75b70356efbe159de7427eb31fd}{Detection\+Axis}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+Action\+Block$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data} $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a1dff97a3144d7642595a8ce1fd4831a4}{Input}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
 \subsection*{Events}
 \begin{DoxyCompactItemize}
 \item 
@@ -33,6 +46,12 @@ List$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Seg
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a28a3c23d7d350c0e37e9a58ff9a4e16b}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a28a3c23d7d350c0e37e9a58ff9a4e16b}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}!Detect@{Detect}}
+\index{Detect@{Detect}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}}
+\subsubsection{\texorpdfstring{Detect()}{Detect()}}
+{\footnotesize\ttfamily abstract List$<$\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit}$>$ Rowing\+Monitor.\+Model.\+Pipeline.\+Segment\+Detector.\+Detect (\begin{DoxyParamCaption}\item[{\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data}}]{joint\+Data,  }\item[{Joint\+Type}]{joint\+Type,  }\item[{String}]{axis }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
 \mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a1f8ffebdfca18aa67a213ca817981161}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a1f8ffebdfca18aa67a213ca817981161}} 
 \index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}!Get\+Joint\+Data\+Value@{Get\+Joint\+Data\+Value}}
 \index{Get\+Joint\+Data\+Value@{Get\+Joint\+Data\+Value}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}}
@@ -73,6 +92,33 @@ Implemented in \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_z_v_c_
 \index{hits@{hits}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}}
 \subsubsection{\texorpdfstring{hits}{hits}}
 {\footnotesize\ttfamily List$<$\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit}$>$ Rowing\+Monitor.\+Model.\+Pipeline.\+Segment\+Detector.\+hits = new List$<$\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit}$>$()\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_ae8b2b75b70356efbe159de7427eb31fd}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_ae8b2b75b70356efbe159de7427eb31fd}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}!Detection\+Axis@{Detection\+Axis}}
+\index{Detection\+Axis@{Detection\+Axis}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}}
+\subsubsection{\texorpdfstring{Detection\+Axis}{DetectionAxis}}
+{\footnotesize\ttfamily string Rowing\+Monitor.\+Model.\+Pipeline.\+Segment\+Detector.\+Detection\+Axis\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a0bc85068e6ac401713535e38c0f1e18d}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a0bc85068e6ac401713535e38c0f1e18d}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}!Detection\+Joint\+Type@{Detection\+Joint\+Type}}
+\index{Detection\+Joint\+Type@{Detection\+Joint\+Type}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}}
+\subsubsection{\texorpdfstring{Detection\+Joint\+Type}{DetectionJointType}}
+{\footnotesize\ttfamily Joint\+Type Rowing\+Monitor.\+Model.\+Pipeline.\+Segment\+Detector.\+Detection\+Joint\+Type\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a1dff97a3144d7642595a8ce1fd4831a4}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a1dff97a3144d7642595a8ce1fd4831a4}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}!Input@{Input}}
+\index{Input@{Input}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}}
+\subsubsection{\texorpdfstring{Input}{Input}}
+{\footnotesize\ttfamily Action\+Block$<$\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data}$>$ Rowing\+Monitor.\+Model.\+Pipeline.\+Segment\+Detector.\+Input\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a2f9933aa3e7251629d0b1676b73a336a}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector_a2f9933aa3e7251629d0b1676b73a336a}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}!Output@{Output}}
+\index{Output@{Output}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Segment\+Detector}}
+\subsubsection{\texorpdfstring{Output}{Output}}
+{\footnotesize\ttfamily Broadcast\+Block$<$List$<$\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit}$>$ $>$ Rowing\+Monitor.\+Model.\+Pipeline.\+Segment\+Detector.\+Output\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
 
 
 

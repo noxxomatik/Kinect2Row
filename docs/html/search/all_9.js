@@ -1,6 +1,17 @@
 var searchData=
 [
   ['jointdata',['JointData',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html',1,'RowingMonitor.Model.Util.JointData'],['../class_rowing_monitor_1_1_model_1_1_kinect_frame_arrived_event_args.html#a2249c19be25bb9b2c3627fb1bfa7512b',1,'RowingMonitor.Model.KinectFrameArrivedEventArgs.JointData()']]],
-  ['joints',['Joints',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#afa67f920730db9679102686913774e69',1,'RowingMonitor::Model::Util::JointData']]],
-  ['jointthickness',['JointThickness',['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#af0d4024f6496a4408e27f1d7bb4327b8',1,'RowingMonitor::Model::FrontalView']]]
+  ['jointdatablock',['JointDataBlock',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a6e860c115b12d8f17b8f800f9bc64645',1,'RowingMonitor::Model::Pipeline::KinectReader']]],
+  ['jointdatahandler',['JointDataHandler',['../class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler.html',1,'RowingMonitor::Model::Util']]],
+  ['jointdatahandler_2ecs',['JointDataHandler.cs',['../_joint_data_handler_8cs.html',1,'']]],
+  ['jointdataplot',['JointDataPlot',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_joint_data_plot.html',1,'RowingMonitor.Model.Pipeline.JointDataPlot'],['../class_rowing_monitor_1_1_joint_data_plot.html',1,'RowingMonitor.JointDataPlot'],['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_joint_data_plot.html#ab5f09dd3d3b8ea21748dc9fc89fb15d4',1,'RowingMonitor.Model.Pipeline.JointDataPlot.JointDataPlot()']]],
+  ['jointdataplot_2ecs',['JointDataPlot.cs',['../_joint_data_plot_8cs.html',1,'']]],
+  ['jointdataplot_2eg_2ei_2ecs',['JointDataPlot.g.i.cs',['../_joint_data_plot_8g_8i_8cs.html',1,'']]],
+  ['jointdataplotview',['JointDataPlotView',['../class_rowing_monitor_1_1_view_1_1_joint_data_plot_view.html',1,'RowingMonitor.View.JointDataPlotView'],['../class_rowing_monitor_1_1_view_1_1_joint_data_plot_view.html#a4b629e47777ec1c5a13c8e134a35ebb4',1,'RowingMonitor.View.JointDataPlotView.JointDataPlotView()']]],
+  ['jointdataplotview_2eg_2ecs',['JointDataPlotView.g.cs',['../_debug_2_view_2_joint_data_plot_view_8g_8cs.html',1,'(Global Namespace)'],['../_release_2_view_2_joint_data_plot_view_8g_8cs.html',1,'(Global Namespace)']]],
+  ['jointdataplotview_2eg_2ei_2ecs',['JointDataPlotView.g.i.cs',['../_debug_2_joint_data_plot_view_8g_8i_8cs.html',1,'(Global Namespace)'],['../_debug_2_view_2_joint_data_plot_view_8g_8i_8cs.html',1,'(Global Namespace)'],['../_release_2_view_2_joint_data_plot_view_8g_8i_8cs.html',1,'(Global Namespace)']]],
+  ['jointdataplotview_2examl_2ecs',['JointDataPlotView.xaml.cs',['../_joint_data_plot_view_8xaml_8cs.html',1,'']]],
+  ['jointdataplotviewmodel',['JointDataPlotViewModel',['../class_rowing_monitor_1_1_view_model_1_1_joint_data_plot_view_model.html',1,'RowingMonitor.ViewModel.JointDataPlotViewModel'],['../class_rowing_monitor_1_1_view_model_1_1_joint_data_plot_view_model.html#a0617e5a1a406a41c3c0c0efb38fc4544',1,'RowingMonitor.ViewModel.JointDataPlotViewModel.JointDataPlotViewModel()']]],
+  ['jointdataplotviewmodel_2ecs',['JointDataPlotViewModel.cs',['../_joint_data_plot_view_model_8cs.html',1,'']]],
+  ['joints',['Joints',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#afa67f920730db9679102686913774e69',1,'RowingMonitor::Model::Util::JointData']]]
 ];

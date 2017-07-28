@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['hits',['hits',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a567492ea6e393bed7c946359cdf7c866',1,'RowingMonitor::Model::Pipeline::SegmentDetector']]]
+  ['fcorrection',['fCorrection',['../struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e.html#a7303c0fbcd8a80670f7ddd5f46c0d49c',1,'RowingMonitor::Model::Pipeline::KinectJointSmoothingFilter::TRANSFORM_SMOOTH_PARAMETERS']]],
+  ['firsttime',['firstTime',['../class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html#aef4128061f9e58498c536a2f0238fb5e',1,'RowingMonitor.Model.Util.OneEuroFilter.firstTime()'],['../class_rowing_monitor_1_1_model_1_1_util_1_1_lowpass_filter.html#a8d81ed9b3a6d910cf22d7ef743bb6163',1,'RowingMonitor.Model.Util.LowpassFilter.firstTime()']]],
+  ['fjitterradius',['fJitterRadius',['../struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e.html#aa4a54259125f5677ef2b7a149402e268',1,'RowingMonitor::Model::Pipeline::KinectJointSmoothingFilter::TRANSFORM_SMOOTH_PARAMETERS']]],
+  ['fmaxdeviationradius',['fMaxDeviationRadius',['../struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e.html#a01f36a8e40cd63c55161e3df85de9196',1,'RowingMonitor::Model::Pipeline::KinectJointSmoothingFilter::TRANSFORM_SMOOTH_PARAMETERS']]],
+  ['fprediction',['fPrediction',['../struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e.html#a4cc3828d097b5b63f71f004f2034ba79',1,'RowingMonitor::Model::Pipeline::KinectJointSmoothingFilter::TRANSFORM_SMOOTH_PARAMETERS']]],
+  ['fsmoothing',['fSmoothing',['../struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e.html#a5fd02a9b999cbcc12ad1a22763adb8cd',1,'RowingMonitor::Model::Pipeline::KinectJointSmoothingFilter::TRANSFORM_SMOOTH_PARAMETERS']]]
 ];

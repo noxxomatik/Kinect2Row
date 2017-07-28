@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['mincutoff',['Mincutoff',['../class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing.html#a9763ac7c63ca0ad07c8a0a00f645a9fc',1,'RowingMonitor::Model::OneEuroFilterSmoothing']]]
+  ['lastindex',['LastIndex',['../class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler.html#ae5d278181fb0c1896766b4482e5a4f7e',1,'RowingMonitor::Model::Util::JointDataHandler']]],
+  ['lastsegmentplotmodel',['LastSegmentPlotModel',['../class_rowing_monitor_1_1_view_model_1_1_kleshnev_plot_view_model.html#af35d0a979c83141a6dc40e71df701ed2',1,'RowingMonitor::ViewModel::KleshnevPlotViewModel']]]
 ];

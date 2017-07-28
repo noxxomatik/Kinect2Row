@@ -1,10 +1,13 @@
 var searchData=
 [
-  ['datastreamtype',['DataStreamType',['../struct_rowing_monitor_1_1_model_1_1_plot_data.html#a254e431007698194e2a440cba5fc48a5',1,'RowingMonitor::Model::PlotData']]],
-  ['defaultplotmodel',['DefaultPlotModel',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_monitor_pipeline.html#a91cb4d291d11eae9d5a89812d63ad393',1,'RowingMonitor.Model.Pipeline.RowingMonitorPipeline.DefaultPlotModel()'],['../class_rowing_monitor_1_1_view_model_1_1_main_view_model.html#a79c8374c2e47f0d83d1a7561a078c6c7',1,'RowingMonitor.ViewModel.MainViewModel.DefaultPlotModel()']]],
+  ['datastreamtype',['DataStreamType',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a8ed0022c598484f0b418ad30b50bbfb6',1,'RowingMonitor.Model.Util.JointData.DataStreamType()'],['../struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data.html#a774cc0b6b03996964e6bde85b993ca2d',1,'RowingMonitor.Model.Util.PlotData.DataStreamType()']]],
+  ['debugmessage',['DebugMessage',['../class_rowing_monitor_1_1_properties_1_1_resources.html#a31be075f6145a715b6449bd05c48a441',1,'RowingMonitor::Properties::Resources']]],
+  ['debugtitle',['DebugTitle',['../class_rowing_monitor_1_1_properties_1_1_resources.html#ac197e44538c0c710513c11a63d98f236',1,'RowingMonitor::Properties::Resources']]],
   ['detectionabstimestamp',['DetectionAbsTimestamp',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ab9778fc572f014c1d75de5898f8c83d2',1,'RowingMonitor::Model::Util::SegmentHit']]],
+  ['detectionaxis',['DetectionAxis',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#ae8b2b75b70356efbe159de7427eb31fd',1,'RowingMonitor::Model::Pipeline::SegmentDetector']]],
   ['detectionindex',['DetectionIndex',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ad943df68e8adfeaa2b76701701cef0df',1,'RowingMonitor::Model::Util::SegmentHit']]],
-  ['displayheight',['DisplayHeight',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html#aff2b7f5c2516877b8c935ba41407c8b6',1,'RowingMonitor::Model::KinectReader']]],
-  ['displaywidth',['DisplayWidth',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html#a533cac2f9a8e2aebf5251c5538598b6d',1,'RowingMonitor::Model::KinectReader']]],
+  ['detectionjointtype',['DetectionJointType',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a0bc85068e6ac401713535e38c0f1e18d',1,'RowingMonitor::Model::Pipeline::SegmentDetector']]],
+  ['displayheight',['DisplayHeight',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#abf9ef0cd7ebc6bfbb3d3035705bacf58',1,'RowingMonitor::Model::Pipeline::KinectReader']]],
+  ['displaywidth',['DisplayWidth',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a87c7a51b3ac3983882144e85cb90a223',1,'RowingMonitor::Model::Pipeline::KinectReader']]],
   ['distance',['Distance',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence.html#a9f07ec73d4dcc7cb1d9e97f7e979fcc1',1,'RowingMonitor::Model::Util::Subsequence']]]
 ];

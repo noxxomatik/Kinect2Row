@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['x',['X',['../struct_rowing_monitor_1_1_model_1_1_plot_data.html#a0e4ce74a471cf5ffbc621bcc18e6ceb8',1,'RowingMonitor::Model::PlotData']]]
+  ['usekinectjointfilter',['UseKinectJointFilter',['../class_rowing_monitor_1_1_view_model_1_1_rowing_monitor_view_model.html#aa1c7347af05e006ced9ae63f6bbdfafb',1,'RowingMonitor::ViewModel::RowingMonitorViewModel']]],
+  ['usezvc',['UseZVC',['../class_rowing_monitor_1_1_view_model_1_1_rowing_monitor_view_model.html#a6764ca95c8ba917cd2b26b364fb86f84',1,'RowingMonitor::ViewModel::RowingMonitorViewModel']]]
 ];

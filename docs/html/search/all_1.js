@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['beta',['Beta',['../class_rowing_monitor_1_1_model_1_1_one_euro_filter_smoothing.html#abbe908f1d7748febfc27336f42b95a6f',1,'RowingMonitor.Model.OneEuroFilterSmoothing.Beta()'],['../class_rowing_monitor_1_1_view_model_1_1_main_view_model.html#aea1ee41eb29904df4dd08c781def6bd2',1,'RowingMonitor.ViewModel.MainViewModel.Beta()']]],
-  ['bodies',['Bodies',['../class_rowing_monitor_1_1_model_1_1_util_1_1_kinect_data_handler.html#a099b9bc04fc8023717be35549aaeddda',1,'RowingMonitor::Model::Util::KinectDataHandler']]],
-  ['bodycolors',['bodyColors',['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#a75389fa61ab8d54d93aadc11d5d5360e',1,'RowingMonitor::Model::FrontalView']]],
-  ['bodyimagesource',['BodyImageSource',['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#a5761942e513e1b5389ca9c72da6e8b29',1,'RowingMonitor.Model.FrontalView.BodyImageSource()'],['../class_rowing_monitor_1_1_view_model_1_1_main_view_model.html#a8db6c0be0de3d081ecc1cfd4e29f63ea',1,'RowingMonitor.ViewModel.MainViewModel.BodyImageSource()']]],
+  ['b',['b',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#afe1a5177263ae1fa5a9077a0c5747b95',1,'RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters.b()'],['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#a74b2faac51507b9c925a2ee9185605e2',1,'RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters.B()']]],
+  ['beta',['beta',['../class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html#a11b6badcd4065baa9453aa4672300fb3',1,'RowingMonitor.Model.Util.OneEuroFilter.beta()'],['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_one_euro_smoothing_filter.html#aa9fe6be1fe6687a2fe7e1f8a77864527',1,'RowingMonitor.Model.Pipeline.OneEuroSmoothingFilter.Beta()'],['../class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html#a16e8bfe237364453b4ed8d79d05ba662',1,'RowingMonitor.Model.Util.OneEuroFilter.Beta()']]],
+  ['bodies',['Bodies',['../class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler.html#a0c4ffc4145ad48004d1ffb064801adae',1,'RowingMonitor::Model::Util::JointDataHandler']]],
   ['bodynotfullytrackedexception',['BodyNotFullyTrackedException',['../class_rowing_monitor_1_1_model_1_1_body_not_fully_tracked_exception.html',1,'RowingMonitor::Model']]],
   ['bodynotfullytrackedexception_2ecs',['BodyNotFullyTrackedException.cs',['../_body_not_fully_tracked_exception_8cs.html',1,'']]]
 ];

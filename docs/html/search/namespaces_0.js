@@ -5,5 +5,6 @@ var searchData=
   ['properties',['Properties',['../namespace_rowing_monitor_1_1_properties.html',1,'RowingMonitor']]],
   ['rowingmonitor',['RowingMonitor',['../namespace_rowing_monitor.html',1,'']]],
   ['util',['Util',['../namespace_rowing_monitor_1_1_model_1_1_util.html',1,'RowingMonitor::Model']]],
+  ['view',['View',['../namespace_rowing_monitor_1_1_view.html',1,'RowingMonitor']]],
   ['viewmodel',['ViewModel',['../namespace_rowing_monitor_1_1_view_model.html',1,'RowingMonitor']]]
 ];

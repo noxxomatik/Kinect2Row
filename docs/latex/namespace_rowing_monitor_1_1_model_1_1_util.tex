@@ -3,11 +3,33 @@
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_circular_buffer}{Circular\+Buffer}
+\begin{DoxyCompactList}\small\item\em A F\+I\+FO buffer which overwrites old values if the size is reached. \end{DoxyCompactList}\item 
+class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting}{Curve\+Fitting}
+\item 
+class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_degrees}{Degrees}
+\item 
 struct \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data}
 \item 
-class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_kinect_data_handler}{Kinect\+Data\+Handler}
+class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler}{Joint\+Data\+Handler}
+\item 
+class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_logger}{Logger}
+\item 
+class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_lowpass_filter}{Lowpass\+Filter}
+\item 
+class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter}{One\+Euro\+Filter}
+\item 
+struct \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data}{Plot\+Data}
+\item 
+class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_plot_data_handler}{Plot\+Data\+Handler}
+\item 
+struct \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data}{Rowing\+Meta\+Data}
+\begin{DoxyCompactList}\small\item\em Calculated meta data that describes the current rowing session. \end{DoxyCompactList}\item 
+class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data_handler}{Rowing\+Meta\+Data\+Handler}
 \item 
 struct \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit}
+\item 
+class \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler}{Segment\+Hit\+Handler}
 \item 
 struct \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence}{Subsequence}
 \begin{DoxyCompactList}\small\item\em \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence}{Subsequence} in a data stream which suits a given template. \end{DoxyCompactList}\item 
@@ -29,9 +51,10 @@ enum \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a45e0956b123d438555a
 enum \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107f}{Data\+Stream\+Type} \{ \newline
 \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fa1a271ffa218a9b8369f32a2c00b566d3}{Data\+Stream\+Type.\+Raw\+Position}, 
 \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fafc36d596856e041f000cd516b1bfa80f}{Data\+Stream\+Type.\+Smoothed\+Position}, 
+\hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fae51bf1c2de9a9d12c48fb091f0a19d1e}{Data\+Stream\+Type.\+Shifted\+Position}, 
 \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fa88156d46910a2d733443c339a9231d12}{Data\+Stream\+Type.\+Velocity}, 
-\hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fa147a03fd666321d0ee5c79a002f85433}{Data\+Stream\+Type.\+Segment\+Hits}, 
 \newline
+\hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fa147a03fd666321d0ee5c79a002f85433}{Data\+Stream\+Type.\+Segment\+Hits}, 
 \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fa6311ae17c1ee52b36e68aaf4ad066387}{Data\+Stream\+Type.\+Other}
  \}
 \item 
@@ -39,6 +62,11 @@ enum \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a7135d50f11f02e6f0cb
 \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a7135d50f11f02e6f0cb9680dc68dba56a9f45120e6ec846521e3b6b55e2dcc665}{Hit\+Type.\+Segment\+Internal}, 
 \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a7135d50f11f02e6f0cb9680dc68dba56aae19ae84ffd1b96e67e533a405e4cda7}{Hit\+Type.\+Segment\+End}, 
 \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a7135d50f11f02e6f0cb9680dc68dba56a1899bd0fcd7cf17807c2b09bacce7881}{Hit\+Type.\+Segment\+End\+Start}
+ \}
+\item 
+enum \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4df}{Segment\+State} \{ \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4dfa196f9202d8d6092d9d7dc486b768f220}{Segment\+State.\+Segment\+Started}, 
+\hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4dfa33f6dd1661b3df1911d267491d6f5eb1}{Segment\+State.\+Segment\+Ended}, 
+\hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4dfa79af1a8ea8d63169379023f139962520}{Segment\+State.\+No\+Segment}
  \}
 \item 
 enum \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a248a257b884983ed79c45a8b34ee9580}{Subsequence\+Status} \{ \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a248a257b884983ed79c45a8b34ee9580a1c250a21210b7b88a14db9a0cbe71162}{Subsequence\+Status.\+N\+O\+T\+\_\+\+S\+ET}, 
@@ -62,6 +90,10 @@ Raw\+Position&\\
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{Smoothed\+Position@{Smoothed\+Position}!Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}}\index{Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}!Smoothed\+Position@{Smoothed\+Position}}}\mbox{\Hypertarget{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fafc36d596856e041f000cd516b1bfa80f}\label{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fafc36d596856e041f000cd516b1bfa80f}} 
 Smoothed\+Position&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Shifted\+Position@{Shifted\+Position}!Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}}\index{Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}!Shifted\+Position@{Shifted\+Position}}}\mbox{\Hypertarget{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fae51bf1c2de9a9d12c48fb091f0a19d1e}\label{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fae51bf1c2de9a9d12c48fb091f0a19d1e}} 
+Shifted\+Position&\\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{Velocity@{Velocity}!Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}}\index{Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}!Velocity@{Velocity}}}\mbox{\Hypertarget{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fa88156d46910a2d733443c339a9231d12}\label{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107fa88156d46910a2d733443c339a9231d12}} 
@@ -130,6 +162,26 @@ Arms\+Right&\\
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{Arms\+Left@{Arms\+Left}!Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}}\index{Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}!Arms\+Left@{Arms\+Left}}}\mbox{\Hypertarget{namespace_rowing_monitor_1_1_model_1_1_util_a45e0956b123d438555a1cb3997bd5cb4ac18c5d5152ddb36c4fb869a27ba05efa}\label{namespace_rowing_monitor_1_1_model_1_1_util_a45e0956b123d438555a1cb3997bd5cb4ac18c5d5152ddb36c4fb869a27ba05efa}} 
 Arms\+Left&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4df}\label{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4df}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}!Segment\+State@{Segment\+State}}
+\index{Segment\+State@{Segment\+State}!Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}}
+\subsubsection{\texorpdfstring{Segment\+State}{SegmentState}}
+{\footnotesize\ttfamily enum \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4df}{Rowing\+Monitor.\+Model.\+Util.\+Segment\+State}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Segment\+Started@{Segment\+Started}!Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}}\index{Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}!Segment\+Started@{Segment\+Started}}}\mbox{\Hypertarget{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4dfa196f9202d8d6092d9d7dc486b768f220}\label{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4dfa196f9202d8d6092d9d7dc486b768f220}} 
+Segment\+Started&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Segment\+Ended@{Segment\+Ended}!Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}}\index{Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}!Segment\+Ended@{Segment\+Ended}}}\mbox{\Hypertarget{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4dfa33f6dd1661b3df1911d267491d6f5eb1}\label{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4dfa33f6dd1661b3df1911d267491d6f5eb1}} 
+Segment\+Ended&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{No\+Segment@{No\+Segment}!Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}}\index{Rowing\+Monitor\+::\+Model\+::\+Util@{Rowing\+Monitor\+::\+Model\+::\+Util}!No\+Segment@{No\+Segment}}}\mbox{\Hypertarget{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4dfa79af1a8ea8d63169379023f139962520}\label{namespace_rowing_monitor_1_1_model_1_1_util_aab07192bda8b488e80710841de62e4dfa79af1a8ea8d63169379023f139962520}} 
+No\+Segment&\\
 \hline
 
 \end{DoxyEnumFields}

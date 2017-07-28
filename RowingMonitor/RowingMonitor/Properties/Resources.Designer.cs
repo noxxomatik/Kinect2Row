@@ -70,6 +70,15 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Catch trunk angle ähnelt.
+        /// </summary>
+        public static string CatchTrunkAngleTitle {
+            get {
+                return ResourceManager.GetString("CatchTrunkAngleTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Start tracking with the dashboard layout for coaches. ähnelt.
         /// </summary>
         public static string CoachMessage {
@@ -111,6 +120,15 @@ namespace RowingMonitor.Properties {
         public static string FailedScreenshotStatusTextFormat {
             get {
                 return ResourceManager.GetString("FailedScreenshotStatusTextFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Finish trunk angle ähnelt.
+        /// </summary>
+        public static string FinishTrunkAngleTitle {
+            get {
+                return ResourceManager.GetString("FinishTrunkAngleTitle", resourceCulture);
             }
         }
         
@@ -426,6 +444,15 @@ namespace RowingMonitor.Properties {
         public static string TrunkAngle {
             get {
                 return ResourceManager.GetString("TrunkAngle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Trunk angle ähnelt.
+        /// </summary>
+        public static string TrunkAngleTitle {
+            get {
+                return ResourceManager.GetString("TrunkAngleTitle", resourceCulture);
             }
         }
     }

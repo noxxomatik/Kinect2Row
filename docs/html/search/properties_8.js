@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['klshcurrentsegmentplotmodel',['KlshCurrentSegmentPlotModel',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_monitor_pipeline.html#aa103ae2c7cff43766d4504d65f7b08c8',1,'RowingMonitor.Model.Pipeline.RowingMonitorPipeline.KlshCurrentSegmentPlotModel()'],['../class_rowing_monitor_1_1_view_model_1_1_main_view_model.html#a9534f6ef9053f21582f5e16da72441c0',1,'RowingMonitor.ViewModel.MainViewModel.KlshCurrentSegmentPlotModel()']]],
-  ['klshlastsegmentplotmodel',['KlshLastSegmentPlotModel',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_monitor_pipeline.html#a1ec7023f64fc4b08d54122a2a1f8c975',1,'RowingMonitor.Model.Pipeline.RowingMonitorPipeline.KlshLastSegmentPlotModel()'],['../class_rowing_monitor_1_1_view_model_1_1_main_view_model.html#a96719ac6ef51316ea6149ee4b2a0b299',1,'RowingMonitor.ViewModel.MainViewModel.KlshLastSegmentPlotModel()']]]
+  ['jointdata',['JointData',['../class_rowing_monitor_1_1_model_1_1_kinect_frame_arrived_event_args.html#a2249c19be25bb9b2c3627fb1bfa7512b',1,'RowingMonitor::Model::KinectFrameArrivedEventArgs']]],
+  ['jointdatablock',['JointDataBlock',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a6e860c115b12d8f17b8f800f9bc64645',1,'RowingMonitor::Model::Pipeline::KinectReader']]],
+  ['joints',['Joints',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#afa67f920730db9679102686913774e69',1,'RowingMonitor::Model::Util::JointData']]]
 ];

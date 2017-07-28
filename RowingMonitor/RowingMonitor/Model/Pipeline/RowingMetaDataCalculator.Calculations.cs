@@ -378,7 +378,8 @@ namespace RowingMonitor.Model.Pipeline
             // check for zero crossings
             // only crossings that travel from negative to positive are required
             // seat crossing
-            if (lastKleshnevData.Velocities[KleshnevVelocityType.Legs] < 0 
+            if (!currentKleshnevData.IsEmpty 
+                && lastKleshnevData.Velocities[KleshnevVelocityType.Legs] < 0 
                 && currentKleshnevData.Velocities[KleshnevVelocityType.Legs] >= 0) {
                 if (currentKleshnevData.Velocities[KleshnevVelocityType.Legs] == 0) {
                     seatCrossedTimestamp = currentKleshnevData.AbsTimestamp;
@@ -398,7 +399,8 @@ namespace RowingMonitor.Model.Pipeline
                 }
             }
             // handle crossing
-            if (lastKleshnevData.Velocities[KleshnevVelocityType.HandleRight] < 0
+            if (!currentKleshnevData.IsEmpty 
+                && lastKleshnevData.Velocities[KleshnevVelocityType.HandleRight] < 0
                 && currentKleshnevData.Velocities[KleshnevVelocityType.HandleRight] >= 0) {
                 if (currentKleshnevData.Velocities[KleshnevVelocityType.HandleRight] == 0) {
                     handleCrossedTimestamp = currentKleshnevData.AbsTimestamp;

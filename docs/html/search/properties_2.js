@@ -1,10 +1,19 @@
 var searchData=
 [
+  ['c',['C',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#a2c26f634699927ecf6586043bf7a134b',1,'RowingMonitor::Model::Util::CurveFitting::QuadraticFunctionParameters']]],
   ['calculatedjointdata',['CalculatedJointData',['../class_rowing_monitor_1_1_model_1_1_calculated_frame_arrived_event_args.html#ad2a6d96247f32cec46b5e5006b4a867b',1,'RowingMonitor::Model::CalculatedFrameArrivedEventArgs']]],
   ['canexecutechanged',['CanExecuteChanged',['../class_rowing_monitor_1_1_relay_command.html#ae4dd035ea91a110089885a49c15fa525',1,'RowingMonitor::RelayCommand']]],
+  ['catchfactor',['CatchFactor',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#aa16578566b33c3a692a1040ede071d2a',1,'RowingMonitor.Model.Util.RowingMetaData.CatchFactor()'],['../class_rowing_monitor_1_1_properties_1_1_resources.html#a387e94c12ed72def984e5c51c268cf0a',1,'RowingMonitor.Properties.Resources.CatchFactor()'],['../class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#afdc5c2e015f01d1ab93ed92f438453ca',1,'RowingMonitor.ViewModel.RowingMetaDataViewModel.CatchFactor()']]],
+  ['catchtrunkangle',['CatchTrunkAngle',['../class_rowing_monitor_1_1_view_model_1_1_trunk_angle_view_model.html#a64fc2e1372e05c65cd17f24a142f2783',1,'RowingMonitor::ViewModel::TrunkAngleViewModel']]],
+  ['catchtrunkanglestring',['CatchTrunkAngleString',['../class_rowing_monitor_1_1_view_model_1_1_trunk_angle_view_model.html#a696475d48415b0f2d9574d9189eac534',1,'RowingMonitor::ViewModel::TrunkAngleViewModel']]],
+  ['catchtrunkangletitle',['CatchTrunkAngleTitle',['../class_rowing_monitor_1_1_properties_1_1_resources.html#a1a12bdf0feea59667d2d272370806cfa',1,'RowingMonitor::Properties::Resources']]],
+  ['coachmessage',['CoachMessage',['../class_rowing_monitor_1_1_properties_1_1_resources.html#aaff4b4081f166baef8672bd7a8fb0a46',1,'RowingMonitor::Properties::Resources']]],
+  ['coachtitle',['CoachTitle',['../class_rowing_monitor_1_1_properties_1_1_resources.html#a23437e7fcfbd5a143a7dcb88fd19ae11',1,'RowingMonitor::Properties::Resources']]],
   ['colorbitmap',['ColorBitmap',['../class_rowing_monitor_1_1_model_1_1_color_frame_arrived_event_args.html#a2332327334320a56103d13596128a841',1,'RowingMonitor::Model::ColorFrameArrivedEventArgs']]],
-  ['colorbodyimagesource',['ColorBodyImageSource',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_monitor_pipeline.html#affd26b0d4b0fd4fc310e3ed60e517db2',1,'RowingMonitor::Model::Pipeline::RowingMonitorPipeline']]],
-  ['colorimagesource',['ColorImageSource',['../class_rowing_monitor_1_1_model_1_1_frontal_view.html#a0f47cf3abfe77c81f15735301a04c5af',1,'RowingMonitor.Model.FrontalView.ColorImageSource()'],['../class_rowing_monitor_1_1_view_model_1_1_main_view_model.html#a6a3397050ea6774eabf6118819a183a0',1,'RowingMonitor.ViewModel.MainViewModel.ColorImageSource()']]],
-  ['colors',['Colors',['../class_rowing_monitor_1_1_model_1_1_plot.html#af5c811e7e98de0927650caede84921a5',1,'RowingMonitor::Model::Plot']]],
-  ['coordinatemapper',['CoordinateMapper',['../class_rowing_monitor_1_1_model_1_1_kinect_reader.html#a6e16165a91a0d690370503db49999c30',1,'RowingMonitor::Model::KinectReader']]]
+  ['colorframeblock',['ColorFrameBlock',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#acfc75a10c6a18c1a8f511944cb411937',1,'RowingMonitor::Model::Pipeline::KinectReader']]],
+  ['colorimageblock',['ColorImageBlock',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_frontal_display.html#a1bc8a2facef1ae045fea7c21c637e6ee',1,'RowingMonitor::Model::Pipeline::SkeletonFrontalDisplay']]],
+  ['colorimagesource',['ColorImageSource',['../class_rowing_monitor_1_1_view_model_1_1_skeleton_frontal_view_model.html#a91b53739cf7c3904497a1d9a34fd6962',1,'RowingMonitor::ViewModel::SkeletonFrontalViewModel']]],
+  ['coordinatemapper',['CoordinateMapper',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#abb848deb4ea9ed2ed53f6d95ce1945db',1,'RowingMonitor::Model::Pipeline::KinectReader']]],
+  ['culture',['Culture',['../class_rowing_monitor_1_1_properties_1_1_resources.html#a99dee899703451cc2050cff9b778058a',1,'RowingMonitor::Properties::Resources']]],
+  ['currentsegmentplotmodel',['CurrentSegmentPlotModel',['../class_rowing_monitor_1_1_view_model_1_1_kleshnev_plot_view_model.html#a7d8136280ae36f895edb930c7235da7b',1,'RowingMonitor::ViewModel::KleshnevPlotViewModel']]]
 ];

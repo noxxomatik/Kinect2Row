@@ -240,4 +240,13 @@
   <data name="TraineeTitle" xml:space="preserve">
     <value>Trainee view</value>
   </data>
+  <data name="CatchTrunkAngleTitle" xml:space="preserve">
+    <value>Catch trunk angle</value>
+  </data>
+  <data name="FinishTrunkAngleTitle" xml:space="preserve">
+    <value>Finish trunk angle</value>
+  </data>
+  <data name="TrunkAngleTitle" xml:space="preserve">
+    <value>Trunk angle</value>
+  </data>
 </root>

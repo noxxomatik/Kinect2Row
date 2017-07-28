@@ -73,10 +73,10 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a56463d7bd16c6e5cad4e3619e9df9508"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a56463d7bd16c6e5cad4e3619e9df9508">RelTimestamp</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a56463d7bd16c6e5cad4e3619e9df9508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time since Kinect sensor started.  <a href="#a56463d7bd16c6e5cad4e3619e9df9508">More...</a><br /></td></tr>
+<tr class="memdesc:a56463d7bd16c6e5cad4e3619e9df9508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time in milliseconds since Kinect sensor started.  <a href="#a56463d7bd16c6e5cad4e3619e9df9508">More...</a><br /></td></tr>
 <tr class="separator:a56463d7bd16c6e5cad4e3619e9df9508"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c951ee40b3e49be73b92cf39c5aa9ab"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a2c951ee40b3e49be73b92cf39c5aa9ab">AbsTimestamp</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a2c951ee40b3e49be73b92cf39c5aa9ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time since first frame.  <a href="#a2c951ee40b3e49be73b92cf39c5aa9ab">More...</a><br /></td></tr>
+<tr class="memdesc:a2c951ee40b3e49be73b92cf39c5aa9ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time in milliseconds since first frame.  <a href="#a2c951ee40b3e49be73b92cf39c5aa9ab">More...</a><br /></td></tr>
 <tr class="separator:a2c951ee40b3e49be73b92cf39c5aa9ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa67f920730db9679102686913774e69"><td class="memItemLeft" align="right" valign="top">IReadOnlyDictionary&lt; JointType, Joint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#afa67f920730db9679102686913774e69">Joints</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:afa67f920730db9679102686913774e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Positions of all joints.  <a href="#afa67f920730db9679102686913774e69">More...</a><br /></td></tr>
@@ -87,6 +87,12 @@ Properties</h2></td></tr>
 <tr class="memitem:a98bf571ea92c7f9b8e197062f17ddc27"><td class="memItemLeft" align="right" valign="top">List&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a98bf571ea92c7f9b8e197062f17ddc27">Timestamps</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a98bf571ea92c7f9b8e197062f17ddc27"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of all timestamps that were set in the pipeline  <a href="#a98bf571ea92c7f9b8e197062f17ddc27">More...</a><br /></td></tr>
 <tr class="separator:a98bf571ea92c7f9b8e197062f17ddc27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ed0022c598484f0b418ad30b50bbfb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f">DataStreamType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a8ed0022c598484f0b418ad30b50bbfb6">DataStreamType</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a8ed0022c598484f0b418ad30b50bbfb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the data.  <a href="#a8ed0022c598484f0b418ad30b50bbfb6">More...</a><br /></td></tr>
+<tr class="separator:a8ed0022c598484f0b418ad30b50bbfb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e86bf9206df62d0fb4b77c8017ccf8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a1e86bf9206df62d0fb4b77c8017ccf8a">IsEmpty</a><code> [get]</code></td></tr>
+<tr class="memdesc:a1e86bf9206df62d0fb4b77c8017ccf8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this element conatins no joint data.  <a href="#a1e86bf9206df62d0fb4b77c8017ccf8a">More...</a><br /></td></tr>
+<tr class="separator:a1e86bf9206df62d0fb4b77c8017ccf8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Property Documentation</h2>
 <a id="a2c951ee40b3e49be73b92cf39c5aa9ab"></a>
@@ -109,7 +115,31 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Time since first frame. </p>
+<p>Time in milliseconds since first frame. </p>
+
+</div>
+</div>
+<a id="a8ed0022c598484f0b418ad30b50bbfb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ed0022c598484f0b418ad30b50bbfb6">&#9670;&nbsp;</a></span>DataStreamType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f">DataStreamType</a> RowingMonitor.Model.Util.JointData.DataStreamType</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Type of the data. </p>
 
 </div>
 </div>
@@ -134,6 +164,30 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Incrementing number of frames. </p>
+
+</div>
+</div>
+<a id="a1e86bf9206df62d0fb4b77c8017ccf8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e86bf9206df62d0fb4b77c8017ccf8a">&#9670;&nbsp;</a></span>IsEmpty</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RowingMonitor.Model.Util.JointData.IsEmpty</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if this element conatins no joint data. </p>
 
 </div>
 </div>
@@ -181,7 +235,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Time since Kinect sensor started. </p>
+<p>Time in milliseconds since Kinect sensor started. </p>
 
 </div>
 </div>
@@ -210,7 +264,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>Model/Util/<a class="el" href="_kinect_data_handler_8cs.html">KinectDataHandler.cs</a></li>
+<li>Model/Util/<a class="el" href="_joint_data_handler_8cs.html">JointDataHandler.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

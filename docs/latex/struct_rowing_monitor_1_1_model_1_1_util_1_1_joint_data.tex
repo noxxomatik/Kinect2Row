@@ -4,15 +4,19 @@
 \begin{DoxyCompactItemize}
 \item 
 double \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a56463d7bd16c6e5cad4e3619e9df9508}{Rel\+Timestamp}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\begin{DoxyCompactList}\small\item\em Time since Kinect sensor started. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Time in milliseconds since Kinect sensor started. \end{DoxyCompactList}\item 
 double \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a2c951ee40b3e49be73b92cf39c5aa9ab}{Abs\+Timestamp}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\begin{DoxyCompactList}\small\item\em Time since first frame. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Time in milliseconds since first frame. \end{DoxyCompactList}\item 
 I\+Read\+Only\+Dictionary$<$ Joint\+Type, Joint $>$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_afa67f920730db9679102686913774e69}{Joints}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Positions of all joints. \end{DoxyCompactList}\item 
 long \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a2193c6359b3e9e2d6dfdb6178351a8b3}{Index}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Incrementing number of frames. \end{DoxyCompactList}\item 
 List$<$ double $>$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a98bf571ea92c7f9b8e197062f17ddc27}{Timestamps}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\begin{DoxyCompactList}\small\item\em List of all timestamps that were set in the pipeline \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em List of all timestamps that were set in the pipeline \end{DoxyCompactList}\item 
+\hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107f}{Data\+Stream\+Type} \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a8ed0022c598484f0b418ad30b50bbfb6}{Data\+Stream\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Type of the data. \end{DoxyCompactList}\item 
+bool \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a1e86bf9206df62d0fb4b77c8017ccf8a}{Is\+Empty}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Returns true if this element conatins no joint data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Property Documentation}
@@ -24,7 +28,17 @@ List$<$ double $>$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint
 
 
 
-Time since first frame. 
+Time in milliseconds since first frame. 
+
+\mbox{\Hypertarget{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a8ed0022c598484f0b418ad30b50bbfb6}\label{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a8ed0022c598484f0b418ad30b50bbfb6}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data}!Data\+Stream\+Type@{Data\+Stream\+Type}}
+\index{Data\+Stream\+Type@{Data\+Stream\+Type}!Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data}}
+\subsubsection{\texorpdfstring{Data\+Stream\+Type}{DataStreamType}}
+{\footnotesize\ttfamily \hyperlink{namespace_rowing_monitor_1_1_model_1_1_util_a01e1a06061533b246feb7421c9d0107f}{Data\+Stream\+Type} Rowing\+Monitor.\+Model.\+Util.\+Joint\+Data.\+Data\+Stream\+Type\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Type of the data. 
 
 \mbox{\Hypertarget{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a2193c6359b3e9e2d6dfdb6178351a8b3}\label{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a2193c6359b3e9e2d6dfdb6178351a8b3}} 
 \index{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data}!Index@{Index}}
@@ -35,6 +49,16 @@ Time since first frame.
 
 
 Incrementing number of frames. 
+
+\mbox{\Hypertarget{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a1e86bf9206df62d0fb4b77c8017ccf8a}\label{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a1e86bf9206df62d0fb4b77c8017ccf8a}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data}!Is\+Empty@{Is\+Empty}}
+\index{Is\+Empty@{Is\+Empty}!Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data}}
+\subsubsection{\texorpdfstring{Is\+Empty}{IsEmpty}}
+{\footnotesize\ttfamily bool Rowing\+Monitor.\+Model.\+Util.\+Joint\+Data.\+Is\+Empty\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Returns true if this element conatins no joint data. 
 
 \mbox{\Hypertarget{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_afa67f920730db9679102686913774e69}\label{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_afa67f920730db9679102686913774e69}} 
 \index{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data}!Joints@{Joints}}
@@ -54,7 +78,7 @@ Positions of all joints.
 
 
 
-Time since Kinect sensor started. 
+Time in milliseconds since Kinect sensor started. 
 
 \mbox{\Hypertarget{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a98bf571ea92c7f9b8e197062f17ddc27}\label{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_a98bf571ea92c7f9b8e197062f17ddc27}} 
 \index{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Joint\+Data}!Timestamps@{Timestamps}}
@@ -70,4 +94,4 @@ List of all timestamps that were set in the pipeline
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Model/\+Util/\hyperlink{_kinect_data_handler_8cs}{Kinect\+Data\+Handler.\+cs}\end{DoxyCompactItemize}
+Model/\+Util/\hyperlink{_joint_data_handler_8cs}{Joint\+Data\+Handler.\+cs}\end{DoxyCompactItemize}
