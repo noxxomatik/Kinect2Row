@@ -1,5 +1,6 @@
 ﻿using Microsoft.Kinect;
 using RowingMonitor.Model.Util;
+using RowingMonitor.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace RowingMonitor
+namespace RowingMonitor.View
 {
     /// <summary>
     /// Interaktionslogik für RowingMonitorWindow.xaml
     /// </summary>
-    public partial class RowingMonitorWindow : Window
+    public partial class DebugView : Page
     {
-        public RowingMonitorWindow()
+        public DebugView()
         {
             InitializeComponent();
-
+            
             ViewModel.Grid = grid;
         }
 
@@ -352,9 +353,14 @@ namespace RowingMonitor
             ViewModel.PlotMeasuredVariables.Remove(DataStreamType.ShiftedPosition);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel.WindowLoaded();
+            ViewModel.ViewLoaded();
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ViewUnloaded();
         }
     }
 }

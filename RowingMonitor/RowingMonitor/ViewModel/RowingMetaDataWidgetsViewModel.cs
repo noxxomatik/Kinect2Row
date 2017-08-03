@@ -55,29 +55,29 @@ namespace RowingMonitor.ViewModel
             RowingStyleFactor = (rowingStyleFactor * 100).ToString("0.0") + "%";
 
             // bars
-            double catchFactorOffset;
+            int catchFactorOffset;
             if (catchFactor >= catchFactorEnd) {
-                catchFactorOffset = catchFactorEnd * catchFactorBarUnit - tickOffset;
+                catchFactorOffset = (int)(catchFactorEnd * catchFactorBarUnit - tickOffset);
             }
             else if (catchFactor <= catchFactorEnd) {
-                catchFactorOffset = 0 - tickOffset;
+                catchFactorOffset = (int)(0 - tickOffset);
             }
             else {
-                catchFactorOffset = (catchFactor - catchFactorStart)
-                    * catchFactorBarUnit - tickOffset;
+                catchFactorOffset = (int)((catchFactor - catchFactorStart)
+                    * catchFactorBarUnit - tickOffset);
             }
             CatchFactorMargin = new Thickness(catchFactorOffset, 0, 0, 0);
 
-            double rowingStyleOffset;
+            int rowingStyleOffset;
             if (rowingStyleFactor >= rowingStyleEnd) {
-                rowingStyleOffset = rowingStyleEnd * rowingStyleBarUnit - tickOffset;
+                rowingStyleOffset = (int)(rowingStyleEnd * rowingStyleBarUnit - tickOffset);
             }
             else if (rowingStyleFactor <= rowingStyleEnd) {
-                rowingStyleOffset = 0 - tickOffset;
+                rowingStyleOffset = (int)(0 - tickOffset);
             }
             else {
-                rowingStyleOffset = (rowingStyleFactor - rowingStyleStart)
-                    * rowingStyleBarUnit - tickOffset;
+                rowingStyleOffset = (int)((rowingStyleFactor - rowingStyleStart)
+                    * rowingStyleBarUnit - tickOffset);
             }
             RowingStyleFactorMargin = new Thickness(rowingStyleOffset, 0, 0, 0);
 

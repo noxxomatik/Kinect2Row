@@ -1,4 +1,4 @@
-﻿<Window x:Class="RowingMonitor.RowingMonitorWindow"
+﻿<Page x:Class="RowingMonitor.View.DebugView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,17 +7,17 @@
         xmlns:vm="clr-namespace:RowingMonitor.ViewModel"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="Kinect2Row" Height="820" Width="1280" Loaded="Window_Loaded">
+        Title="Kinect2Row" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
-    <Window.DataContext>
-        <vm:RowingMonitorViewModel x:Name="ViewModel"/>
-    </Window.DataContext>
+    <Page.DataContext>
+        <vm:DebugViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
 
-    <Window.Resources>
+    <Page.Resources>
         <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
         <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
         <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2" />
-    </Window.Resources>
+    </Page.Resources>
 
     <Grid x:Name="grid" Margin="4 4 4 4">
         <Grid.ColumnDefinitions>
@@ -92,4 +92,4 @@
             <CheckBox Checked="CheckBox_Checked_28" Unchecked="CheckBox_Unchecked_28">WristRight</CheckBox>
         </StackPanel>
     </Grid>
-</Window>
+</Page>

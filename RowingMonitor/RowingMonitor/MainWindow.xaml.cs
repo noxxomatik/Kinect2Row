@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using RowingMonitor.ViewModel;
+using RowingMonitor.View;
 
 namespace RowingMonitor
 {
@@ -22,12 +24,17 @@ namespace RowingMonitor
     {
         public MainWindow()
         {
-            InitializeComponent();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             settingsFlyout.IsOpen = true;
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            mainFrame.NavigationService.Navigate(new HomeView());
         }
     }
 }

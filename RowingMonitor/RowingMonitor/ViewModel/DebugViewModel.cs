@@ -12,7 +12,7 @@ using System.Windows.Controls;
 
 namespace RowingMonitor.ViewModel
 {
-    public class RowingMonitorViewModel
+    public class DebugViewModel
     {
         /* pipeline elemnts */
         // kinect reader
@@ -71,7 +71,7 @@ namespace RowingMonitor.ViewModel
         // render timer
         private Timer timer;
 
-        public RowingMonitorViewModel()
+        public DebugViewModel()
         {
             // create the pipeline elements
             kinectReader = KinectReader.Instance;
@@ -142,7 +142,7 @@ namespace RowingMonitor.ViewModel
             widgetsDisplay.Render();
         }
 
-        public void WindowLoaded()
+        public void ViewLoaded()
         {
             // create the GUI    
             Frame plotFrame = new Frame();
@@ -192,6 +192,12 @@ namespace RowingMonitor.ViewModel
 
             // start the pipeline
             kinectReader.StartReader();
+        }
+
+        public void ViewUnloaded()
+        {
+            // TODO: dispose and clean up
+            timer.Dispose();
         }
 
         public void ChangeSegmentDetector()

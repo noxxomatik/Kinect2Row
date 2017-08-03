@@ -12,7 +12,7 @@
                       Width="1280"                      
                       BorderBrush="{DynamicResource AccentColorBrush}"
                       BorderThickness="1"
-                      ResizeMode="CanResizeWithGrip"                      
+                      ResizeMode="CanResizeWithGrip" Loaded="MetroWindow_Loaded"                        
                       >
     
     <Controls:MetroWindow.RightWindowCommands>
@@ -32,58 +32,7 @@
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
-    <Controls:MetroTabControl>
-        <TabItem Header="{x:Static resx:Resources.HomeTitle}">
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="100"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Controls:Tile Title="{x:Static resx:Resources.TraineeTitle}" 
-                               Grid.Row="1" Grid.Column="0" 
-                               Width="200" Height="100"
-                               VerticalContentAlignment="Top">
-                    <TextBlock Text="{x:Static resx:Resources.TraineeMessage}" Width="180" TextWrapping="Wrap"/>
-                </Controls:Tile>
-                <Controls:Tile Title="{x:Static resx:Resources.CoachTitle}" 
-                               Grid.Row="2" Grid.Column="0" 
-                               Width="200" Height="100"
-                               VerticalContentAlignment="Top">
-                    <TextBlock Text="{x:Static resx:Resources.CoachMessage}" Width="180" TextWrapping="Wrap"/>
-                </Controls:Tile>
-                <Controls:Tile Title="{x:Static resx:Resources.DebugTitle}" 
-                               Grid.Row="3" Grid.Column="0" 
-                               Width="200" Height="100"
-                               VerticalContentAlignment="Top">
-                    <TextBlock Text="{x:Static resx:Resources.DebugMessage}" Width="180" TextWrapping="Wrap"/>
-                </Controls:Tile>
-
-                <GroupBox Header="{x:Static resx:Resources.KinectCalibrationTitle}"
-                          Grid.Row="0" Grid.Column="1" Grid.RowSpan="5"
-                          Width="600">
-                    <Grid x:Name="calibrationGrid">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <TextBox Text="{x:Static resx:Resources.KinectNotFoundMessage}" 
-                                 IsEnabled="False" Grid.Row="0" 
-                                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                 TextAlignment="Center" VerticalContentAlignment="Center"/>
-                        <TextBlock Text="{x:Static resx:Resources.KinectCalibrationMessage}" 
-                                   TextWrapping="Wrap" Grid.Row="1"/>
-                    </Grid>                    
-                </GroupBox>
-            </Grid>
-        </TabItem>
-    </Controls:MetroTabControl>
+    <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden">        
+    </Frame>   
     
 </Controls:MetroWindow>
