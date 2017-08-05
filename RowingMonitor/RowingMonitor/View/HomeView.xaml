@@ -28,13 +28,13 @@
                     <Controls:Tile Title="{x:Static resx:Resources.TraineeTitle}" 
                                Grid.Row="1" Grid.Column="0" 
                                Width="200" Height="100"
-                               VerticalContentAlignment="Top">
+                               VerticalContentAlignment="Top" Click="Tile_Click_1" Cursor="Hand">
                         <TextBlock Text="{x:Static resx:Resources.TraineeMessage}" Width="180" TextWrapping="Wrap"/>
                     </Controls:Tile>
                     <Controls:Tile Title="{x:Static resx:Resources.CoachTitle}" 
                                Grid.Row="2" Grid.Column="0" 
                                Width="200" Height="100"
-                               VerticalContentAlignment="Top">
+                               VerticalContentAlignment="Top" Cursor="Hand">
                         <TextBlock Text="{x:Static resx:Resources.CoachMessage}" Width="180" TextWrapping="Wrap"/>
                     </Controls:Tile>
                     <Controls:Tile Title="{x:Static resx:Resources.DebugTitle}" 

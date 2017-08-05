@@ -181,7 +181,7 @@
     <value>Kinect not available!</value>
   </data>
   <data name="SessionTime" xml:space="preserve">
-    <value>Session duration in (m)</value>
+    <value>Session duration (min)</value>
   </data>
   <data name="StrokeCount" xml:space="preserve">
     <value>Number of strokes</value>
@@ -248,5 +248,23 @@
   </data>
   <data name="TrunkAngleTitle" xml:space="preserve">
     <value>Trunk angle</value>
+  </data>
+  <data name="EndSession" xml:space="preserve">
+    <value>End session</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export session</value>
+  </data>
+  <data name="MeanSeatTravelDistanceNoUnit" xml:space="preserve">
+    <value>Mean seat travelled</value>
+  </data>
+  <data name="MeanStrokeLengthNoUnit" xml:space="preserve">
+    <value>Mean stroke length</value>
+  </data>
+  <data name="MeanStrokeTimeNoUnit" xml:space="preserve">
+    <value>Mean stroke time</value>
+  </data>
+  <data name="SessionTimeNoUnit" xml:space="preserve">
+    <value>Session duration</value>
   </data>
 </root>

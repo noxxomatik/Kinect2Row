@@ -41,7 +41,8 @@
                           TicksForeground="White" Foreground="White"
                           FontWeight="Bold" FontSize="16" SectionsInnerRadius=".5" DisableaAnimations="True">
         </lvc:AngularGauge>
-        <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+        <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" 
+              VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -51,12 +52,24 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="{Binding CatchTrunkAngleString}" Grid.Row="0" Grid.Column="0" TextAlignment="Right"/>
-            <TextBlock Text="{x:Static resx:Resources.CatchTrunkAngleTitle}" Grid.Row="1" Grid.Column="0" TextAlignment="Right"/>
-            <TextBlock Text="{Binding TrunkAngleString}" Grid.Row="0" Grid.Column="1" TextAlignment="Center"/>
-            <TextBlock Text="{x:Static resx:Resources.TrunkAngleTitle}" Grid.Row="1" Grid.Column="1" TextAlignment="Center"/>
-            <TextBlock Text="{Binding FinishTrunkAngleString}" Grid.Row="0" Grid.Column="2" TextAlignment="Left"/>
-            <TextBlock Text="{x:Static resx:Resources.FinishTrunkAngleTitle}" Grid.Row="1" Grid.Column="2" TextAlignment="Left"/>
+            <TextBlock Text="{Binding CatchTrunkAngleString}" Grid.Row="0" Grid.Column="0"
+                       TextAlignment="Center" FontSize="20" 
+                       Foreground="{DynamicResource AccentColorBrush}"/>
+            <TextBlock Text="{x:Static resx:Resources.CatchTrunkAngleTitle}" Grid.Row="1" 
+                       Grid.Column="0" TextAlignment="Center" FontSize="20" 
+                       Foreground="{DynamicResource AccentColorBrush}"/>
+            <TextBlock Text="{Binding TrunkAngleString}" Grid.Row="0" Grid.Column="1" 
+                       TextAlignment="Center" FontSize="16"
+                       Foreground="{DynamicResource AccentColorBrush}"/>
+            <TextBlock Text="{x:Static resx:Resources.TrunkAngleTitle}" Grid.Row="1" 
+                       Grid.Column="1" TextAlignment="Center" FontSize="16" 
+                       Foreground="{DynamicResource AccentColorBrush}"/>
+            <TextBlock Text="{Binding FinishTrunkAngleString}" Grid.Row="0"
+                       Grid.Column="2" TextAlignment="Center" FontSize="20" 
+                       Foreground="{DynamicResource AccentColorBrush}"/>
+            <TextBlock Text="{x:Static resx:Resources.FinishTrunkAngleTitle}" Grid.Row="1"
+                       Grid.Column="2" TextAlignment="Center" FontSize="20" 
+                       Foreground="{DynamicResource AccentColorBrush}"/>
         </Grid>
     </Grid>
 </Page>

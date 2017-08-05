@@ -115,6 +115,24 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die End session ähnelt.
+        /// </summary>
+        public static string EndSession {
+            get {
+                return ResourceManager.GetString("EndSession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Export session ähnelt.
+        /// </summary>
+        public static string Export {
+            get {
+                return ResourceManager.GetString("Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Failed to write screenshot to {0} ähnelt.
         /// </summary>
         public static string FailedScreenshotStatusTextFormat {
@@ -295,6 +313,15 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean seat travelled ähnelt.
+        /// </summary>
+        public static string MeanSeatTravelDistanceNoUnit {
+            get {
+                return ResourceManager.GetString("MeanSeatTravelDistanceNoUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Mean stroke length (m) ähnelt.
         /// </summary>
         public static string MeanStrokeLength {
@@ -304,11 +331,29 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean stroke length ähnelt.
+        /// </summary>
+        public static string MeanStrokeLengthNoUnit {
+            get {
+                return ResourceManager.GetString("MeanStrokeLengthNoUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Mean stroke time (s) ähnelt.
         /// </summary>
         public static string MeanStrokeTime {
             get {
                 return ResourceManager.GetString("MeanStrokeTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mean stroke time ähnelt.
+        /// </summary>
+        public static string MeanStrokeTimeNoUnit {
+            get {
+                return ResourceManager.GetString("MeanStrokeTimeNoUnit", resourceCulture);
             }
         }
         
@@ -358,11 +403,20 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Session duration in (m) ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Session duration (min) ähnelt.
         /// </summary>
         public static string SessionTime {
             get {
                 return ResourceManager.GetString("SessionTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Session duration ähnelt.
+        /// </summary>
+        public static string SessionTimeNoUnit {
+            get {
+                return ResourceManager.GetString("SessionTimeNoUnit", resourceCulture);
             }
         }
         

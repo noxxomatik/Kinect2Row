@@ -18,9 +18,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Catch factor bar-->
@@ -44,9 +45,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{x:Static resx:Resources.CatchFactor}" Grid.Column="0" TextAlignment="Center"/>
+            <TextBlock Text="{x:Static resx:Resources.CatchFactor}" Grid.Column="0" 
+                       TextAlignment="Center" FontSize="20" TextWrapping="Wrap"
+                       Foreground="{DynamicResource AccentColorBrush}"/>
             <TextBlock Text="{Binding CatchFactor}" Foreground="{Binding CatchFactorColor}" 
-                       Grid.Column="1" TextAlignment="Center"/>
+                       Grid.Column="1" TextAlignment="Center" FontSize="20"/>
         </Grid>
 
         <!-- Rowing style factor bar-->
@@ -70,9 +73,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{x:Static resx:Resources.RowingStyleFactor}" Grid.Column="0" TextAlignment="Center"/>
+            <TextBlock Text="{x:Static resx:Resources.RowingStyleFactor}" Grid.Column="0" 
+                       TextAlignment="Center" FontSize="20" TextWrapping="Wrap"
+                       Foreground="{DynamicResource AccentColorBrush}"/>
             <TextBlock Text="{Binding RowingStyleFactor}" Foreground="{Binding RowingStyleFactorColor}" 
-                       Grid.Column="1" TextAlignment="Center"/>
+                       Grid.Column="1" TextAlignment="Center" FontSize="20"/>
         </Grid>
     </Grid>
 </Page>

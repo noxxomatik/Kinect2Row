@@ -43,5 +43,10 @@ namespace RowingMonitor.View
             // dispose all links when page is unloaded
             ((HomeViewModel)DataContext).ViewUnloaded();
         }
+
+        private void Tile_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new TraineeView());
+        }
     }
 }
