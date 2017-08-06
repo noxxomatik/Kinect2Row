@@ -40,5 +40,14 @@ namespace RowingMonitor.Properties {
                 return ((float)(this["FootSpineBaseOffset"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.2")]
+        public double MinSegmentTime {
+            get {
+                return ((double)(this["MinSegmentTime"]));
+            }
+        }
     }
 }

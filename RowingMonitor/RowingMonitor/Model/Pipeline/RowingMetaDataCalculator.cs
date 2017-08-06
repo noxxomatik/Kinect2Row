@@ -69,8 +69,8 @@ namespace RowingMonitor.Model.Pipeline
 
                     // check if a new complete segment is passed
                     long[] tmpSegmentBounds = SegmentHitHandler.GetLastSegmentStartEnd(segmentHitsBuffer);
-                    if (tmpSegmentBounds != null && 
-                    (segmentBoundsBuffer == null || !tmpSegmentBounds.Equals(segmentBoundsBuffer))) {
+                    if (tmpSegmentBounds != null && SegmentHitHandler.IsSegmentValid(segmentHits, tmpSegmentBounds) 
+                    && (segmentBoundsBuffer == null || tmpSegmentBounds[1] != segmentBoundsBuffer[1])) {
                         newSegment = true;
                         segmentBoundsBuffer = tmpSegmentBounds;
                     }
