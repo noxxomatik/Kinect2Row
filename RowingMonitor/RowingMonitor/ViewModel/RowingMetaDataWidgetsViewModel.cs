@@ -48,18 +48,26 @@ namespace RowingMonitor.ViewModel
 
         public void Render(double catchFactor, double rowingStyleFactor)
         {
-            rowingStyleFactor = rowingStyleFactor != 0 ? rowingStyleFactor : lastRowingStyleFactor;
+            // catch factor is always the last current value
+            // rowing style factor is only not equal 0 when a segment ended
+            rowingStyleFactor *= 100;
+            rowingStyleFactor = rowingStyleFactor != 0 ? 
+                rowingStyleFactor : lastRowingStyleFactor;
+            lastRowingStyleFactor = rowingStyleFactor;
 
             // text
             CatchFactor = catchFactor.ToString("0.0") + "ms";
-            RowingStyleFactor = (rowingStyleFactor * 100).ToString("0.0") + "%";
+            RowingStyleFactor = rowingStyleFactor.ToString("0.0") + "%";
 
-            // bars
+            // bars offset for the pointer
             int catchFactorOffset;
+            // if catch factor is greater then the maximum bar value
             if (catchFactor >= catchFactorEnd) {
-                catchFactorOffset = (int)(catchFactorEnd * catchFactorBarUnit - tickOffset);
+                catchFactorOffset = (int)((catchFactorEnd - catchFactorStart)
+                    * catchFactorBarUnit - tickOffset);
             }
-            else if (catchFactor <= catchFactorEnd) {
+            // if catch factor is smaller then the minimum bar value
+            else if (catchFactor <= catchFactorStart) {
                 catchFactorOffset = (int)(0 - tickOffset);
             }
             else {
@@ -70,9 +78,10 @@ namespace RowingMonitor.ViewModel
 
             int rowingStyleOffset;
             if (rowingStyleFactor >= rowingStyleEnd) {
-                rowingStyleOffset = (int)(rowingStyleEnd * rowingStyleBarUnit - tickOffset);
+                rowingStyleOffset = (int)((rowingStyleEnd - rowingStyleStart)
+                    * rowingStyleBarUnit - tickOffset);
             }
-            else if (rowingStyleFactor <= rowingStyleEnd) {
+            else if (rowingStyleFactor <= rowingStyleStart) {
                 rowingStyleOffset = (int)(0 - tickOffset);
             }
             else {
@@ -81,7 +90,7 @@ namespace RowingMonitor.ViewModel
             }
             RowingStyleFactorMargin = new Thickness(rowingStyleOffset, 0, 0, 0);
 
-            // text colors
+            // text colors referring the bar limits
             if (catchFactor < catchFactorGoodStart) {
                 CatchFactorColor = LowColor;
             }
