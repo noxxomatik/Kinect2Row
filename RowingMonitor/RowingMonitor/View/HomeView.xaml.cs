@@ -48,5 +48,10 @@ namespace RowingMonitor.View
         {
             NavigationService.GetNavigationService(this).Navigate(new TraineeView());
         }
+
+        private void Tile_Click_2(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new CoachView());
+        }
     }
 }

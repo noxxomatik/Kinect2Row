@@ -16,7 +16,8 @@
     <Grid>
         <Controls:MetroTabControl>
             <TabItem Header="{x:Static resx:Resources.TraineeTitle}">
-                <Grid x:Name="mainGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
+                <Grid x:Name="mainGrid" VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Stretch" Margin="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="160"/>
                         <ColumnDefinition Width="160"/>

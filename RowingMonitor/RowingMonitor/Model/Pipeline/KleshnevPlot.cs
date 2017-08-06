@@ -133,7 +133,8 @@ namespace RowingMonitor.Model.Pipeline
                     foreach (KeyValuePair<string, List<PlotData>> plotSeries in
                         currentSegmentPlotData) {
                         List<PlotData> plotData = new List<PlotData>();
-                        for (long i = segmentBounds[0]; i <= segmentBounds[1]; i++) {
+                        for (long i = segmentBounds[0]; i <= segmentBounds[1] 
+                            && i < plotSeries.Value.Count; i++) {
                             plotData.Add(plotSeries.Value[(int)i]);
                         }
                         lastSegmentPlotData.Add(plotSeries.Key, plotData);
@@ -266,8 +267,14 @@ namespace RowingMonitor.Model.Pipeline
                                 new List<double>(), new List<double>()));
                     }
 
-                    currentSegmentKleshnevValues[type].Item1.Add(kleshnevData.AbsTimestamp / 1000);
-                    currentSegmentKleshnevValues[type].Item2.Add(kleshnevData.Velocities[type]);
+                    try {
+                        currentSegmentKleshnevValues[type].Item1.Add(kleshnevData.AbsTimestamp / 1000);
+                        currentSegmentKleshnevValues[type].Item2.Add(kleshnevData.Velocities[type]);
+                    }
+                    catch (Exception e) {
+                        Logger.Log(this.ToString(), e.ToString());
+                    }
+                    
                 }
             }
             // calculate curve fit if enough values are present

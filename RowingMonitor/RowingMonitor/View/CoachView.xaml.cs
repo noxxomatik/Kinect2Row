@@ -23,6 +23,24 @@ namespace RowingMonitor.View
         public CoachView()
         {
             InitializeComponent();
+
+            /* publish the grid to the view model*/
+            ViewModel.MainGrid = MainGrid;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ViewLoaded();
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ViewUnloaded();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new HomeView());
         }
     }
 }

@@ -34,7 +34,7 @@
                     <Controls:Tile Title="{x:Static resx:Resources.CoachTitle}" 
                                Grid.Row="2" Grid.Column="0" 
                                Width="200" Height="100"
-                               VerticalContentAlignment="Top" Cursor="Hand">
+                               VerticalContentAlignment="Top" Cursor="Hand" Click="Tile_Click_2">
                         <TextBlock Text="{x:Static resx:Resources.CoachMessage}" Width="180" TextWrapping="Wrap"/>
                     </Controls:Tile>
                     <Controls:Tile Title="{x:Static resx:Resources.DebugTitle}" 
@@ -55,9 +55,10 @@
                             <TextBox Text="{x:Static resx:Resources.KinectNotFoundMessage}" 
                                  IsEnabled="False" Grid.Row="0" 
                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                 TextAlignment="Center" VerticalContentAlignment="Center"/>
+                                 TextAlignment="Center" VerticalContentAlignment="Center"
+                                 FontSize="20"/>
                             <TextBlock Text="{x:Static resx:Resources.KinectCalibrationMessage}" 
-                                   TextWrapping="Wrap" Grid.Row="1"/>
+                                   TextWrapping="Wrap" Grid.Row="1" FontSize="16"/>
                         </Grid>
                     </GroupBox>
                 </Grid>

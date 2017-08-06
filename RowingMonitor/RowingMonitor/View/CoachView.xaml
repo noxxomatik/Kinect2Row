@@ -4,14 +4,221 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:vm="clr-namespace:RowingMonitor.ViewModel"
       xmlns:resx="clr-namespace:RowingMonitor.Properties"
       xmlns:local="clr-namespace:RowingMonitor.View"
       mc:Ignorable="d"
-      Title="CoachView">
+      Title="CoachView"
+      Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+
+    <Page.DataContext>
+        <vm:CoachViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
 
     <Grid>
         <Controls:MetroTabControl>
             <TabItem Header="{x:Static resx:Resources.CoachTitle}">
+                <Grid x:Name="MainGrid" VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch" Margin="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="320"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" MinHeight="320"/>
+                        <RowDefinition Height="320"/>
+                        <RowDefinition Height="160"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Header="{x:Static resx:Resources.MetaDataTitle}"
+                              Grid.Column="0" Grid.Row="0" Grid.RowSpan="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{x:Static resx:Resources.SessionTimeNoUnit}"
+                                       Grid.Column="0" Grid.Row="0"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                            <TextBlock Text="{Binding SessionTime}"
+                                       Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.StrokeCount}"
+                                       Grid.Column="0" Grid.Row="1"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                            <TextBlock Text="{Binding StrokeCount}"
+                                       Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.StrokesPerMinute}"
+                                       Grid.Column="0" Grid.Row="2"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                            <TextBlock Text="{Binding StrokeRate}"
+                                       Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.StrokeLength}"
+                                       Grid.Column="0" Grid.Row="3"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                            <TextBlock Text="{Binding StrokeLength}"
+                                       Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MeanStrokeLength}"
+                                       Grid.Column="0" Grid.Row="4"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                            <TextBlock Text="{Binding MeanStrokeLength}"
+                                       Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                                       
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>                            
+
+                            <TextBlock Text="{x:Static resx:Resources.StrokeTime}"
+                                       Grid.Column="0" Grid.Row="5"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                            <TextBlock Text="{Binding StrokeTime}"
+                                       Grid.Column="1" Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MeanStrokeTime}"
+                                       Grid.Column="0" Grid.Row="6"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                            <TextBlock Text="{Binding MeanStrokeTime}"
+                                       Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.SeatTravelDistance}"
+                                       Grid.Column="0" Grid.Row="7"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                            <TextBlock Text="{Binding SeatTravel}"
+                                       Grid.Column="1" Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MeanSeatTravelDistance}"
+                                       Grid.Column="0" Grid.Row="8"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                            <TextBlock Text="{Binding MeanSeatTravel}"
+                                       Grid.Column="1" Grid.Row="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                            
+                            <TextBlock Text="{x:Static resx:Resources.MaxHandleVelocity}"
+                                       Grid.Column="0" Grid.Row="9"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                            <TextBlock Text="{Binding MaxHandleVelocity}"
+                                       Grid.Column="1" Grid.Row="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MeanMaxHandleVelocity}"
+                                       Grid.Column="0" Grid.Row="10"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                            <TextBlock Text="{Binding MeanMaxHandleVelocity}"
+                                       Grid.Column="1" Grid.Row="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MaxLegsVelocity}"
+                                       Grid.Column="0" Grid.Row="11"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                            <TextBlock Text="{Binding MaxLegsVelocity}"
+                                       Grid.Column="1" Grid.Row="11" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MeanMaxLegsVelocity}"
+                                       Grid.Column="0" Grid.Row="12"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                            <TextBlock Text="{Binding MeanMaxLegsVelocity}"
+                                       Grid.Column="1" Grid.Row="12" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MaxArmsVelocity}"
+                                       Grid.Column="0" Grid.Row="13"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                            <TextBlock Text="{Binding MaxArmsVelocity}"
+                                       Grid.Column="1" Grid.Row="13" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MeanMaxArmsVelocity}"
+                                       Grid.Column="0" Grid.Row="14"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                            <TextBlock Text="{Binding MeanMaxArmsVelocity}"
+                                       Grid.Column="1" Grid.Row="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MaxTrunkVelocity}"
+                                       Grid.Column="0" Grid.Row="15"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                            <TextBlock Text="{Binding MaxTrunkVelocity}"
+                                       Grid.Column="1" Grid.Row="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MeanMaxTrunkVelocity}"
+                                       Grid.Column="0" Grid.Row="16"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                            <TextBlock Text="{Binding MeanMaxTrunkVelocity}"
+                                       Grid.Column="1" Grid.Row="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MeanCatchFactor}"
+                                       Grid.Column="0" Grid.Row="17"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                            <TextBlock Text="{Binding MeanCatchFactor}"
+                                       Grid.Column="1" Grid.Row="17" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+
+                            <TextBlock Text="{x:Static resx:Resources.MeanRowingStyleFactor}"
+                                       Grid.Column="0" Grid.Row="18"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                            <TextBlock Text="{Binding MeanRowingStyleFactor}"
+                                       Grid.Column="1" Grid.Row="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap" FontSize="16" Padding="4"
+                                       Background="{DynamicResource AccentColorBrush}"/>
+                        </Grid>
+                    </GroupBox>
+                    <Button Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="4" 
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            Content="{x:Static resx:Resources.EndSession}" 
+                            Height="40" Click="Button_Click"/>
+                </Grid>
             </TabItem>
         </Controls:MetroTabControl>
     </Grid>

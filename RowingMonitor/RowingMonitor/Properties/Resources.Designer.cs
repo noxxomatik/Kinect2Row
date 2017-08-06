@@ -358,6 +358,15 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Meta Data ähnelt.
+        /// </summary>
+        public static string MetaDataTitle {
+            get {
+                return ResourceManager.GetString("MetaDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No ready Kinect found! ähnelt.
         /// </summary>
         public static string NoSensorStatusText {

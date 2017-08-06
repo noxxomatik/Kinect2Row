@@ -267,4 +267,7 @@
   <data name="SessionTimeNoUnit" xml:space="preserve">
     <value>Session duration</value>
   </data>
+  <data name="MetaDataTitle" xml:space="preserve">
+    <value>Meta Data</value>
+  </data>
 </root>
