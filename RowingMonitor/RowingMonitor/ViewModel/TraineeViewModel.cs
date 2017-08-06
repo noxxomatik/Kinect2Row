@@ -77,9 +77,9 @@ namespace RowingMonitor.ViewModel
             widgetsDisplay = new RowingMetaDataWidgetsDisplay();
 
             viewInput = new ActionBlock<RowingMetaData>(metaData =>
-                {
-                    UpdateRowingMetaData(metaData);
-                });
+            {
+                UpdateRowingMetaData(metaData);
+            });
 
             /* link the pipeline */
             //readerLink = kinectReader.JointDataBlock.LinkTo(smoothingFilter.Input);
@@ -100,6 +100,7 @@ namespace RowingMonitor.ViewModel
             kleshnevVelocityCalculator.Output.LinkTo(rowingSonification.Input);
 
             segmentDetector.Output.LinkTo(metaDataCalculator.InputSegmentHits);
+            segmentDetector.Output.LinkTo(rowingSonification.InputSegmentHits);
 
             metaDataCalculator.Output.LinkTo(widgetsDisplay.Input);
             metaDataCalculator.Output.LinkTo(viewInput);
@@ -150,7 +151,7 @@ namespace RowingMonitor.ViewModel
         {
             // prepare the meta data for the view
             TimeSpan time = TimeSpan.FromMilliseconds(metaData.SessionTime);
-            SessionTime = time.ToString(@"hh\:mm\:ss");            
+            SessionTime = time.ToString(@"hh\:mm\:ss");
 
             if (metaData.StrokeCount != 0) {
                 StrokeCount = metaData.StrokeCount.ToString();
@@ -168,7 +169,7 @@ namespace RowingMonitor.ViewModel
                 MeanSeatTravel = metaData.MeanSeatTravelDistance.ToString("0.00") + "m";
             }
 
-            if(metaData.MeanStrokeTime != 0) {
+            if (metaData.MeanStrokeTime != 0) {
                 MeanStrokeTime = metaData.MeanStrokeTime.ToString("0.00") + "s";
             }
         }
