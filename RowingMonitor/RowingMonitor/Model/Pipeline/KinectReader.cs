@@ -37,15 +37,9 @@ namespace RowingMonitor.Model.Pipeline
         /// </summary>
         private MultiSourceFrameReader multiSourceFrameReader = null;
 
-        /// <summary>
-        /// Width of display (depth space)
-        /// </summary>
-        private int displayWidth;
-
-        /// <summary>
-        /// Height of display (depth space)
-        /// </summary>
-        private int displayHeight;
+        /* frame descriptions */
+        private FrameDescription depthFrameDescription;
+        private FrameDescription colorFrameDescription;
 
         /// <summary>
         /// Current status text to display
@@ -61,8 +55,6 @@ namespace RowingMonitor.Model.Pipeline
 
         /* Properties */
         public CoordinateMapper CoordinateMapper { get => coordinateMapper; }
-        public int DisplayWidth { get => displayWidth; }
-        public int DisplayHeight { get => displayHeight; }
         public string StatusText { get => statusText; }
 
         /* Events */
@@ -92,13 +84,9 @@ namespace RowingMonitor.Model.Pipeline
             // get the coordinate mapper
             coordinateMapper = kinectSensor.CoordinateMapper;
 
-            // get the depth (display) extents
-            FrameDescription frameDescription =
-                kinectSensor.DepthFrameSource.FrameDescription;
-
-            // get size of joint space
-            displayWidth = frameDescription.Width;
-            displayHeight = frameDescription.Height;
+            // get the extents
+            DepthFrameDescription = kinectSensor.DepthFrameSource.FrameDescription;
+            ColorFrameDescription = kinectSensor.ColorFrameSource.FrameDescription;
 
             // open the reader for the body frames
             multiSourceFrameReader = kinectSensor.OpenMultiSourceFrameReader(
@@ -135,9 +123,6 @@ namespace RowingMonitor.Model.Pipeline
                 return instance;
             }
         }
-
-        public BroadcastBlock<JointData> JointDataBlock { get => jointDataBlock; set => jointDataBlock = value; }
-        public BroadcastBlock<WriteableBitmap> ColorFrameBlock { get => colorFrameBlock; set => colorFrameBlock = value; }
 
         /// <summary>
         /// Handles the event which the sensor becomes unavailable 
@@ -183,7 +168,7 @@ namespace RowingMonitor.Model.Pipeline
                                     bodyFrame.RelativeTime.TotalMilliseconds,
                                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                                     joints);
-                        
+
                     }
                 }
             }
@@ -232,7 +217,7 @@ namespace RowingMonitor.Model.Pipeline
             MultiSourceFrameArrivedEventArgs e)
         {
             // process the multi source frame
-            Tuple<WriteableBitmap, JointData> tuple = ReadMultiSourceFrame(e.FrameReference.AcquireFrame());            
+            Tuple<WriteableBitmap, JointData> tuple = ReadMultiSourceFrame(e.FrameReference.AcquireFrame());
 
             // trigger the events
             // start the pipeline
@@ -281,6 +266,28 @@ namespace RowingMonitor.Model.Pipeline
                 this.kinectSensor.Close();
                 this.kinectSensor = null;
             }
+        }
+
+
+        public BroadcastBlock<JointData> JointDataBlock
+        {
+            get => jointDataBlock;
+            private set => jointDataBlock = value;
+        }
+        public BroadcastBlock<WriteableBitmap> ColorFrameBlock
+        {
+            get => colorFrameBlock;
+            private set => colorFrameBlock = value;
+        }
+        public FrameDescription DepthFrameDescription
+        {
+            get => depthFrameDescription;
+            private set => depthFrameDescription = value;
+        }
+        public FrameDescription ColorFrameDescription
+        {
+            get => colorFrameDescription;
+            private set => colorFrameDescription = value;
         }
     }
 }

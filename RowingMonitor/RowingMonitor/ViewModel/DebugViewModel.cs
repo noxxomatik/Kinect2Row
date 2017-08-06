@@ -84,8 +84,9 @@ namespace RowingMonitor.ViewModel
             metaDataCalculator = new RowingMetaDataCalculator();
 
             jointDataPlot = new JointDataPlot(PlotRange);
-            skeletonFrontalDisplay = new SkeletonFrontalDisplay(kinectReader.CoordinateMapper,
-                kinectReader.DisplayWidth, kinectReader.DisplayHeight);
+            skeletonFrontalDisplay = new SkeletonFrontalDisplay(
+                kinectReader.CoordinateMapper, kinectReader.DepthFrameDescription,
+                kinectReader.ColorFrameDescription);
             skeletonSideDisplay = new SkeletonSideDisplay();
             kleshnevPlot = new KleshnevPlot(KleshnevPlotRange);
             trunkAngleDisplay = new TrunkAngleDisplay();

@@ -25,8 +25,8 @@ namespace RowingMonitor.Model.Pipeline
         private ActionBlock<WriteableBitmap> colorImageBlock;
 
         private CoordinateMapper coordinateMapper;
-        private int width;
-        private int height;
+        private FrameDescription depthFrameDescription;
+        private FrameDescription colorFrameDescription;
 
         private SkeletonFrontalView view;
         private SkeletonFrontalViewModel viewModel;
@@ -88,12 +88,12 @@ namespace RowingMonitor.Model.Pipeline
             }));
         }
 
-        public SkeletonFrontalDisplay(CoordinateMapper mapper, int displayWidth,
-            int displayHeight)
+        public SkeletonFrontalDisplay(CoordinateMapper mapper, FrameDescription depthFrame,
+            FrameDescription colorFrame)
         {
             coordinateMapper = mapper;
-            width = displayWidth;
-            height = displayHeight;
+            depthFrameDescription = depthFrame;
+            colorFrameDescription = colorFrame;
 
             View = new SkeletonFrontalView();
             ViewModel = (SkeletonFrontalViewModel)View.DataContext;
@@ -151,10 +151,15 @@ namespace RowingMonitor.Model.Pipeline
         /// </summary>
         public virtual void UpdateSkeleton(IReadOnlyDictionary<JointType, Joint> joints)
         {
+            // calculate width and hight of the skeleton image
+            // use the aspect ratio of the kinect image sensor 
+            // and convert it 
+
             DrawingGroup drawingGroup = new DrawingGroup();
             DrawingImage tmpImageSource = new DrawingImage(drawingGroup);
             using (DrawingContext dc = drawingGroup.Open()) {
-                dc.DrawRectangle(Brushes.Transparent, null, new Rect(0.0, 0.0, width, height));
+                dc.DrawRectangle(Brushes.Transparent, null, new Rect(0.0, 0.0, 
+                    colorFrameDescription.Width, colorFrameDescription.Height));
 
                 // convert the joint points to depth (display) space
                 Dictionary<JointType, Point> jointPoints = new Dictionary<JointType, Point>();
@@ -167,9 +172,8 @@ namespace RowingMonitor.Model.Pipeline
                         position.Z = InferredZPositionClamp;
                     }
 
-                    DepthSpacePoint depthSpacePoint =
-                        coordinateMapper.MapCameraPointToDepthSpace(
-                        position);
+                    ColorSpacePoint depthSpacePoint =
+                        coordinateMapper.MapCameraPointToColorSpace(position);
                     jointPoints[jointType] = new Point(depthSpacePoint.X, depthSpacePoint.Y);
                 }
 
@@ -177,7 +181,7 @@ namespace RowingMonitor.Model.Pipeline
 
                 // prevent drawing outside of our render area
                 drawingGroup.ClipGeometry = new RectangleGeometry(
-                    new Rect(0.0, 0.0, width, height));    
+                    new Rect(0.0, 0.0, colorFrameDescription.Width, colorFrameDescription.Height));    
             }
             ViewModel.UpdateSkeletonImage(tmpImageSource.CloneCurrentValue());
         }
@@ -298,30 +302,30 @@ namespace RowingMonitor.Model.Pipeline
                 drawingContext.DrawRectangle(
                     Brushes.Red,
                     null,
-                    new Rect(0, height - ClipBoundsThickness,
-                    width, ClipBoundsThickness));
+                    new Rect(0, colorFrameDescription.Height - ClipBoundsThickness,
+                    colorFrameDescription.Width, ClipBoundsThickness));
             }
 
             if (clippedEdges.HasFlag(FrameEdges.Top)) {
                 drawingContext.DrawRectangle(
                     Brushes.Red,
                     null,
-                    new Rect(0, 0, width, ClipBoundsThickness));
+                    new Rect(0, 0, colorFrameDescription.Width, ClipBoundsThickness));
             }
 
             if (clippedEdges.HasFlag(FrameEdges.Left)) {
                 drawingContext.DrawRectangle(
                     Brushes.Red,
                     null,
-                    new Rect(0, 0, ClipBoundsThickness, height));
+                    new Rect(0, 0, ClipBoundsThickness, colorFrameDescription.Height));
             }
 
             if (clippedEdges.HasFlag(FrameEdges.Right)) {
                 drawingContext.DrawRectangle(
                     Brushes.Red,
                     null,
-                    new Rect(width - ClipBoundsThickness, 0,
-                    ClipBoundsThickness, height));
+                    new Rect(colorFrameDescription.Width - ClipBoundsThickness, 0,
+                    ClipBoundsThickness, colorFrameDescription.Height));
             }
         }
 

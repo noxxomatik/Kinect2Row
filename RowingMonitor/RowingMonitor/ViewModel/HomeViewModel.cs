@@ -26,8 +26,8 @@ namespace RowingMonitor.ViewModel
             kinectReader = KinectReader.Instance;
 
             skeletonFrontalDisplay = new SkeletonFrontalDisplay(
-                kinectReader.CoordinateMapper, kinectReader.DisplayWidth,
-                kinectReader.DisplayHeight);
+                kinectReader.CoordinateMapper, kinectReader.DepthFrameDescription,
+                kinectReader.ColorFrameDescription);
 
             displayLink = kinectReader.ColorFrameBlock.LinkTo(
                 skeletonFrontalDisplay.ColorImageBlock);
