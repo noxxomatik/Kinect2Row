@@ -58,6 +58,11 @@ namespace RowingMonitor.Model.Pipeline
         //private Dictionary<string, List<PlotData>> currentSegmentDebugPlotData =
         //    new Dictionary<string, List<PlotData>>();
 
+        // data for simple peak detection (from sonification)
+        private SimplePeakDetector legsPeakDetector;
+        private SimplePeakDetector trunkPeakDetector;
+        private SimplePeakDetector armsPeakDetector;
+
 
         /// <summary>
         /// Creates a new Kleshnev plot with a plot for the last complete segment and an realtime plot of the current Kleshnev velocities.
@@ -85,6 +90,10 @@ namespace RowingMonitor.Model.Pipeline
             //debugKleshnevColors.Add(KleshnevVelocityType.ArmsRight.ToString() + " prediction", OxyColors.PaleGreen);
             //debugKleshnevColors.Add(KleshnevVelocityType.Legs.ToString() + " prediction", OxyColors.PaleVioletRed);
             //debugKleshnevColors.Add(KleshnevVelocityType.Trunk.ToString() + " prediction", OxyColors.LightBlue);
+
+            legsPeakDetector = new SimplePeakDetector();
+            trunkPeakDetector = new SimplePeakDetector();
+            armsPeakDetector = new SimplePeakDetector();
 
             KleshnevDataBlock = new ActionBlock<KleshnevData>(kleshnevData =>
             {
@@ -126,7 +135,8 @@ namespace RowingMonitor.Model.Pipeline
             // update last segment plot if new hits were detected
             if (newSegmentHits) {
                 long[] segmentBounds = SegmentHitHandler.GetLastSegmentStartEnd(hits);
-                if (segmentBounds != null) {
+                if (segmentBounds != null
+                    && SegmentHitHandler.IsSegmentValid(hits, segmentBounds)) {
                     Dictionary<string, List<PlotData>> lastSegmentPlotData =
                         new Dictionary<string, List<PlotData>>();
 
@@ -134,12 +144,17 @@ namespace RowingMonitor.Model.Pipeline
                     foreach (KeyValuePair<string, List<PlotData>> plotSeries in
                         currentSegmentPlotData) {
                         List<PlotData> plotData = new List<PlotData>();
-                        for (long i = segmentBounds[0]; i <= segmentBounds[1] 
+                        for (long i = segmentBounds[0]; i <= segmentBounds[1]
                             && i < plotSeries.Value.Count; i++) {
                             plotData.Add(plotSeries.Value[(int)i]);
                         }
                         lastSegmentPlotData.Add(plotSeries.Key, plotData);
                     }
+
+                    // reset the peak detector
+                    legsPeakDetector.Reset();
+                    trunkPeakDetector.Reset();
+                    armsPeakDetector.Reset();
 
                     viewModel?.UpdateLastSegmentPlot(UpdatePlot(lastSegmentPlotData,
                         "Kleshnev Velocities Last Segment", .0f));
@@ -166,8 +181,8 @@ namespace RowingMonitor.Model.Pipeline
         /// <param name="valueRange"></param>
         /// <returns></returns>
         private PlotModel UpdatePlot(Dictionary<String, List<PlotData>> dataPoints,
-            String title, float valueRange, 
-            Dictionary<String,List<PlotData>> debugDataPoints = null)
+            String title, float valueRange,
+            Dictionary<String, List<PlotData>> debugDataPoints = null)
         {
             PlotModel tmp = new PlotModel { Title = title != null ? title : "" };
             LinearAxis xAxis = new LinearAxis();
@@ -181,17 +196,42 @@ namespace RowingMonitor.Model.Pipeline
             tmp.LegendPosition = LegendPosition.BottomLeft;
 
             foreach (KeyValuePair<String, List<PlotData>> series in dataPoints) {
-                // use a vertical line for hits
-                if (series.Value.Count > 0) {
+                if (series.Value.Count > 0
+                    && series.Value[0].DataStreamType == DataStreamType.KleshnevPeak) {
+                    int indexCount = series.Value.Count();
+                    for (int j = 0; j < indexCount; j++) {
+                        LineAnnotation annotation = new LineAnnotation();
+                        annotation.Type = LineAnnotationType.Vertical;
+                        annotation.X = series.Value[j].X;
+                        annotation.Text = series.Value[j].Annotation;
+                        annotation.StrokeThickness = 4;
+
+                        switch (series.Key) {
+                            case "Legs peaks":
+                                annotation.Color =
+                                    kleshnevColors[KleshnevVelocityType.Legs.ToString()];
+                                break;
+                            case "Trunk peaks":
+                                annotation.Color =
+                                    kleshnevColors[KleshnevVelocityType.Trunk.ToString()];
+                                break;
+                            case "Arms peaks":
+                                annotation.Color =
+                                    kleshnevColors[KleshnevVelocityType.ArmsRight.ToString()];
+                                break;
+                        }
+
+                        tmp.Annotations.Add(annotation);
+                    }
+                }
+                else if (series.Value.Count > 0) {
                     LineSeries lineSeries = new LineSeries
                     {
                         Title = series.Key
                     };
 
-                    // check if specific colors are set
-                    if (kleshnevColors != null && kleshnevColors.Count() == dataPoints.Count()) {
-                        lineSeries.Color = kleshnevColors[series.Key];
-                    }
+                    // set the specific colors
+                    lineSeries.Color = kleshnevColors[series.Key];
 
                     int indexCount = series.Value.Count();
                     for (int j = 0; j < indexCount; j++) {
@@ -250,12 +290,57 @@ namespace RowingMonitor.Model.Pipeline
                 PlotData point = new PlotData();
                 point.X = kleshnevData.AbsTimestamp / 1000;
                 point.Y = klshVel.Value;
-                point.DataStreamType = DataStreamType.Other;
+                point.DataStreamType = DataStreamType.KleshnevVelocity;
                 if (currentSegmentPlotData.ContainsKey(klshVel.Key.ToString())) {
                     currentSegmentPlotData[klshVel.Key.ToString()].Add(point);
                 }
                 else {
                     currentSegmentPlotData.Add(klshVel.Key.ToString(),
+                        new List<PlotData>() { point });
+                }
+            }
+
+            // check for peaks and add them when found
+            if (legsPeakDetector.HasPeak(
+                kleshnevData.Velocities[KleshnevVelocityType.Legs])) {
+                PlotData point = new PlotData();
+                point.X = kleshnevData.AbsTimestamp / 1000;
+                point.Annotation = "Legs peak";
+                point.DataStreamType = DataStreamType.KleshnevPeak;
+                if (currentSegmentPlotData.ContainsKey("Legs peaks")) {
+                    currentSegmentPlotData["Legs peaks"].Add(point);
+                }
+                else {
+                    currentSegmentPlotData.Add("Legs peaks",
+                        new List<PlotData>() { point });
+                }
+            }
+            if (trunkPeakDetector.HasPeak(
+                kleshnevData.Velocities[KleshnevVelocityType.Trunk])) {
+                PlotData point = new PlotData();
+                point.X = kleshnevData.AbsTimestamp / 1000;
+                point.Annotation = "Trunk peak";
+                point.DataStreamType = DataStreamType.KleshnevPeak;
+                if (currentSegmentPlotData.ContainsKey("Trunk peaks")) {
+                    currentSegmentPlotData["Trunk peaks"].Add(point);
+                }
+                else {
+                    currentSegmentPlotData.Add("Trunk peaks",
+                        new List<PlotData>() { point });
+                }
+            }
+            if (armsPeakDetector.HasPeak(
+                (kleshnevData.Velocities[KleshnevVelocityType.ArmsLeft]
+                + kleshnevData.Velocities[KleshnevVelocityType.ArmsRight]) / 2)) {
+                PlotData point = new PlotData();
+                point.X = kleshnevData.AbsTimestamp / 1000;
+                point.Annotation = "Arms peak";
+                point.DataStreamType = DataStreamType.KleshnevPeak;
+                if (currentSegmentPlotData.ContainsKey("Arms peaks")) {
+                    currentSegmentPlotData["Arms peaks"].Add(point);
+                }
+                else {
+                    currentSegmentPlotData.Add("Arms peaks",
                         new List<PlotData>() { point });
                 }
             }
@@ -277,7 +362,7 @@ namespace RowingMonitor.Model.Pipeline
             //        catch (Exception e) {
             //            Logger.Log(this.ToString(), e.ToString());
             //        }
-                    
+
             //    }
             //}
             // calculate curve fit if enough values are present
@@ -319,7 +404,7 @@ namespace RowingMonitor.Model.Pipeline
             //        }
             //    }
             //}
-        }       
+        }
 
         public float Range { get => range; set => range = value; }
         public ActionBlock<KleshnevData> KleshnevDataBlock { get => kleshnevDataBlock; set => kleshnevDataBlock = value; }

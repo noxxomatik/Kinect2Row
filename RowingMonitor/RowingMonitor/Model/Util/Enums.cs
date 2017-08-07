@@ -23,6 +23,8 @@ namespace RowingMonitor.Model.Util
         ShiftedPosition,
         Velocity,
         SegmentHits,
+        KleshnevVelocity,
+        KleshnevPeak,
         Other
     }
 

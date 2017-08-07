@@ -169,6 +169,7 @@
     <Compile Include="Model\Util\PlotDataHandler.cs" />
     <Compile Include="Model\Util\RelayCommand.cs" />
     <Compile Include="Model\Util\SegmentHitHandler.cs" />
+    <Compile Include="Model\Util\SimplePeakDetector.cs" />
     <Compile Include="Properties\Resources.de-DE.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
