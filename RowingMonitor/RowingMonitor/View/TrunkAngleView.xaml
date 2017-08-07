@@ -17,32 +17,40 @@
     </Page.DataContext>
 
     <Grid x:Name="viewGrid">
-        <lvc:AngularGauge Grid.Row="0" Grid.Column="0" Value="{Binding CatchTrunkAngle}"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <lvc:AngularGauge Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"
+                          Value="{Binding CatchTrunkAngle}"
                           FromValue="-90" ToValue="90" LabelsStep="45" TicksStep="5" Wedge="180"
                           TicksForeground="White" Foreground="White"
                           FontWeight="Bold" FontSize="16" SectionsInnerRadius=".5"
                           NeedleFill="DarkBlue" DisableaAnimations="True">
             <lvc:AngularGauge.Sections>
-                <lvc:AngularSection FromValue="-90" ToValue="-30" Fill="OrangeRed"/>
+                <lvc:AngularSection FromValue="-90" ToValue="-30" Fill="PaleVioletRed"/>
                 <lvc:AngularSection FromValue="-30" ToValue="-20" Fill="GreenYellow"/>
-                <lvc:AngularSection FromValue="-20" ToValue="20" Fill="OrangeRed"/>
+                <lvc:AngularSection FromValue="-20" ToValue="20" Fill="PaleVioletRed"/>
                 <lvc:AngularSection FromValue="20" ToValue="30" Fill="GreenYellow"/>
-                <lvc:AngularSection FromValue="30" ToValue="90" Fill="OrangeRed"/>
+                <lvc:AngularSection FromValue="30" ToValue="90" Fill="PaleVioletRed"/>
             </lvc:AngularGauge.Sections>
         </lvc:AngularGauge>
-        <lvc:AngularGauge Grid.Row="0" Grid.Column="0" Value="{Binding FinishTrunkAngle}"
+        <lvc:AngularGauge Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"
+                          Value="{Binding FinishTrunkAngle}"
                           FromValue="-90" ToValue="90" LabelsStep="45" TicksStep="10" Wedge="180"
                           TicksForeground="White" Foreground="White"
                           FontWeight="Bold" FontSize="16" SectionsInnerRadius=".5"
                           NeedleFill="DarkBlue" DisableaAnimations="True">
         </lvc:AngularGauge>
-        <lvc:AngularGauge Grid.Row="0" Grid.Column="0" Value="{Binding TrunkAngle}"
+        <lvc:AngularGauge Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"
+                          Value="{Binding TrunkAngle}"
                           FromValue="-90" ToValue="90" LabelsStep="45" TicksStep="10" Wedge="180"
                           TicksForeground="White" Foreground="White"
                           FontWeight="Bold" FontSize="16" SectionsInnerRadius=".5" DisableaAnimations="True">
         </lvc:AngularGauge>
-        <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" 
-              VerticalAlignment="Bottom">
+        <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" 
+              VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

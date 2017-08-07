@@ -126,10 +126,7 @@ namespace RowingMonitor.ViewModel
             //segmentDetector.DetectionOutputBlock.LinkTo(kleshnevPlot.PlotHitsBlock);
 
             metaDataCalculator.Output.LinkTo(metaDataDisplay.Input);
-            metaDataCalculator.Output.LinkTo(widgetsDisplay.Input);
-
-            ChangeSegmentDetector();
-            ChangeSmoothingFilter();
+            metaDataCalculator.Output.LinkTo(widgetsDisplay.Input);            
         }
 
         private void Render(object state)
@@ -194,8 +191,10 @@ namespace RowingMonitor.ViewModel
             // start the renderer
             timer = new Timer(Render, null, 0, 40);
 
-            // start the pipeline
-            kinectReader.StartReader();
+            // start the pipeline by connecting the reader to the pipeline
+            // here this happens in the ChangeSmoothingFilter() method
+            ChangeSegmentDetector();
+            ChangeSmoothingFilter();
         }
 
         public void ViewUnloaded()

@@ -73,6 +73,9 @@ namespace RowingMonitor.Model.Pipeline
         // log times
         private List<double> timeLog = new List<double>();
 
+        // check if reader already started
+        private bool readerStarted = false;
+
         /// <summary>
         /// Initilizes the KinectReader class and establishes the connection to the sensor.
         /// </summary>
@@ -243,12 +246,12 @@ namespace RowingMonitor.Model.Pipeline
         /// </summary>
         public void StartReader()
         {
-            if (this.multiSourceFrameReader != null) {
+            if (this.multiSourceFrameReader != null && !readerStarted) {
                 this.multiSourceFrameReader.MultiSourceFrameArrived +=
                     MultiSourceFrameReader_MultiSourceFrameArrived;
-            }
-
-            Logger.Log(this.ToString(), "##### New Session #####");
+                readerStarted = true;
+                Logger.Log(this.ToString(), "##### New Session #####");
+            }           
         }
 
         /// <summary>

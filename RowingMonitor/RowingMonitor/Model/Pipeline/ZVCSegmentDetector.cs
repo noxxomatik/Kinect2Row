@@ -128,6 +128,8 @@ namespace RowingMonitor.Model.Pipeline
             if (lastJointData.RelTimestamp != 0) {
                 float value = GetJointDataValue(jointData, jointType, axis);
                 float lastValue = GetJointDataValue(lastJointData, jointType, axis);
+
+                // set slope rising true if the current value is greater then the last
                 bool slopeRising = value - lastValue > 0 ? true : false;
 
                 // zero velocity crossing
