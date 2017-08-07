@@ -40,23 +40,23 @@ namespace RowingMonitor.Model.Pipeline
         private List<SegmentHit> hits;
 
         // data to identify the peaks
-        private bool showDebugPlots = false;
-        private bool newSegmentStarted = false;
-        private Dictionary<String, OxyColor> debugKleshnevColors;
-        private KleshnevVelocityType[] peakTypes = {
-            KleshnevVelocityType.ArmsLeft,
-            KleshnevVelocityType.ArmsRight,
-            KleshnevVelocityType.Legs,
-            KleshnevVelocityType.Trunk };
-        private Dictionary<KleshnevVelocityType, Tuple<List<double>, List<double>>> currentSegmentKleshnevValues =
-            new Dictionary<KleshnevVelocityType, Tuple<List<double>, List<double>>>();
-        private Dictionary<KleshnevVelocityType, Tuple<List<double>, List<CurveFitting.QuadraticFunctionParameters>>> currentSegmentParams =
-            new Dictionary<KleshnevVelocityType, Tuple<List<double>, List<CurveFitting.QuadraticFunctionParameters>>>();
-        private double segmentStartX;
-        // time to predict into the future from segment start x
-        private const double predictionOffset = 2.0;
-        private Dictionary<string, List<PlotData>> currentSegmentDebugPlotData =
-            new Dictionary<string, List<PlotData>>();
+        //private bool showDebugPlots = false;
+        //private bool newSegmentStarted = false;
+        //private Dictionary<String, OxyColor> debugKleshnevColors;
+        //private KleshnevVelocityType[] peakTypes = {
+        //    KleshnevVelocityType.ArmsLeft,
+        //    KleshnevVelocityType.ArmsRight,
+        //    KleshnevVelocityType.Legs,
+        //    KleshnevVelocityType.Trunk };
+        //private Dictionary<KleshnevVelocityType, Tuple<List<double>, List<double>>> currentSegmentKleshnevValues =
+        //    new Dictionary<KleshnevVelocityType, Tuple<List<double>, List<double>>>();
+        //private Dictionary<KleshnevVelocityType, Tuple<List<double>, List<CurveFitting.QuadraticFunctionParameters>>> currentSegmentParams =
+        //    new Dictionary<KleshnevVelocityType, Tuple<List<double>, List<CurveFitting.QuadraticFunctionParameters>>>();
+        //private double segmentStartX;
+        //// time to predict into the future from segment start x
+        //private const double predictionOffset = 2.0;
+        //private Dictionary<string, List<PlotData>> currentSegmentDebugPlotData =
+        //    new Dictionary<string, List<PlotData>>();
 
 
         /// <summary>
@@ -79,11 +79,12 @@ namespace RowingMonitor.Model.Pipeline
             kleshnevColors.Add(KleshnevVelocityType.Legs.ToString(), OxyColors.Red);
             kleshnevColors.Add(KleshnevVelocityType.Trunk.ToString(), OxyColors.Blue);
 
-            debugKleshnevColors = new Dictionary<string, OxyColor>();
-            debugKleshnevColors.Add(KleshnevVelocityType.ArmsLeft.ToString() + " prediction", OxyColors.YellowGreen);
-            debugKleshnevColors.Add(KleshnevVelocityType.ArmsRight.ToString() + " prediction", OxyColors.PaleGreen);
-            debugKleshnevColors.Add(KleshnevVelocityType.Legs.ToString() + " prediction", OxyColors.PaleVioletRed);
-            debugKleshnevColors.Add(KleshnevVelocityType.Trunk.ToString() + " prediction", OxyColors.LightBlue);
+            // define colors for curve fit predictions
+            //debugKleshnevColors = new Dictionary<string, OxyColor>();
+            //debugKleshnevColors.Add(KleshnevVelocityType.ArmsLeft.ToString() + " prediction", OxyColors.YellowGreen);
+            //debugKleshnevColors.Add(KleshnevVelocityType.ArmsRight.ToString() + " prediction", OxyColors.PaleGreen);
+            //debugKleshnevColors.Add(KleshnevVelocityType.Legs.ToString() + " prediction", OxyColors.PaleVioletRed);
+            //debugKleshnevColors.Add(KleshnevVelocityType.Trunk.ToString() + " prediction", OxyColors.LightBlue);
 
             KleshnevDataBlock = new ActionBlock<KleshnevData>(kleshnevData =>
             {
@@ -99,12 +100,12 @@ namespace RowingMonitor.Model.Pipeline
                     newSegmentHits = true;
 
                     // check if segment started for peak detection
-                    newSegmentStarted = SegmentHitHandler.CheckIfNewSegmentStarted(newHits);
-                    if (newSegmentStarted) {
-                        segmentStartX = newHits.Last().AbsTimestamp / 1000;
-                        currentSegmentKleshnevValues =
-                            new Dictionary<KleshnevVelocityType, Tuple<List<double>, List<double>>>();
-                    }
+                    //newSegmentStarted = SegmentHitHandler.CheckIfNewSegmentStarted(newHits);
+                    //if (newSegmentStarted) {
+                    //    segmentStartX = newHits.Last().AbsTimestamp / 1000;
+                    //    currentSegmentKleshnevValues =
+                    //        new Dictionary<KleshnevVelocityType, Tuple<List<double>, List<double>>>();
+                    //}
                 }
             });
         }
@@ -149,10 +150,12 @@ namespace RowingMonitor.Model.Pipeline
 
             // update the continuus plot
             viewModel?.UpdateCurrentSegmentPlot(UpdatePlot(currentSegmentPlotData,
-                "Kleshnev Velocity Current Segment", Range, currentSegmentDebugPlotData));
+                "Kleshnev Velocity Current Segment", Range));
+            //viewModel?.UpdateCurrentSegmentPlot(UpdatePlot(currentSegmentPlotData,
+            //    "Kleshnev Velocity Current Segment", Range, currentSegmentDebugPlotData));
 
 
-            currentSegmentDebugPlotData = new Dictionary<string, List<PlotData>>();
+            //currentSegmentDebugPlotData = new Dictionary<string, List<PlotData>>();
         }
 
         /// <summary>
@@ -163,8 +166,8 @@ namespace RowingMonitor.Model.Pipeline
         /// <param name="valueRange"></param>
         /// <returns></returns>
         private PlotModel UpdatePlot(Dictionary<String, List<PlotData>> dataPoints,
-            String title, float valueRange, Dictionary<String,
-                List<PlotData>> debugDataPoints = null)
+            String title, float valueRange, 
+            Dictionary<String,List<PlotData>> debugDataPoints = null)
         {
             PlotModel tmp = new PlotModel { Title = title != null ? title : "" };
             LinearAxis xAxis = new LinearAxis();
@@ -201,30 +204,30 @@ namespace RowingMonitor.Model.Pipeline
             }
 
             // add debug data points
-            if (showDebugPlots && debugDataPoints != null) {
-                foreach (KeyValuePair<String, List<PlotData>> series in debugDataPoints) {
-                    LineSeries lineSeries = new LineSeries
-                    {
-                        Title = series.Key
-                    };
+            //if (showDebugPlots && debugDataPoints != null) {
+            //    foreach (KeyValuePair<String, List<PlotData>> series in debugDataPoints) {
+            //        LineSeries lineSeries = new LineSeries
+            //        {
+            //            Title = series.Key
+            //        };
 
-                    // check if specific colors are set
-                    if (debugKleshnevColors != null && 
-                        debugKleshnevColors.Count() == debugDataPoints.Count()) {
-                        lineSeries.Color = debugKleshnevColors[series.Key];
-                    }
+            //        // check if specific colors are set
+            //        if (debugKleshnevColors != null &&
+            //            debugKleshnevColors.Count() == debugDataPoints.Count()) {
+            //            lineSeries.Color = debugKleshnevColors[series.Key];
+            //        }
 
-                    int indexCount = series.Value.Count();
-                    for (int j = 0; j < indexCount; j++) {
-                        maxXValue = maxXValue < series.Value[j].X ? series.Value[j].X : maxXValue;
-                        lineSeries.Points.Add(new DataPoint(series.Value[j].X, series.Value[j].Y));
-                    }
+            //        int indexCount = series.Value.Count();
+            //        for (int j = 0; j < indexCount; j++) {
+            //            maxXValue = maxXValue < series.Value[j].X ? series.Value[j].X : maxXValue;
+            //            lineSeries.Points.Add(new DataPoint(series.Value[j].X, series.Value[j].Y));
+            //        }
 
-                    tmp.Series.Add(lineSeries);
-                }
-                yAxis.Minimum = yMin;
-                yAxis.Maximum = yMax;
-            }
+            //        tmp.Series.Add(lineSeries);
+            //    }
+            //    yAxis.Minimum = yMin;
+            //    yAxis.Maximum = yMax;
+            //}
 
             // set graph range by highest value from all data Points
             if (valueRange > 0) {
@@ -258,64 +261,64 @@ namespace RowingMonitor.Model.Pipeline
             }
 
             // prepare peak data
-            if (newSegmentStarted) {
-                foreach (KleshnevVelocityType type in peakTypes) {
+            //if (newSegmentStarted) {
+            //    foreach (KleshnevVelocityType type in peakTypes) {
 
-                    if (!currentSegmentKleshnevValues.ContainsKey(type)) {
-                        currentSegmentKleshnevValues.Add(type,
-                            new Tuple<List<double>, List<double>>(
-                                new List<double>(), new List<double>()));
-                    }
+            //        if (!currentSegmentKleshnevValues.ContainsKey(type)) {
+            //            currentSegmentKleshnevValues.Add(type,
+            //                new Tuple<List<double>, List<double>>(
+            //                    new List<double>(), new List<double>()));
+            //        }
 
-                    try {
-                        currentSegmentKleshnevValues[type].Item1.Add(kleshnevData.AbsTimestamp / 1000);
-                        currentSegmentKleshnevValues[type].Item2.Add(kleshnevData.Velocities[type]);
-                    }
-                    catch (Exception e) {
-                        Logger.Log(this.ToString(), e.ToString());
-                    }
+            //        try {
+            //            currentSegmentKleshnevValues[type].Item1.Add(kleshnevData.AbsTimestamp / 1000);
+            //            currentSegmentKleshnevValues[type].Item2.Add(kleshnevData.Velocities[type]);
+            //        }
+            //        catch (Exception e) {
+            //            Logger.Log(this.ToString(), e.ToString());
+            //        }
                     
-                }
-            }
+            //    }
+            //}
             // calculate curve fit if enough values are present
-            if (currentSegmentKleshnevValues.Count > 0 &&
-                currentSegmentKleshnevValues[KleshnevVelocityType.ArmsLeft]?.Item1.Count() > 2) {
-                foreach (KeyValuePair<KleshnevVelocityType, Tuple<List<double>, List<double>>> values
-                    in currentSegmentKleshnevValues) {
-                    CurveFitting.QuadraticFunctionParameters param =
-                        CurveFitting.QuadraticFunctionFit(values.Value.Item1.ToArray(),
-                        values.Value.Item2.ToArray());
+            //if (currentSegmentKleshnevValues.Count > 0 &&
+            //    currentSegmentKleshnevValues[KleshnevVelocityType.ArmsLeft]?.Item1.Count() > 2) {
+            //    foreach (KeyValuePair<KleshnevVelocityType, Tuple<List<double>, List<double>>> values
+            //        in currentSegmentKleshnevValues) {
+            //        CurveFitting.QuadraticFunctionParameters param =
+            //            CurveFitting.QuadraticFunctionFit(values.Value.Item1.ToArray(),
+            //            values.Value.Item2.ToArray());
 
-                    if (!currentSegmentParams.ContainsKey(values.Key)) {
-                        currentSegmentParams.Add(values.Key, new Tuple<List<double>,
-                            List<CurveFitting.QuadraticFunctionParameters>>(new List<double>(),
-                            new List<CurveFitting.QuadraticFunctionParameters>()));
-                    }
+            //        if (!currentSegmentParams.ContainsKey(values.Key)) {
+            //            currentSegmentParams.Add(values.Key, new Tuple<List<double>,
+            //                List<CurveFitting.QuadraticFunctionParameters>>(new List<double>(),
+            //                new List<CurveFitting.QuadraticFunctionParameters>()));
+            //        }
 
-                    currentSegmentParams[values.Key].Item1.Add(values.Value.Item1.Last());
-                    currentSegmentParams[values.Key].Item2.Add(param);
-                }
-            }
+            //        currentSegmentParams[values.Key].Item1.Add(values.Value.Item1.Last());
+            //        currentSegmentParams[values.Key].Item2.Add(param);
+            //    }
+            //}
             // create the predicted curves and add them to the current segment plot data
-            if (currentSegmentParams.Count > 0) {
-                foreach (KeyValuePair<KleshnevVelocityType, Tuple<List<double>,
-                    List<CurveFitting.QuadraticFunctionParameters>>> values in
-                    currentSegmentParams) {
-                    if (!currentSegmentDebugPlotData.ContainsKey(values.Key.ToString() + " prediction")) {
-                        currentSegmentDebugPlotData.Add(values.Key.ToString() + " prediction", new List<PlotData>());
-                    }
-                    else {
-                        currentSegmentDebugPlotData[values.Key.ToString() + " prediction"] = new List<PlotData>();
-                    }
+            //if (currentSegmentParams.Count > 0) {
+            //    foreach (KeyValuePair<KleshnevVelocityType, Tuple<List<double>,
+            //        List<CurveFitting.QuadraticFunctionParameters>>> values in
+            //        currentSegmentParams) {
+            //        if (!currentSegmentDebugPlotData.ContainsKey(values.Key.ToString() + " prediction")) {
+            //            currentSegmentDebugPlotData.Add(values.Key.ToString() + " prediction", new List<PlotData>());
+            //        }
+            //        else {
+            //            currentSegmentDebugPlotData[values.Key.ToString() + " prediction"] = new List<PlotData>();
+            //        }
 
-                    for (double x = segmentStartX; x <= segmentStartX + predictionOffset; x += 0.01) {
-                        PlotData point = new PlotData();
-                        point.X = x;
-                        point.Y = CurveFitting.QuadraticFunction(x, values.Value.Item2.Last());
-                        currentSegmentDebugPlotData[values.Key.ToString() + " prediction"].Add(point);
-                    }
-                }
-            }
+            //        for (double x = segmentStartX; x <= segmentStartX + predictionOffset; x += 0.01) {
+            //            PlotData point = new PlotData();
+            //            point.X = x;
+            //            point.Y = CurveFitting.QuadraticFunction(x, values.Value.Item2.Last());
+            //            currentSegmentDebugPlotData[values.Key.ToString() + " prediction"].Add(point);
+            //        }
+            //    }
+            //}
         }       
 
         public float Range { get => range; set => range = value; }
