@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 
 namespace RowingMonitor.View
 {
@@ -353,12 +354,17 @@ namespace RowingMonitor.View
             ViewModel.PlotMeasuredVariables.Remove(DataStreamType.ShiftedPosition);
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new HomeView());
+        }
+
+        private void Page_Loaded_1(object sender, RoutedEventArgs e)
         {
             ViewModel.ViewLoaded();
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        private void Page_Unloaded_1(object sender, RoutedEventArgs e)
         {
             ViewModel.ViewUnloaded();
         }

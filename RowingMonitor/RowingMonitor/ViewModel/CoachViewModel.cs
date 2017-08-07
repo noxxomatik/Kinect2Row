@@ -45,8 +45,8 @@ namespace RowingMonitor.ViewModel
 
         /* options */
         // ZVC
-        int minimumHitGap = 10;
-        bool startSegmentWithRisingVelocity = true;
+        private int minimumHitGap = 10;
+        private bool startSegmentWithRisingVelocity = true;
         // kleshnev plot
         private float kleshnevPlotRange = 3;
 
@@ -191,10 +191,10 @@ namespace RowingMonitor.ViewModel
             }
 
             if (metaData.StrokeTime != 0) {
-                StrokeTime = metaData.StrokeTime.ToString("0.00");
+                StrokeTime = (metaData.StrokeTime / 1000).ToString("0.00");
             }
             if (metaData.MeanStrokeTime != 0) {
-                MeanStrokeTime = metaData.MeanStrokeTime.ToString("0.00");
+                MeanStrokeTime = (metaData.MeanStrokeTime / 1000).ToString("0.00");
             }
 
             if (metaData.SeatTravelDistance != 0) {

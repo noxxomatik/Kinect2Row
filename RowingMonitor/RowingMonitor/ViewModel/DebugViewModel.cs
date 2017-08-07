@@ -20,7 +20,6 @@ namespace RowingMonitor.ViewModel
 
         // smoothing filter
         private SmoothingFilter smoothingFilter;
-        private bool smoothingFilterChanged = false;
 
         // velocity smoothing filter
         private SmoothingFilter velocitySmoothingFilter;
@@ -30,7 +29,6 @@ namespace RowingMonitor.ViewModel
 
         // segmentation
         private SegmentDetector segmentDetector;
-        private bool segmentDetectorChanged;
         // DTW
         float distanceThreshold = 3.0f;
         int minimumSubsequenceLength = 10;
@@ -63,10 +61,14 @@ namespace RowingMonitor.ViewModel
         private bool useZVC = false;
         private float plotRange = 10;
         private float kleshnevPlotRange = 5;
+
         // remember links to dispose them
         private IDisposable segmentationLink;
         private IDisposable smoothingLink;
         private IDisposable velocitySmoothingLink;
+        private IDisposable readerLinkPlot;
+        private IDisposable readerLinkSkeleton;
+        private IDisposable readerLinkColor;
 
         // render timer
         private Timer timer;
@@ -96,9 +98,9 @@ namespace RowingMonitor.ViewModel
 
             // link pipeline together
             //kinectReader.JointDataBlock.LinkTo(smoothingFilter.SmoothingBlock);
-            kinectReader.JointDataBlock.LinkTo(jointDataPlot.PlotJointDataBlock);
-            kinectReader.JointDataBlock.LinkTo(skeletonFrontalDisplay.SkeletonBlock);
-            kinectReader.ColorFrameBlock.LinkTo(skeletonFrontalDisplay.ColorImageBlock);            
+            readerLinkPlot = kinectReader.JointDataBlock.LinkTo(jointDataPlot.PlotJointDataBlock);
+            readerLinkSkeleton = kinectReader.JointDataBlock.LinkTo(skeletonFrontalDisplay.SkeletonBlock);
+            readerLinkColor = kinectReader.ColorFrameBlock.LinkTo(skeletonFrontalDisplay.ColorImageBlock);
 
             //smoothingFilter.SmoothingBlock.LinkTo(shifter.ShiftingBlock);
             //smoothingFilter.SmoothingBlock.LinkTo(jointDataPlot.PlotJointDataBlock);
@@ -128,8 +130,6 @@ namespace RowingMonitor.ViewModel
 
             ChangeSegmentDetector();
             ChangeSmoothingFilter();
-
-            timer = new Timer(Render, null, 0, 40);
         }
 
         private void Render(object state)
@@ -191,6 +191,9 @@ namespace RowingMonitor.ViewModel
             widgetsFrame.SetValue(Grid.ColumnProperty, 2);
             Grid.Children.Add(widgetsFrame);
 
+            // start the renderer
+            timer = new Timer(Render, null, 0, 40);
+
             // start the pipeline
             kinectReader.StartReader();
         }
@@ -199,6 +202,12 @@ namespace RowingMonitor.ViewModel
         {
             // TODO: dispose and clean up
             timer.Dispose();
+            readerLinkColor?.Dispose();
+            readerLinkPlot?.Dispose();
+            readerLinkSkeleton?.Dispose();
+            segmentationLink?.Dispose();
+            smoothingLink?.Dispose();
+            velocitySmoothingLink.Dispose();
         }
 
         public void ChangeSegmentDetector()
@@ -207,7 +216,7 @@ namespace RowingMonitor.ViewModel
             segmentationLink?.Dispose();
 
             if (UseZVC) {
-                segmentDetector = new ZVCSegmentDetector(minimumHitGap, 
+                segmentDetector = new ZVCSegmentDetector(minimumHitGap,
                     startSegmentWithRisingVelocity);
                 segmentationLink = velocitySmoothingFilter.Output.LinkTo(
                     segmentDetector.Input);
@@ -277,7 +286,7 @@ namespace RowingMonitor.ViewModel
             // link ouptuts of filters
             smoothingFilter.Output.LinkTo(shifter.Input);
             smoothingFilter.Output.LinkTo(jointDataPlot.PlotJointDataBlock);
-            velocitySmoothingFilter.Output.LinkTo(kleshnevVelocityCalculator.Input);            
+            velocitySmoothingFilter.Output.LinkTo(kleshnevVelocityCalculator.Input);
             velocitySmoothingFilter.Output.LinkTo(jointDataPlot.PlotJointDataBlock);
 
             if (UseZVC) {
@@ -287,12 +296,32 @@ namespace RowingMonitor.ViewModel
             }
         }
 
-        public List<JointType> PlotJointTypes {
-            get => jointDataPlot.PlotJointTypes; set => jointDataPlot.PlotJointTypes = value; }
-        public List<DataStreamType> PlotMeasuredVariables {
-            get => jointDataPlot.PlotMeasuredVariables; set => jointDataPlot.PlotMeasuredVariables = value; }
-        public bool UseKinectJointFilter { get => useKinectJointFilter; set => useKinectJointFilter = value; }
-        public bool UseZVC { get => useZVC; set => useZVC = value; }
+        public List<JointType> PlotJointTypes
+        {
+            get => jointDataPlot.PlotJointTypes;
+            set => jointDataPlot.PlotJointTypes = value;
+        }
+        public List<DataStreamType> PlotMeasuredVariables
+        {
+            get => jointDataPlot.PlotMeasuredVariables;
+            set => jointDataPlot.PlotMeasuredVariables = value;
+        }
+        public bool UseKinectJointFilter
+        {
+            get => useKinectJointFilter;
+            set {
+                useKinectJointFilter = value;
+                ChangeSmoothingFilter();
+            }
+        }
+        public bool UseZVC
+        {
+            get => useZVC;
+            set {
+                useZVC = value;
+                ChangeSegmentDetector();
+            }
+        }
         public float PlotRange { get => plotRange; set => plotRange = value; }
         public Grid Grid { get => grid; set => grid = value; }
         public float KleshnevPlotRange { get => kleshnevPlotRange; set => kleshnevPlotRange = value; }

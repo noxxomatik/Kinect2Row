@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:resx="clr-namespace:RowingMonitor.Properties"
         xmlns:local="clr-namespace:RowingMonitor"
         xmlns:vm="clr-namespace:RowingMonitor.ViewModel"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="Kinect2Row" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+        Title="Kinect2Row" Loaded="Page_Loaded_1" Unloaded="Page_Unloaded_1">
 
     <Page.DataContext>
         <vm:DebugViewModel x:Name="ViewModel"/>
@@ -23,15 +24,16 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="360"/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="360"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" HorizontalAlignment="Center" Margin="4 0 4 0">
@@ -91,5 +93,9 @@
             <CheckBox Checked="CheckBox_Checked_27" Unchecked="CheckBox_Unchecked_27">WristLeft</CheckBox>
             <CheckBox Checked="CheckBox_Checked_28" Unchecked="CheckBox_Unchecked_28">WristRight</CheckBox>
         </StackPanel>
+        <Button Grid.Column="3" Grid.Row="5" 
+            HorizontalAlignment="Right" VerticalAlignment="Bottom"
+            Content="{x:Static resx:Resources.EndSession}" 
+            Height="40" Click="Button_Click"/>
     </Grid>
 </Page>

@@ -44,8 +44,8 @@ namespace RowingMonitor.ViewModel
 
         /* options */
         // ZVC
-        int minimumHitGap = 10;
-        bool startSegmentWithRisingVelocity = true;
+        private int minimumHitGap = 10;
+        private bool startSegmentWithRisingVelocity = true;
 
         /* gui */
         private Grid mainGrid;
@@ -170,7 +170,7 @@ namespace RowingMonitor.ViewModel
             }
 
             if (metaData.MeanStrokeTime != 0) {
-                MeanStrokeTime = metaData.MeanStrokeTime.ToString("0.00") + "s";
+                MeanStrokeTime = (metaData.MeanStrokeTime / 1000).ToString("0.00") + "s";
             }
         }
 
