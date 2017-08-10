@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kinect2Row.exe" size="238488">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Kinect2Row.exe" size="239000">
       <assemblyIdentity name="Kinect2Row" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>TU8ocs5hYvsGyxa+Am5BBXcfldl3kSGcQKR4M1d14bw=</dsig:DigestValue>
+        <dsig:DigestValue>ZIH5B+1E4XczpmcSB/U88qNK80GxasoNxO+l0MTR2eE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>m0s/3U4zee2sgB9Jwq/8dv4MFDFoTRCe+dar8sB7rDM=</dsig:DigestValue>
+        <dsig:DigestValue>QlcO3qrbqj29xs9NIK95L4jT4ccOOS8ndkBbq+YnKB8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
