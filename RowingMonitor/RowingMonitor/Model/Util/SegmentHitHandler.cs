@@ -77,7 +77,7 @@ namespace RowingMonitor.Model.Util
         /// minimum segment duration in the settings</returns>
         public static bool IsSegmentValid(List<SegmentHit> hits, long[] bounds)
         {
-            if (hits.Count >= 2) {
+            if (hits != null && bounds != null && hits.Count >= 2) {
                 double startTime = 0;
                 double endTime = 0;
                 for (int i = hits.Count - 1; i >= 0; i--) {

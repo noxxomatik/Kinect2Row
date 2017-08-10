@@ -27,7 +27,7 @@
         <Controls:FlyoutsControl>
             <Controls:Flyout x:Name="settingsFlyout"
                              Header="{x:Static resx:Resources.SettingsTitle}"
-                             Position="Right" Width="400" Theme="Adapt">
+                             Position="Right" Width="400" Theme="Accent">
                 <!-- Your custom content here -->
             </Controls:Flyout>
         </Controls:FlyoutsControl>
