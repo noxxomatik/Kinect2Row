@@ -49,5 +49,14 @@ namespace RowingMonitor.Properties {
                 return ((double)(this["MinSegmentTime"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public double PeakDetectionWindow {
+            get {
+                return ((double)(this["PeakDetectionWindow"]));
+            }
+        }
     }
 }

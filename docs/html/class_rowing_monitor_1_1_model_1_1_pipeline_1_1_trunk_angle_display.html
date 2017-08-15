@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -42,6 +49,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,11 +78,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model.html">Model</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_pipeline.html">Pipeline</a></li><li class="navelem"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">TrunkAngleDisplay</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -75,8 +92,6 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa821fa5b4473ec7cc3ce2947fb9b4b73"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#aa821fa5b4473ec7cc3ce2947fb9b4b73">TrunkAngleDisplay</a> ()</td></tr>
 <tr class="separator:aa821fa5b4473ec7cc3ce2947fb9b4b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1e4cc748894dc3d2bb8bbd0ec17226e"><td class="memItemLeft" align="right" valign="top">ImageSource&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#ac1e4cc748894dc3d2bb8bbd0ec17226e">GetOutput</a> ()</td></tr>
-<tr class="separator:ac1e4cc748894dc3d2bb8bbd0ec17226e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f82a22f8d195e8285ec1008514b8a3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#a3f82a22f8d195e8285ec1008514b8a3a">Render</a> ()</td></tr>
 <tr class="separator:a3f82a22f8d195e8285ec1008514b8a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -84,10 +99,6 @@ Public Member Functions</h2></td></tr>
 Properties</h2></td></tr>
 <tr class="memitem:a2bbac9839cfa5977f133be79c3c47754"><td class="memItemLeft" align="right" valign="top">ActionBlock&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#a2bbac9839cfa5977f133be79c3c47754">Input</a><code> [get, set]</code></td></tr>
 <tr class="separator:a2bbac9839cfa5977f133be79c3c47754"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8ae0fc35ad101ac1c7e5fa75eace01e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#ad8ae0fc35ad101ac1c7e5fa75eace01e">Height</a><code> [get, set]</code></td></tr>
-<tr class="separator:ad8ae0fc35ad101ac1c7e5fa75eace01e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44e27b142945a82a101bb38cbd5a3c1f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#a44e27b142945a82a101bb38cbd5a3c1f">Width</a><code> [get, set]</code></td></tr>
-<tr class="separator:a44e27b142945a82a101bb38cbd5a3c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0578beabcf4ec767137c3e7b9d50493"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_rowing_monitor_1_1_view_1_1_trunk_angle_view.html">TrunkAngleView</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#ac0578beabcf4ec767137c3e7b9d50493">View</a><code> [get, set]</code></td></tr>
 <tr class="separator:ac0578beabcf4ec767137c3e7b9d50493"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -110,23 +121,6 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac1e4cc748894dc3d2bb8bbd0ec17226e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1e4cc748894dc3d2bb8bbd0ec17226e">&#9670;&nbsp;</a></span>GetOutput()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ImageSource RowingMonitor.Model.Pipeline.TrunkAngleDisplay.GetOutput </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a3f82a22f8d195e8285ec1008514b8a3a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3f82a22f8d195e8285ec1008514b8a3a">&#9670;&nbsp;</a></span>Render()</h2>
 
@@ -145,28 +139,6 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
-<a id="ad8ae0fc35ad101ac1c7e5fa75eace01e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8ae0fc35ad101ac1c7e5fa75eace01e">&#9670;&nbsp;</a></span>Height</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double RowingMonitor.Model.Pipeline.TrunkAngleDisplay.Height</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a2bbac9839cfa5977f133be79c3c47754"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2bbac9839cfa5977f133be79c3c47754">&#9670;&nbsp;</a></span>Input</h2>
 
@@ -211,37 +183,19 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a44e27b142945a82a101bb38cbd5a3c1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44e27b142945a82a101bb38cbd5a3c1f">&#9670;&nbsp;</a></span>Width</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double RowingMonitor.Model.Pipeline.TrunkAngleDisplay.Width</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Model/Pipeline/<a class="el" href="_trunk_angle_display_8cs.html">TrunkAngleDisplay.cs</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model.html">Model</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_pipeline.html">Pipeline</a></li><li class="navelem"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">TrunkAngleDisplay</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

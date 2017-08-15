@@ -11,5 +11,8 @@
     <Setting Name="MinSegmentTime" Type="System.Double" Scope="Application">
       <Value Profile="(Default)">1.2</Value>
     </Setting>
+    <Setting Name="PeakDetectionWindow" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

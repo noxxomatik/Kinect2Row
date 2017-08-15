@@ -1,19 +1,17 @@
 var searchData=
 [
-  ['segmentdetectedeventargs',['SegmentDetectedEventArgs',['../class_rowing_monitor_1_1_model_1_1_segment_detected_event_args.html',1,'RowingMonitor::Model']]],
-  ['segmentdetector',['SegmentDetector',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html',1,'RowingMonitor::Model::Pipeline']]],
-  ['segmenthit',['SegmentHit',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html',1,'RowingMonitor::Model::Util']]],
-  ['segmenthithandler',['SegmentHitHandler',['../class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html',1,'RowingMonitor::Model::Util']]],
-  ['shiftedframearrivedeventargs',['ShiftedFrameArrivedEventArgs',['../class_rowing_monitor_1_1_model_1_1_shifted_frame_arrived_event_args.html',1,'RowingMonitor::Model']]],
-  ['shifter',['Shifter',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html',1,'RowingMonitor::Model::Pipeline']]],
-  ['skeletonfrontaldisplay',['SkeletonFrontalDisplay',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_frontal_display.html',1,'RowingMonitor::Model::Pipeline']]],
-  ['skeletonfrontalview',['SkeletonFrontalView',['../class_rowing_monitor_1_1_view_1_1_skeleton_frontal_view.html',1,'RowingMonitor::View']]],
-  ['skeletonfrontalviewmodel',['SkeletonFrontalViewModel',['../class_rowing_monitor_1_1_view_model_1_1_skeleton_frontal_view_model.html',1,'RowingMonitor::ViewModel']]],
-  ['skeletonsidedisplay',['SkeletonSideDisplay',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_side_display.html',1,'RowingMonitor::Model::Pipeline']]],
-  ['skeletonsideview',['SkeletonSideView',['../class_rowing_monitor_1_1_view_1_1_skeleton_side_view.html',1,'RowingMonitor::View']]],
-  ['skeletonsideviewmodel',['SkeletonSideViewModel',['../class_rowing_monitor_1_1_view_model_1_1_skeleton_side_view_model.html',1,'RowingMonitor::ViewModel']]],
-  ['smoothedframearrivedeventargs',['SmoothedFrameArrivedEventArgs',['../class_rowing_monitor_1_1_model_1_1_smoothed_frame_arrived_event_args.html',1,'RowingMonitor::Model']]],
-  ['smoothingfilter',['SmoothingFilter',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html',1,'RowingMonitor::Model::Pipeline']]],
-  ['subsequence',['Subsequence',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence.html',1,'RowingMonitor::Model::Util']]],
-  ['subsequencedtw',['SubsequenceDTW',['../class_rowing_monitor_1_1_model_1_1_util_1_1_subsequence_d_t_w.html',1,'RowingMonitor::Model::Util']]]
+  ['relaycommand',['RelayCommand',['../class_rowing_monitor_1_1_relay_command.html',1,'RowingMonitor']]],
+  ['resources',['Resources',['../class_rowing_monitor_1_1_properties_1_1_resources.html',1,'RowingMonitor::Properties']]],
+  ['rowingmetadata',['RowingMetaData',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html',1,'RowingMonitor::Model::Util']]],
+  ['rowingmetadatacalculator',['RowingMetaDataCalculator',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_calculator.html',1,'RowingMonitor::Model::Pipeline']]],
+  ['rowingmetadatadebugdisplay',['RowingMetaDataDebugDisplay',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_debug_display.html',1,'RowingMonitor::Model::Pipeline']]],
+  ['rowingmetadatadebugview',['RowingMetaDataDebugView',['../class_rowing_monitor_1_1_view_1_1_rowing_meta_data_debug_view.html',1,'RowingMonitor::View']]],
+  ['rowingmetadatadebugviewmodel',['RowingMetaDataDebugViewModel',['../class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html',1,'RowingMonitor::ViewModel']]],
+  ['rowingmetadatahandler',['RowingMetaDataHandler',['../class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data_handler.html',1,'RowingMonitor::Model::Util']]],
+  ['rowingmetadataview',['RowingMetaDataView',['../class_rowing_monitor_1_1_view_1_1_rowing_meta_data_view.html',1,'RowingMonitor::View']]],
+  ['rowingmetadatawidgetsdisplay',['RowingMetaDataWidgetsDisplay',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_widgets_display.html',1,'RowingMonitor::Model::Pipeline']]],
+  ['rowingmetadatawidgetsview',['RowingMetaDataWidgetsView',['../class_rowing_monitor_1_1_view_1_1_rowing_meta_data_widgets_view.html',1,'RowingMonitor::View']]],
+  ['rowingmetadatawidgetsviewmodel',['RowingMetaDataWidgetsViewModel',['../class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_widgets_view_model.html',1,'RowingMonitor::ViewModel']]],
+  ['rowingmonitorwindow',['RowingMonitorWindow',['../class_rowing_monitor_1_1_rowing_monitor_window.html',1,'RowingMonitor']]],
+  ['rowingsonification',['RowingSonification',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html',1,'RowingMonitor::Model::Pipeline']]]
 ];

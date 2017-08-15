@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -42,6 +49,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('namespace_rowing_monitor_1_1_model_1_1_util.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,11 +78,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model.html">Model</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html">Util</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
@@ -102,6 +119,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html">SegmentHitHandler</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html">SimplePeakDetector</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detects the first maximum of a data series.  <a href="class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence.html">Subsequence</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence.html" title="Subsequence in a data stream which suits a given template. ">Subsequence</a> in a data stream which suits a given template.  <a href="struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,6 +149,8 @@ Enumerations</h2></td></tr>
 <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107fa88156d46910a2d733443c339a9231d12">DataStreamType.Velocity</a>, 
 <br />
 &#160;&#160;<a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107fa147a03fd666321d0ee5c79a002f85433">DataStreamType.SegmentHits</a>, 
+<a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107fad27e9b47a8967b14df36cf8c7811c883">DataStreamType.KleshnevVelocity</a>, 
+<a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107fa9d3bbe2cf44b2a4f2766035cf66affe1">DataStreamType.KleshnevPeak</a>, 
 <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107fa6311ae17c1ee52b36e68aaf4ad066387">DataStreamType.Other</a>
 <br />
  }</td></tr>
@@ -177,6 +199,8 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a01e1a06061533b246feb7421c9d0107fae51bf1c2de9a9d12c48fb091f0a19d1e"></a>ShiftedPosition&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a01e1a06061533b246feb7421c9d0107fa88156d46910a2d733443c339a9231d12"></a>Velocity&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a01e1a06061533b246feb7421c9d0107fa147a03fd666321d0ee5c79a002f85433"></a>SegmentHits&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a01e1a06061533b246feb7421c9d0107fad27e9b47a8967b14df36cf8c7811c883"></a>KleshnevVelocity&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a01e1a06061533b246feb7421c9d0107fa9d3bbe2cf44b2a4f2766035cf66affe1"></a>KleshnevPeak&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a01e1a06061533b246feb7421c9d0107fa6311ae17c1ee52b36e68aaf4ad066387"></a>Other&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
@@ -300,11 +324,15 @@ Enumerations</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model.html">Model</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html">Util</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['plotdatahandler_2ecs',['PlotDataHandler.cs',['../_plot_data_handler_8cs.html',1,'']]]
+  ['oneeurofilter_2ecs',['OneEuroFilter.cs',['../_one_euro_filter_8cs.html',1,'']]],
+  ['oneeurosmoothingfilter_2ecs',['OneEuroSmoothingFilter.cs',['../_one_euro_smoothing_filter_8cs.html',1,'']]]
 ];

@@ -11,10 +11,16 @@ namespace RowingMonitor.Model.Util
     /// </summary>
     public class SimplePeakDetector
     {
-        private double lastValue = Double.NegativeInfinity;
+        protected double lastValue = Double.NegativeInfinity;
 
-        private bool peakDetected = false;
+        protected bool peakDetected = false;
 
+        /// <summary>
+        /// Check if the last value was a maximum. The value must be greater
+        /// then 0.
+        /// </summary>
+        /// <param name="newValue">New value in the data series.</param>
+        /// <returns>Returns true if the last value was a maximum.</returns>
         public bool HasPeak(double newValue)
         {
             if(newValue > 0 && newValue > lastValue) {
@@ -27,7 +33,10 @@ namespace RowingMonitor.Model.Util
             return false;
         }
 
-        public void Reset()
+        /// <summary>
+        /// Resets the detection after a segment ended.
+        /// </summary>
+        public virtual void SegmentEnded()
         {
             lastValue = Double.NegativeInfinity;
             peakDetected = false;

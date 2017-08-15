@@ -1,11 +1,24 @@
 var searchData=
 [
-  ['temporarygeneratedfile_5f036c0b5b_2d1481_2d4323_2d8d20_2d8f5adcb23d92_2ecs',['TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs',['../_debug_2_temporary_generated_file__036_c0_b5_b-1481-4323-8_d20-8_f5_a_d_c_b23_d92_8cs.html',1,'(Global Namespace)'],['../_release_2_temporary_generated_file__036_c0_b5_b-1481-4323-8_d20-8_f5_a_d_c_b23_d92_8cs.html',1,'(Global Namespace)']]],
-  ['temporarygeneratedfile_5f5937a670_2d0e60_2d4077_2d877b_2df7221da3dda1_2ecs',['TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs',['../_debug_2_temporary_generated_file__5937a670-0e60-4077-877b-f7221da3dda1_8cs.html',1,'(Global Namespace)'],['../_release_2_temporary_generated_file__5937a670-0e60-4077-877b-f7221da3dda1_8cs.html',1,'(Global Namespace)']]],
-  ['temporarygeneratedfile_5fe7a71f73_2d0f8d_2d4b9b_2db56e_2d8e70b10bc5d3_2ecs',['TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs',['../_debug_2_temporary_generated_file___e7_a71_f73-0_f8_d-4_b9_b-_b56_e-8_e70_b10_b_c5_d3_8cs.html',1,'(Global Namespace)'],['../_release_2_temporary_generated_file___e7_a71_f73-0_f8_d-4_b9_b-_b56_e-8_e70_b10_b_c5_d3_8cs.html',1,'(Global Namespace)']]],
-  ['trunkangledisplay_2ecs',['TrunkAngleDisplay.cs',['../_trunk_angle_display_8cs.html',1,'']]],
-  ['trunkangleview_2eg_2ecs',['TrunkAngleView.g.cs',['../_debug_2_view_2_trunk_angle_view_8g_8cs.html',1,'(Global Namespace)'],['../_release_2_view_2_trunk_angle_view_8g_8cs.html',1,'(Global Namespace)']]],
-  ['trunkangleview_2eg_2ei_2ecs',['TrunkAngleView.g.i.cs',['../_debug_2_view_2_trunk_angle_view_8g_8i_8cs.html',1,'(Global Namespace)'],['../_release_2_view_2_trunk_angle_view_8g_8i_8cs.html',1,'(Global Namespace)']]],
-  ['trunkangleview_2examl_2ecs',['TrunkAngleView.xaml.cs',['../_trunk_angle_view_8xaml_8cs.html',1,'']]],
-  ['trunkangleviewmodel_2ecs',['TrunkAngleViewModel.cs',['../_trunk_angle_view_model_8cs.html',1,'']]]
+  ['segmentdetectedeventargs_2ecs',['SegmentDetectedEventArgs.cs',['../_segment_detected_event_args_8cs.html',1,'']]],
+  ['segmentdetector_2ecs',['SegmentDetector.cs',['../_segment_detector_8cs.html',1,'']]],
+  ['segmenthithandler_2ecs',['SegmentHitHandler.cs',['../_segment_hit_handler_8cs.html',1,'']]],
+  ['settings_2edesigner_2ecs',['Settings.Designer.cs',['../_settings_8_designer_8cs.html',1,'']]],
+  ['shiftedframearrivedeventargs_2ecs',['ShiftedFrameArrivedEventArgs.cs',['../_shifted_frame_arrived_event_args_8cs.html',1,'']]],
+  ['shifter_2ecs',['Shifter.cs',['../_shifter_8cs.html',1,'']]],
+  ['simplepeakdetector_2ecs',['SimplePeakDetector.cs',['../_simple_peak_detector_8cs.html',1,'']]],
+  ['skeletonfrontaldisplay_2ecs',['SkeletonFrontalDisplay.cs',['../_skeleton_frontal_display_8cs.html',1,'']]],
+  ['skeletonfrontalview_20_2d_20kopieren_2eg_2ei_2ecs',['SkeletonFrontalView - Kopieren.g.i.cs',['../_skeleton_frontal_view_01-_01_kopieren_8g_8i_8cs.html',1,'']]],
+  ['skeletonfrontalview_2eg_2ecs',['SkeletonFrontalView.g.cs',['../_debug_2_view_2_skeleton_frontal_view_8g_8cs.html',1,'(Global Namespace)'],['../_release_2_view_2_skeleton_frontal_view_8g_8cs.html',1,'(Global Namespace)']]],
+  ['skeletonfrontalview_2eg_2ei_2ecs',['SkeletonFrontalView.g.i.cs',['../_debug_2_view_2_skeleton_frontal_view_8g_8i_8cs.html',1,'(Global Namespace)'],['../_release_2_view_2_skeleton_frontal_view_8g_8i_8cs.html',1,'(Global Namespace)']]],
+  ['skeletonfrontalview_2examl_2ecs',['SkeletonFrontalView.xaml.cs',['../_skeleton_frontal_view_8xaml_8cs.html',1,'']]],
+  ['skeletonfrontalviewmodel_2ecs',['SkeletonFrontalViewModel.cs',['../_skeleton_frontal_view_model_8cs.html',1,'']]],
+  ['skeletonsidedisplay_2ecs',['SkeletonSideDisplay.cs',['../_skeleton_side_display_8cs.html',1,'']]],
+  ['skeletonsideview_2eg_2ecs',['SkeletonSideView.g.cs',['../_debug_2_view_2_skeleton_side_view_8g_8cs.html',1,'(Global Namespace)'],['../_release_2_view_2_skeleton_side_view_8g_8cs.html',1,'(Global Namespace)']]],
+  ['skeletonsideview_2eg_2ei_2ecs',['SkeletonSideView.g.i.cs',['../_debug_2_view_2_skeleton_side_view_8g_8i_8cs.html',1,'(Global Namespace)'],['../_release_2_view_2_skeleton_side_view_8g_8i_8cs.html',1,'(Global Namespace)']]],
+  ['skeletonsideview_2examl_2ecs',['SkeletonSideView.xaml.cs',['../_skeleton_side_view_8xaml_8cs.html',1,'']]],
+  ['skeletonsideviewmodel_2ecs',['SkeletonSideViewModel.cs',['../_skeleton_side_view_model_8cs.html',1,'']]],
+  ['smoothedframearrivedeventargs_2ecs',['SmoothedFrameArrivedEventArgs.cs',['../_smoothed_frame_arrived_event_args_8cs.html',1,'']]],
+  ['smoothingfilter_2ecs',['SmoothingFilter.cs',['../_smoothing_filter_8cs.html',1,'']]],
+  ['subsequencedtw_2ecs',['SubsequenceDTW.cs',['../_subsequence_d_t_w_8cs.html',1,'']]]
 ];

@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -43,6 +50,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_p.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -70,33 +91,39 @@ $(function() {
 </li>
 <li>PlotJointTypes
 : <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_joint_data_plot.html#a47e49071f1b58e6c2edec002becf8a67">RowingMonitor.Model.Pipeline.JointDataPlot</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_monitor_view_model.html#a0c6130aa15345b26622dfaa5590666c5">RowingMonitor.ViewModel.RowingMonitorViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#a41dc4f6035874ac84cf7e184d55786b5">RowingMonitor.ViewModel.DebugViewModel</a>
 </li>
 <li>PlotMeasuredVariables
 : <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_joint_data_plot.html#a95475a3d828259105ad1c08f8eb73504">RowingMonitor.Model.Pipeline.JointDataPlot</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_monitor_view_model.html#ac01f574e88a7d89c1a587179cfd39828">RowingMonitor.ViewModel.RowingMonitorViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#adeea14566ca983399b9258a6d11ccd94">RowingMonitor.ViewModel.DebugViewModel</a>
 </li>
 <li>PlotModel
 : <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_joint_data_plot_view_model.html#a68e8da622523739caafdfb6da1d9d112">RowingMonitor.ViewModel.JointDataPlotViewModel</a>
 </li>
 <li>PlotRange
-: <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_monitor_view_model.html#a8eabbb4dc7eb13de7dd37d130e2e5f9e">RowingMonitor.ViewModel.RowingMonitorViewModel</a>
+: <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#a3c5a6901e5cfe6d6ca2ea49f6939cc5e">RowingMonitor.ViewModel.DebugViewModel</a>
 </li>
 <li>PropertyChanged
-: <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_joint_data_plot_view_model.html#ae2148e9e8b2dbb242f0a4cff6265e837">RowingMonitor.ViewModel.JointDataPlotViewModel</a>
+: <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#ab3364d1cd88e9e02b866ae2a7f3fe688">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_joint_data_plot_view_model.html#ae2148e9e8b2dbb242f0a4cff6265e837">RowingMonitor.ViewModel.JointDataPlotViewModel</a>
 , <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_kleshnev_plot_view_model.html#a6c7aa3954d98984a2b6c360a207af8aa">RowingMonitor.ViewModel.KleshnevPlotViewModel</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a54801af6236117dcc9e59b64d6e832ae">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#a330fed4ef7c22c9c2f114759e07957cb">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_widgets_view_model.html#a4661a90884262be4e23ae44e73db22df">RowingMonitor.ViewModel.RowingMetaDataWidgetsViewModel</a>
 , <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_skeleton_frontal_view_model.html#a0eab183b09804fc0b512bfaf6ac9ab9c">RowingMonitor.ViewModel.SkeletonFrontalViewModel</a>
 , <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_skeleton_side_view_model.html#a55f1fd445df598e35e9d6e1caf98a24d">RowingMonitor.ViewModel.SkeletonSideViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_trainee_view_model.html#a33d6d8137f217e3c51d97e8f6b871ab8">RowingMonitor.ViewModel.TraineeViewModel</a>
 , <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_trunk_angle_view_model.html#afbf525541d69036a9e40d427d08084c1">RowingMonitor.ViewModel.TrunkAngleViewModel</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

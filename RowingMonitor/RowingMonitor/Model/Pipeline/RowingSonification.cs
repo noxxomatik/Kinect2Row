@@ -15,18 +15,19 @@ namespace RowingMonitor.Model.Pipeline
         private ActionBlock<KleshnevData> input;
         private ActionBlock<List<SegmentHit>> inputSegmentHits;
 
-        private double lastLegsVelocity = Double.NegativeInfinity;
-        private double lastTrunkVelocity = Double.NegativeInfinity;
-        private double lastArmsVelocity = Double.NegativeInfinity;
-
-        private bool legsPeakPlayed = false;
-        private bool trunkPeakPlayed = false;
-        private bool armsPeakPlayed = false;
+        // data for peak detection
+        private MeanWindowPeakDetector legsPeakDetector;
+        private MeanWindowPeakDetector trunkPeakDetector;
+        private MeanWindowPeakDetector armsPeakDetector;
 
         private long[] lastBounds;
 
         public RowingSonification()
         {
+            legsPeakDetector = new MeanWindowPeakDetector(Properties.Settings.Default.PeakDetectionWindow);
+            trunkPeakDetector = new MeanWindowPeakDetector(Properties.Settings.Default.PeakDetectionWindow);
+            armsPeakDetector = new MeanWindowPeakDetector(Properties.Settings.Default.PeakDetectionWindow);
+
             Input = new ActionBlock<KleshnevData>(kleshnevData =>
             {
                 CheckForPeaks(kleshnevData);
@@ -40,67 +41,38 @@ namespace RowingMonitor.Model.Pipeline
 
         private void CheckForPeaks(KleshnevData kleshnevData)
         {
-            // TODO: very simple peak detection, do something more intelligent
             double legsVelocity = kleshnevData.Velocities[KleshnevVelocityType.Legs];
             double trunkVelocity = kleshnevData.Velocities[KleshnevVelocityType.Trunk];
             double armsVelocity = (kleshnevData.Velocities[KleshnevVelocityType.ArmsLeft] 
                 + kleshnevData.Velocities[KleshnevVelocityType.ArmsRight]) / 2;
 
-            if (legsVelocity > 0 && legsVelocity > lastLegsVelocity)
-            {
-                lastLegsVelocity = legsVelocity;
-            }
-            else if (!legsPeakPlayed && legsVelocity > 0 && legsVelocity < lastLegsVelocity)
-            {
+            if (legsPeakDetector.HasPeak(kleshnevData.AbsTimestamp, legsVelocity)) {
                 PlayLegPeak();
-                legsPeakPlayed = true;
             }
 
-            if (trunkVelocity > 0 && trunkVelocity > lastTrunkVelocity)
-            {
-                lastTrunkVelocity = trunkVelocity;
-            }
-            else if (!trunkPeakPlayed && trunkVelocity > 0 && trunkVelocity < lastTrunkVelocity)
-            {
+            if (trunkPeakDetector.HasPeak(kleshnevData.AbsTimestamp, trunkVelocity)) {
                 PlayTrunkPeak();
-                trunkPeakPlayed = true;
             }
 
-            if (armsVelocity > 0 && armsVelocity > lastArmsVelocity)
-            {
-                lastArmsVelocity = armsVelocity;
-            }
-            else if (!armsPeakPlayed && armsVelocity > 0 && armsVelocity < lastArmsVelocity)
-            {
+            if(armsPeakDetector.HasPeak(kleshnevData.AbsTimestamp, armsVelocity)) {
                 PlayArmsPeak();
-                armsPeakPlayed = true;
             }
         }
 
         private void CheckForSegmentEnd(List<SegmentHit> hits)
         {
             long[] bounds = SegmentHitHandler.GetLastSegmentStartEnd(hits);
-            if (lastBounds == null)
-            {
-                lastBounds = bounds;
-                return;
-            }
-            if (lastBounds.SequenceEqual(bounds))
-            {
-                return;
-            }
-            lastBounds = bounds;
+            if (SegmentHitHandler.IsSegmentValid(hits, bounds)) {
+                if (lastBounds == null || (lastBounds[1] != bounds[1])) {
+                    lastBounds = bounds;
 
-            // reset
-            lastLegsVelocity = Double.NegativeInfinity;
-            lastTrunkVelocity = Double.NegativeInfinity;
-            lastArmsVelocity = Double.NegativeInfinity;
+                    legsPeakDetector.SegmentEnded();
+                    trunkPeakDetector.SegmentEnded();
+                    armsPeakDetector.SegmentEnded();
 
-            legsPeakPlayed = false;
-            trunkPeakPlayed = false;
-            armsPeakPlayed = false;
-
-            PlaySegmentEnd();
+                    PlaySegmentEnd();
+                }
+            }            
         }
 
         private void PlayLegPeak()

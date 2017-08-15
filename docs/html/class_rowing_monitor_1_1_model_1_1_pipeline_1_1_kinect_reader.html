@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -42,6 +49,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,11 +78,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model.html">Model</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_pipeline.html">Pipeline</a></li><li class="navelem"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html">KinectReader</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -92,19 +109,19 @@ Public Member Functions</h2></td></tr>
 Properties</h2></td></tr>
 <tr class="memitem:abb848deb4ea9ed2ed53f6d95ce1945db"><td class="memItemLeft" align="right" valign="top">CoordinateMapper&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#abb848deb4ea9ed2ed53f6d95ce1945db">CoordinateMapper</a><code> [get]</code></td></tr>
 <tr class="separator:abb848deb4ea9ed2ed53f6d95ce1945db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87c7a51b3ac3983882144e85cb90a223"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a87c7a51b3ac3983882144e85cb90a223">DisplayWidth</a><code> [get]</code></td></tr>
-<tr class="separator:a87c7a51b3ac3983882144e85cb90a223"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf9ef0cd7ebc6bfbb3d3035705bacf58"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#abf9ef0cd7ebc6bfbb3d3035705bacf58">DisplayHeight</a><code> [get]</code></td></tr>
-<tr class="separator:abf9ef0cd7ebc6bfbb3d3035705bacf58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75073cd905041d0675f11e6ac23836bf"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a75073cd905041d0675f11e6ac23836bf">StatusText</a><code> [get]</code></td></tr>
 <tr class="separator:a75073cd905041d0675f11e6ac23836bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0ef04719102355582b9c41b5affed8c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html">KinectReader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#ae0ef04719102355582b9c41b5affed8c">Instance</a><code> [get]</code></td></tr>
 <tr class="memdesc:ae0ef04719102355582b9c41b5affed8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instance of <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html" title="The KinectReader class connects the application to the Kinect device. ">KinectReader</a> singleton  <a href="#ae0ef04719102355582b9c41b5affed8c">More...</a><br /></td></tr>
 <tr class="separator:ae0ef04719102355582b9c41b5affed8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e860c115b12d8f17b8f800f9bc64645"><td class="memItemLeft" align="right" valign="top">BroadcastBlock&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a6e860c115b12d8f17b8f800f9bc64645">JointDataBlock</a><code> [get, set]</code></td></tr>
+<tr class="memitem:a6e860c115b12d8f17b8f800f9bc64645"><td class="memItemLeft" align="right" valign="top">BroadcastBlock&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a6e860c115b12d8f17b8f800f9bc64645">JointDataBlock</a><code> [get]</code></td></tr>
 <tr class="separator:a6e860c115b12d8f17b8f800f9bc64645"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfc75a10c6a18c1a8f511944cb411937"><td class="memItemLeft" align="right" valign="top">BroadcastBlock&lt; WriteableBitmap &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#acfc75a10c6a18c1a8f511944cb411937">ColorFrameBlock</a><code> [get, set]</code></td></tr>
+<tr class="memitem:acfc75a10c6a18c1a8f511944cb411937"><td class="memItemLeft" align="right" valign="top">BroadcastBlock&lt; WriteableBitmap &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#acfc75a10c6a18c1a8f511944cb411937">ColorFrameBlock</a><code> [get]</code></td></tr>
 <tr class="separator:acfc75a10c6a18c1a8f511944cb411937"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8aafd70dd48e36b6cc55ad2bee4ae0e6"><td class="memItemLeft" align="right" valign="top">FrameDescription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a8aafd70dd48e36b6cc55ad2bee4ae0e6">DepthFrameDescription</a><code> [get]</code></td></tr>
+<tr class="separator:a8aafd70dd48e36b6cc55ad2bee4ae0e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43790d6bdb5e70d50c418fb17ac90ee6"><td class="memItemLeft" align="right" valign="top">FrameDescription&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a43790d6bdb5e70d50c418fb17ac90ee6">ColorFrameDescription</a><code> [get]</code></td></tr>
+<tr class="separator:a43790d6bdb5e70d50c418fb17ac90ee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="events"></a>
 Events</h2></td></tr>
@@ -227,7 +244,29 @@ Events</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43790d6bdb5e70d50c418fb17ac90ee6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43790d6bdb5e70d50c418fb17ac90ee6">&#9670;&nbsp;</a></span>ColorFrameDescription</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FrameDescription RowingMonitor.Model.Pipeline.KinectReader.ColorFrameDescription</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -256,8 +295,8 @@ Events</h2></td></tr>
 
 </div>
 </div>
-<a id="abf9ef0cd7ebc6bfbb3d3035705bacf58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf9ef0cd7ebc6bfbb3d3035705bacf58">&#9670;&nbsp;</a></span>DisplayHeight</h2>
+<a id="a8aafd70dd48e36b6cc55ad2bee4ae0e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aafd70dd48e36b6cc55ad2bee4ae0e6">&#9670;&nbsp;</a></span>DepthFrameDescription</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,29 +305,7 @@ Events</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int RowingMonitor.Model.Pipeline.KinectReader.DisplayHeight</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a87c7a51b3ac3983882144e85cb90a223"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87c7a51b3ac3983882144e85cb90a223">&#9670;&nbsp;</a></span>DisplayWidth</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int RowingMonitor.Model.Pipeline.KinectReader.DisplayWidth</td>
+          <td class="memname">FrameDescription RowingMonitor.Model.Pipeline.KinectReader.DepthFrameDescription</td>
         </tr>
       </table>
   </td>
@@ -339,7 +356,7 @@ Events</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -401,11 +418,15 @@ Events</h2></td></tr>
 <li>Model/Pipeline/<a class="el" href="_kinect_reader_8cs.html">KinectReader.cs</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model.html">Model</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_pipeline.html">Pipeline</a></li><li class="navelem"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html">KinectReader</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

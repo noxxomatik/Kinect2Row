@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['x',['X',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data.html#aecf4f967ff34d6f3ff541792a3de2cb2',1,'RowingMonitor::Model::Util::PlotData']]],
-  ['xamlgeneratednamespace',['XamlGeneratedNamespace',['../namespace_xaml_generated_namespace.html',1,'']]],
-  ['xfilt',['xFilt',['../class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html#a8c5c8ede133408fde40a26fd11f0e9c0',1,'RowingMonitor::Model::Util::OneEuroFilter']]],
-  ['xmax',['xMax',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#ac0528b38840754899c904c31efd81545',1,'RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters.xMax()'],['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#a40123a6904fd646645844bd2e23bbaef',1,'RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters.XMax()']]]
+  ['y',['Y',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data.html#ad481a32ecc84d09b772a1e7737728e46',1,'RowingMonitor::Model::Util::PlotData']]],
+  ['ymax',['yMax',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#a7265f213951d92146c03ddc6235964f5',1,'RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters.yMax()'],['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#a873310b852028fc7ec7629bb3fb49f86',1,'RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters.YMax()']]]
 ];

@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -42,6 +49,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_rowing_monitor_1_1_properties_1_1_resources.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,11 +78,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_properties.html">Properties</a></li><li class="navelem"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html">Resources</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#properties">Properties</a> &#124;
@@ -99,6 +116,12 @@ Properties</h2></td></tr>
 <tr class="memitem:ac197e44538c0c710513c11a63d98f236"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#ac197e44538c0c710513c11a63d98f236">DebugTitle</a><code> [get]</code></td></tr>
 <tr class="memdesc:ac197e44538c0c710513c11a63d98f236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Debug view ähnelt.  <a href="#ac197e44538c0c710513c11a63d98f236">More...</a><br /></td></tr>
 <tr class="separator:ac197e44538c0c710513c11a63d98f236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9040fc326480ec6679211524c8aef3b"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#ae9040fc326480ec6679211524c8aef3b">EndSession</a><code> [get]</code></td></tr>
+<tr class="memdesc:ae9040fc326480ec6679211524c8aef3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die End session ähnelt.  <a href="#ae9040fc326480ec6679211524c8aef3b">More...</a><br /></td></tr>
+<tr class="separator:ae9040fc326480ec6679211524c8aef3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4ad4cd82d6f6b3289cc385c3551d85f"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#aa4ad4cd82d6f6b3289cc385c3551d85f">Export</a><code> [get]</code></td></tr>
+<tr class="memdesc:aa4ad4cd82d6f6b3289cc385c3551d85f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Export session ähnelt.  <a href="#aa4ad4cd82d6f6b3289cc385c3551d85f">More...</a><br /></td></tr>
+<tr class="separator:aa4ad4cd82d6f6b3289cc385c3551d85f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82fbb12913d48de07a02c10dd756b575"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a82fbb12913d48de07a02c10dd756b575">FailedScreenshotStatusTextFormat</a><code> [get]</code></td></tr>
 <tr class="memdesc:a82fbb12913d48de07a02c10dd756b575"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Failed to write screenshot to {0} ähnelt.  <a href="#a82fbb12913d48de07a02c10dd756b575">More...</a><br /></td></tr>
 <tr class="separator:a82fbb12913d48de07a02c10dd756b575"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,12 +182,24 @@ Properties</h2></td></tr>
 <tr class="memitem:ac34d72eb29be8388d7d551b906bf0995"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#ac34d72eb29be8388d7d551b906bf0995">MeanSeatTravelDistance</a><code> [get]</code></td></tr>
 <tr class="memdesc:ac34d72eb29be8388d7d551b906bf0995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Mean seat travelled (m) ähnelt.  <a href="#ac34d72eb29be8388d7d551b906bf0995">More...</a><br /></td></tr>
 <tr class="separator:ac34d72eb29be8388d7d551b906bf0995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf9cf68364cf633ed99b1b808e635f71"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#aaf9cf68364cf633ed99b1b808e635f71">MeanSeatTravelDistanceNoUnit</a><code> [get]</code></td></tr>
+<tr class="memdesc:aaf9cf68364cf633ed99b1b808e635f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Mean seat travelled ähnelt.  <a href="#aaf9cf68364cf633ed99b1b808e635f71">More...</a><br /></td></tr>
+<tr class="separator:aaf9cf68364cf633ed99b1b808e635f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a704f021aad75ca92700dfe7cdb189670"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a704f021aad75ca92700dfe7cdb189670">MeanStrokeLength</a><code> [get]</code></td></tr>
 <tr class="memdesc:a704f021aad75ca92700dfe7cdb189670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Mean stroke length (m) ähnelt.  <a href="#a704f021aad75ca92700dfe7cdb189670">More...</a><br /></td></tr>
 <tr class="separator:a704f021aad75ca92700dfe7cdb189670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66d57a4a758dcf565c5aa1422ab3b1f1"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a66d57a4a758dcf565c5aa1422ab3b1f1">MeanStrokeLengthNoUnit</a><code> [get]</code></td></tr>
+<tr class="memdesc:a66d57a4a758dcf565c5aa1422ab3b1f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Mean stroke length ähnelt.  <a href="#a66d57a4a758dcf565c5aa1422ab3b1f1">More...</a><br /></td></tr>
+<tr class="separator:a66d57a4a758dcf565c5aa1422ab3b1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a880c3e3f52ed32f7e09fb5dde7f7220a"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a880c3e3f52ed32f7e09fb5dde7f7220a">MeanStrokeTime</a><code> [get]</code></td></tr>
 <tr class="memdesc:a880c3e3f52ed32f7e09fb5dde7f7220a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Mean stroke time (s) ähnelt.  <a href="#a880c3e3f52ed32f7e09fb5dde7f7220a">More...</a><br /></td></tr>
 <tr class="separator:a880c3e3f52ed32f7e09fb5dde7f7220a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3abffb090ae29ce13a35ca3d226b2c6c"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a3abffb090ae29ce13a35ca3d226b2c6c">MeanStrokeTimeNoUnit</a><code> [get]</code></td></tr>
+<tr class="memdesc:a3abffb090ae29ce13a35ca3d226b2c6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Mean stroke time ähnelt.  <a href="#a3abffb090ae29ce13a35ca3d226b2c6c">More...</a><br /></td></tr>
+<tr class="separator:a3abffb090ae29ce13a35ca3d226b2c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d03e7ae63797c4372290c89615921a5"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a8d03e7ae63797c4372290c89615921a5">MetaDataTitle</a><code> [get]</code></td></tr>
+<tr class="memdesc:a8d03e7ae63797c4372290c89615921a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Meta Data ähnelt.  <a href="#a8d03e7ae63797c4372290c89615921a5">More...</a><br /></td></tr>
+<tr class="separator:a8d03e7ae63797c4372290c89615921a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47a30e91e4789279914f53985bae7151"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a47a30e91e4789279914f53985bae7151">NoSensorStatusText</a><code> [get]</code></td></tr>
 <tr class="memdesc:a47a30e91e4789279914f53985bae7151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die No ready Kinect found! ähnelt.  <a href="#a47a30e91e4789279914f53985bae7151">More...</a><br /></td></tr>
 <tr class="separator:a47a30e91e4789279914f53985bae7151"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,8 +216,11 @@ Properties</h2></td></tr>
 <tr class="memdesc:a9966b553e0fb646c78b9256ef6574b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Kinect not available! ähnelt.  <a href="#a9966b553e0fb646c78b9256ef6574b53">More...</a><br /></td></tr>
 <tr class="separator:a9966b553e0fb646c78b9256ef6574b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0224e4993f61a965fcf0daadb31bfc97"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a0224e4993f61a965fcf0daadb31bfc97">SessionTime</a><code> [get]</code></td></tr>
-<tr class="memdesc:a0224e4993f61a965fcf0daadb31bfc97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Session duration in (m) ähnelt.  <a href="#a0224e4993f61a965fcf0daadb31bfc97">More...</a><br /></td></tr>
+<tr class="memdesc:a0224e4993f61a965fcf0daadb31bfc97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Session duration (min) ähnelt.  <a href="#a0224e4993f61a965fcf0daadb31bfc97">More...</a><br /></td></tr>
 <tr class="separator:a0224e4993f61a965fcf0daadb31bfc97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4acf4d548be476b04c7d9a672159eb8"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#ad4acf4d548be476b04c7d9a672159eb8">SessionTimeNoUnit</a><code> [get]</code></td></tr>
+<tr class="memdesc:ad4acf4d548be476b04c7d9a672159eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Session duration ähnelt.  <a href="#ad4acf4d548be476b04c7d9a672159eb8">More...</a><br /></td></tr>
+<tr class="separator:ad4acf4d548be476b04c7d9a672159eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a655e6b7c1b7acdb6fadf85cd16f3a419"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a655e6b7c1b7acdb6fadf85cd16f3a419">SettingsTitle</a><code> [get]</code></td></tr>
 <tr class="memdesc:a655e6b7c1b7acdb6fadf85cd16f3a419"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht eine lokalisierte Zeichenfolge, die Settings ähnelt.  <a href="#a655e6b7c1b7acdb6fadf85cd16f3a419">More...</a><br /></td></tr>
 <tr class="separator:a655e6b7c1b7acdb6fadf85cd16f3a419"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -382,6 +420,54 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Sucht eine lokalisierte Zeichenfolge, die Debug view ähnelt. </p>
+
+</div>
+</div>
+<a id="ae9040fc326480ec6679211524c8aef3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9040fc326480ec6679211524c8aef3b">&#9670;&nbsp;</a></span>EndSession</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RowingMonitor.Properties.Resources.EndSession</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sucht eine lokalisierte Zeichenfolge, die End session ähnelt. </p>
+
+</div>
+</div>
+<a id="aa4ad4cd82d6f6b3289cc385c3551d85f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4ad4cd82d6f6b3289cc385c3551d85f">&#9670;&nbsp;</a></span>Export</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RowingMonitor.Properties.Resources.Export</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sucht eine lokalisierte Zeichenfolge, die Export session ähnelt. </p>
 
 </div>
 </div>
@@ -865,6 +951,30 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="aaf9cf68364cf633ed99b1b808e635f71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf9cf68364cf633ed99b1b808e635f71">&#9670;&nbsp;</a></span>MeanSeatTravelDistanceNoUnit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RowingMonitor.Properties.Resources.MeanSeatTravelDistanceNoUnit</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sucht eine lokalisierte Zeichenfolge, die Mean seat travelled ähnelt. </p>
+
+</div>
+</div>
 <a id="a704f021aad75ca92700dfe7cdb189670"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a704f021aad75ca92700dfe7cdb189670">&#9670;&nbsp;</a></span>MeanStrokeLength</h2>
 
@@ -889,6 +999,30 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="a66d57a4a758dcf565c5aa1422ab3b1f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66d57a4a758dcf565c5aa1422ab3b1f1">&#9670;&nbsp;</a></span>MeanStrokeLengthNoUnit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RowingMonitor.Properties.Resources.MeanStrokeLengthNoUnit</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sucht eine lokalisierte Zeichenfolge, die Mean stroke length ähnelt. </p>
+
+</div>
+</div>
 <a id="a880c3e3f52ed32f7e09fb5dde7f7220a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a880c3e3f52ed32f7e09fb5dde7f7220a">&#9670;&nbsp;</a></span>MeanStrokeTime</h2>
 
@@ -910,6 +1044,54 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Sucht eine lokalisierte Zeichenfolge, die Mean stroke time (s) ähnelt. </p>
+
+</div>
+</div>
+<a id="a3abffb090ae29ce13a35ca3d226b2c6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3abffb090ae29ce13a35ca3d226b2c6c">&#9670;&nbsp;</a></span>MeanStrokeTimeNoUnit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RowingMonitor.Properties.Resources.MeanStrokeTimeNoUnit</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sucht eine lokalisierte Zeichenfolge, die Mean stroke time ähnelt. </p>
+
+</div>
+</div>
+<a id="a8d03e7ae63797c4372290c89615921a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d03e7ae63797c4372290c89615921a5">&#9670;&nbsp;</a></span>MetaDataTitle</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RowingMonitor.Properties.Resources.MetaDataTitle</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sucht eine lokalisierte Zeichenfolge, die Meta Data ähnelt. </p>
 
 </div>
 </div>
@@ -1077,7 +1259,31 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Sucht eine lokalisierte Zeichenfolge, die Session duration in (m) ähnelt. </p>
+<p>Sucht eine lokalisierte Zeichenfolge, die Session duration (min) ähnelt. </p>
+
+</div>
+</div>
+<a id="ad4acf4d548be476b04c7d9a672159eb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4acf4d548be476b04c7d9a672159eb8">&#9670;&nbsp;</a></span>SessionTimeNoUnit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RowingMonitor.Properties.Resources.SessionTimeNoUnit</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sucht eine lokalisierte Zeichenfolge, die Session duration ähnelt. </p>
 
 </div>
 </div>
@@ -1325,11 +1531,15 @@ Properties</h2></td></tr>
 <li>Properties/<a class="el" href="_resources_8_designer_8cs.html">Resources.Designer.cs</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_properties.html">Properties</a></li><li class="navelem"><a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html">Resources</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

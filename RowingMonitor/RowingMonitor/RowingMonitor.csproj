@@ -177,6 +177,7 @@
     <Compile Include="Model\EventArgs\KinectFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\KinectReader.cs" />
     <Compile Include="Model\Pipeline\OneEuroSmoothingFilter.cs" />
+    <Compile Include="Model\Util\MeanWindowPeakDetector.cs" />
     <Compile Include="Model\Util\RowingMetaDataHandler.cs" />
     <Compile Include="Model\Util\OneEuroFilter.cs" />
     <Compile Include="Model\Util\PlotDataHandler.cs" />

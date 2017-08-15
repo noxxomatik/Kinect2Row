@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -43,6 +50,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_prop_m.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,80 +82,114 @@ $(function() {
 &#160;
 
 <h3><a id="index_m"></a>- m -</h3><ul>
+<li>MainGrid
+: <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#a7f736b8421cccf54c5b2c745c06c5e03">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_trainee_view_model.html#a4fab1e779e1336f06f79849e2128459d">RowingMonitor.ViewModel.TraineeViewModel</a>
+</li>
 <li>MaxArmsVelocity
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#a7143799bca95bc54ea1089ba941c8df4">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a24ae603ed8d743173db5ad95422f1b43">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a944c164cf43ce8b42e30b763c6a0724b">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#a8c119b77046f9ebc29a8bc51253423a1">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#ac5820eda650e646eac2a0adf4f88eb0d">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MaxCatchTrunkAngle
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#a584871b9e8b5cd821f4d080acd9cd917">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a719188712de0b0ca68430d55ef6e056a">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#abaecd5e8f7ff65231b2ba9b8390baecb">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#a25b04c304c6c3a5977bd2520ede1e7c3">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MaxFinishTrunkAngle
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#a754aef1dc0344af59d83e10debf08b8b">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#ab2e04d859eccef5e7fe84566c5d19a9e">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a9ae268c1bb8e81d38974f8e81977682c">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#a2fe2f846ba972b3bfa62f08d8f7e054e">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MaxHandleVelocity
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#a047d5fd079a23902d4390d17c5c85a6a">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#ae64ee05cc7efe5061d819604243cc329">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#aed29b2a05b1b300ec9de24e5f03832b7">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#a61256f169d1e75c1f3d8fa7805d5e757">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#a18263a166b9e48a60aa19c1127d9eee2">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MaxLegsVelocity
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#af6bde9eeda004b3614bd1cacd68771e8">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a1be32a40d9aabe3ccd2a5e2a4c13c5e6">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a1f1bd0c0548dea77e4a73023c690415f">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#a438fdc5df5ae18d8cd154504912d9b65">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#ae78027aa407b8a37e860f223a5269eb8">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MaxTrunkVelocity
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#abdfd0d10608e2655f12994cda812b060">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a55adc5e7b70ad437f1d5cc217fd3e799">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a4a77b8f455bb2f7862d2a7b8317be240">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#adc7d37e55dc2ac669f81356f9a2bc079">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#a9b29fed094b5664914c1399758bc7728">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MeanCatchFactor
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#a141b6b4cc593aa32e034b30dea6820b0">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#afd9d96b64031744615932ca371e64257">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#ae0051dc9d140b819243d2269a22a1a5e">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#a72b074890be114e880646d6856e1038d">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#ab2e80c441072f488f247942c99fa70b4">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MeanMaxArmsVelocity
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#a57df10beaf4d3ecc43d25e1ecb669e51">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#aefe138efd7d84e783a37820fd4655069">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a860c29f02792b4d17b2e54a9c9b1832b">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#ade526b71315b0698a4d784f0e4bc2860">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#ad7dc40c4a166f7ba1a5321f35a979238">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MeanMaxHandleVelocity
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#af9c451462cc99b03c003b2f8f95e1fe3">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a9259f46ec2e511e16397345db30b083c">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a88d69952930420071a82fe4efa37612f">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#aba6a7eb887398580daaf9567bcf36d3f">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#a1c1582da513792bc11943d02807fc720">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MeanMaxLegsVelocity
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#a4cdba49e59a66f68b5df5ca6ab4742cb">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a2254769cd88372fb92595fc59c36e0ad">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a3e66a0b824644d63c712613a48796f69">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#aeac341cb4dc82ce1a7e784fdb7aa2aa9">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#ad58213bfbf02d861242aa5d9c78845cd">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MeanMaxTrunkVelocity
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#a191473e54dbd2ae98eac311b16b51067">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#ae8925670637fe28af1a497d4d9e99f1f">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#ac3f9c7d2915d82a2dd52a5d2cde6bdf6">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#a913a7dd526cef93b33d4d7a6dd85209c">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#acc977e2c789b254b73a4ecbe0dc49577">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
 </li>
 <li>MeanRowingStyleFactor
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#accb0b7482873df604c048f9b6b3e7cda">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a6a72ee7d9006274b2c616410c5dc89bf">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a1873631d333228f09de939087db24052">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#a4d6e272b54fefc1195b28e6cadaa4b34">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#a282c3663e2a5727a308e6ac8667158c8">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
+</li>
+<li>MeanSeatTravel
+: <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#a6a7e565b8183152d1894b9ca31184371">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_trainee_view_model.html#a3528ab6aaf531da1b58fbcb841bf6289">RowingMonitor.ViewModel.TraineeViewModel</a>
 </li>
 <li>MeanSeatTravelDistance
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#adfa552780cb390fa805206e24b1c7a70">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#ac34d72eb29be8388d7d551b906bf0995">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a767c5064b68f231804a37b4f7d5ad1db">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#a4b6c793a6db1654c7684fc6c6b71ce17">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
+</li>
+<li>MeanSeatTravelDistanceNoUnit
+: <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#aaf9cf68364cf633ed99b1b808e635f71">RowingMonitor.Properties.Resources</a>
 </li>
 <li>MeanStrokeLength
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#a80c9a6c9f230a1f7a84c8ed3e1f3353b">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a704f021aad75ca92700dfe7cdb189670">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a55df589f70394cc857870857fd0abdc7">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#aba749823320c686335dc09514bc8b6ab">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#acbef052db26e08c4caa332017e8df8b3">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_trainee_view_model.html#abeea8b0717e76fcb5bb300ba96f50b2b">RowingMonitor.ViewModel.TraineeViewModel</a>
+</li>
+<li>MeanStrokeLengthNoUnit
+: <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a66d57a4a758dcf565c5aa1422ab3b1f1">RowingMonitor.Properties.Resources</a>
 </li>
 <li>MeanStrokeTime
 : <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#ae25c2935da8062e6decc9c8a0a02f423">RowingMonitor.Model.Util.RowingMetaData</a>
 , <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a880c3e3f52ed32f7e09fb5dde7f7220a">RowingMonitor.Properties.Resources</a>
-, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_view_model.html#a36e9692c0bad31f92b56435d99d16cbc">RowingMonitor.ViewModel.RowingMetaDataViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_coach_view_model.html#a4524d8e7f6e93686d46e26df699c956d">RowingMonitor.ViewModel.CoachViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#a79f3e7cbda926c9a2776bc195b60d950">RowingMonitor.ViewModel.RowingMetaDataDebugViewModel</a>
+, <a class="el" href="class_rowing_monitor_1_1_view_model_1_1_trainee_view_model.html#a3b991710dd1abe5a0292242d84b751bb">RowingMonitor.ViewModel.TraineeViewModel</a>
+</li>
+<li>MeanStrokeTimeNoUnit
+: <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a3abffb090ae29ce13a35ca3d226b2c6c">RowingMonitor.Properties.Resources</a>
+</li>
+<li>MetaDataTitle
+: <a class="el" href="class_rowing_monitor_1_1_properties_1_1_resources.html#a8d03e7ae63797c4372290c89615921a5">RowingMonitor.Properties.Resources</a>
 </li>
 <li>Mincutoff
 : <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_one_euro_smoothing_filter.html#a25584ff866652d0985ff677725a32f77">RowingMonitor.Model.Pipeline.OneEuroSmoothingFilter</a>
@@ -150,11 +205,14 @@ $(function() {
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

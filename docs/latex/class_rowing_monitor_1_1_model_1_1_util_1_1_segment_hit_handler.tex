@@ -8,7 +8,9 @@ static bool \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_h
 static long \mbox{[}$\,$\mbox{]} \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler_a75d8b23514da843ef1eebf9e684f8094}{Get\+Last\+Segment\+Start\+End} (List$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit} $>$ hits)
 \begin{DoxyCompactList}\small\item\em Return the bounding indices values of the last complete segment. \end{DoxyCompactList}\item 
 static long \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler_ac73a1aebbe85844658b84fd48591c302}{Get\+Last\+Segment\+Internal} (List$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit} $>$ hits)
-\begin{DoxyCompactList}\small\item\em Returns the index of the last detected internal segment hit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns the index of the last detected internal segment hit. \end{DoxyCompactList}\item 
+static bool \hyperlink{class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler_afe07b33e8ee385a2320a5e6f05d86215}{Is\+Segment\+Valid} (List$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit} $>$ hits, long\mbox{[}$\,$\mbox{]} bounds)
+\begin{DoxyCompactList}\small\item\em Checks if the segment is valid by comparing its duration with the minimum segment time from the settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
@@ -53,6 +55,26 @@ Return the bounding indices values of the last complete segment.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Start an d end index of the lastdetected segment.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler_afe07b33e8ee385a2320a5e6f05d86215}\label{class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler_afe07b33e8ee385a2320a5e6f05d86215}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Segment\+Hit\+Handler@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Segment\+Hit\+Handler}!Is\+Segment\+Valid@{Is\+Segment\+Valid}}
+\index{Is\+Segment\+Valid@{Is\+Segment\+Valid}!Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Segment\+Hit\+Handler@{Rowing\+Monitor\+::\+Model\+::\+Util\+::\+Segment\+Hit\+Handler}}
+\subsubsection{\texorpdfstring{Is\+Segment\+Valid()}{IsSegmentValid()}}
+{\footnotesize\ttfamily static bool Rowing\+Monitor.\+Model.\+Util.\+Segment\+Hit\+Handler.\+Is\+Segment\+Valid (\begin{DoxyParamCaption}\item[{List$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit}{Segment\+Hit} $>$}]{hits,  }\item[{long \mbox{[}$\,$\mbox{]}}]{bounds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks if the segment is valid by comparing its duration with the minimum segment time from the settings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hits} & \\
+\hline
+{\em bounds} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the segment duration is greater then the minimum segment duration in the settings
 \end{DoxyReturn}
 
 

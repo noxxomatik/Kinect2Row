@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -42,6 +49,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_frontal_display.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,11 +78,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model.html">Model</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_pipeline.html">Pipeline</a></li><li class="navelem"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_frontal_display.html">SkeletonFrontalDisplay</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -77,8 +94,8 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae55122ec00fa8ea4a95037c3cb4d8580"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_frontal_display.html#ae55122ec00fa8ea4a95037c3cb4d8580">Render</a> ()</td></tr>
 <tr class="separator:ae55122ec00fa8ea4a95037c3cb4d8580"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd21a93370aa49b931f002d9e035426a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_frontal_display.html#afd21a93370aa49b931f002d9e035426a">SkeletonFrontalDisplay</a> (CoordinateMapper mapper, int displayWidth, int displayHeight)</td></tr>
-<tr class="separator:afd21a93370aa49b931f002d9e035426a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74506876336e434a4ed20c3e0d7fd86e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_frontal_display.html#a74506876336e434a4ed20c3e0d7fd86e">SkeletonFrontalDisplay</a> (CoordinateMapper mapper, FrameDescription depthFrame, FrameDescription colorFrame)</td></tr>
+<tr class="separator:a74506876336e434a4ed20c3e0d7fd86e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a698babc7b0ee287fd25de6e784b242ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_frontal_display.html#a698babc7b0ee287fd25de6e784b242ab">UpdateSkeleton</a> (IReadOnlyDictionary&lt; JointType, Joint &gt; joints)</td></tr>
 <tr class="memdesc:a698babc7b0ee287fd25de6e784b242ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the view with new data.  <a href="#a698babc7b0ee287fd25de6e784b242ab">More...</a><br /></td></tr>
 <tr class="separator:a698babc7b0ee287fd25de6e784b242ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,8 +124,8 @@ Properties</h2></td></tr>
 <tr class="separator:a8be39be7a7348b853f17e4fbd59e8530"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="afd21a93370aa49b931f002d9e035426a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd21a93370aa49b931f002d9e035426a">&#9670;&nbsp;</a></span>SkeletonFrontalDisplay()</h2>
+<a id="a74506876336e434a4ed20c3e0d7fd86e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74506876336e434a4ed20c3e0d7fd86e">&#9670;&nbsp;</a></span>SkeletonFrontalDisplay()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -122,14 +139,14 @@ Properties</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>displayWidth</em>, </td>
+          <td class="paramtype">FrameDescription&#160;</td>
+          <td class="paramname"><em>depthFrame</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>displayHeight</em>&#160;</td>
+          <td class="paramtype">FrameDescription&#160;</td>
+          <td class="paramname"><em>colorFrame</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -353,11 +370,15 @@ Properties</h2></td></tr>
 <li>Model/Pipeline/<a class="el" href="_skeleton_frontal_display_8cs.html">SkeletonFrontalDisplay.cs</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model.html">Model</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_pipeline.html">Pipeline</a></li><li class="navelem"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_frontal_display.html">SkeletonFrontalDisplay</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

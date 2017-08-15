@@ -1,0 +1,8 @@
+var struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e =
+[
+    [ "fCorrection", "struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e.html#a7303c0fbcd8a80670f7ddd5f46c0d49c", null ],
+    [ "fJitterRadius", "struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e.html#aa4a54259125f5677ef2b7a149402e268", null ],
+    [ "fMaxDeviationRadius", "struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e.html#a01f36a8e40cd63c55161e3df85de9196", null ],
+    [ "fPrediction", "struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e.html#a4cc3828d097b5b63f71f004f2034ba79", null ],
+    [ "fSmoothing", "struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_t_r_a_n_s_f_o9fb8ee9e37e15ee7ab8d318a72b8984e.html#a5fd02a9b999cbcc12ad1a22763adb8cd", null ]
+];

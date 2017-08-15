@@ -1,0 +1,7 @@
+var class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_filter_double_exponential_data =
+[
+    [ "m_dwFrameCount", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_filter_double_exponential_data.html#a6e78b9e396880ae02df6ed4a22ef8d5a", null ],
+    [ "m_vFilteredPosition", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_filter_double_exponential_data.html#a21b62353676c1da09291ff22fc273e19", null ],
+    [ "m_vRawPosition", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_filter_double_exponential_data.html#aaa96edf113418068d2dc5e9ae97400ea", null ],
+    [ "m_vTrend", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_filter_double_exponential_data.html#a59e5535cdc6f5edb7dd8d6a3b37fa9cf", null ]
+];

@@ -64,8 +64,7 @@ namespace RowingMonitor.Model.Pipeline
                 AbsTimestamp = velocityJointData.AbsTimestamp,
                 Index = velocityJointData.Index
             };
-
-            // multiply all values with -1 to change the sign
+            
             // leg velocity equals velocity of chip
             double legs = velocityJointData.Joints[JointType.SpineBase].Position.Z;
 

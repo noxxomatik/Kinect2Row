@@ -21,17 +21,17 @@ void \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a1
 \item 
 Coordinate\+Mapper \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_abb848deb4ea9ed2ed53f6d95ce1945db}{Coordinate\+Mapper}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \item 
-int \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a87c7a51b3ac3983882144e85cb90a223}{Display\+Width}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
-\item 
-int \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_abf9ef0cd7ebc6bfbb3d3035705bacf58}{Display\+Height}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
-\item 
 string \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a75073cd905041d0675f11e6ac23836bf}{Status\+Text}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \item 
 static \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader}{Kinect\+Reader} \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_ae0ef04719102355582b9c41b5affed8c}{Instance}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \begin{DoxyCompactList}\small\item\em Instance of \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader}{Kinect\+Reader} singleton \end{DoxyCompactList}\item 
-Broadcast\+Block$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data} $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a6e860c115b12d8f17b8f800f9bc64645}{Joint\+Data\+Block}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+Broadcast\+Block$<$ \hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data} $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a6e860c115b12d8f17b8f800f9bc64645}{Joint\+Data\+Block}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \item 
-Broadcast\+Block$<$ Writeable\+Bitmap $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_acfc75a10c6a18c1a8f511944cb411937}{Color\+Frame\+Block}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+Broadcast\+Block$<$ Writeable\+Bitmap $>$ \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_acfc75a10c6a18c1a8f511944cb411937}{Color\+Frame\+Block}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Frame\+Description \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a8aafd70dd48e36b6cc55ad2bee4ae0e6}{Depth\+Frame\+Description}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+Frame\+Description \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a43790d6bdb5e70d50c418fb17ac90ee6}{Color\+Frame\+Description}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \end{DoxyCompactItemize}
 \subsection*{Events}
 \begin{DoxyCompactItemize}
@@ -87,7 +87,13 @@ Stop the kinect reader and clean up.
 \index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}!Color\+Frame\+Block@{Color\+Frame\+Block}}
 \index{Color\+Frame\+Block@{Color\+Frame\+Block}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}}
 \subsubsection{\texorpdfstring{Color\+Frame\+Block}{ColorFrameBlock}}
-{\footnotesize\ttfamily Broadcast\+Block$<$Writeable\+Bitmap$>$ Rowing\+Monitor.\+Model.\+Pipeline.\+Kinect\+Reader.\+Color\+Frame\+Block\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+{\footnotesize\ttfamily Broadcast\+Block$<$Writeable\+Bitmap$>$ Rowing\+Monitor.\+Model.\+Pipeline.\+Kinect\+Reader.\+Color\+Frame\+Block\hspace{0.3cm}{\ttfamily [get]}}
+
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a43790d6bdb5e70d50c418fb17ac90ee6}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a43790d6bdb5e70d50c418fb17ac90ee6}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}!Color\+Frame\+Description@{Color\+Frame\+Description}}
+\index{Color\+Frame\+Description@{Color\+Frame\+Description}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}}
+\subsubsection{\texorpdfstring{Color\+Frame\+Description}{ColorFrameDescription}}
+{\footnotesize\ttfamily Frame\+Description Rowing\+Monitor.\+Model.\+Pipeline.\+Kinect\+Reader.\+Color\+Frame\+Description\hspace{0.3cm}{\ttfamily [get]}}
 
 \mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_abb848deb4ea9ed2ed53f6d95ce1945db}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_abb848deb4ea9ed2ed53f6d95ce1945db}} 
 \index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}!Coordinate\+Mapper@{Coordinate\+Mapper}}
@@ -95,17 +101,11 @@ Stop the kinect reader and clean up.
 \subsubsection{\texorpdfstring{Coordinate\+Mapper}{CoordinateMapper}}
 {\footnotesize\ttfamily Coordinate\+Mapper Rowing\+Monitor.\+Model.\+Pipeline.\+Kinect\+Reader.\+Coordinate\+Mapper\hspace{0.3cm}{\ttfamily [get]}}
 
-\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_abf9ef0cd7ebc6bfbb3d3035705bacf58}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_abf9ef0cd7ebc6bfbb3d3035705bacf58}} 
-\index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}!Display\+Height@{Display\+Height}}
-\index{Display\+Height@{Display\+Height}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}}
-\subsubsection{\texorpdfstring{Display\+Height}{DisplayHeight}}
-{\footnotesize\ttfamily int Rowing\+Monitor.\+Model.\+Pipeline.\+Kinect\+Reader.\+Display\+Height\hspace{0.3cm}{\ttfamily [get]}}
-
-\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a87c7a51b3ac3983882144e85cb90a223}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a87c7a51b3ac3983882144e85cb90a223}} 
-\index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}!Display\+Width@{Display\+Width}}
-\index{Display\+Width@{Display\+Width}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}}
-\subsubsection{\texorpdfstring{Display\+Width}{DisplayWidth}}
-{\footnotesize\ttfamily int Rowing\+Monitor.\+Model.\+Pipeline.\+Kinect\+Reader.\+Display\+Width\hspace{0.3cm}{\ttfamily [get]}}
+\mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a8aafd70dd48e36b6cc55ad2bee4ae0e6}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a8aafd70dd48e36b6cc55ad2bee4ae0e6}} 
+\index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}!Depth\+Frame\+Description@{Depth\+Frame\+Description}}
+\index{Depth\+Frame\+Description@{Depth\+Frame\+Description}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}}
+\subsubsection{\texorpdfstring{Depth\+Frame\+Description}{DepthFrameDescription}}
+{\footnotesize\ttfamily Frame\+Description Rowing\+Monitor.\+Model.\+Pipeline.\+Kinect\+Reader.\+Depth\+Frame\+Description\hspace{0.3cm}{\ttfamily [get]}}
 
 \mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_ae0ef04719102355582b9c41b5affed8c}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_ae0ef04719102355582b9c41b5affed8c}} 
 \index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}!Instance@{Instance}}
@@ -121,7 +121,7 @@ Instance of \hyperlink{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_re
 \index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}!Joint\+Data\+Block@{Joint\+Data\+Block}}
 \index{Joint\+Data\+Block@{Joint\+Data\+Block}!Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}}
 \subsubsection{\texorpdfstring{Joint\+Data\+Block}{JointDataBlock}}
-{\footnotesize\ttfamily Broadcast\+Block$<$\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data}$>$ Rowing\+Monitor.\+Model.\+Pipeline.\+Kinect\+Reader.\+Joint\+Data\+Block\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+{\footnotesize\ttfamily Broadcast\+Block$<$\hyperlink{struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data}{Joint\+Data}$>$ Rowing\+Monitor.\+Model.\+Pipeline.\+Kinect\+Reader.\+Joint\+Data\+Block\hspace{0.3cm}{\ttfamily [get]}}
 
 \mbox{\Hypertarget{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a75073cd905041d0675f11e6ac23836bf}\label{class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader_a75073cd905041d0675f11e6ac23836bf}} 
 \index{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader@{Rowing\+Monitor\+::\+Model\+::\+Pipeline\+::\+Kinect\+Reader}!Status\+Text@{Status\+Text}}

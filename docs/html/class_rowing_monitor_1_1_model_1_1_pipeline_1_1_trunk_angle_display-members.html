@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -42,6 +49,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,11 +78,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespace_rowing_monitor.html">RowingMonitor</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model.html">Model</a></li><li class="navelem"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_pipeline.html">Pipeline</a></li><li class="navelem"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">TrunkAngleDisplay</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">RowingMonitor.Model.Pipeline.TrunkAngleDisplay Member List</div>  </div>
@@ -69,19 +86,19 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">RowingMonitor.Model.Pipeline.TrunkAngleDisplay</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#ac1e4cc748894dc3d2bb8bbd0ec17226e">GetOutput</a>()</td><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">RowingMonitor.Model.Pipeline.TrunkAngleDisplay</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#ad8ae0fc35ad101ac1c7e5fa75eace01e">Height</a></td><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">RowingMonitor.Model.Pipeline.TrunkAngleDisplay</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#a2bbac9839cfa5977f133be79c3c47754">Input</a></td><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">RowingMonitor.Model.Pipeline.TrunkAngleDisplay</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#a3f82a22f8d195e8285ec1008514b8a3a">Render</a>()</td><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">RowingMonitor.Model.Pipeline.TrunkAngleDisplay</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#aa821fa5b4473ec7cc3ce2947fb9b4b73">TrunkAngleDisplay</a>()</td><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">RowingMonitor.Model.Pipeline.TrunkAngleDisplay</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#ac0578beabcf4ec767137c3e7b9d50493">View</a></td><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">RowingMonitor.Model.Pipeline.TrunkAngleDisplay</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#a44e27b142945a82a101bb38cbd5a3c1f">Width</a></td><td class="entry"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html">RowingMonitor.Model.Pipeline.TrunkAngleDisplay</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

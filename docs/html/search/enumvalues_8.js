@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['velocity',['Velocity',['../namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107fa88156d46910a2d733443c339a9231d12',1,'RowingMonitor::Model::Util']]]
+  ['trunk',['Trunk',['../namespace_rowing_monitor_1_1_model_1_1_util.html#a45e0956b123d438555a1cb3997bd5cb4afa4543063c32652d93dff5ff09898ab1',1,'RowingMonitor::Model::Util']]]
 ];

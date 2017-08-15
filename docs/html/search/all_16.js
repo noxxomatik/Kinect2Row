@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['width',['Width',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_trunk_angle_display.html#a44e27b142945a82a101bb38cbd5a3c1f',1,'RowingMonitor::Model::Pipeline::TrunkAngleDisplay']]],
-  ['windowloaded',['WindowLoaded',['../class_rowing_monitor_1_1_view_model_1_1_rowing_monitor_view_model.html#aeae6b5826078c5ef7047829af060a02a',1,'RowingMonitor::ViewModel::RowingMonitorViewModel']]]
+  ['x',['X',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data.html#aecf4f967ff34d6f3ff541792a3de2cb2',1,'RowingMonitor::Model::Util::PlotData']]],
+  ['xamlgeneratednamespace',['XamlGeneratedNamespace',['../namespace_xaml_generated_namespace.html',1,'']]],
+  ['xfilt',['xFilt',['../class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html#a8c5c8ede133408fde40a26fd11f0e9c0',1,'RowingMonitor::Model::Util::OneEuroFilter']]],
+  ['xmax',['xMax',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#ac0528b38840754899c904c31efd81545',1,'RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters.xMax()'],['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#a40123a6904fd646645844bd2e23bbaef',1,'RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters.XMax()']]]
 ];

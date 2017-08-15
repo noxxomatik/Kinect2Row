@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zvcsegmentdetector_2ecs',['ZVCSegmentDetector.cs',['../_z_v_c_segment_detector_8cs.html',1,'']]]
+  ['velocitycalculator_2ecs',['VelocityCalculator.cs',['../_velocity_calculator_8cs.html',1,'']]]
 ];

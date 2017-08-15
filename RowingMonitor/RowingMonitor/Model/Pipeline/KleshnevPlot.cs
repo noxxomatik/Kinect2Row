@@ -40,10 +40,10 @@ namespace RowingMonitor.Model.Pipeline
         //private List<SegmentHit> hits;
         private long[] detectedBounds;
 
-        // data for simple peak detection (from sonification)
-        private SimplePeakDetector legsPeakDetector;
-        private SimplePeakDetector trunkPeakDetector;
-        private SimplePeakDetector armsPeakDetector;
+        // data for peak detection
+        private MeanWindowPeakDetector legsPeakDetector;
+        private MeanWindowPeakDetector trunkPeakDetector;
+        private MeanWindowPeakDetector armsPeakDetector;
 
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace RowingMonitor.Model.Pipeline
             kleshnevColors.Add(KleshnevVelocityType.Legs.ToString(), OxyColors.Red);
             kleshnevColors.Add(KleshnevVelocityType.Trunk.ToString(), OxyColors.Blue);
 
-            legsPeakDetector = new SimplePeakDetector();
-            trunkPeakDetector = new SimplePeakDetector();
-            armsPeakDetector = new SimplePeakDetector();
+            legsPeakDetector = new MeanWindowPeakDetector(Properties.Settings.Default.PeakDetectionWindow);
+            trunkPeakDetector = new MeanWindowPeakDetector(Properties.Settings.Default.PeakDetectionWindow);
+            armsPeakDetector = new MeanWindowPeakDetector(Properties.Settings.Default.PeakDetectionWindow);
 
             KleshnevDataBlock = new ActionBlock<KleshnevData>(kleshnevData =>
             {
@@ -107,25 +107,43 @@ namespace RowingMonitor.Model.Pipeline
                 Dictionary<string, List<PlotData>> lastSegmentPlotData =
                     new Dictionary<string, List<PlotData>>();
 
-                // TODO: filtert falsch index und Plot data wird vermischt
                 // filter the plot data between the bounds
                 foreach (KeyValuePair<string, List<PlotData>> plotSeries in
                     currentSegmentPlotData) {
                     List<PlotData> plotData = new List<PlotData>();
 
-                    foreach (PlotData point in plotSeries.Value) {
-                        if (point.Index >= detectedBounds[0] && point.Index <= detectedBounds[1]) {
-                            plotData.Add(point);
-                        }
+                    // override peaks with the improved peaks 
+                    if (plotSeries.Key == "Legs peaks") {
+                        PlotData point = new PlotData();
+                        point.X = legsPeakDetector.SegmentEnded() / 1000;
+                        point.Annotation = "Legs peak";
+                        point.DataStreamType = DataStreamType.KleshnevPeak;
+                        plotData.Add(point);
+                    }
+                    else if (plotSeries.Key == "Trunk peaks") {
+                        PlotData point = new PlotData();
+                        point.X = trunkPeakDetector.SegmentEnded() / 1000;
+                        point.Annotation = "Trunk peaks";
+                        point.DataStreamType = DataStreamType.KleshnevPeak;
+                        plotData.Add(point);
+                    }
+                    else if (plotSeries.Key == "Arms peaks") {
+                        PlotData point = new PlotData();
+                        point.X = armsPeakDetector.SegmentEnded() / 1000;
+                        point.Annotation = "Arms peaks";
+                        point.DataStreamType = DataStreamType.KleshnevPeak;
+                        plotData.Add(point);
+                    }
+                    else {
+                        foreach (PlotData point in plotSeries.Value) {
+                            if (point.Index >= detectedBounds[0] && point.Index <= detectedBounds[1]) {
+                                plotData.Add(point);
+                            }
+                        }                        
                     }
 
                     lastSegmentPlotData.Add(plotSeries.Key, plotData);
                 }
-
-                // reset the peak detector
-                legsPeakDetector.Reset();
-                trunkPeakDetector.Reset();
-                armsPeakDetector.Reset();
 
                 viewModel?.UpdateLastSegmentPlot(UpdatePlot(lastSegmentPlotData,
                     "Kleshnev Velocities Last Segment", .0f));
@@ -240,7 +258,7 @@ namespace RowingMonitor.Model.Pipeline
             }
 
             // check for peaks and add them when found
-            if (legsPeakDetector.HasPeak(
+            if (legsPeakDetector.HasPeak(kleshnevData.AbsTimestamp,
                 kleshnevData.Velocities[KleshnevVelocityType.Legs])) {
                 PlotData point = new PlotData();
                 point.Index = kleshnevData.Index;
@@ -255,7 +273,7 @@ namespace RowingMonitor.Model.Pipeline
                         new List<PlotData>() { point });
                 }
             }
-            if (trunkPeakDetector.HasPeak(
+            if (trunkPeakDetector.HasPeak(kleshnevData.AbsTimestamp,
                 kleshnevData.Velocities[KleshnevVelocityType.Trunk])) {
                 PlotData point = new PlotData();
                 point.Index = kleshnevData.Index;
@@ -270,7 +288,7 @@ namespace RowingMonitor.Model.Pipeline
                         new List<PlotData>() { point });
                 }
             }
-            if (armsPeakDetector.HasPeak(
+            if (armsPeakDetector.HasPeak(kleshnevData.AbsTimestamp,
                 (kleshnevData.Velocities[KleshnevVelocityType.ArmsLeft]
                 + kleshnevData.Velocities[KleshnevVelocityType.ArmsRight]) / 2)) {
                 PlotData point = new PlotData();
