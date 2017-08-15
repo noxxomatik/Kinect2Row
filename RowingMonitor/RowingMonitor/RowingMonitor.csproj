@@ -189,7 +189,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.de-DE.resx</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\CoachViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\TraineeViewModel.cs" />
     <Compile Include="View\CoachView.xaml.cs">
       <DependentUpon>CoachView.xaml</DependentUpon>

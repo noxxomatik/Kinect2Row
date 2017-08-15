@@ -36,5 +36,10 @@ namespace RowingMonitor
         {
             mainFrame.NavigationService.Navigate(new HomeView());
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SaveSettings();
+        }
     }
 }

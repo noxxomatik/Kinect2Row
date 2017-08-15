@@ -270,4 +270,28 @@
   <data name="MetaDataTitle" xml:space="preserve">
     <value>Meta Data</value>
   </data>
+  <data name="EnviromentSettingsTitle" xml:space="preserve">
+    <value>Enviroment settings</value>
+  </data>
+  <data name="FootSpineBaseOffset" xml:space="preserve">
+    <value>Foot to hip offset (cm)</value>
+  </data>
+  <data name="MinSegmentTime" xml:space="preserve">
+    <value>Minimum stroke time (s)</value>
+  </data>
+  <data name="PeakDetectionSettingsTitle" xml:space="preserve">
+    <value>Peak detection settings</value>
+  </data>
+  <data name="PeakDetectionWindow" xml:space="preserve">
+    <value>Peak detection window (ms)</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SegmentationSettingsTitle" xml:space="preserve">
+    <value>Segmentation settings</value>
+  </data>
+  <data name="SegmentationTemplate" xml:space="preserve">
+    <value>Segmentation template</value>
+  </data>
 </root>

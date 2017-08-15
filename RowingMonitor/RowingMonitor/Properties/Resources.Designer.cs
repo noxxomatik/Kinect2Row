@@ -124,6 +124,15 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enviroment settings ähnelt.
+        /// </summary>
+        public static string EnviromentSettingsTitle {
+            get {
+                return ResourceManager.GetString("EnviromentSettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Export session ähnelt.
         /// </summary>
         public static string Export {
@@ -147,6 +156,15 @@ namespace RowingMonitor.Properties {
         public static string FinishTrunkAngleTitle {
             get {
                 return ResourceManager.GetString("FinishTrunkAngleTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Foot to hip offset (cm) ähnelt.
+        /// </summary>
+        public static string FootSpineBaseOffset {
+            get {
+                return ResourceManager.GetString("FootSpineBaseOffset", resourceCulture);
             }
         }
         
@@ -367,11 +385,38 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Minimum stroke time (s) ähnelt.
+        /// </summary>
+        public static string MinSegmentTime {
+            get {
+                return ResourceManager.GetString("MinSegmentTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No ready Kinect found! ähnelt.
         /// </summary>
         public static string NoSensorStatusText {
             get {
                 return ResourceManager.GetString("NoSensorStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Peak detection settings ähnelt.
+        /// </summary>
+        public static string PeakDetectionSettingsTitle {
+            get {
+                return ResourceManager.GetString("PeakDetectionSettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Peak detection window (ms) ähnelt.
+        /// </summary>
+        public static string PeakDetectionWindow {
+            get {
+                return ResourceManager.GetString("PeakDetectionWindow", resourceCulture);
             }
         }
         
@@ -394,11 +439,38 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Save ähnelt.
+        /// </summary>
+        public static string SaveButton {
+            get {
+                return ResourceManager.GetString("SaveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Seat travelled (m) ähnelt.
         /// </summary>
         public static string SeatTravelDistance {
             get {
                 return ResourceManager.GetString("SeatTravelDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Segmentation settings ähnelt.
+        /// </summary>
+        public static string SegmentationSettingsTitle {
+            get {
+                return ResourceManager.GetString("SegmentationSettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Segmentation template ähnelt.
+        /// </summary>
+        public static string SegmentationTemplate {
+            get {
+                return ResourceManager.GetString("SegmentationTemplate", resourceCulture);
             }
         }
         
