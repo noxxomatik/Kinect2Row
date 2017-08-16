@@ -92,6 +92,28 @@ namespace RowingMonitor.Model.Util
             else
                 return null;
         }
+
+        /// <summary>
+        /// Get a specific joint data value.
+        /// </summary>
+        /// <param name="jointData">Joint data object.</param>
+        /// <param name="jointType">Joint type of the value.</param>
+        /// <param name="axis">Axis of the value (X, Y, Z).</param>
+        /// <returns>Returns the requested value.</returns>
+        public static float GetJointDataValue(JointData jointData,
+            JointType jointType, String axis)
+        {
+            switch (axis) {
+                case "X":
+                    return jointData.Joints[jointType].Position.X;
+                case "Y":
+                    return jointData.Joints[jointType].Position.Y;
+                case "Z":
+                    return jointData.Joints[jointType].Position.Z;
+                default:
+                    throw new Exception("Chose axis X, Y or Z.");
+            }
+        }
     }
 
     public struct JointData

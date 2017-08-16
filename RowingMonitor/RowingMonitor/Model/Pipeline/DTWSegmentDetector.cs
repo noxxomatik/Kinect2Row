@@ -63,7 +63,7 @@ namespace RowingMonitor.Model.Pipeline
             string[] splittedText = templateText.Split(',');
 
             foreach (string value in splittedText) {
-                template.Add(Double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture.NumberFormat));
+                template.Add(Double.Parse(value, NumberStyles.Float, CultureInfo.CurrentUICulture.NumberFormat));
             }
 
             return template;
@@ -79,7 +79,7 @@ namespace RowingMonitor.Model.Pipeline
             jointDataHistory.Add(jointData);
 
             Subsequence subsequence = subsequenceDTW.compareDataStream(
-                GetJointDataValue(jointData, jointType, axis), 
+                JointDataHandler.GetJointDataValue(jointData, jointType, axis), 
                 (int)jointData.Index + 1);
             if (subsequence.Status == SubsequenceStatus.Optimal) {
                 // -1 because index t of DTW starts with 1

@@ -32,22 +32,7 @@ namespace RowingMonitor.Model.Pipeline
             String axis);
 
         public abstract List<SegmentHit> Detect(JointData jointData,
-            JointType jointType, String axis);
-
-        protected float GetJointDataValue(JointData jointData,
-            JointType jointType, String axis)
-        {
-            switch (axis) {
-                case "X":
-                    return jointData.Joints[jointType].Position.X;
-                case "Y":
-                    return jointData.Joints[jointType].Position.Y;
-                case "Z":
-                    return jointData.Joints[jointType].Position.Z;
-                default:
-                    throw new Exception("Chose axis X, Y or Z.");
-            }
-        }
+            JointType jointType, String axis);        
 
         protected virtual void OnSegmentDetected(SegmentDetectedEventArgs e)
         {

@@ -2,6 +2,7 @@
 using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,6 +83,9 @@ namespace RowingMonitor.Model.Pipeline
 
                     UpdateRowingMetaData(true);
 
+                    // log template data for DTW
+                    LogTemplateData(JointType.HandRight, "Z");
+
                     newSegment = false;
                 }
                 // do realtime based calculations
@@ -97,11 +101,46 @@ namespace RowingMonitor.Model.Pipeline
             });
         }
 
+        /// <summary>
+        /// Log the normalized template of the segment and its
+        /// minimum and maximum values for realtime normalization.        
+        /// <param name="jointType"></param>
+        /// <param name="axis"/><param/>
+        /// </summary>
+        private void LogTemplateData(JointType jointType, string axis)
+        {
+            // the values
+            List<float> values = new List<float>();
+            // get the segment joint data
+            List<JointData> segmentJointData = 
+                SegmentHitHandler.FilterSegmentJointData(jointDataBuffer, segmentBoundsBuffer);
+            // filter the joint data for the joint type and axis and
+            // remember the values, minimum and maximum
+            foreach(JointData jointData in segmentJointData) {
+                float value = JointDataHandler.GetJointDataValue(jointData, jointType, axis);                
+                values.Add(value);
+            }
+            // to normalize the minimum an maximum is needed
+            float min = values.Min();
+            float max = values.Max();
+            // normalize the values
+            List<float> normalizedValues = values.Select(x => x = (x - min) / (max - min)).ToList();
+            // output the result in the log
+            Logger.Log(this.ToString(), "Normalized template of last segment: " 
+                + String.Join(";", normalizedValues.Select(x => x.ToString(CultureInfo.CurrentUICulture.NumberFormat))));
+            Logger.Log(this.ToString(), "Segment minimum: " + min.ToString(CultureInfo.CurrentUICulture.NumberFormat));
+            Logger.Log(this.ToString(), "Segment maximum: " + max.ToString(CultureInfo.CurrentUICulture.NumberFormat));
+        }
+
         private void UpdateRowingMetaData(bool segmentEnded)
         {
             if (kleshnevDataBuffer.Count > 0) {
                 RowingMetaData metaData = new RowingMetaData();
-                // use index and timestamp of kleshnev data since it is the last data in the pipline and jointData and velocity should have these indices also
+
+                // use index and timestamp of kleshnev data since it is the 
+                // last data in the pipline and jointData and velocity 
+                // should have these indices also
+
                 KleshnevData lastData = kleshnevDataBuffer.Last();
                 metaData.Index = lastData.Index;
                 metaData.AbsTimestamp = lastData.AbsTimestamp;
@@ -116,50 +155,6 @@ namespace RowingMonitor.Model.Pipeline
                 Output.Post(metaData);
             }            
         }        
-
-        private List<JointData> FilterLastSegmentJointData(List<JointData> buffer, long[] bounds)
-        {
-            List<JointData> tmpLastSegmentJointDataBuffer = new List<JointData>();
-            // do not search through all buffer objects, search last in first out
-            for (int i = buffer.Count - 1; i >= 0; i--) {
-                if (buffer[i].Index >= bounds[0] && buffer[i].Index <= bounds[1]) {
-                    tmpLastSegmentJointDataBuffer.Add(buffer[i]);
-                }
-            }
-            tmpLastSegmentJointDataBuffer.Reverse();
-            return tmpLastSegmentJointDataBuffer;
-        }
-
-        private double CalculateHandleTravelDistance(List<JointData> buffer)
-        {
-            double minZ = Double.PositiveInfinity;
-            double maxZ = Double.NegativeInfinity;
-            foreach (JointData jointData in buffer) {
-                // calculate handle position as mean of LeftHand and RightHand
-                double meanZ = (jointData.Joints[JointType.HandLeft].Position.Z
-                    + jointData.Joints[JointType.HandRight].Position.Z) / 2;
-                minZ = meanZ < minZ ? meanZ : minZ;
-                maxZ = meanZ > maxZ ? meanZ : maxZ;
-            }
-            return maxZ - minZ;
-        }
-
-        private double CalculateSeatTravelDistance(List<JointData> buffer)
-        {
-            double minZ = Double.PositiveInfinity;
-            double maxZ = Double.NegativeInfinity;
-            foreach (JointData jointData in buffer) {
-                double z = jointData.Joints[JointType.SpineBase].Position.Z;
-                minZ = z < minZ ? z : minZ;
-                maxZ = z > maxZ ? z : maxZ;
-            }
-            return maxZ - minZ;
-        }
-
-        private double CalculateSegmentTime(List<JointData> buffer)
-        {
-            return buffer.Last().AbsTimestamp - buffer[0].AbsTimestamp;
-        }
 
         public ActionBlock<JointData> Input { get => input; set => input = value; }
         public ActionBlock<KleshnevData> InputKleshnevData

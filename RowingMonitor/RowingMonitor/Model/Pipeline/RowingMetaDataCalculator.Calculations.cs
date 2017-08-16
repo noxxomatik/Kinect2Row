@@ -91,6 +91,37 @@ namespace RowingMonitor.Model.Pipeline
             return metaData;
         }
 
+        private double CalculateHandleTravelDistance(List<JointData> buffer)
+        {
+            double minZ = Double.PositiveInfinity;
+            double maxZ = Double.NegativeInfinity;
+            foreach (JointData jointData in buffer) {
+                // calculate handle position as mean of LeftHand and RightHand
+                double meanZ = (jointData.Joints[JointType.HandLeft].Position.Z
+                    + jointData.Joints[JointType.HandRight].Position.Z) / 2;
+                minZ = meanZ < minZ ? meanZ : minZ;
+                maxZ = meanZ > maxZ ? meanZ : maxZ;
+            }
+            return maxZ - minZ;
+        }
+
+        private double CalculateSeatTravelDistance(List<JointData> buffer)
+        {
+            double minZ = Double.PositiveInfinity;
+            double maxZ = Double.NegativeInfinity;
+            foreach (JointData jointData in buffer) {
+                double z = jointData.Joints[JointType.SpineBase].Position.Z;
+                minZ = z < minZ ? z : minZ;
+                maxZ = z > maxZ ? z : maxZ;
+            }
+            return maxZ - minZ;
+        }
+
+        private double CalculateSegmentTime(List<JointData> buffer)
+        {
+            return buffer.Last().AbsTimestamp - buffer[0].AbsTimestamp;
+        }
+
         private double GetTrunkAngle(RowingMetaData metaData)
         {
             JointData jointData = GetJointDataByIndex(jointDataBuffer, metaData.Index);
@@ -337,7 +368,8 @@ namespace RowingMonitor.Model.Pipeline
             }
 
             bounds[1] = internalHitIndex;
-            List<JointData> segmentJointData = FilterLastSegmentJointData(jointDataBuffer, bounds);
+            List<JointData> segmentJointData = 
+                SegmentHitHandler.FilterSegmentJointData(jointDataBuffer, bounds);
             double handleTravel = CalculateHandleTravelDistance(segmentJointData);
 
             // get joint data until 20% of handle travel is reached

@@ -126,8 +126,8 @@ namespace RowingMonitor.Model.Pipeline
         public override List<SegmentHit> Detect(JointData jointData, JointType jointType, string axis)
         {
             if (lastJointData.RelTimestamp != 0) {
-                float value = GetJointDataValue(jointData, jointType, axis);
-                float lastValue = GetJointDataValue(lastJointData, jointType, axis);
+                float value = JointDataHandler.GetJointDataValue(jointData, jointType, axis);
+                float lastValue = JointDataHandler.GetJointDataValue(lastJointData, jointType, axis);
 
                 // set slope rising true if the current value is greater then the last
                 bool slopeRising = value - lastValue > 0 ? true : false;

@@ -18,22 +18,22 @@ namespace RowingMonitor.ViewModel
         {
             Template = Properties.Settings.Default.Template;
             FootSpineBaseOffset = Properties.Settings.Default.FootSpineBaseOffset.ToString(
-                CultureInfo.InvariantCulture.NumberFormat);
+                CultureInfo.CurrentUICulture.NumberFormat);
             MinSegmentTime = Properties.Settings.Default.MinSegmentTime.ToString(
-                CultureInfo.InvariantCulture.NumberFormat);
+                CultureInfo.CurrentUICulture.NumberFormat);
             PeakDetectionWindow = Properties.Settings.Default.PeakDetectionWindow.ToString(
-                CultureInfo.InvariantCulture.NumberFormat);
+                CultureInfo.CurrentUICulture.NumberFormat);
         }        
 
         public void SaveSettings()
         {
             Properties.Settings.Default.Template = Template;
             Properties.Settings.Default.FootSpineBaseOffset =
-                float.Parse(FootSpineBaseOffset, CultureInfo.InvariantCulture.NumberFormat);
+                float.Parse(FootSpineBaseOffset, CultureInfo.CurrentUICulture.NumberFormat);
             Properties.Settings.Default.MinSegmentTime =
-                double.Parse(MinSegmentTime, CultureInfo.InvariantCulture.NumberFormat);
+                double.Parse(MinSegmentTime, CultureInfo.CurrentUICulture.NumberFormat);
             Properties.Settings.Default.PeakDetectionWindow =
-                double.Parse(PeakDetectionWindow, CultureInfo.InvariantCulture.NumberFormat);
+                double.Parse(PeakDetectionWindow, CultureInfo.CurrentUICulture.NumberFormat);
 
             Properties.Settings.Default.Save();
         }

@@ -93,6 +93,25 @@ namespace RowingMonitor.Model.Util
             }
             return false;
         }
+
+        /// <summary>
+        /// Filters the joint data of a completed segment.
+        /// </summary>
+        /// <param name="buffer">The list of joint data that shall be filtered.</param>
+        /// <param name="bounds">Start and end index of the segment.</param>
+        /// <returns>Returns a list of all joint data that ist part of the segment.</returns>
+        public static List<JointData> FilterSegmentJointData(List<JointData> buffer, long[] bounds)
+        {
+            List<JointData> tmpLastSegmentJointDataBuffer = new List<JointData>();
+            // do not search through all buffer objects, search last in first out
+            for (int i = buffer.Count - 1; i >= 0; i--) {
+                if (buffer[i].Index >= bounds[0] && buffer[i].Index <= bounds[1]) {
+                    tmpLastSegmentJointDataBuffer.Add(buffer[i]);
+                }
+            }
+            tmpLastSegmentJointDataBuffer.Reverse();
+            return tmpLastSegmentJointDataBuffer;
+        }
     }
 
     public struct SegmentHit
