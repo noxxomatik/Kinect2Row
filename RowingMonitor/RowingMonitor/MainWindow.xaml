@@ -48,6 +48,9 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="{x:Static resx:Resources.EnviromentSettingsTitle}"
                        Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
@@ -67,21 +70,39 @@
                         <TextBox Controls:TextBoxHelper.ClearTextButton="True" 
                                  Text="{Binding Template}"
                      Grid.Column="1" Grid.Row="3"/>
-                        <TextBlock Text="{x:Static resx:Resources.MinSegmentTime}"
+                        <TextBlock Text="{x:Static resx:Resources.DTWStartMinimumPosition}"
                        Grid.Column="0" Grid.Row="4"
                        TextWrapping="Wrap" FontSize="14" Padding="4"/>
                         <TextBox Controls:TextBoxHelper.ClearTextButton="True" 
-                                 Text="{Binding MinSegmentTime}"
+                                 Text="{Binding DTWStartMinimumPosition}"
                      Grid.Column="1" Grid.Row="4"/>
-                        <TextBlock Text="{x:Static resx:Resources.PeakDetectionSettingsTitle}"
-                       Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2"
-                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
-                        <TextBlock Text="{x:Static resx:Resources.PeakDetectionWindow}"
+                        <TextBlock Text="{x:Static resx:Resources.DTWStartMaximumPosition}"
+                       Grid.Column="0" Grid.Row="5"
+                       TextWrapping="Wrap" FontSize="14" Padding="4"/>
+                        <TextBox Controls:TextBoxHelper.ClearTextButton="True" 
+                                 Text="{Binding DTWStartMaximumPosition}"
+                     Grid.Column="1" Grid.Row="5"/>
+                        <TextBlock Text="{x:Static resx:Resources.DTWMaxDistance}"
                        Grid.Column="0" Grid.Row="6"
                        TextWrapping="Wrap" FontSize="14" Padding="4"/>
                         <TextBox Controls:TextBoxHelper.ClearTextButton="True" 
-                                 Text="{Binding PeakDetectionWindow}"
+                                 Text="{Binding DTWMaxDistance}"
                      Grid.Column="1" Grid.Row="6"/>
+                        <TextBlock Text="{x:Static resx:Resources.MinSegmentTime}"
+                       Grid.Column="0" Grid.Row="7"
+                       TextWrapping="Wrap" FontSize="14" Padding="4"/>
+                        <TextBox Controls:TextBoxHelper.ClearTextButton="True" 
+                                 Text="{Binding MinSegmentTime}"
+                     Grid.Column="1" Grid.Row="7"/>
+                        <TextBlock Text="{x:Static resx:Resources.PeakDetectionSettingsTitle}"
+                       Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2"
+                       TextWrapping="Wrap" FontSize="16" Padding="4"/>
+                        <TextBlock Text="{x:Static resx:Resources.PeakDetectionWindow}"
+                       Grid.Column="0" Grid.Row="9"
+                       TextWrapping="Wrap" FontSize="14" Padding="4"/>
+                        <TextBox Controls:TextBoxHelper.ClearTextButton="True" 
+                                 Text="{Binding PeakDetectionWindow}"
+                     Grid.Column="1" Grid.Row="9"/>
                     </Grid>
                     <Button HorizontalAlignment="Right" VerticalAlignment="Bottom"
                         Content="{x:Static resx:Resources.SaveButton}" 

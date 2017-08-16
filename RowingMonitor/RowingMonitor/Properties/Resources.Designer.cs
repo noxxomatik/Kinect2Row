@@ -115,6 +115,33 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die DTW distance threshold ähnelt.
+        /// </summary>
+        public static string DTWMaxDistance {
+            get {
+                return ResourceManager.GetString("DTWMaxDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Segmentation maximum position ähnelt.
+        /// </summary>
+        public static string DTWStartMaximumPosition {
+            get {
+                return ResourceManager.GetString("DTWStartMaximumPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Segmentation minimum position ähnelt.
+        /// </summary>
+        public static string DTWStartMinimumPosition {
+            get {
+                return ResourceManager.GetString("DTWStartMinimumPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die End session ähnelt.
         /// </summary>
         public static string EndSession {

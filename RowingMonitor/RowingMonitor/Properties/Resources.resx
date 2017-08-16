@@ -294,4 +294,13 @@
   <data name="SegmentationTemplate" xml:space="preserve">
     <value>Segmentation template</value>
   </data>
+  <data name="DTWStartMaximumPosition" xml:space="preserve">
+    <value>Segmentation maximum position</value>
+  </data>
+  <data name="DTWStartMinimumPosition" xml:space="preserve">
+    <value>Segmentation minimum position</value>
+  </data>
+  <data name="DTWMaxDistance" xml:space="preserve">
+    <value>DTW distance threshold</value>
+  </data>
 </root>

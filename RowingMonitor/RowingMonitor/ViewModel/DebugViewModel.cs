@@ -30,7 +30,7 @@ namespace RowingMonitor.ViewModel
         // segmentation
         private SegmentDetector segmentDetector;
         // DTW
-        float distanceThreshold = 3.0f;
+        float distanceThreshold = 2.0f;
         int minimumSubsequenceLength = 10;
         // ZVC
         int minimumHitGap = 10;
@@ -221,7 +221,8 @@ namespace RowingMonitor.ViewModel
                     segmentDetector.Input);
             }
             else {
-                segmentDetector = new DTWSegmentDetector(distanceThreshold,
+                segmentDetector = 
+                    new DTWSegmentDetector(Properties.Settings.Default.DTWMaxDistance,
                     minimumSubsequenceLength);
                 segmentationLink = shifter.Output.LinkTo(
                     segmentDetector.Input);

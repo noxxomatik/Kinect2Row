@@ -60,7 +60,7 @@ namespace RowingMonitor.Model.Pipeline
         {
             List<double> template = new List<double>();
             string templateText = Properties.Settings.Default.Template;
-            string[] splittedText = templateText.Split(',');
+            string[] splittedText = templateText.Split(';');
 
             foreach (string value in splittedText) {
                 template.Add(Double.Parse(value, NumberStyles.Float, CultureInfo.CurrentUICulture.NumberFormat));
@@ -78,9 +78,16 @@ namespace RowingMonitor.Model.Pipeline
 
             jointDataHistory.Add(jointData);
 
-            Subsequence subsequence = subsequenceDTW.compareDataStream(
-                JointDataHandler.GetJointDataValue(jointData, jointType, axis), 
-                (int)jointData.Index + 1);
+            // normalize jointData before comparing with the template
+            // TODO: calculate minimum and maximum from mean
+            float value = JointDataHandler.GetJointDataValue(jointData, jointType, axis);
+            value = (value - Properties.Settings.Default.DTWStartMinimumPosition) 
+                / (Properties.Settings.Default.DTWStartMaximumPosition 
+                - Properties.Settings.Default.DTWStartMinimumPosition);
+
+            Subsequence subsequence = 
+                subsequenceDTW.compareDataStream(value, (int)jointData.Index + 1);
+
             if (subsequence.Status == SubsequenceStatus.Optimal) {
                 // -1 because index t of DTW starts with 1
                 int startIndex = subsequence.TStart  - 1;

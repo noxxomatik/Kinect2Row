@@ -13,6 +13,9 @@ namespace RowingMonitor.ViewModel
         private string footSpineBaseOffset;
         private string minSegmentTime;
         private string peakDetectionWindow;
+        private string dTWStartMinimumPosition;
+        private string dTWStartMaximumPosition;
+        private string dTWMaxDistance;
 
         public SettingsViewModel()
         {
@@ -23,6 +26,12 @@ namespace RowingMonitor.ViewModel
                 CultureInfo.CurrentUICulture.NumberFormat);
             PeakDetectionWindow = Properties.Settings.Default.PeakDetectionWindow.ToString(
                 CultureInfo.CurrentUICulture.NumberFormat);
+            DTWStartMinimumPosition = 
+                Properties.Settings.Default.DTWStartMinimumPosition.ToString(CultureInfo.CurrentUICulture.NumberFormat);
+            DTWStartMaximumPosition = 
+                Properties.Settings.Default.DTWStartMaximumPosition.ToString(CultureInfo.CurrentUICulture.NumberFormat);
+            DTWMaxDistance =
+                Properties.Settings.Default.DTWMaxDistance.ToString(CultureInfo.CurrentUICulture.NumberFormat);
         }        
 
         public void SaveSettings()
@@ -34,6 +43,12 @@ namespace RowingMonitor.ViewModel
                 double.Parse(MinSegmentTime, CultureInfo.CurrentUICulture.NumberFormat);
             Properties.Settings.Default.PeakDetectionWindow =
                 double.Parse(PeakDetectionWindow, CultureInfo.CurrentUICulture.NumberFormat);
+            Properties.Settings.Default.DTWStartMinimumPosition =
+                float.Parse(DTWStartMinimumPosition, CultureInfo.CurrentUICulture.NumberFormat);
+            Properties.Settings.Default.DTWStartMaximumPosition =
+                float.Parse(DTWStartMaximumPosition, CultureInfo.CurrentUICulture.NumberFormat);
+            Properties.Settings.Default.DTWMaxDistance =
+                float.Parse(DTWMaxDistance, CultureInfo.CurrentUICulture.NumberFormat);
 
             Properties.Settings.Default.Save();
         }
@@ -42,5 +57,8 @@ namespace RowingMonitor.ViewModel
         public string FootSpineBaseOffset { get => footSpineBaseOffset; set => footSpineBaseOffset = value; }
         public string MinSegmentTime { get => minSegmentTime; set => minSegmentTime = value; }
         public string PeakDetectionWindow { get => peakDetectionWindow; set => peakDetectionWindow = value; }
+        public string DTWStartMinimumPosition { get => dTWStartMinimumPosition; set => dTWStartMinimumPosition = value; }
+        public string DTWStartMaximumPosition { get => dTWStartMaximumPosition; set => dTWStartMaximumPosition = value; }
+        public string DTWMaxDistance { get => dTWMaxDistance; set => dTWMaxDistance = value; }
     }
 }
