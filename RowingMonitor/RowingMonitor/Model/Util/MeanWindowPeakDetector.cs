@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace RowingMonitor.Model.Util
         private double meanDetectionWindowEnd;
         private double segmentStartTime;
         private List<double> detectionTimestamps;
-        private Dictionary<double, double> segmentValues;
+        private ConcurrentDictionary<double, double> segmentValues;
 
         /// <summary>
         /// Create a new instance of MeanWindowPeakDetection.
@@ -28,7 +29,7 @@ namespace RowingMonitor.Model.Util
         {
             window = timeWindow;
             detectionTimestamps = new List<double>();
-            segmentValues = new Dictionary<double, double>();
+            segmentValues = new ConcurrentDictionary<double, double>();
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace RowingMonitor.Model.Util
                 segmentValues[segmentTimestamp] = newValue;
             }
             else {
-                segmentValues.Add(segmentTimestamp, newValue);
+                segmentValues.TryAdd(segmentTimestamp, newValue);
             }            
 
             // simple check if there is a peak
@@ -102,7 +103,7 @@ namespace RowingMonitor.Model.Util
             meanDetectionWindowEnd = meanDetectionTimestamp + window / 2;
 
             // reset the segment values
-            segmentValues = new Dictionary<double, double>();
+            segmentValues = new ConcurrentDictionary<double, double>();
             segmentStartTime = 0;
 
             base.SegmentEnded();
