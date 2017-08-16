@@ -15,10 +15,6 @@ namespace RowingMonitor.Model.Pipeline
     {
         private SubsequenceDTW subsequenceDTW;
 
-        //private int indexOffset = -1;
-
-        //private int currentIndex = 1;
-
         private List<JointData> jointDataHistory = new List<JointData>();
         private List<double> timeLog = new List<double>();
 
@@ -85,7 +81,7 @@ namespace RowingMonitor.Model.Pipeline
             Subsequence subsequence = subsequenceDTW.compareDataStream(
                 GetJointDataValue(jointData, jointType, axis), 
                 (int)jointData.Index + 1);
-            if (subsequence.Status == SubsequenceStatus.OPTIMAL) {
+            if (subsequence.Status == SubsequenceStatus.Optimal) {
                 // -1 because index t of DTW starts with 1
                 int startIndex = subsequence.TStart  - 1;
                 int endIndex = subsequence.TEnd - 1;

@@ -21,6 +21,9 @@ namespace RowingMonitor
             System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
             RowingMonitor.Properties.Resources.Culture = new CultureInfo(culture);
+
+            // init Logger
+            log4net.Config.XmlConfigurator.Configure();
         }
 
         protected override void OnStartup(StartupEventArgs e)

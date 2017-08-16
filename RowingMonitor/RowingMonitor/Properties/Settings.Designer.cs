@@ -70,5 +70,29 @@ namespace RowingMonitor.Properties {
                 this["PeakDetectionWindow"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float DTWStartMinimumPosition {
+            get {
+                return ((float)(this["DTWStartMinimumPosition"]));
+            }
+            set {
+                this["DTWStartMinimumPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public float DTWStartMaximumPosition {
+            get {
+                return ((float)(this["DTWStartMaximumPosition"]));
+            }
+            set {
+                this["DTWStartMaximumPosition"] = value;
+            }
+        }
     }
 }

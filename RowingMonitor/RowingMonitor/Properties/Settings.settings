@@ -14,5 +14,11 @@
     <Setting Name="PeakDetectionWindow" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
+    <Setting Name="DTWStartMinimumPosition" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DTWStartMaximumPosition" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -75,13 +75,13 @@ namespace UnitTest
                 Distance = 4,
                 TStart = 2,
                 TEnd = 5,
-                Status = SubsequenceStatus.OPTIMAL
+                Status = SubsequenceStatus.Optimal
             });
             resultSubsequences.Add(new Subsequence {
                 Distance = 0,
                 TStart = 6,
                 TEnd = 9,
-                Status = SubsequenceStatus.NOT_OPTIMAL
+                Status = SubsequenceStatus.NotOptimal
             });
 
             List<Subsequence> reportedSubsequences = new List<Subsequence>();
@@ -89,9 +89,9 @@ namespace UnitTest
             SubsequenceDTW dtw = new SubsequenceDTW(template, 15, 4);
             for (int i = 0; i < data.Count; i++) {
                 Subsequence sequence = dtw.compareDataStream(data[i], i + 1);
-                if (sequence.Status == SubsequenceStatus.OPTIMAL)
+                if (sequence.Status == SubsequenceStatus.Optimal)
                     reportedSubsequences.Add(sequence);
-                else if (sequence.Status == SubsequenceStatus.NOT_OPTIMAL && i == data.Count - 1)
+                else if (sequence.Status == SubsequenceStatus.NotOptimal && i == data.Count - 1)
                     reportedSubsequences.Add(sequence);
             }
 

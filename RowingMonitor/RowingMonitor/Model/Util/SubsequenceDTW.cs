@@ -75,7 +75,7 @@ namespace RowingMonitor.Model.Util
         {
             Subsequence report = new Subsequence
             {
-                Status = SubsequenceStatus.NOT_SET,
+                Status = SubsequenceStatus.NotSet,
                 TDetected = t
             };
             s[0] = t;
@@ -98,7 +98,7 @@ namespace RowingMonitor.Model.Util
                         report.Distance = dMin;
                         report.TStart = tS;
                         report.TEnd = tE;
-                        report.Status = SubsequenceStatus.OPTIMAL;
+                        report.Status = SubsequenceStatus.Optimal;
 
                         dMin = Double.PositiveInfinity;
                         for (int j = 1; j <= m; j++) {
@@ -116,11 +116,11 @@ namespace RowingMonitor.Model.Util
                 tE = t;
 
                 // if no optimal subsequence is reported, report the not optimal subsequence
-                if (report.Status != SubsequenceStatus.OPTIMAL) {
+                if (report.Status != SubsequenceStatus.Optimal) {
                     report.Distance = dMin;
                     report.TStart = tS;
                     report.TEnd = tE;
-                    report.Status = SubsequenceStatus.NOT_OPTIMAL;
+                    report.Status = SubsequenceStatus.NotOptimal;
                 }
             }
 
@@ -172,14 +172,14 @@ namespace RowingMonitor.Model.Util
         /// <summary>
         /// No subsequence was detected.
         /// </summary>
-        NOT_SET,
+        NotSet,
         /// <summary>
         /// A subsequenece with smaller distance can occur.
         /// </summary>
-        NOT_OPTIMAL,
+        NotOptimal,
         /// <summary>
         /// No more exact subsequenece can occur.
         /// </summary>
-        OPTIMAL
+        Optimal
     }
 }
