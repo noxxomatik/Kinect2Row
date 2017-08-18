@@ -114,6 +114,19 @@ namespace RowingMonitor.Model.Util
                     throw new Exception("Chose axis X, Y or Z.");
             }
         }
+
+        /// <summary>
+        /// Short check to validate that the joint data has valid values.
+        /// </summary>
+        /// <param name="jointData">The joint data to be validated.</param>
+        /// <returns>Returns true if the joint data is valid.</returns>
+        public static bool IsValid(JointData jointData)
+        {
+            if (!float.IsNaN(jointData.Joints[JointType.AnkleLeft].Position.X)) {
+                return true;
+            }
+            return false;
+        }
     }
 
     public struct JointData

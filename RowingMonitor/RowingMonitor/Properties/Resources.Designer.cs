@@ -214,7 +214,7 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Find a position for the Kinect sensor and trainee. The skeleton should stay green for the complete stroke to get the best results. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Find a proper position for the Kinect sensor and trainee. The skeleton should stay green for a complete stroke to get the best results. ähnelt.
         /// </summary>
         public static string KinectCalibrationMessage {
             get {

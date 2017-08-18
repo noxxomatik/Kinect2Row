@@ -68,7 +68,9 @@ namespace RowingMonitor.Model.Pipeline
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                Output.Post(Smooth(jointData));
+                if (JointDataHandler.IsValid(jointData)) {
+                    Output.Post(Smooth(jointData));
+                }
 
                 stopwatch.Stop();
                 // log times

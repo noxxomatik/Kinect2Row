@@ -14,7 +14,8 @@
                       Width="1280"                      
                       BorderBrush="{DynamicResource AccentColorBrush}"
                       BorderThickness="1"
-                      ResizeMode="CanResizeWithGrip" Loaded="MetroWindow_Loaded"                        
+                      ResizeMode="CanResizeWithGrip" Loaded="MetroWindow_Loaded"      
+                      WindowState="Maximized"
                       >
 
     <Controls:MetroWindow.DataContext>

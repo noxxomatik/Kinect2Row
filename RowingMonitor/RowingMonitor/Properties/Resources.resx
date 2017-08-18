@@ -226,7 +226,7 @@
     <value>Choose a view</value>
   </data>
   <data name="KinectCalibrationMessage" xml:space="preserve">
-    <value>Find a position for the Kinect sensor and trainee. The skeleton should stay green for the complete stroke to get the best results.</value>
+    <value>Find a proper position for the Kinect sensor and trainee. The skeleton should stay green for a complete stroke to get the best results.</value>
   </data>
   <data name="KinectCalibrationTitle" xml:space="preserve">
     <value>Kinect calibration</value>
