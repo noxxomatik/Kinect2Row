@@ -396,8 +396,14 @@ namespace RowingMonitor.Model.Pipeline
             double seatTravel = CalculateSeatTravelDistance(choppedJointData);
 
             // calculate rowing style factor
-            rowingStyleFactors.Add(seatTravel / handleTravel);
-            return seatTravel / handleTravel;
+            double rsf = seatTravel / handleTravel;
+
+            if (rsf != double.NaN) {
+                rowingStyleFactors.Add(rsf);
+                return rsf;
+            }
+            
+            return 0;
         }
 
         private double GetCatchFactor()

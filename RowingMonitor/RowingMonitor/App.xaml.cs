@@ -31,7 +31,7 @@ namespace RowingMonitor
             // change the theme and accent
             ThemeManager.ChangeAppStyle(Application.Current,
                                         ThemeManager.GetAccent("Blue"),
-                                        ThemeManager.GetAppTheme("BaseLight"));
+                                        ThemeManager.GetAppTheme("BaseDark"));
 
             base.OnStartup(e);
         }

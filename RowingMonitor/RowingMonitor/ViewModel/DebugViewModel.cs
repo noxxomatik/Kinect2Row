@@ -179,7 +179,7 @@ namespace RowingMonitor.ViewModel
             metaDataFrame.Content = metaDataDisplay.View;
             metaDataFrame.SetValue(Grid.RowProperty, 0);
             metaDataFrame.SetValue(Grid.ColumnProperty, 0);
-            metaDataFrame.SetValue(Grid.RowSpanProperty, 3);
+            metaDataFrame.SetValue(Grid.RowSpanProperty, 5);
             Grid.Children.Add(metaDataFrame);
 
             Frame widgetsFrame = new Frame();

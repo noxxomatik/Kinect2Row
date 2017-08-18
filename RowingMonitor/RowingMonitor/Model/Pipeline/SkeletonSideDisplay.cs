@@ -17,34 +17,42 @@ namespace RowingMonitor.Model.Pipeline
 {
     public class SkeletonSideDisplay
     {
-        // width of area in m
-        private float areaWidth = 3.5f;
+        // width of training area in m
+        private float areaWidth = 2.5f;
 
         private ActionBlock<JointData> skeletonBlock;
 
         private SkeletonSideView view;
         private SkeletonSideViewModel viewModel;
 
+        private int displayWidth = 1920;
+        private int displayHeight = 1080;
+
         // definition of bones
         private List<Tuple<JointType, JointType>> bones;
 
         // colors and thicknesses
-        private const double TrackedBoneThickness = 6;
+        private const double TrackedBoneThickness = 16;
         private readonly Color trackedBoneColor = Colors.LightGreen;
-        private const double TrackedJointThickness = 3;
+        private const double TrackedJointThickness = 8;
         private readonly Color trackedJointColor = Colors.Green;
 
-        private const double InferredBoneThickness = 4;
+        private const double InferredBoneThickness = 12;
         private readonly Color inferredBoneColor = Colors.Yellow;
         private const double InferredJointThickness = 8;
         private readonly Color inferredJointColor = Colors.Orange;
 
-        private const double NotTrackedBoneThickness = 2;
+        private const double NotTrackedBoneThickness = 12;
         private readonly Color notTrackedBoneColor = Colors.OrangeRed;
-        private const double NotTrackedJointThickness = 10;
+        private const double NotTrackedJointThickness = 12;
         private readonly Color notTrackedJointColor = Colors.Red;
 
-        private const double AxisThickness = 6;
+        private const double TrajectoryThickness = 16;
+        private const double MarkerThickness = 24;
+        private const double AxisThickness = 3;
+
+        private readonly Color legendFontColor = Colors.White;
+        private const double LegendFontSize = 32;
 
         /// <summary>
         /// Constant for clamping Z values of camera space points from being negative
@@ -81,20 +89,26 @@ namespace RowingMonitor.Model.Pipeline
         // hand trajectory
         private bool showHandTrajectory = true;
         private CircularBuffer handPoints = new CircularBuffer(PointsBufferCapacity);
-        private Color handTrajectoryColor = Colors.Blue;
+        private Color handTrajectoryColor = Colors.DodgerBlue;
 
         // body center of mass trajectory
         private bool showBodyCOMTrajectory = true;
         private CircularBuffer bodyCOMPoints = new CircularBuffer(PointsBufferCapacity);
-        private Color bodyCOMTrajectoryColor = Colors.Black;
+        private Color bodyCOMTrajectoryColor = Colors.White;
+        private Color horizontalAxisColor = Colors.LightSlateGray;
+        private List<int> bodyCOMY = new List<int>();
 
         // knee trajectory
         private bool showKneeTrajectory = true;
         private CircularBuffer kneePoints = new CircularBuffer(PointsBufferCapacity);
-        private Color kneeTrajectoryColor = Colors.Violet;
+        private Color kneeTrajectoryColor = Colors.PaleVioletRed;
 
         // debug foot hip connection
         private bool showFootHipConnection = false;
+
+        // set to true when the view dimensions changed
+        private bool dimensionsChanged = false;
+        private double lastScale = 0;
 
         public SkeletonSideDisplay()
         {
@@ -162,16 +176,16 @@ namespace RowingMonitor.Model.Pipeline
             DrawingImage tmpImageSource = new DrawingImage(drawingGroup);
             using (DrawingContext dc = drawingGroup.Open()) {
                 // Draw a transparent background to set the render size
-                dc.DrawRectangle(Brushes.White, null, new Rect(0.0, 0.0,
-                    View.ActualWidth, View.ActualHeight));
+                dc.DrawRectangle(Brushes.Transparent, null, new Rect(0.0, 0.0,
+                    displayWidth, displayHeight));
 
                 // convert the joint points to display space
                 Dictionary<JointType, Point> jointPoints = new Dictionary<JointType, Point>();
 
-                float scale = (float)View.ActualWidth / AreaWidth;
+                float scale = (float)displayWidth / AreaWidth;
                 // origin is 0.5m from both edges
                 float originOffsetX = 0.5f * scale;
-                float originOffsetY = (float)View.ActualHeight - (0.5f + Properties.Settings.Default.FootSpineBaseOffset) * scale;
+                float originOffsetY = (float)displayHeight - (0.2f + Properties.Settings.Default.FootSpineBaseOffset) * scale;
 
                 foreach (JointType jointType in joints.Keys) {
                     int x = (int)(originOffsetX + joints[jointType].Position.Z * scale);
@@ -184,6 +198,9 @@ namespace RowingMonitor.Model.Pipeline
                 CameraSpacePoint bodyCOM3D = CalculateBodyCOM(joints);
                 int cx = (int)(originOffsetX + bodyCOM3D.Z * scale);
                 int cy = (int)(originOffsetY - bodyCOM3D.Y * scale);
+                // add y of COM in camera space point to list to calculate 
+                // the mean and show a mean horizontal axis 
+                bodyCOMY.Add(cy);
 
                 // update point queues
                 UpdateBodyCOMPoints(new Point(cx, cy));
@@ -207,8 +224,9 @@ namespace RowingMonitor.Model.Pipeline
 
                 // prevent drawing outside of our render area
                 drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0,
-                    View.ActualWidth, View.ActualHeight));
+                    displayWidth, displayHeight));
             }
+
             ViewModel.UpdateSkeletonImage(tmpImageSource);
         }
 
@@ -323,30 +341,30 @@ namespace RowingMonitor.Model.Pipeline
                 drawingContext.DrawRectangle(
                     Brushes.Red,
                     null,
-                    new Rect(0, View.ActualHeight - ClipBoundsThickness,
-                    View.ActualWidth, ClipBoundsThickness));
+                    new Rect(0, displayHeight - ClipBoundsThickness,
+                    displayWidth, ClipBoundsThickness));
             }
 
             if (clippedEdges.HasFlag(FrameEdges.Top)) {
                 drawingContext.DrawRectangle(
                     Brushes.Red,
                     null,
-                    new Rect(0, 0, View.ActualWidth, ClipBoundsThickness));
+                    new Rect(0, 0, displayWidth, ClipBoundsThickness));
             }
 
             if (clippedEdges.HasFlag(FrameEdges.Left)) {
                 drawingContext.DrawRectangle(
                     Brushes.Red,
                     null,
-                    new Rect(0, 0, ClipBoundsThickness, View.ActualHeight));
+                    new Rect(0, 0, ClipBoundsThickness, displayHeight));
             }
 
             if (clippedEdges.HasFlag(FrameEdges.Right)) {
                 drawingContext.DrawRectangle(
                     Brushes.Red,
                     null,
-                    new Rect(View.ActualWidth - ClipBoundsThickness, 0,
-                    ClipBoundsThickness, View.ActualHeight));
+                    new Rect(displayWidth - ClipBoundsThickness, 0,
+                    ClipBoundsThickness, displayHeight));
             }
         }
 
@@ -362,7 +380,7 @@ namespace RowingMonitor.Model.Pipeline
                 + jointPoints[JointType.FootRight].Y) / 2
                 - Properties.Settings.Default.FootSpineBaseOffset * scale;
 
-            drawingContext.DrawEllipse(drawBrush, null, footCenter, AxisThickness, AxisThickness);
+            drawingContext.DrawEllipse(drawBrush, null, footCenter, TrajectoryThickness, TrajectoryThickness);
 
             // draw a line between cankle and spine base
             Pen drawPen = new Pen(Brushes.Blue, 1);
@@ -558,9 +576,16 @@ namespace RowingMonitor.Model.Pipeline
 
         private void DrawBodyCOMTrajectory(DrawingContext drawingContext)
         {
+            // draw the mean horizontal axis
+            drawingContext.DrawLine(new Pen(new SolidColorBrush(horizontalAxisColor), AxisThickness),
+                new Point(0, bodyCOMY.Average()), new Point(displayWidth, bodyCOMY.Average()));
+
+            // draw trajectory and current point
             Point[] points = Array.ConvertAll(bodyCOMPoints.ToArray(), x => (Point)x);
             DrawTrajectory(points, drawingContext, bodyCOMTrajectoryColor, true);
-            DrawLegend(0, "Body center of mass trajectory", drawingContext, bodyCOMTrajectoryColor);
+
+            // draw the legend
+            //DrawLegend(0, "Body center of mass trajectory", drawingContext, bodyCOMTrajectoryColor);
         }
 
         private void UpdateHandPoints(IDictionary<JointType, Point> jointPoints)
@@ -588,7 +613,7 @@ namespace RowingMonitor.Model.Pipeline
             // convert an array of objects to an array of points
             Point[] points = Array.ConvertAll(handPoints.ToArray(), x => (Point)x);
             DrawTrajectory(points, drawingContext, handTrajectoryColor, false);
-            DrawLegend(1, "Handle trajectory", drawingContext, handTrajectoryColor);
+            //DrawLegend(1, "Handle trajectory", drawingContext, handTrajectoryColor);
         }
 
         private void DrawKneeTrajectory(DrawingContext drawingContext)
@@ -596,10 +621,10 @@ namespace RowingMonitor.Model.Pipeline
             // convert an array of objects to an array of points
             Point[] points = Array.ConvertAll(kneePoints.ToArray(), x => (Point)x);
             DrawTrajectory(points, drawingContext, kneeTrajectoryColor, false);
-            DrawLegend(2, "Knee trajectory", drawingContext, kneeTrajectoryColor);
+            //DrawLegend(2, "Knee trajectory", drawingContext, kneeTrajectoryColor);
         }
 
-        private void DrawTrajectory(Point[] points, DrawingContext drawingContext, 
+        private void DrawTrajectory(Point[] points, DrawingContext drawingContext,
             Color color, bool markCurrentPoint)
         {
             int i = 0;
@@ -610,7 +635,7 @@ namespace RowingMonitor.Model.Pipeline
                         Color = color,
                         Opacity = 1.0 / PointsBufferCapacity * i
                     };
-                    Pen drawPen = new Pen(drawBrush, 3.0);
+                    Pen drawPen = new Pen(drawBrush, TrajectoryThickness);
 
                     drawingContext.DrawLine(drawPen, points[i - 1], point);
                 }
@@ -618,26 +643,27 @@ namespace RowingMonitor.Model.Pipeline
             }
             if (markCurrentPoint) {
                 drawingContext.DrawEllipse(new SolidColorBrush(color), null,
-                        points.Last(), AxisThickness, AxisThickness);
+                        points.Last(), MarkerThickness, MarkerThickness);
             }
         }
 
         private void DrawLegend(int position, string name, DrawingContext drawingContext,
             Color color)
         {
-            Pen drawPen = new Pen(new SolidColorBrush() { Color = color }, 3.0);
+            Pen drawPen = new Pen(new SolidColorBrush() { Color = color }, TrajectoryThickness);
+
             drawingContext.DrawLine(drawPen,
-                new Point(2, View.ActualHeight - 4 * (position + 1) - 10 * position),
-                new Point(12, View.ActualHeight - 4 * (position + 1) - 10 * position));
+                new Point(4, 12 + (1 + position) * ((LegendFontSize * 2 + 4) / 2)),
+                new Point(20, 12 + (1 + position) * ((LegendFontSize * 2 + 4) / 2)));
 
             FormattedText text = new FormattedText(
                 name,
                 CultureInfo.GetCultureInfo("en-us"),
                 FlowDirection.LeftToRight,
                 new Typeface("Verdana"),
-                10,
-                Brushes.Black);
-            drawingContext.DrawText(text, new Point(14, View.ActualHeight - 12 * (position + 1)));
+                LegendFontSize,
+                new SolidColorBrush(legendFontColor));
+            drawingContext.DrawText(text, new Point(24, position * (LegendFontSize / 2) + 12));
         }
 
         public ActionBlock<JointData> SkeletonBlock

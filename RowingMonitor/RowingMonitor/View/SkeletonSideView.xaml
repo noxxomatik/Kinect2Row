@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:resx="clr-namespace:RowingMonitor.Properties"
       xmlns:local="clr-namespace:RowingMonitor.View"
       xmlns:vm="clr-namespace:RowingMonitor.ViewModel"
       mc:Ignorable="d" 
@@ -13,9 +14,43 @@
         <vm:SkeletonSideViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid x:Name="viewGrid">
-        <Viewbox HorizontalAlignment="Center" MouseWheel="Viewbox_MouseWheel">
+    <Grid x:Name="ViewGrid" Margin="12">
+        <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2"/>
+        <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top">
             <Image Source="{Binding SkeletonImageSource}" Stretch="UniformToFill"/>
         </Viewbox>
+        <Grid Margin="12" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </Grid.Resources>
+            <Rectangle x:Name="LegendSymbolCOM" Width="16" Height="12" Fill="White"
+                       Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBlock x:Name="LegendCOM" Text="{x:Static resx:Resources.SideViewLegendCOM}" 
+                       FontSize="16" Grid.Column="1" Grid.Row="0" Padding="4"
+                       VerticalAlignment="Center"/>
+            
+            <Rectangle x:Name="LegendSymbolHandle" Width="16" Height="12" Fill="DodgerBlue"
+                       Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBlock x:Name="LegendHAndle" Text="{x:Static resx:Resources.SideViewLegendHandle}" 
+                       FontSize="16" Grid.Column="1" Grid.Row="1" Padding="4"
+                       VerticalAlignment="Center"/>
+            
+            <Rectangle x:Name="LegendSymbolKnee" Width="16" Height="12" Fill="PaleVioletRed"
+                       Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBlock x:Name="LegendKnee" Text="{x:Static resx:Resources.SideViewLegendKnee}" 
+                       FontSize="16" Grid.Column="1" Grid.Row="2" Padding="4"
+                       VerticalAlignment="Center"/>
+        </Grid>
     </Grid>
 </Page>

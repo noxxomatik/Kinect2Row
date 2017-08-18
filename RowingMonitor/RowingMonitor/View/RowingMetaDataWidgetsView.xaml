@@ -36,7 +36,7 @@
             <Rectangle Fill="PaleVioletRed" Grid.Column="2"/>
         </Grid>
         <Grid Grid.Row="0" Margin="10">
-            <Rectangle Fill="Black" Grid.Row="0" Height="60" 
+            <Rectangle Fill="White" Grid.Row="0" Height="60" 
                        Width="4" HorizontalAlignment="Left"                        
                        Margin="{Binding CatchFactorMargin}"/>
         </Grid>
@@ -64,7 +64,7 @@
             <Rectangle Fill="PaleVioletRed" Grid.Column="2"/>
         </Grid>
         <Grid Grid.Row="3" Margin="10 0">
-            <Rectangle Fill="Black" Grid.Row="0" Height="60" 
+            <Rectangle Fill="White" Grid.Row="0" Height="60" 
                        Width="4" HorizontalAlignment="Left" 
                        Margin="{Binding RowingStyleFactorMargin}"/>
         </Grid>

@@ -146,14 +146,14 @@ namespace RowingMonitor.Model.Pipeline
                 }
 
                 viewModel?.UpdateLastSegmentPlot(UpdatePlot(lastSegmentPlotData,
-                    "Kleshnev Velocities Last Segment", .0f));
+                    Properties.Resources.KleshnevPlotLastSegmentTitle, .0f));
 
                 newSegmentDetected = false;
             }
 
             // update the continuus plot
             viewModel?.UpdateCurrentSegmentPlot(UpdatePlot(currentSegmentPlotData,
-                "Kleshnev Velocity Current Segment", Range));
+                Properties.Resources.KleshnevPlotCurrentSegmentTitle, Range));
         }
 
         /// <summary>

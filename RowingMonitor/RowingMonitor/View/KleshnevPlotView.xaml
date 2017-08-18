@@ -14,7 +14,7 @@
         <vm:KleshnevPlotViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid>
+    <Grid Margin="12">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>

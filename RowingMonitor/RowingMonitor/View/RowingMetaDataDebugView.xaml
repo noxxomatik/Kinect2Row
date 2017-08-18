@@ -6,15 +6,20 @@
       xmlns:local="clr-namespace:RowingMonitor.View"
       xmlns:resx="clr-namespace:RowingMonitor.Properties"
       xmlns:vm="clr-namespace:RowingMonitor.ViewModel"
-      mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="300"
+      mc:Ignorable="d"
       Title="RowingMetaDataView">
 
     <Page.DataContext>
         <vm:RowingMetaDataDebugViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid>
+    <Grid Margin="12">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+            </Style>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="50"/>

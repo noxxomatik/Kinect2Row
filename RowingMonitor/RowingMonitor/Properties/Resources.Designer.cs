@@ -19,7 +19,7 @@ namespace RowingMonitor.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -237,6 +237,24 @@ namespace RowingMonitor.Properties {
         public static string KinectNotFoundMessage {
             get {
                 return ResourceManager.GetString("KinectNotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Body segments plot: current stroke ähnelt.
+        /// </summary>
+        public static string KleshnevPlotCurrentSegmentTitle {
+            get {
+                return ResourceManager.GetString("KleshnevPlotCurrentSegmentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Body segments plot: last stroke ähnelt.
+        /// </summary>
+        public static string KleshnevPlotLastSegmentTitle {
+            get {
+                return ResourceManager.GetString("KleshnevPlotLastSegmentTitle", resourceCulture);
             }
         }
         
@@ -534,6 +552,33 @@ namespace RowingMonitor.Properties {
         public static string SettingsTitle {
             get {
                 return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Body center of mass trajectory ähnelt.
+        /// </summary>
+        public static string SideViewLegendCOM {
+            get {
+                return ResourceManager.GetString("SideViewLegendCOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Handle trajectory ähnelt.
+        /// </summary>
+        public static string SideViewLegendHandle {
+            get {
+                return ResourceManager.GetString("SideViewLegendHandle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Knee trajectory ähnelt.
+        /// </summary>
+        public static string SideViewLegendKnee {
+            get {
+                return ResourceManager.GetString("SideViewLegendKnee", resourceCulture);
             }
         }
         

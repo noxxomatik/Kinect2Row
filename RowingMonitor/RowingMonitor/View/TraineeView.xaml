@@ -17,7 +17,7 @@
         <Controls:MetroTabControl>
             <TabItem Header="{x:Static resx:Resources.TraineeTitle}">
                 <Grid x:Name="mainGrid" VerticalAlignment="Stretch" 
-                      HorizontalAlignment="Stretch" Margin="4">
+                      HorizontalAlignment="Stretch" Margin="12">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="160"/>
                         <ColumnDefinition Width="160"/>
@@ -28,12 +28,13 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="160"/>
                         <RowDefinition Height="160"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    
                     <Controls:Tile Title="{x:Static resx:Resources.SessionTimeNoUnit}" 
                                Grid.Row="0" Grid.Column="0" 
                                Width="160" Height="100"
@@ -70,10 +71,11 @@
                                VerticalContentAlignment="Center"
                                Count="{Binding MeanSeatTravel}">
                     </Controls:Tile>
+                    
                     <Button Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="4" 
                             HorizontalAlignment="Right" VerticalAlignment="Bottom"
                             Content="{x:Static resx:Resources.EndSession}" 
-                            Click="Button_Click" Height="40"/>
+                            Click="Button_Click" Height="40" Margin="12"/>
                 </Grid>
             </TabItem>
         </Controls:MetroTabControl>

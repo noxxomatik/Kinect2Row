@@ -303,4 +303,19 @@
   <data name="DTWMaxDistance" xml:space="preserve">
     <value>DTW distance threshold</value>
   </data>
+  <data name="KleshnevPlotCurrentSegmentTitle" xml:space="preserve">
+    <value>Body segments plot: current stroke</value>
+  </data>
+  <data name="KleshnevPlotLastSegmentTitle" xml:space="preserve">
+    <value>Body segments plot: last stroke</value>
+  </data>
+  <data name="SideViewLegendCOM" xml:space="preserve">
+    <value>Body center of mass trajectory</value>
+  </data>
+  <data name="SideViewLegendHandle" xml:space="preserve">
+    <value>Handle trajectory</value>
+  </data>
+  <data name="SideViewLegendKnee" xml:space="preserve">
+    <value>Knee trajectory</value>
+  </data>
 </root>

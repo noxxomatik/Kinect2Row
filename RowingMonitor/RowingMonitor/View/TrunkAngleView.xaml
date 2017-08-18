@@ -16,7 +16,7 @@
         <vm:TrunkAngleViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid x:Name="viewGrid">
+    <Grid x:Name="ViewGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -27,7 +27,7 @@
                           FromValue="-90" ToValue="90" LabelsStep="45" TicksStep="5" Wedge="180"
                           TicksForeground="White" Foreground="White"
                           FontWeight="Bold" FontSize="16" SectionsInnerRadius=".5"
-                          NeedleFill="DarkBlue" DisableaAnimations="True">
+                          NeedleFill="DodgerBlue" DisableaAnimations="True">
             <lvc:AngularGauge.Sections>
                 <lvc:AngularSection FromValue="-90" ToValue="-30" Fill="PaleVioletRed"/>
                 <lvc:AngularSection FromValue="-30" ToValue="-20" Fill="GreenYellow"/>
@@ -41,13 +41,14 @@
                           FromValue="-90" ToValue="90" LabelsStep="45" TicksStep="10" Wedge="180"
                           TicksForeground="White" Foreground="White"
                           FontWeight="Bold" FontSize="16" SectionsInnerRadius=".5"
-                          NeedleFill="DarkBlue" DisableaAnimations="True">
+                          NeedleFill="DodgerBlue" DisableaAnimations="True">
         </lvc:AngularGauge>
         <lvc:AngularGauge Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"
                           Value="{Binding TrunkAngle}"
                           FromValue="-90" ToValue="90" LabelsStep="45" TicksStep="10" Wedge="180"
                           TicksForeground="White" Foreground="White"
-                          FontWeight="Bold" FontSize="16" SectionsInnerRadius=".5" DisableaAnimations="True">
+                          FontWeight="Bold" FontSize="16" SectionsInnerRadius=".5" DisableaAnimations="True"
+                          NeedleFill="White">
         </lvc:AngularGauge>
         <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" 
               VerticalAlignment="Top">
@@ -60,24 +61,29 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            
             <TextBlock Text="{Binding CatchTrunkAngleString}" Grid.Row="0" Grid.Column="0"
                        TextAlignment="Center" FontSize="20" 
                        Foreground="{DynamicResource AccentColorBrush}"/>
             <TextBlock Text="{x:Static resx:Resources.CatchTrunkAngleTitle}" Grid.Row="1" 
                        Grid.Column="0" TextAlignment="Center" FontSize="20" 
-                       Foreground="{DynamicResource AccentColorBrush}"/>
+                       Foreground="{DynamicResource AccentColorBrush}"
+                       TextWrapping="Wrap"/>
+            
             <TextBlock Text="{Binding TrunkAngleString}" Grid.Row="0" Grid.Column="1" 
                        TextAlignment="Center" FontSize="16"
                        Foreground="{DynamicResource AccentColorBrush}"/>
             <TextBlock Text="{x:Static resx:Resources.TrunkAngleTitle}" Grid.Row="1" 
                        Grid.Column="1" TextAlignment="Center" FontSize="16" 
                        Foreground="{DynamicResource AccentColorBrush}"/>
+            
             <TextBlock Text="{Binding FinishTrunkAngleString}" Grid.Row="0"
                        Grid.Column="2" TextAlignment="Center" FontSize="20" 
                        Foreground="{DynamicResource AccentColorBrush}"/>
             <TextBlock Text="{x:Static resx:Resources.FinishTrunkAngleTitle}" Grid.Row="1"
                        Grid.Column="2" TextAlignment="Center" FontSize="20" 
-                       Foreground="{DynamicResource AccentColorBrush}"/>
+                       Foreground="{DynamicResource AccentColorBrush}"
+                       TextWrapping="Wrap"/>
         </Grid>
     </Grid>
 </Page>
