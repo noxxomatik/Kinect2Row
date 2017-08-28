@@ -340,6 +340,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Sounds\c3_twice.WAV" />
+    <Content Include="Sounds\d3.WAV" />
+    <Content Include="Sounds\e3.WAV" />
+    <Content Include="Sounds\g3.WAV" />
     <Resource Include="icons8-Rowing Machine-80.ico" />
     <Content Include="Images\trunk_angle_gauge.svg" />
   </ItemGroup>

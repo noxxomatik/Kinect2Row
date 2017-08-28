@@ -133,6 +133,7 @@ namespace RowingMonitor.ViewModel
             /* dispose all elements*/
             timer.Dispose();
             readerLink.Dispose();
+            rowingSonification.Destroy();
         }
 
         private void AddGridElement(object content, int row,

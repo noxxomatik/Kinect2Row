@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
@@ -10,7 +11,8 @@ namespace RowingMonitor.Model.Pipeline
 {
     class RowingSonification
     {
-        private bool mute;
+        //private bool mute;
+        //private bool playBeep;
 
         private ActionBlock<KleshnevData> input;
         private ActionBlock<List<SegmentHit>> inputSegmentHits;
@@ -22,11 +24,31 @@ namespace RowingMonitor.Model.Pipeline
 
         private long[] lastBounds;
 
+        // sound player
+        SoundPlayer legsSoundPlayer;
+        SoundPlayer trunkSoundPlayer;
+        SoundPlayer armsSoundPlayer;
+        SoundPlayer segmentSoundPlayer;
+
         public RowingSonification()
         {
+            // create peak detectors
             legsPeakDetector = new MeanWindowPeakDetector(Properties.Settings.Default.PeakDetectionWindow);
             trunkPeakDetector = new MeanWindowPeakDetector(Properties.Settings.Default.PeakDetectionWindow);
             armsPeakDetector = new MeanWindowPeakDetector(Properties.Settings.Default.PeakDetectionWindow);
+
+            // load sounds
+            legsSoundPlayer = new SoundPlayer(Properties.Resources.d3);
+            trunkSoundPlayer = new SoundPlayer(Properties.Resources.e3);
+            armsSoundPlayer = new SoundPlayer(Properties.Resources.g3);
+            segmentSoundPlayer = new SoundPlayer(Properties.Resources.c3_twice);
+
+            try {
+                legsSoundPlayer.Load();
+            }
+            catch (Exception e) {
+                Logger.Log(this.ToString(), e.Message);
+            }
 
             Input = new ActionBlock<KleshnevData>(kleshnevData =>
             {
@@ -77,51 +99,83 @@ namespace RowingMonitor.Model.Pipeline
 
         private void PlayLegPeak()
         {
-            if (!Mute)
+            if (!Properties.Settings.Default.Mute)
             {
-                Task.Run(() =>
-                {
-                    System.Console.Beep(2000, 30);
-                });
+                if (Properties.Settings.Default.PlayBeep) {
+                    Task.Run(() =>
+                    {
+                        Console.Beep(2000, 30);
+                    });
+                }
+                else {
+                    legsSoundPlayer.Play();
+                }                
             }            
         }
 
         private void PlayTrunkPeak()
         {
-            if (!Mute)
+            if (!Properties.Settings.Default.Mute)
             {
-                Task.Run(() =>
-                {
-                    System.Console.Beep(4000, 30);
-                });
+                if (Properties.Settings.Default.PlayBeep) {
+                    Task.Run(() =>
+                    {
+                        Console.Beep(4000, 30);
+                    });
+                }
+                else {
+                    trunkSoundPlayer.Play();
+                }
+                
             }
         }
 
         private void PlayArmsPeak()
         {
-            if (!Mute)
+            if (!Properties.Settings.Default.Mute)
             {
-                Task.Run(() =>
-                {
-                    System.Console.Beep(6000, 30);
-                });
+                if (Properties.Settings.Default.PlayBeep) {
+                    Task.Run(() =>
+                    {
+                        Console.Beep(6000, 30);
+                    });
+                }
+                else {
+                    armsSoundPlayer.Play();
+                }
+                
             }
         }
 
         private void PlaySegmentEnd()
         {
-            if (!Mute)
+            if (!Properties.Settings.Default.Mute)
             {
-                Task.Run(() =>
-                {
-                    System.Console.Beep(1000, 15);
-                    System.Console.Beep(1000, 15);
-                });
+                if (Properties.Settings.Default.PlayBeep) {
+                    Task.Run(() =>
+                    {
+                        Console.Beep(1000, 15);
+                        Console.Beep(1000, 15);
+                    });
+                }
+                else {
+                    segmentSoundPlayer.Play();
+                }
+                
             }
         }
 
-        public bool Mute { get => mute; set => mute = value; }
+        public void Destroy()
+        {
+            legsSoundPlayer.Dispose();
+            trunkSoundPlayer.Dispose();
+            armsSoundPlayer.Dispose();
+            segmentSoundPlayer.Dispose();
+        }
+
+        //public bool Mute { get => mute; set => mute = value; }
         public ActionBlock<KleshnevData> Input { get => input; set => input = value; }
         public ActionBlock<List<SegmentHit>> InputSegmentHits { get => inputSegmentHits; set => inputSegmentHits = value; }
+        //public bool PlayBeep { get => playBeep; set => playBeep = value; }
     }
 }

@@ -16,6 +16,8 @@ namespace RowingMonitor.ViewModel
         private string dTWStartMinimumPosition;
         private string dTWStartMaximumPosition;
         private string dTWMaxDistance;
+        private bool playSounds;
+        private bool playBeeps;
 
         public SettingsViewModel()
         {
@@ -32,6 +34,8 @@ namespace RowingMonitor.ViewModel
                 Properties.Settings.Default.DTWStartMaximumPosition.ToString(CultureInfo.CurrentUICulture.NumberFormat);
             DTWMaxDistance =
                 Properties.Settings.Default.DTWMaxDistance.ToString(CultureInfo.CurrentUICulture.NumberFormat);
+            PlaySounds = !Properties.Settings.Default.Mute;
+            PlayBeeps = Properties.Settings.Default.PlayBeep;
         }        
 
         public void SaveSettings()
@@ -49,6 +53,8 @@ namespace RowingMonitor.ViewModel
                 float.Parse(DTWStartMaximumPosition, CultureInfo.CurrentUICulture.NumberFormat);
             Properties.Settings.Default.DTWMaxDistance =
                 float.Parse(DTWMaxDistance, CultureInfo.CurrentUICulture.NumberFormat);
+            Properties.Settings.Default.Mute = !PlaySounds;
+            Properties.Settings.Default.PlayBeep = PlayBeeps;
 
             Properties.Settings.Default.Save();
         }
@@ -60,5 +66,7 @@ namespace RowingMonitor.ViewModel
         public string DTWStartMinimumPosition { get => dTWStartMinimumPosition; set => dTWStartMinimumPosition = value; }
         public string DTWStartMaximumPosition { get => dTWStartMaximumPosition; set => dTWStartMaximumPosition = value; }
         public string DTWMaxDistance { get => dTWMaxDistance; set => dTWMaxDistance = value; }
+        public bool PlayBeeps { get => playBeeps; set => playBeeps = value; }
+        public bool PlaySounds { get => playSounds; set => playSounds = value; }
     }
 }

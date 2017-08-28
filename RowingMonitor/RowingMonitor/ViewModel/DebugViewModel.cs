@@ -207,6 +207,7 @@ namespace RowingMonitor.ViewModel
             segmentationLink?.Dispose();
             smoothingLink?.Dispose();
             velocitySmoothingLink.Dispose();
+            rowingSonification.Destroy();
         }
 
         public void ChangeSegmentDetector()

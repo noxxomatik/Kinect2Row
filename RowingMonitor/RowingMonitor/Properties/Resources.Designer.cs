@@ -61,6 +61,15 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.IO.UnmanagedMemoryStream ähnlich wie System.IO.MemoryStream.
+        /// </summary>
+        public static System.IO.UnmanagedMemoryStream c3_twice {
+            get {
+                return ResourceManager.GetStream("c3_twice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Catch factor (ms) ähnelt.
         /// </summary>
         public static string CatchFactor {
@@ -93,6 +102,15 @@ namespace RowingMonitor.Properties {
         public static string CoachTitle {
             get {
                 return ResourceManager.GetString("CoachTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.IO.UnmanagedMemoryStream ähnlich wie System.IO.MemoryStream.
+        /// </summary>
+        public static System.IO.UnmanagedMemoryStream d3 {
+            get {
+                return ResourceManager.GetStream("d3", resourceCulture);
             }
         }
         
@@ -138,6 +156,15 @@ namespace RowingMonitor.Properties {
         public static string DTWStartMinimumPosition {
             get {
                 return ResourceManager.GetString("DTWStartMinimumPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.IO.UnmanagedMemoryStream ähnlich wie System.IO.MemoryStream.
+        /// </summary>
+        public static System.IO.UnmanagedMemoryStream e3 {
+            get {
+                return ResourceManager.GetStream("e3", resourceCulture);
             }
         }
         
@@ -201,6 +228,15 @@ namespace RowingMonitor.Properties {
         public static string FrameIndex {
             get {
                 return ResourceManager.GetString("FrameIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.IO.UnmanagedMemoryStream ähnlich wie System.IO.MemoryStream.
+        /// </summary>
+        public static System.IO.UnmanagedMemoryStream g3 {
+            get {
+                return ResourceManager.GetStream("g3", resourceCulture);
             }
         }
         
@@ -448,6 +484,24 @@ namespace RowingMonitor.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Off ähnelt.
+        /// </summary>
+        public static string Off {
+            get {
+                return ResourceManager.GetString("Off", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die On ähnelt.
+        /// </summary>
+        public static string On {
+            get {
+                return ResourceManager.GetString("On", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Peak detection settings ähnelt.
         /// </summary>
         public static string PeakDetectionSettingsTitle {
@@ -462,6 +516,24 @@ namespace RowingMonitor.Properties {
         public static string PeakDetectionWindow {
             get {
                 return ResourceManager.GetString("PeakDetectionWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use beep sounds ähnelt.
+        /// </summary>
+        public static string PlayBeeps {
+            get {
+                return ResourceManager.GetString("PlayBeeps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Play sound ähnelt.
+        /// </summary>
+        public static string PlaySoundSetting {
+            get {
+                return ResourceManager.GetString("PlaySoundSetting", resourceCulture);
             }
         }
         
@@ -579,6 +651,15 @@ namespace RowingMonitor.Properties {
         public static string SideViewLegendKnee {
             get {
                 return ResourceManager.GetString("SideViewLegendKnee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sonification settings ähnelt.
+        /// </summary>
+        public static string SonificationTitle {
+            get {
+                return ResourceManager.GetString("SonificationTitle", resourceCulture);
             }
         }
         
