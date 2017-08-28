@@ -25,10 +25,10 @@ namespace RowingMonitor.Model.Pipeline
         private long[] lastBounds;
 
         // sound player
-        SoundPlayer legsSoundPlayer;
-        SoundPlayer trunkSoundPlayer;
-        SoundPlayer armsSoundPlayer;
-        SoundPlayer segmentSoundPlayer;
+        private SoundPlayer legsSoundPlayer;
+        private SoundPlayer trunkSoundPlayer;
+        private SoundPlayer armsSoundPlayer;
+        private SoundPlayer segmentSoundPlayer;
 
         public RowingSonification()
         {
@@ -45,6 +45,9 @@ namespace RowingMonitor.Model.Pipeline
 
             try {
                 legsSoundPlayer.Load();
+                trunkSoundPlayer.Load();
+                armsSoundPlayer.Load();
+                segmentSoundPlayer.Load();
             }
             catch (Exception e) {
                 Logger.Log(this.ToString(), e.Message);
