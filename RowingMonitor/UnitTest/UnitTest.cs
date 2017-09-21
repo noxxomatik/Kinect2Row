@@ -144,9 +144,6 @@ namespace UnitTest
 
             shifter.Updata(jointData);
 
-            // wait for the results
-            System.Threading.Thread.Sleep(1000);
-
             Joint spineComp = new Joint();
             spineComp.Position.X = 0;
             spineComp.Position.Y = 0;
