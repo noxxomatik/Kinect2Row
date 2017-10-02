@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:RowingMonitor"
         xmlns:vm="clr-namespace:RowingMonitor.ViewModel"
         xmlns:oxy="http://oxyplot.org/wpf"
-        mc:Ignorable="d"
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      mc:Ignorable="d"
         Title="Kinect2Row" Loaded="Page_Loaded_1" Unloaded="Page_Unloaded_1">
 
     <Page.DataContext>
@@ -40,16 +41,14 @@
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="18">Options</TextBlock>
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Smoothing Filter</TextBlock>
             <RadioButton GroupName="SmoothingFilter" Content="1€ Filter" IsChecked="True" Checked="RadioButton_Checked"></RadioButton>
-            <RadioButton GroupName="SmoothingFilter" Content="Kinect Joint Filter" IsChecked="False" Checked="RadioButton_Checked_1"></RadioButton>
-            <!--<TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16"></TextBlock>
-            <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">beta:</TextBlock>
-            <xctk:ButtonSpinner Name="betaUpDown" HorizontalAlignment="Right" Spin="betaUpDown_Spin">
-                <TextBox Text="{Binding Beta}" HorizontalAlignment="Right"/>
-            </xctk:ButtonSpinner>
-            <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">fcmin:</TextBlock>
-            <xctk:ButtonSpinner Name="fcminUpDown" HorizontalAlignment="Right" Spin="fcminUpDown_Spin">
-                <TextBox Text="{Binding Fcmin}" HorizontalAlignment="Right"/>
-            </xctk:ButtonSpinner>-->
+            <TextBlock>Beta:</TextBlock>
+            <Controls:NumericUpDown Value="{Binding Beta}" Minimum="0" Maximum="1" Interval="0.1"/>
+            <TextBlock>Fcmin:</TextBlock>
+            <Controls:NumericUpDown Value="{Binding Fcmin}" Minimum="1" Maximum="100" Interval="0.1"/>
+            <RadioButton GroupName="SmoothingFilter"
+                         Content="Kinect Joint Filter"
+                         IsChecked="False"
+                         Checked="RadioButton_Checked_1"></RadioButton>
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Segment Detection</TextBlock>
             <RadioButton GroupName="SegmentDetection" Content="Zero Velocity Crossing" IsChecked="True" Checked="RadioButton_Checked_2"></RadioButton>
             <RadioButton GroupName="SegmentDetection" Content="Subsequence DTW" IsChecked="False" Checked="RadioButton_Checked_3"></RadioButton>

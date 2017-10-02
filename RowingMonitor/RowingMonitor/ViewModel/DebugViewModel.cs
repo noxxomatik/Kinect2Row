@@ -20,6 +20,9 @@ namespace RowingMonitor.ViewModel
 
         // smoothing filter
         private SmoothingFilter smoothingFilter;
+        // 1€ filter parameter
+        private double beta = 0;
+        private double fcmin = 1;
 
         // velocity smoothing filter
         private SmoothingFilter velocitySmoothingFilter;
@@ -126,7 +129,7 @@ namespace RowingMonitor.ViewModel
             //segmentDetector.DetectionOutputBlock.LinkTo(kleshnevPlot.PlotHitsBlock);
 
             metaDataCalculator.Output.LinkTo(metaDataDisplay.Input);
-            metaDataCalculator.Output.LinkTo(widgetsDisplay.Input);            
+            metaDataCalculator.Output.LinkTo(widgetsDisplay.Input);
         }
 
         private void Render(object state)
@@ -222,7 +225,7 @@ namespace RowingMonitor.ViewModel
                     segmentDetector.Input);
             }
             else {
-                segmentDetector = 
+                segmentDetector =
                     new DTWSegmentDetector(Properties.Settings.Default.DTWMaxDistance,
                     minimumSubsequenceLength);
                 segmentationLink = shifter.Output.LinkTo(
@@ -271,13 +274,13 @@ namespace RowingMonitor.ViewModel
             else {
                 smoothingFilter = new OneEuroSmoothingFilter(
                     DataStreamType.SmoothedPosition);
-                ((OneEuroSmoothingFilter)smoothingFilter).Beta = 0.0;
-                ((OneEuroSmoothingFilter)smoothingFilter).Fcmin = 1.0;
+                ((OneEuroSmoothingFilter)smoothingFilter).Beta = Beta;
+                ((OneEuroSmoothingFilter)smoothingFilter).Fcmin = Fcmin;
 
                 velocitySmoothingFilter = new OneEuroSmoothingFilter(
                     DataStreamType.Velocity);
-                ((OneEuroSmoothingFilter)velocitySmoothingFilter).Beta = 0.0;
-                ((OneEuroSmoothingFilter)velocitySmoothingFilter).Fcmin = 1.0;
+                ((OneEuroSmoothingFilter)velocitySmoothingFilter).Beta = Beta;
+                ((OneEuroSmoothingFilter)velocitySmoothingFilter).Fcmin = Fcmin;
             }
 
             // link inputs of filters
@@ -326,5 +329,21 @@ namespace RowingMonitor.ViewModel
         public float PlotRange { get => plotRange; set => plotRange = value; }
         public Grid Grid { get => grid; set => grid = value; }
         public float KleshnevPlotRange { get => kleshnevPlotRange; set => kleshnevPlotRange = value; }
+        public double Beta
+        {
+            get => beta;
+            set {
+                beta = value;
+                ChangeSmoothingFilter();
+            }
+        }
+        public double Fcmin
+        {
+            get => fcmin;
+            set {
+                fcmin = value;
+                ChangeSmoothingFilter();
+            }
+        }
     }
 }

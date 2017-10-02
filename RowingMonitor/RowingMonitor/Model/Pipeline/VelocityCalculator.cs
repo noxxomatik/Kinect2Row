@@ -10,6 +10,9 @@ using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
+    /// <summary>
+    /// The VelocityCalculator class calcutlates the velocities of the joints.
+    /// </summary>
     public class VelocityCalculator
     {
         public delegate void CalculatedFrameArrivedEventHandler(Object sender,
@@ -27,6 +30,9 @@ namespace RowingMonitor.Model.Pipeline
         public BroadcastBlock<JointData> Output { get => output; set => output = value; }
         public ActionBlock<JointData> Input { get => input; set => input = value; }
 
+        /// <summary>
+        /// Creates a new VelocityCalculator class.
+        /// </summary>
         public VelocityCalculator()
         {
             Input = new ActionBlock<JointData>(jointData =>
@@ -61,7 +67,7 @@ namespace RowingMonitor.Model.Pipeline
         /// Calculates the velocity as 1st derivative (gradient) of position.
         /// Calculation needs one frame as buffer.
         /// </summary>
-        /// <param name="jointData"></param>
+        /// <param name="jointData">The joint data of which the velocity gets calculated.</param>
         public JointData CalculateVelocity(JointData jointData)
         {
             // check if jointData is NaN
@@ -69,8 +75,11 @@ namespace RowingMonitor.Model.Pipeline
                 throw new Exception("Joint data position is not a number.");
             }
 
+            JointData newJointData;
+
             // check if first value
             if (lastJointData.RelTimestamp == 0) {
+                // save to history
                 lastJointData = jointData;
 
                 Dictionary<JointType, Joint> joints = new Dictionary<JointType, Joint>();
@@ -81,12 +90,11 @@ namespace RowingMonitor.Model.Pipeline
                     newJoint.Position.Z = 0.0f;
                     joints.Add(joint.Key, newJoint);
                 }
-                JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
+
+                newJointData = JointDataHandler.ReplaceJointsInJointData(
                     lastJointData,
                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                     joints, DataStreamType.Velocity);
-
-                return newJointData;
             }
             // check if second value -> use the boundaries formula
             else if (penultimateJointData.RelTimestamp == 0) {
@@ -107,7 +115,7 @@ namespace RowingMonitor.Model.Pipeline
                     newJoints.Add(joint.Key, newJoint);
                 }
 
-                JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
+                newJointData = JointDataHandler.ReplaceJointsInJointData(
                     lastJointData,
                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                     newJoints, DataStreamType.Velocity);
@@ -115,15 +123,6 @@ namespace RowingMonitor.Model.Pipeline
                 // save to history
                 penultimateJointData = lastJointData;
                 lastJointData = jointData;
-
-                // log times
-                timeLog.Add(newJointData.Timestamps.Last());
-                if (timeLog.Count == 100) {
-                    Logger.LogTimes(timeLog, this.ToString(), "mean time to calculate velocity");
-                    timeLog = new List<double>();
-                }
-
-                return newJointData;
             }
             // if two old values are present -> use interior formula
             else {
@@ -143,7 +142,7 @@ namespace RowingMonitor.Model.Pipeline
                     newJoints.Add(joint.Key, newJoint);
                 }
 
-                JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
+                newJointData = JointDataHandler.ReplaceJointsInJointData(
                     lastJointData,
                     DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                     newJoints, DataStreamType.Velocity);
@@ -151,9 +150,16 @@ namespace RowingMonitor.Model.Pipeline
                 // save to history
                 penultimateJointData = lastJointData;
                 lastJointData = jointData;
-
-                return newJointData;
             }
+
+            // log times
+            timeLog.Add(newJointData.Timestamps.Last());
+            if (timeLog.Count == 100) {
+                Logger.LogTimes(timeLog, this.ToString(), "mean time to calculate velocity");
+                timeLog = new List<double>();
+            }
+
+            return newJointData;
         }
     }
 }

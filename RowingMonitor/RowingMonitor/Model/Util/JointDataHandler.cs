@@ -236,10 +236,10 @@ namespace RowingMonitor.Model.Util
             newJoint.JointType = joints[jointToReplace].JointType;
             newJoint.TrackingState = joints[jointToReplace].TrackingState;
             newJoint.Position = newPosition;
-            if (joints.ContainsKey(JointType.FootLeft)) {
-                joints.Remove(JointType.FootLeft);
+            if (joints.ContainsKey(jointToReplace)) {
+                joints.Remove(jointToReplace);
             }
-            joints.Add(JointType.FootLeft, newJoint);
+            joints.Add(jointToReplace, newJoint);
         }
 
         /// <summary>
