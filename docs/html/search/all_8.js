@@ -11,5 +11,6 @@ var searchData=
   ['inputvelocityjointdata',['InputVelocityJointData',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_calculator.html#abc9554152134ffbecb285cbef206929e',1,'RowingMonitor::Model::Pipeline::RowingMetaDataCalculator']]],
   ['instance',['Instance',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#ae0ef04719102355582b9c41b5affed8c',1,'RowingMonitor.Model.Pipeline.KinectReader.Instance()'],['../class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler.html#a3ad8535ad9430e2a635071976a73c2ea',1,'RowingMonitor.Model.Util.JointDataHandler.Instance()']]],
   ['isempty',['IsEmpty',['../struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_data.html#ab24e99ca9880f363559b2cdd81bbda5b',1,'RowingMonitor.Model.Pipeline.KleshnevData.IsEmpty()'],['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a1e86bf9206df62d0fb4b77c8017ccf8a',1,'RowingMonitor.Model.Util.JointData.IsEmpty()']]],
-  ['issegmentvalid',['IsSegmentValid',['../class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#afe07b33e8ee385a2320a5e6f05d86215',1,'RowingMonitor::Model::Util::SegmentHitHandler']]]
+  ['issegmentvalid',['IsSegmentValid',['../class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#afe07b33e8ee385a2320a5e6f05d86215',1,'RowingMonitor::Model::Util::SegmentHitHandler']]],
+  ['isvalid',['IsValid',['../class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler.html#a65527d5bffba03828c100bbaadde6b0a',1,'RowingMonitor::Model::Util::JointDataHandler']]]
 ];

@@ -5,6 +5,8 @@ var class_rowing_monitor_1_1_view_model_1_1_debug_view_model =
     [ "ChangeSmoothingFilter", "class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#a874acc432d71f1cc9118ff8fda71a2f6", null ],
     [ "ViewLoaded", "class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#ac98ef68bcbe80ff74e742877c0bad04a", null ],
     [ "ViewUnloaded", "class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#ad8fab68504357f6e002e8a3e8ef0522b", null ],
+    [ "Beta", "class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#a076bc648502c75b9ef1ba03bbd97403d", null ],
+    [ "Fcmin", "class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#aa16f9bc305b10eae625352fa3d251b4c", null ],
     [ "Grid", "class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#a7ab2d29ceb37f0650a15ee6c32401c3f", null ],
     [ "KleshnevPlotRange", "class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#a6945ae46c3ce1f69f39fdbdb90ae1d66", null ],
     [ "PlotJointTypes", "class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#a41dc4f6035874ac84cf7e184d55786b5", null ],

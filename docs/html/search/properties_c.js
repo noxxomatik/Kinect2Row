@@ -22,6 +22,6 @@ var searchData=
   ['meanstroketimenounit',['MeanStrokeTimeNoUnit',['../class_rowing_monitor_1_1_properties_1_1_resources.html#a3abffb090ae29ce13a35ca3d226b2c6c',1,'RowingMonitor::Properties::Resources']]],
   ['metadatatitle',['MetaDataTitle',['../class_rowing_monitor_1_1_properties_1_1_resources.html#a8d03e7ae63797c4372290c89615921a5',1,'RowingMonitor::Properties::Resources']]],
   ['mincutoff',['MinCutoff',['../class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html#a65d1767883d487c73e340389d066f097',1,'RowingMonitor.Model.Util.OneEuroFilter.MinCutoff()'],['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_one_euro_smoothing_filter.html#a25584ff866652d0985ff677725a32f77',1,'RowingMonitor.Model.Pipeline.OneEuroSmoothingFilter.Mincutoff()']]],
-  ['model',['Model',['../class_rowing_monitor_1_1_view_model_1_1_skeleton_side_view_model.html#a57efea54b412831f6940cd8e5e8c101e',1,'RowingMonitor::ViewModel::SkeletonSideViewModel']]],
-  ['mute',['Mute',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html#af076633c8ac6e8f30336b0ca0bb891e0',1,'RowingMonitor::Model::Pipeline::RowingSonification']]]
+  ['minsegmenttime',['MinSegmentTime',['../class_rowing_monitor_1_1_properties_1_1_resources.html#a6c219565871b6048c310cd47e3c4d347',1,'RowingMonitor.Properties.Resources.MinSegmentTime()'],['../class_rowing_monitor_1_1_view_model_1_1_settings_view_model.html#a623fbef1a62ca82ac97d4124fddc80d1',1,'RowingMonitor.ViewModel.SettingsViewModel.MinSegmentTime()']]],
+  ['model',['Model',['../class_rowing_monitor_1_1_view_model_1_1_skeleton_side_view_model.html#a57efea54b412831f6940cd8e5e8c101e',1,'RowingMonitor::ViewModel::SkeletonSideViewModel']]]
 ];

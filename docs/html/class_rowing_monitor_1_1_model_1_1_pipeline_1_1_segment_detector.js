@@ -1,7 +1,6 @@
 var class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector =
 [
     [ "Detect", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a28a3c23d7d350c0e37e9a58ff9a4e16b", null ],
-    [ "GetJointDataValue", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a1f8ffebdfca18aa67a213ca817981161", null ],
     [ "OnSegmentDetected", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a30d5b8752257a3992db11770506f6a8a", null ],
     [ "SegmentDetectedEventHandler", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#aee5283f7fa49f68c5c4195449442093c", null ],
     [ "Update", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a24dcb2926660a6218af3052f147d82da", null ],

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['c',['c',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#a9e1baacfac496277b584a696bc83bbba',1,'RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters.c()'],['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#a2c26f634699927ecf6586043bf7a134b',1,'RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters.C()']]],
+  ['c3_5ftwice',['c3_twice',['../class_rowing_monitor_1_1_properties_1_1_resources.html#ab2a4c727b7722787e477fd0fa2424cd5',1,'RowingMonitor::Properties::Resources']]],
   ['calculatedframearrived',['CalculatedFrameArrived',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_velocity_calculator.html#ad0b95bfb006ea268ea476f1da13bc7da',1,'RowingMonitor::Model::Pipeline::VelocityCalculator']]],
   ['calculatedframearrivedeventargs',['CalculatedFrameArrivedEventArgs',['../class_rowing_monitor_1_1_model_1_1_calculated_frame_arrived_event_args.html',1,'RowingMonitor.Model.CalculatedFrameArrivedEventArgs'],['../class_rowing_monitor_1_1_model_1_1_calculated_frame_arrived_event_args.html#ab73cb44f37b699c76ed2a5b1d98338d3',1,'RowingMonitor.Model.CalculatedFrameArrivedEventArgs.CalculatedFrameArrivedEventArgs()']]],
   ['calculatedframearrivedeventargs_2ecs',['CalculatedFrameArrivedEventArgs.cs',['../_calculated_frame_arrived_event_args_8cs.html',1,'']]],

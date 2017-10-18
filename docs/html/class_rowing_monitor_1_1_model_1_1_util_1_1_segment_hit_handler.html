@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Rowing Monitor: RowingMonitor.Model.Util.SegmentHitHandler Class Reference</title>
+<title>Kinect2Row: RowingMonitor.Model.Util.SegmentHitHandler Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Rowing Monitor
+   <div id="projectname">Kinect2Row
+   &#160;<span id="projectnumber">0.1.0</span>
    </div>
   </td>
  </tr>
@@ -100,6 +101,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:afe07b33e8ee385a2320a5e6f05d86215"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#afe07b33e8ee385a2320a5e6f05d86215">IsSegmentValid</a> (List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt; hits, long[] bounds)</td></tr>
 <tr class="memdesc:afe07b33e8ee385a2320a5e6f05d86215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the segment is valid by comparing its duration with the minimum segment time from the settings.  <a href="#afe07b33e8ee385a2320a5e6f05d86215">More...</a><br /></td></tr>
 <tr class="separator:afe07b33e8ee385a2320a5e6f05d86215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f4fce5bfa8233f938340e75d9999a80"><td class="memItemLeft" align="right" valign="top">static List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#a6f4fce5bfa8233f938340e75d9999a80">FilterSegmentJointData</a> (List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt; buffer, long[] bounds)</td></tr>
+<tr class="memdesc:a6f4fce5bfa8233f938340e75d9999a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters the joint data of a completed segment.  <a href="#a6f4fce5bfa8233f938340e75d9999a80">More...</a><br /></td></tr>
+<tr class="separator:a6f4fce5bfa8233f938340e75d9999a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="adbd44130a8d894cd7c21430c3eedf9e1"></a>
@@ -125,6 +129,52 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f4fce5bfa8233f938340e75d9999a80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f4fce5bfa8233f938340e75d9999a80">&#9670;&nbsp;</a></span>FilterSegmentJointData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static List&lt;<a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a>&gt; RowingMonitor.Model.Util.SegmentHitHandler.FilterSegmentJointData </td>
+          <td>(</td>
+          <td class="paramtype">List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long []&#160;</td>
+          <td class="paramname"><em>bounds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Filters the joint data of a completed segment. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>The list of joint data that shall be filtered.</td></tr>
+    <tr><td class="paramname">bounds</td><td>Start and end index of the segment.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a list of all joint data that ist part of the segment.</dd></dl>
 
 </div>
 </div>

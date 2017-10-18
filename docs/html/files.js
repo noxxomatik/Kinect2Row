@@ -10,5 +10,6 @@ var files =
     ] ],
     [ "MainWindow.xaml.cs", "_main_window_8xaml_8cs.html", [
       [ "MainWindow", "class_rowing_monitor_1_1_main_window.html", "class_rowing_monitor_1_1_main_window" ]
-    ] ]
+    ] ],
+    [ "Settings.cs", "_settings_8cs.html", null ]
 ];

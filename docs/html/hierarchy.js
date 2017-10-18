@@ -203,8 +203,11 @@ var hierarchy =
     ] ],
     [ "RowingMonitor.Model.Util.SegmentHit", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html", null ],
     [ "RowingMonitor.Model.Util.SegmentHitHandler", "class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html", null ],
+    [ "RowingMonitor.ViewModel.SettingsViewModel", "class_rowing_monitor_1_1_view_model_1_1_settings_view_model.html", null ],
     [ "RowingMonitor.Model.Pipeline.Shifter", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html", null ],
-    [ "RowingMonitor.Model.Util.SimplePeakDetector", "class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html", null ],
+    [ "RowingMonitor.Model.Util.SimplePeakDetector", "class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html", [
+      [ "RowingMonitor.Model.Util.MeanWindowPeakDetector", "class_rowing_monitor_1_1_model_1_1_util_1_1_mean_window_peak_detector.html", null ]
+    ] ],
     [ "RowingMonitor.Model.Pipeline.SkeletonFrontalDisplay", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_frontal_display.html", null ],
     [ "RowingMonitor.Model.Pipeline.SkeletonSideDisplay", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_skeleton_side_display.html", null ],
     [ "RowingMonitor.Model.Pipeline.SmoothingFilter", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html", [

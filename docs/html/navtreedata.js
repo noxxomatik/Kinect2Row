@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "Rowing Monitor", "index.html", [
+  [ "Kinect2Row", "index.html", [
     [ "Packages", null, [
       [ "Packages", "namespaces.html", "namespaces" ],
       [ "Package Functions", "namespacemembers.html", [
@@ -29,9 +29,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_app_8xaml_8cs.html",
-"class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a8aafd70dd48e36b6cc55ad2bee4ae0e6",
-"class_rowing_monitor_1_1_view_1_1_trainee_view.html#aafd3b2c6136bc2da309abd7b3706619a",
-"namespace_rowing_monitor_1_1_model.html"
+"class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a69f71477e3f769bab61917c3654b4965",
+"class_rowing_monitor_1_1_view_1_1_skeleton_side_view.html#ae823832e7aa40c2585f66c0939c83040",
+"functions_prop_p.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

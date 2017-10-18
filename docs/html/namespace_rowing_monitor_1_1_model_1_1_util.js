@@ -7,6 +7,7 @@ var namespace_rowing_monitor_1_1_model_1_1_util =
     [ "JointDataHandler", "class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler" ],
     [ "Logger", "class_rowing_monitor_1_1_model_1_1_util_1_1_logger.html", null ],
     [ "LowpassFilter", "class_rowing_monitor_1_1_model_1_1_util_1_1_lowpass_filter.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_lowpass_filter" ],
+    [ "MeanWindowPeakDetector", "class_rowing_monitor_1_1_model_1_1_util_1_1_mean_window_peak_detector.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_mean_window_peak_detector" ],
     [ "OneEuroFilter", "class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter" ],
     [ "PlotData", "struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data.html", "struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data" ],
     [ "PlotDataHandler", "class_rowing_monitor_1_1_model_1_1_util_1_1_plot_data_handler.html", null ],

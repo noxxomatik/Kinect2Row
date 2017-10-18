@@ -2,6 +2,12 @@ var searchData=
 [
   ['page1',['Page1',['../class_rowing_monitor_1_1_view_1_1_page1.html',1,'RowingMonitor::View']]],
   ['page1_2eg_2ei_2ecs',['Page1.g.i.cs',['../_page1_8g_8i_8cs.html',1,'']]],
+  ['peakdetected',['peakDetected',['../class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html#a4234eae01e643002b585d3daee76594a',1,'RowingMonitor::Model::Util::SimplePeakDetector']]],
+  ['peakdetectionsettingstitle',['PeakDetectionSettingsTitle',['../class_rowing_monitor_1_1_properties_1_1_resources.html#ad7b66ae93a2d6fad4ac5b022a52b2616',1,'RowingMonitor::Properties::Resources']]],
+  ['peakdetectionwindow',['PeakDetectionWindow',['../class_rowing_monitor_1_1_properties_1_1_resources.html#ac8abd1279c743bede26b275652dc5601',1,'RowingMonitor.Properties.Resources.PeakDetectionWindow()'],['../class_rowing_monitor_1_1_view_model_1_1_settings_view_model.html#aa699c2719428f3648e398cb9fd2e805b',1,'RowingMonitor.ViewModel.SettingsViewModel.PeakDetectionWindow()']]],
+  ['playbeeps',['PlayBeeps',['../class_rowing_monitor_1_1_properties_1_1_resources.html#a440cad187d11fcd7ad55c20235038931',1,'RowingMonitor.Properties.Resources.PlayBeeps()'],['../class_rowing_monitor_1_1_view_model_1_1_settings_view_model.html#a8d72377d5b55c0e4516022fd0fff627d',1,'RowingMonitor.ViewModel.SettingsViewModel.PlayBeeps()']]],
+  ['playsounds',['PlaySounds',['../class_rowing_monitor_1_1_view_model_1_1_settings_view_model.html#a8b1b8496761565003db7908592cf7065',1,'RowingMonitor::ViewModel::SettingsViewModel']]],
+  ['playsoundsetting',['PlaySoundSetting',['../class_rowing_monitor_1_1_properties_1_1_resources.html#ae79cd1f95e1240ce035985a7e60afbf3',1,'RowingMonitor::Properties::Resources']]],
   ['plotdata',['PlotData',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data.html',1,'RowingMonitor::Model::Util']]],
   ['plotdatahandler',['PlotDataHandler',['../class_rowing_monitor_1_1_model_1_1_util_1_1_plot_data_handler.html',1,'RowingMonitor::Model::Util']]],
   ['plotdatahandler_2ecs',['PlotDataHandler.cs',['../_plot_data_handler_8cs.html',1,'']]],

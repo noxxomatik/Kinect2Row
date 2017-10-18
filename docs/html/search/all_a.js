@@ -22,6 +22,8 @@ var searchData=
   ['kleshnevpeak',['KleshnevPeak',['../namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107fa9d3bbe2cf44b2a4f2766035cf66affe1',1,'RowingMonitor::Model::Util']]],
   ['kleshnevplot',['KleshnevPlot',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_plot.html',1,'RowingMonitor.Model.Pipeline.KleshnevPlot'],['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_plot.html#a892c72567b10ca5cd3ef48b4ad9adb6e',1,'RowingMonitor.Model.Pipeline.KleshnevPlot.KleshnevPlot()']]],
   ['kleshnevplot_2ecs',['KleshnevPlot.cs',['../_kleshnev_plot_8cs.html',1,'']]],
+  ['kleshnevplotcurrentsegmenttitle',['KleshnevPlotCurrentSegmentTitle',['../class_rowing_monitor_1_1_properties_1_1_resources.html#a3d4f0eb9e272622fa06c730dd6000c8b',1,'RowingMonitor::Properties::Resources']]],
+  ['kleshnevplotlastsegmenttitle',['KleshnevPlotLastSegmentTitle',['../class_rowing_monitor_1_1_properties_1_1_resources.html#a336540239ec5a4838b4fffc2b11aece1',1,'RowingMonitor::Properties::Resources']]],
   ['kleshnevplotrange',['KleshnevPlotRange',['../class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html#a6945ae46c3ce1f69f39fdbdb90ae1d66',1,'RowingMonitor::ViewModel::DebugViewModel']]],
   ['kleshnevplotview',['KleshnevPlotView',['../class_rowing_monitor_1_1_view_1_1_kleshnev_plot_view.html',1,'RowingMonitor.View.KleshnevPlotView'],['../class_rowing_monitor_1_1_view_1_1_kleshnev_plot_view.html#a3e703e3daef530061957b5c15978ae56',1,'RowingMonitor.View.KleshnevPlotView.KleshnevPlotView()']]],
   ['kleshnevplotview_2eg_2ecs',['KleshnevPlotView.g.cs',['../_debug_2_view_2_kleshnev_plot_view_8g_8cs.html',1,'(Global Namespace)'],['../_release_2_view_2_kleshnev_plot_view_8g_8cs.html',1,'(Global Namespace)']]],

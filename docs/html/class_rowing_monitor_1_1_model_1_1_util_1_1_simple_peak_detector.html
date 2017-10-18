@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Rowing Monitor: RowingMonitor.Model.Util.SimplePeakDetector Class Reference</title>
+<title>Kinect2Row: RowingMonitor.Model.Util.SimplePeakDetector Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Rowing Monitor
+   <div id="projectname">Kinect2Row
+   &#160;<span id="projectnumber">0.1.0</span>
    </div>
   </td>
  </tr>
@@ -81,6 +82,7 @@ $(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_uti
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">RowingMonitor.Model.Util.SimplePeakDetector Class Reference</div>  </div>
@@ -89,13 +91,31 @@ $(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_uti
 
 <p>Detects the first maximum of a data series.  
  <a href="class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for RowingMonitor.Model.Util.SimplePeakDetector:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.png" usemap="#RowingMonitor.Model.Util.SimplePeakDetector_map" alt=""/>
+  <map id="RowingMonitor.Model.Util.SimplePeakDetector_map" name="RowingMonitor.Model.Util.SimplePeakDetector_map">
+<area href="class_rowing_monitor_1_1_model_1_1_util_1_1_mean_window_peak_detector.html" title="Peak detection which uses the mean peak timestamps of past segments to improve the realtime peak dete..." alt="RowingMonitor.Model.Util.MeanWindowPeakDetector" shape="rect" coords="0,56,312,80"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afbfd23663a323bf0efa3c99797549067"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html#afbfd23663a323bf0efa3c99797549067">HasPeak</a> (double newValue)</td></tr>
+<tr class="memdesc:afbfd23663a323bf0efa3c99797549067"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the last value was a maximum. The value must be greater then 0.  <a href="#afbfd23663a323bf0efa3c99797549067">More...</a><br /></td></tr>
 <tr class="separator:afbfd23663a323bf0efa3c99797549067"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1205317942814083c99bbe88b8215676"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html#a1205317942814083c99bbe88b8215676">Reset</a> ()</td></tr>
-<tr class="separator:a1205317942814083c99bbe88b8215676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dc319830c2e9f937845458d08c80bfc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html#a4dc319830c2e9f937845458d08c80bfc">SegmentEnded</a> ()</td></tr>
+<tr class="memdesc:a4dc319830c2e9f937845458d08c80bfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the detection after a segment ended.  <a href="#a4dc319830c2e9f937845458d08c80bfc">More...</a><br /></td></tr>
+<tr class="separator:a4dc319830c2e9f937845458d08c80bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a409bda0ce33bf8b4fc898ad6e69acd54"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html#a409bda0ce33bf8b4fc898ad6e69acd54">lastValue</a> = Double.NegativeInfinity</td></tr>
+<tr class="separator:a409bda0ce33bf8b4fc898ad6e69acd54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4234eae01e643002b585d3daee76594a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html#a4234eae01e643002b585d3daee76594a">peakDetected</a> = false</td></tr>
+<tr class="separator:a4234eae01e643002b585d3daee76594a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Detects the first maximum of a data series. </p>
@@ -116,21 +136,87 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Check if the last value was a maximum. The value must be greater then 0. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newValue</td><td>New value in the data series.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the last value was a maximum.</dd></dl>
+
 </div>
 </div>
-<a id="a1205317942814083c99bbe88b8215676"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1205317942814083c99bbe88b8215676">&#9670;&nbsp;</a></span>Reset()</h2>
+<a id="a4dc319830c2e9f937845458d08c80bfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dc319830c2e9f937845458d08c80bfc">&#9670;&nbsp;</a></span>SegmentEnded()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void RowingMonitor.Model.Util.SimplePeakDetector.Reset </td>
+          <td class="memname">virtual void RowingMonitor.Model.Util.SimplePeakDetector.SegmentEnded </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resets the detection after a segment ended. </p>
+
+<p>Reimplemented in <a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_mean_window_peak_detector.html#a6af1d73dacc0fdab7400a32b2b4869dd">RowingMonitor.Model.Util.MeanWindowPeakDetector</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a409bda0ce33bf8b4fc898ad6e69acd54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a409bda0ce33bf8b4fc898ad6e69acd54">&#9670;&nbsp;</a></span>lastValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double RowingMonitor.Model.Util.SimplePeakDetector.lastValue = Double.NegativeInfinity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4234eae01e643002b585d3daee76594a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4234eae01e643002b585d3daee76594a">&#9670;&nbsp;</a></span>peakDetected</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool RowingMonitor.Model.Util.SimplePeakDetector.peakDetected = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

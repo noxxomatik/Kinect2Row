@@ -24,6 +24,9 @@ var dir_cfd16c840b9fd527055a10c840e041c3 =
     [ "LowPassFilter.cs", "_low_pass_filter_8cs.html", [
       [ "LowPassFilter", "class_rowing_monitor_1_1_model_1_1_low_pass_filter.html", "class_rowing_monitor_1_1_model_1_1_low_pass_filter" ]
     ] ],
+    [ "MeanWindowPeakDetector.cs", "_mean_window_peak_detector_8cs.html", [
+      [ "MeanWindowPeakDetector", "class_rowing_monitor_1_1_model_1_1_util_1_1_mean_window_peak_detector.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_mean_window_peak_detector" ]
+    ] ],
     [ "OneEuroFilter.cs", "_one_euro_filter_8cs.html", [
       [ "OneEuroFilter", "class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter" ],
       [ "LowpassFilter", "class_rowing_monitor_1_1_model_1_1_util_1_1_lowpass_filter.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_lowpass_filter" ]

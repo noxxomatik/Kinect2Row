@@ -1,6 +1,7 @@
 var searchData=
 [
   ['tdetected',['TDetected',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence.html#aaaed8840b79d2c683073ecf408bc6d51',1,'RowingMonitor::Model::Util::Subsequence']]],
+  ['template',['Template',['../class_rowing_monitor_1_1_view_model_1_1_settings_view_model.html#a7e5ba4f8d9005533a1d3e9c9e5fae9c6',1,'RowingMonitor::ViewModel::SettingsViewModel']]],
   ['tend',['TEnd',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence.html#a839b2f62176c2546a8e0d42b87801954',1,'RowingMonitor::Model::Util::Subsequence']]],
   ['timestamps',['Timestamps',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a98bf571ea92c7f9b8e197062f17ddc27',1,'RowingMonitor::Model::Util::JointData']]],
   ['traineemessage',['TraineeMessage',['../class_rowing_monitor_1_1_properties_1_1_resources.html#ad8c651181f3f820b2604964cf28ec195',1,'RowingMonitor::Properties::Resources']]],

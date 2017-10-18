@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Rowing Monitor: RowingMonitor.Model.Util Namespace Reference</title>
+<title>Kinect2Row: RowingMonitor.Model.Util Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -28,7 +28,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Rowing Monitor
+   <div id="projectname">Kinect2Row
+   &#160;<span id="projectnumber">0.1.0</span>
    </div>
   </td>
  </tr>
@@ -97,12 +98,17 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_degrees.html">Degrees</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html" title="JointData is a collection of the tracked joints of one frame and its meta data which is passed throug...">JointData</a> is a collection of the tracked joints of one frame and its meta data which is passed through the processing pipeline.  <a href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler.html">JointDataHandler</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler.html" title="The JointDataHandler class handles the generated kinect data and provides static functions to work wi...">JointDataHandler</a> class handles the generated kinect data and provides static functions to work with the joint data.  <a href="class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_logger.html">Logger</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_lowpass_filter.html">LowpassFilter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_mean_window_peak_detector.html">MeanWindowPeakDetector</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peak detection which uses the mean peak timestamps of past segments to improve the realtime peak detection whith a time window around these timestamps.  <a href="class_rowing_monitor_1_1_model_1_1_util_1_1_mean_window_peak_detector.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html">OneEuroFilter</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,9 +172,9 @@ Enumerations</h2></td></tr>
 <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#aab07192bda8b488e80710841de62e4dfa79af1a8ea8d63169379023f139962520">SegmentState.NoSegment</a>
  }</td></tr>
 <tr class="separator:aab07192bda8b488e80710841de62e4df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a248a257b884983ed79c45a8b34ee9580"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a248a257b884983ed79c45a8b34ee9580">SubsequenceStatus</a> { <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a248a257b884983ed79c45a8b34ee9580a1c250a21210b7b88a14db9a0cbe71162">SubsequenceStatus.NOT_SET</a>, 
-<a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a248a257b884983ed79c45a8b34ee9580a2a13cf4c2d798c8dd4b2c9622dad4a2d">SubsequenceStatus.NOT_OPTIMAL</a>, 
-<a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a248a257b884983ed79c45a8b34ee9580af00c8dbdd6e1f11bdae06be94277d293">SubsequenceStatus.OPTIMAL</a>
+<tr class="memitem:a248a257b884983ed79c45a8b34ee9580"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a248a257b884983ed79c45a8b34ee9580">SubsequenceStatus</a> { <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a248a257b884983ed79c45a8b34ee9580afaf396cbd83927b72a84d2616fac76ff">SubsequenceStatus.NotSet</a>, 
+<a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a248a257b884983ed79c45a8b34ee9580a9acf053269da0d635abfb5d3c5359e8c">SubsequenceStatus.NotOptimal</a>, 
+<a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a248a257b884983ed79c45a8b34ee9580acb61fef1e5e79e07a80421cb9a073a80">SubsequenceStatus.Optimal</a>
  }<tr class="memdesc:a248a257b884983ed79c45a8b34ee9580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Status of detected subsequence.  <a href="namespace_rowing_monitor_1_1_model_1_1_util.html#a248a257b884983ed79c45a8b34ee9580">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:a248a257b884983ed79c45a8b34ee9580"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -313,11 +319,11 @@ Enumerations</h2></td></tr>
 
 <p>Status of detected subsequence. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a248a257b884983ed79c45a8b34ee9580a1c250a21210b7b88a14db9a0cbe71162"></a>NOT_SET&#160;</td><td class="fielddoc"><p>No subsequence was detected. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a248a257b884983ed79c45a8b34ee9580afaf396cbd83927b72a84d2616fac76ff"></a>NotSet&#160;</td><td class="fielddoc"><p>No subsequence was detected. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a248a257b884983ed79c45a8b34ee9580a2a13cf4c2d798c8dd4b2c9622dad4a2d"></a>NOT_OPTIMAL&#160;</td><td class="fielddoc"><p>A subsequenece with smaller distance can occur. </p>
+<tr><td class="fieldname"><a id="a248a257b884983ed79c45a8b34ee9580a9acf053269da0d635abfb5d3c5359e8c"></a>NotOptimal&#160;</td><td class="fielddoc"><p>A subsequenece with smaller distance can occur. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a248a257b884983ed79c45a8b34ee9580af00c8dbdd6e1f11bdae06be94277d293"></a>OPTIMAL&#160;</td><td class="fielddoc"><p>No more exact subsequenece can occur. </p>
+<tr><td class="fieldname"><a id="a248a257b884983ed79c45a8b34ee9580acb61fef1e5e79e07a80421cb9a073a80"></a>Optimal&#160;</td><td class="fielddoc"><p>No more exact subsequenece can occur. </p>
 </td></tr>
 </table>
 

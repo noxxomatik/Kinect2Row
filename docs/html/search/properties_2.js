@@ -1,6 +1,7 @@
 var searchData=
 [
   ['c',['C',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#a2c26f634699927ecf6586043bf7a134b',1,'RowingMonitor::Model::Util::CurveFitting::QuadraticFunctionParameters']]],
+  ['c3_5ftwice',['c3_twice',['../class_rowing_monitor_1_1_properties_1_1_resources.html#ab2a4c727b7722787e477fd0fa2424cd5',1,'RowingMonitor::Properties::Resources']]],
   ['calculatedjointdata',['CalculatedJointData',['../class_rowing_monitor_1_1_model_1_1_calculated_frame_arrived_event_args.html#ad2a6d96247f32cec46b5e5006b4a867b',1,'RowingMonitor::Model::CalculatedFrameArrivedEventArgs']]],
   ['canexecutechanged',['CanExecuteChanged',['../class_rowing_monitor_1_1_relay_command.html#ae4dd035ea91a110089885a49c15fa525',1,'RowingMonitor::RelayCommand']]],
   ['catchfactor',['CatchFactor',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html#aa16578566b33c3a692a1040ede071d2a',1,'RowingMonitor.Model.Util.RowingMetaData.CatchFactor()'],['../class_rowing_monitor_1_1_properties_1_1_resources.html#a387e94c12ed72def984e5c51c268cf0a',1,'RowingMonitor.Properties.Resources.CatchFactor()'],['../class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html#a5682203c76d68ac2d357a667ec9f1a4e',1,'RowingMonitor.ViewModel.RowingMetaDataDebugViewModel.CatchFactor()'],['../class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_widgets_view_model.html#a209ec36ede2c8cdbfcb12630d28218b2',1,'RowingMonitor.ViewModel.RowingMetaDataWidgetsViewModel.CatchFactor()']]],

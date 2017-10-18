@@ -4,6 +4,7 @@ var searchData=
   ['segmentdetector',['SegmentDetector',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html',1,'RowingMonitor::Model::Pipeline']]],
   ['segmenthit',['SegmentHit',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html',1,'RowingMonitor::Model::Util']]],
   ['segmenthithandler',['SegmentHitHandler',['../class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html',1,'RowingMonitor::Model::Util']]],
+  ['settingsviewmodel',['SettingsViewModel',['../class_rowing_monitor_1_1_view_model_1_1_settings_view_model.html',1,'RowingMonitor::ViewModel']]],
   ['shiftedframearrivedeventargs',['ShiftedFrameArrivedEventArgs',['../class_rowing_monitor_1_1_model_1_1_shifted_frame_arrived_event_args.html',1,'RowingMonitor::Model']]],
   ['shifter',['Shifter',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html',1,'RowingMonitor::Model::Pipeline']]],
   ['simplepeakdetector',['SimplePeakDetector',['../class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html',1,'RowingMonitor::Model::Util']]],
