@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RowingMonitor.Model
+namespace RowingMonitor.Model.Util
 {
     class LowPassFilter
     {

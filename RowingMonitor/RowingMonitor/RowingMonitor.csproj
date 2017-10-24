@@ -143,8 +143,8 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\EventArgs\KleshnevEventArgs.cs" />
-    <Compile Include="Model\EventArgs\SegmentDetectedEventArgs.cs" />
+    <Compile Include="Model\EventArguments\KleshnevEventArgs.cs" />
+    <Compile Include="Model\EventArguments\SegmentDetectedEventArgs.cs" />
     <Compile Include="Model\Pipeline\JointDataPlot.cs" />
     <Compile Include="Model\Pipeline\KinectJointSmoothingFilter.cs" />
     <Compile Include="Model\Pipeline\KleshnevPlot.cs" />
@@ -161,20 +161,20 @@
     <Compile Include="Model\Pipeline\TrunkAngleDisplay.cs" />
     <Compile Include="Model\Pipeline\ZVCSegmentDetector.cs" />
     <Compile Include="Model\Pipeline\SegmentDetector.cs" />
-    <Compile Include="Model\Util\BodyNotFullyTrackedException.cs" />
-    <Compile Include="Model\EventArgs\ShiftedFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\Exceptions\BodyNotFullyTrackedException.cs" />
+    <Compile Include="Model\EventArguments\ShiftedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Util\CircularBuffer.cs" />
     <Compile Include="Model\Util\CurveFitting.cs" />
     <Compile Include="Model\Util\Degrees.cs" />
     <Compile Include="Model\Util\Enums.cs" />
-    <Compile Include="Model\EventArgs\ColorFrameArrivedEventArgs.cs" />
-    <Compile Include="Model\EventArgs\CalculatedFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\EventArguments\ColorFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\EventArguments\CalculatedFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Util\JointDataHandler.cs" />
     <Compile Include="Model\Util\Logger.cs" />
     <Compile Include="Model\Util\LowPassFilter.cs" />
     <Compile Include="Model\Pipeline\Shifter.cs" />
-    <Compile Include="Model\EventArgs\SmoothedFrameArrivedEventArgs.cs" />
-    <Compile Include="Model\EventArgs\KinectFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\EventArguments\SmoothedFrameArrivedEventArgs.cs" />
+    <Compile Include="Model\EventArguments\KinectFrameArrivedEventArgs.cs" />
     <Compile Include="Model\Pipeline\KinectReader.cs" />
     <Compile Include="Model\Pipeline\OneEuroSmoothingFilter.cs" />
     <Compile Include="Model\Util\MeanWindowPeakDetector.cs" />

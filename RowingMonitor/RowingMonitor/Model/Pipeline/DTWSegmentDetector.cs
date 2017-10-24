@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using RowingMonitor.Model.EventArguments;
 using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;

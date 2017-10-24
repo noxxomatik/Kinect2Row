@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RowingMonitor.Model
+namespace RowingMonitor.Model.EventArguments
 {
     /// <summary>
     /// Represents the arguments for a smoothed joint data arrived event.

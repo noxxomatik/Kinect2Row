@@ -1,4 +1,5 @@
 ﻿using Microsoft.Kinect;
+using RowingMonitor.Model.EventArguments;
 using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,7 @@ namespace RowingMonitor.Model.Pipeline
         public event KinectFrameArrivedEventHandler KinectFrameArrived;
 
         public delegate void ColorFrameArrivedEventHandler(Object sender,
-            ColorFrameArrivedEventArgs e);
+            EventArguments.ColorFrameArrivedEventArgs e);
         public event ColorFrameArrivedEventHandler ColorFrameArrived;
 
         /* Dataflow Block */

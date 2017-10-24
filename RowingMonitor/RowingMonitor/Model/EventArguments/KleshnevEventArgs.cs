@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using static RowingMonitor.Model.Pipeline.KleshnevVelocityCalculator;
 using RowingMonitor.Model.Pipeline;
 
-namespace RowingMonitor.Model
+namespace RowingMonitor.Model.EventArguments
 {
     /// <summary>
     /// Represents the arguments for a finished Kleshnev analysis.

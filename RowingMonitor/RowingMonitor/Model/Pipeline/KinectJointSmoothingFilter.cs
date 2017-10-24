@@ -6,6 +6,7 @@ using RowingMonitor.Model.Util;
 using System.Threading.Tasks.Dataflow;
 using System.Linq;
 using System.Diagnostics;
+using RowingMonitor.Model.EventArguments;
 
 namespace RowingMonitor.Model.Pipeline
 {

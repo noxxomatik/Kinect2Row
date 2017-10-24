@@ -7,6 +7,7 @@ using System.Linq;
 using System.Diagnostics;
 using RowingMonitor.Model.Util;
 using RowingMonitor.Model.Pipeline;
+using RowingMonitor.Model.EventArguments;
 
 namespace UnitTest
 {

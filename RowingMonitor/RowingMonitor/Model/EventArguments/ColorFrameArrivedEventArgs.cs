@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
-namespace RowingMonitor.Model
+namespace RowingMonitor.Model.EventArguments
 {
     /// <summary>
     /// Represents the arguments for a KinectReader's ColorFrameArrived event.
