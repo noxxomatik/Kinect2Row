@@ -114,24 +114,18 @@ namespace RowingMonitor.Model.Pipeline
 
                     // override peaks with the improved peaks 
                     if (plotSeries.Key == "Legs peaks") {
-                        PlotData point = new PlotData();
-                        point.X = legsPeakDetector.SegmentEnded() / 1000;
-                        point.Annotation = "Legs peak";
-                        point.DataStreamType = DataStreamType.KleshnevPeak;
+                        PlotData point = new PlotData(legsPeakDetector.SegmentEnded() / 1000, 
+                            "Legs peak", DataStreamType.KleshnevPeak);
                         plotData.Add(point);
                     }
                     else if (plotSeries.Key == "Trunk peaks") {
-                        PlotData point = new PlotData();
-                        point.X = trunkPeakDetector.SegmentEnded() / 1000;
-                        point.Annotation = "Trunk peaks";
-                        point.DataStreamType = DataStreamType.KleshnevPeak;
+                        PlotData point = new PlotData(trunkPeakDetector.SegmentEnded() / 1000, 
+                            "Trunk peaks", DataStreamType.KleshnevPeak);
                         plotData.Add(point);
                     }
                     else if (plotSeries.Key == "Arms peaks") {
-                        PlotData point = new PlotData();
-                        point.X = armsPeakDetector.SegmentEnded() / 1000;
-                        point.Annotation = "Arms peaks";
-                        point.DataStreamType = DataStreamType.KleshnevPeak;
+                        PlotData point = new PlotData(armsPeakDetector.SegmentEnded() / 1000,
+                            "Arms peaks", DataStreamType.KleshnevPeak);
                         plotData.Add(point);
                     }
                     else {
@@ -243,11 +237,8 @@ namespace RowingMonitor.Model.Pipeline
         {
             foreach (KeyValuePair<KleshnevVelocityType, double> klshVel in
                 kleshnevData.Velocities) {
-                PlotData point = new PlotData();
-                point.Index = kleshnevData.Index;
-                point.X = kleshnevData.AbsTimestamp / 1000;
-                point.Y = klshVel.Value;
-                point.DataStreamType = DataStreamType.KleshnevVelocity;
+                PlotData point = new PlotData(kleshnevData.AbsTimestamp / 1000, klshVel.Value,
+                    DataStreamType.KleshnevVelocity, kleshnevData.Index);
                 if (currentSegmentPlotData.ContainsKey(klshVel.Key.ToString())) {
                     currentSegmentPlotData[klshVel.Key.ToString()].Add(point);
                 }
@@ -260,11 +251,8 @@ namespace RowingMonitor.Model.Pipeline
             // check for peaks and add them when found
             if (legsPeakDetector.HasPeak(kleshnevData.AbsTimestamp,
                 kleshnevData.Velocities[KleshnevVelocityType.Legs])) {
-                PlotData point = new PlotData();
-                point.Index = kleshnevData.Index;
-                point.X = kleshnevData.AbsTimestamp / 1000;
-                point.Annotation = "Legs peak";
-                point.DataStreamType = DataStreamType.KleshnevPeak;
+                PlotData point = new PlotData(kleshnevData.AbsTimestamp / 1000, "Legs peak", 
+                    DataStreamType.KleshnevPeak, kleshnevData.Index);
                 if (currentSegmentPlotData.ContainsKey("Legs peaks")) {
                     currentSegmentPlotData["Legs peaks"].Add(point);
                 }
@@ -275,11 +263,8 @@ namespace RowingMonitor.Model.Pipeline
             }
             if (trunkPeakDetector.HasPeak(kleshnevData.AbsTimestamp,
                 kleshnevData.Velocities[KleshnevVelocityType.Trunk])) {
-                PlotData point = new PlotData();
-                point.Index = kleshnevData.Index;
-                point.X = kleshnevData.AbsTimestamp / 1000;
-                point.Annotation = "Trunk peak";
-                point.DataStreamType = DataStreamType.KleshnevPeak;
+                PlotData point = new PlotData(kleshnevData.AbsTimestamp / 1000, "Trunk peak", 
+                    DataStreamType.KleshnevPeak, kleshnevData.Index);
                 if (currentSegmentPlotData.ContainsKey("Trunk peaks")) {
                     currentSegmentPlotData["Trunk peaks"].Add(point);
                 }
@@ -291,11 +276,8 @@ namespace RowingMonitor.Model.Pipeline
             if (armsPeakDetector.HasPeak(kleshnevData.AbsTimestamp,
                 (kleshnevData.Velocities[KleshnevVelocityType.ArmsLeft]
                 + kleshnevData.Velocities[KleshnevVelocityType.ArmsRight]) / 2)) {
-                PlotData point = new PlotData();
-                point.Index = kleshnevData.Index;
-                point.X = kleshnevData.AbsTimestamp / 1000;
-                point.Annotation = "Arms peak";
-                point.DataStreamType = DataStreamType.KleshnevPeak;
+                PlotData point = new PlotData(kleshnevData.AbsTimestamp / 1000, "Arms peak", 
+                    DataStreamType.KleshnevPeak, kleshnevData.Index);
                 if (currentSegmentPlotData.ContainsKey("Arms peaks")) {
                     currentSegmentPlotData["Arms peaks"].Add(point);
                 }

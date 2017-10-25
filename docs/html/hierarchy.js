@@ -12,21 +12,21 @@ var hierarchy =
     [ "RowingMonitor.ViewModel.DebugViewModel", "class_rowing_monitor_1_1_view_model_1_1_debug_view_model.html", null ],
     [ "RowingMonitor.Model.Util.Degrees", "class_rowing_monitor_1_1_model_1_1_util_1_1_degrees.html", null ],
     [ "EventArgs", null, [
-      [ "RowingMonitor.Model.CalculatedFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_calculated_frame_arrived_event_args.html", null ],
-      [ "RowingMonitor.Model.ColorFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_color_frame_arrived_event_args.html", null ],
-      [ "RowingMonitor.Model.KinectFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_kinect_frame_arrived_event_args.html", null ],
-      [ "RowingMonitor.Model.KleshnevEventArgs", "class_rowing_monitor_1_1_model_1_1_kleshnev_event_args.html", null ],
-      [ "RowingMonitor.Model.SegmentDetectedEventArgs", "class_rowing_monitor_1_1_model_1_1_segment_detected_event_args.html", null ],
-      [ "RowingMonitor.Model.ShiftedFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_shifted_frame_arrived_event_args.html", null ],
-      [ "RowingMonitor.Model.SmoothedFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_smoothed_frame_arrived_event_args.html", null ]
+      [ "RowingMonitor.Model.EventArguments.CalculatedFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_calculated_frame_arrived_event_args.html", null ],
+      [ "RowingMonitor.Model.EventArguments.ColorFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_color_frame_arrived_event_args.html", null ],
+      [ "RowingMonitor.Model.EventArguments.KinectFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_kinect_frame_arrived_event_args.html", null ],
+      [ "RowingMonitor.Model.EventArguments.KleshnevEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_kleshnev_event_args.html", null ],
+      [ "RowingMonitor.Model.EventArguments.SegmentDetectedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_segment_detected_event_args.html", null ],
+      [ "RowingMonitor.Model.EventArguments.ShiftedFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_shifted_frame_arrived_event_args.html", null ],
+      [ "RowingMonitor.Model.EventArguments.SmoothedFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_smoothed_frame_arrived_event_args.html", null ]
     ] ],
     [ "Exception", null, [
-      [ "RowingMonitor.Model.BodyNotFullyTrackedException", "class_rowing_monitor_1_1_model_1_1_body_not_fully_tracked_exception.html", null ]
+      [ "RowingMonitor.Model.Exceptions.BodyNotFullyTrackedException", "class_rowing_monitor_1_1_model_1_1_exceptions_1_1_body_not_fully_tracked_exception.html", null ]
     ] ],
     [ "RowingMonitor.Model.Pipeline.KinectJointSmoothingFilter.FilterDoubleExponentialData", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter_1_1_filter_double_exponential_data.html", null ],
     [ "RowingMonitor.ViewModel.HomeViewModel", "class_rowing_monitor_1_1_view_model_1_1_home_view_model.html", null ],
     [ "ICommand", null, [
-      [ "RowingMonitor.RelayCommand", "class_rowing_monitor_1_1_relay_command.html", null ]
+      [ "RowingMonitor.Model.Util.RelayCommand", "class_rowing_monitor_1_1_model_1_1_util_1_1_relay_command.html", null ]
     ] ],
     [ "IComponentConnector", null, [
       [ "RowingMonitor.FrontalSkeletonView", "class_rowing_monitor_1_1_frontal_skeleton_view.html", null ],
@@ -113,8 +113,8 @@ var hierarchy =
     [ "RowingMonitor.Model.Pipeline.KleshnevPlot", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_plot.html", null ],
     [ "RowingMonitor.Model.Pipeline.KleshnevVelocityCalculator", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_velocity_calculator.html", null ],
     [ "RowingMonitor.Model.Util.Logger", "class_rowing_monitor_1_1_model_1_1_util_1_1_logger.html", null ],
-    [ "RowingMonitor.Model.LowPassFilter", "class_rowing_monitor_1_1_model_1_1_low_pass_filter.html", null ],
     [ "RowingMonitor.Model.Util.LowpassFilter", "class_rowing_monitor_1_1_model_1_1_util_1_1_lowpass_filter.html", null ],
+    [ "RowingMonitor.Model.Util.LowPassFilter", "class_rowing_monitor_1_1_model_1_1_util_1_1_low_pass_filter.html", null ],
     [ "MetroWindow", null, [
       [ "RowingMonitor.MainWindow", "class_rowing_monitor_1_1_main_window.html", null ],
       [ "RowingMonitor.MainWindow", "class_rowing_monitor_1_1_main_window.html", null ],
@@ -122,9 +122,6 @@ var hierarchy =
       [ "RowingMonitor.MainWindow", "class_rowing_monitor_1_1_main_window.html", null ]
     ] ],
     [ "RowingMonitor.Model.Util.OneEuroFilter", "class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html", null ],
-    [ "Page", null, [
-      [ "RowingMonitor.View.HomeView", "class_rowing_monitor_1_1_view_1_1_home_view.html", null ]
-    ] ],
     [ "Page", null, [
       [ "RowingMonitor.FrontalSkeletonView", "class_rowing_monitor_1_1_frontal_skeleton_view.html", null ],
       [ "RowingMonitor.JointDataPlot", "class_rowing_monitor_1_1_joint_data_plot.html", null ],
@@ -187,14 +184,15 @@ var hierarchy =
       [ "RowingMonitor.View.TrunkAngleView", "class_rowing_monitor_1_1_view_1_1_trunk_angle_view.html", null ],
       [ "RowingMonitor.View.TrunkAngleView", "class_rowing_monitor_1_1_view_1_1_trunk_angle_view.html", null ]
     ] ],
+    [ "Page", null, [
+      [ "RowingMonitor.View.HomeView", "class_rowing_monitor_1_1_view_1_1_home_view.html", null ]
+    ] ],
     [ "RowingMonitor.Model.Util.PlotData", "struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data.html", null ],
-    [ "RowingMonitor.Model.Util.PlotDataHandler", "class_rowing_monitor_1_1_model_1_1_util_1_1_plot_data_handler.html", null ],
     [ "RowingMonitor.Model.Util.CurveFitting.QuadraticFunctionParameters", "struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html", null ],
     [ "RowingMonitor.Properties.Resources", "class_rowing_monitor_1_1_properties_1_1_resources.html", null ],
-    [ "RowingMonitor.Model.Util.RowingMetaData", "struct_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html", null ],
+    [ "RowingMonitor.Model.Util.RowingMetaData", "class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html", null ],
     [ "RowingMonitor.Model.Pipeline.RowingMetaDataCalculator", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_calculator.html", null ],
     [ "RowingMonitor.Model.Pipeline.RowingMetaDataDebugDisplay", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_debug_display.html", null ],
-    [ "RowingMonitor.Model.Util.RowingMetaDataHandler", "class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data_handler.html", null ],
     [ "RowingMonitor.Model.Pipeline.RowingMetaDataWidgetsDisplay", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_widgets_display.html", null ],
     [ "RowingMonitor.Model.Pipeline.RowingSonification", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html", null ],
     [ "RowingMonitor.Model.Pipeline.SegmentDetector", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html", [
@@ -202,7 +200,6 @@ var hierarchy =
       [ "RowingMonitor.Model.Pipeline.ZVCSegmentDetector", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_z_v_c_segment_detector.html", null ]
     ] ],
     [ "RowingMonitor.Model.Util.SegmentHit", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html", null ],
-    [ "RowingMonitor.Model.Util.SegmentHitHandler", "class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html", null ],
     [ "RowingMonitor.ViewModel.SettingsViewModel", "class_rowing_monitor_1_1_view_model_1_1_settings_view_model.html", null ],
     [ "RowingMonitor.Model.Pipeline.Shifter", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html", null ],
     [ "RowingMonitor.Model.Util.SimplePeakDetector", "class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html", [

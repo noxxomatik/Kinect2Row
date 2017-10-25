@@ -1,6 +1,6 @@
 var class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader =
 [
-    [ "ColorFrameArrivedEventHandler", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#aefbafde39c2c91e3b57c1db7073198bc", null ],
+    [ "ColorFrameArrivedEventHandler", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a9705a9974e69dba02f055969fa06f981", null ],
     [ "KinectFrameArrivedEventHandler", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a324ac8a3e20e308a754f163e0925e95a", null ],
     [ "StartReader", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a191df86e5b421857d4eed6a534738461", null ],
     [ "StopReader", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a1beeef16207c67ed6a29d0c7b47b368d", null ],

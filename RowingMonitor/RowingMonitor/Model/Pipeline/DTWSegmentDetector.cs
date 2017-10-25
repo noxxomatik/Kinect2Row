@@ -98,21 +98,8 @@ namespace RowingMonitor.Model.Pipeline
                 Logger.Log(this.ToString() ,"Optimal subsequence detected with distance: " + subsequence.Distance
                     + " | Detection latency: " + (detectionIndex - endIndex));
 
-                //if (detectionIndex != jointData.Index) {
-                //    throw new Exception("Index offset is faulty.");
-                //}
-
-                SegmentHit startHit = new SegmentHit();
-                startHit.Index = startIndex;
-                startHit.DetectionIndex = jointData.Index;
-                startHit.DetectionAbsTimestamp = jointData.AbsTimestamp;
-                startHit.HitType = HitType.SegmentStart;
-
-                SegmentHit endHit = new SegmentHit();
-                endHit.Index = endIndex;
-                endHit.DetectionIndex = jointData.Index;
-                endHit.DetectionAbsTimestamp = jointData.AbsTimestamp;
-                endHit.HitType = HitType.SegmentEnd;
+                double startAbsTimestamp = -1;
+                double endAbsTimestamp = -1;
 
                 // split jointData buffer in the detected segment and new past data
                 List<JointData> segment = new List<JointData>();
@@ -121,10 +108,10 @@ namespace RowingMonitor.Model.Pipeline
                 foreach (JointData data in jointDataHistory) {
                     if (data.Index >= startIndex && data.Index <= endIndex) {
                         if (data.Index == startIndex) {
-                            startHit.AbsTimestamp = data.AbsTimestamp;
+                            startAbsTimestamp = data.AbsTimestamp;
                         }
                         else if (data.Index == endIndex) {
-                            endHit.AbsTimestamp = data.AbsTimestamp;
+                            endAbsTimestamp = data.AbsTimestamp;
                         }
                         segment.Add(data);
                     }
@@ -133,6 +120,12 @@ namespace RowingMonitor.Model.Pipeline
                     }
                 }
                 jointDataHistory = new List<JointData>(buffer);
+
+                SegmentHit startHit = new SegmentHit(startIndex, jointData.Index, startAbsTimestamp, 
+                    jointData.AbsTimestamp, HitType.SegmentStart);
+
+                SegmentHit endHit = new SegmentHit(endIndex, jointData.Index, endAbsTimestamp, 
+                    jointData.AbsTimestamp, HitType.SegmentEnd);
 
                 hits.Add(startHit);
                 hits.Add(endHit);

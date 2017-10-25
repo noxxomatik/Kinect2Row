@@ -6,22 +6,53 @@ using System.Threading.Tasks;
 
 namespace RowingMonitor.Model.Util
 {
-    class PlotDataHandler
-    {
-    }
+    public static class PlotDataHandler { }
 
     public struct PlotData
     {
-        private double x;
-        private double y;
-        private string annotation;
-        private DataStreamType dataStreamType;
-        private long index;
+        public PlotData(double x, double y, DataStreamType dataStreamType) : this()
+        {
+            X = x;
+            Y = y;
+            DataStreamType = dataStreamType;
+        }
 
-        public double X { get => x; set => x = value; }
-        public double Y { get => y; set => y = value; }
-        public string Annotation { get => annotation; set => annotation = value; }
-        public DataStreamType DataStreamType { get => dataStreamType; set => dataStreamType = value; }
-        public long Index { get => index; set => index = value; }
+        public PlotData(double x, string annotation, DataStreamType dataStreamType) : this()
+        {
+            X = x;
+            Annotation = annotation;
+            DataStreamType = dataStreamType;
+        }
+
+        public PlotData(double x, string annotation, DataStreamType dataStreamType, long index) : this()
+        {
+            X = x;
+            Annotation = annotation;
+            DataStreamType = dataStreamType;
+            Index = index;
+        }
+
+        public PlotData(double x, double y, DataStreamType dataStreamType, long index) : this()
+        {
+            X = x;
+            Y = y;
+            DataStreamType = dataStreamType;
+            Index = index;
+        }
+
+        public PlotData(double x, double y, string annotation, DataStreamType dataStreamType, long index)
+        {
+            X = x;
+            Y = y;
+            Annotation = annotation;
+            DataStreamType = dataStreamType;
+            Index = index;
+        }
+
+        public readonly double X;
+        public readonly double Y;
+        public readonly string Annotation;
+        public readonly DataStreamType DataStreamType;
+        public readonly long Index;
     }
 }

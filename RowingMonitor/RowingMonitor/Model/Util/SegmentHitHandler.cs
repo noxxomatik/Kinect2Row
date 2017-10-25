@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace RowingMonitor.Model.Util
 {
-    public class SegmentHitHandler
+    /// <summary>
+    /// A static class to deal with detected segment hits and check 
+    /// if the detected segments are valid or incomplete.
+    /// 
+    /// Also supplies methods to extract start and end points of segments.
+    /// </summary>
+    public static class SegmentHitHandler
     {
-        private SegmentHitHandler() { }
-
+        /// <summary>
+        /// Checks if a new segment started and has not yet ended.
+        /// </summary>
+        /// <param name="hits">List of detected hits.</param>
+        /// <returns></returns>
         public static bool CheckIfNewSegmentStarted(List<SegmentHit> hits)
         {
             if (hits.Count > 0 &&
@@ -21,10 +30,46 @@ namespace RowingMonitor.Model.Util
         }
 
         /// <summary>
+        /// Filters the joint data of a completed segment.
+        /// </summary>
+        /// <param name="buffer">The list of joint data that shall be filtered.</param>
+        /// <param name="bounds">Start and end index of the segment.</param>
+        /// <returns>Returns a list of all joint data that ist part of the segment.</returns>
+        public static List<JointData> FilterSegmentJointData(List<JointData> buffer, long[] bounds)
+        {
+            List<JointData> tmpLastSegmentJointDataBuffer = new List<JointData>();
+            // do not search through all buffer objects, search last in first out
+            for (int i = buffer.Count - 1; i >= 0; i--) {
+                if (buffer[i].Index >= bounds[0] && buffer[i].Index <= bounds[1]) {
+                    tmpLastSegmentJointDataBuffer.Add(buffer[i]);
+                }
+            }
+            tmpLastSegmentJointDataBuffer.Reverse();
+            return tmpLastSegmentJointDataBuffer;
+        }
+
+        /// <summary>
+        /// Returns the index of the last detected internal segment hit.
+        /// </summary>
+        /// <param name="hits">List of detected hits.</param>
+        /// <returns>Index of last detected internal segment hit.</returns>
+        public static long GetLastSegmentInternal(List<SegmentHit> hits)
+        {
+            if (hits.Count > 2) {
+                for (int i = hits.Count - 1; i >= 0; i--) {
+                    if (hits[i].HitType == HitType.SegmentInternal) {
+                        return hits[i].Index;
+                    }
+                }
+            }
+            return -1;
+        }
+
+        /// <summary>
         /// Return the bounding indices values of the last complete segment.
         /// </summary>
         /// <param name="hits">List of detected hits.</param>
-        /// <returns>Start an d end index of the lastdetected segment.</returns>
+        /// <returns>Start and end index of the lastdetected segment.</returns>
         public static long[] GetLastSegmentStartEnd(List<SegmentHit> hits)
         {
             long[] segmentBounds = { -1, -1 };
@@ -48,24 +93,7 @@ namespace RowingMonitor.Model.Util
                 }
             }
             return null;
-        }
-
-        /// <summary>
-        /// Returns the index of the last detected internal segment hit.
-        /// </summary>
-        /// <param name="hits">List of detected hits.</param>
-        /// <returns>Index of last detected internal segment hit.</returns>
-        public static long GetLastSegmentInternal(List<SegmentHit> hits)
-        {
-            if (hits.Count > 2) {
-                for (int i = hits.Count - 1; i >= 0; i--) {
-                    if (hits[i].HitType == HitType.SegmentInternal) {
-                        return hits[i].Index;
-                    }
-                }
-            }
-            return -1;
-        }
+        }        
 
         /// <summary>
         /// Checks if the segment is valid by comparing its duration with the minimum 
@@ -92,55 +120,51 @@ namespace RowingMonitor.Model.Util
                 return (endTime - startTime) / 1000 > Properties.Settings.Default.MinSegmentTime;
             }
             return false;
-        }
-
-        /// <summary>
-        /// Filters the joint data of a completed segment.
-        /// </summary>
-        /// <param name="buffer">The list of joint data that shall be filtered.</param>
-        /// <param name="bounds">Start and end index of the segment.</param>
-        /// <returns>Returns a list of all joint data that ist part of the segment.</returns>
-        public static List<JointData> FilterSegmentJointData(List<JointData> buffer, long[] bounds)
-        {
-            List<JointData> tmpLastSegmentJointDataBuffer = new List<JointData>();
-            // do not search through all buffer objects, search last in first out
-            for (int i = buffer.Count - 1; i >= 0; i--) {
-                if (buffer[i].Index >= bounds[0] && buffer[i].Index <= bounds[1]) {
-                    tmpLastSegmentJointDataBuffer.Add(buffer[i]);
-                }
-            }
-            tmpLastSegmentJointDataBuffer.Reverse();
-            return tmpLastSegmentJointDataBuffer;
-        }
+        }        
     }
 
+    /// <summary>
+    /// Holds information about a detected segment hit.
+    /// </summary>
     public struct SegmentHit
     {
-        private long index;
-        private long detectionIndex;
-        private double absTimestamp;
-        private double detectionAbsTimestamp;
-        private HitType hitType;
+        /// <summary>
+        /// Creates new segment hit data.
+        /// </summary>
+        /// <param name="index">Index of the joint data that this hit belongs to.</param>
+        /// <param name="detectionIndex">Index of the joint data where this hit was detected.</param>
+        /// <param name="absTimestamp">Absolute timestamp of the joint data that this hit belongs to.</param>
+        /// <param name="detectionAbsTimestamp">Absolute timestamp of the joint data where this hit was detected.</param>
+        /// <param name="hitType">Type of this hit in the context of a segment.</param>
+        public SegmentHit(long index, long detectionIndex, double absTimestamp, 
+            double detectionAbsTimestamp, HitType hitType)
+        {
+            Index = index;
+            DetectionIndex = detectionIndex;
+            AbsTimestamp = absTimestamp;
+            DetectionAbsTimestamp = detectionAbsTimestamp;
+            HitType = hitType;
+        }
 
         /// <summary>
         /// Index of the joint data that this hit belongs to.
         /// </summary>
-        public long Index { get => index; set => index = value; }
+        public readonly long Index;
         /// <summary>
         /// Index of the joint data where this hit was detected.
         /// </summary>
-        public long DetectionIndex { get => detectionIndex; set => detectionIndex = value; }
+        public readonly long DetectionIndex;
         /// <summary>
         /// Absolute timestamp of the joint data that this hit belongs to.
         /// </summary>
-        public double AbsTimestamp { get => absTimestamp; set => absTimestamp = value; }
+        public readonly double AbsTimestamp;
         /// <summary>
         /// Absolute timestamp of the joint data where this hit was detected.
         /// </summary>
-        public double DetectionAbsTimestamp { get => detectionAbsTimestamp; set => detectionAbsTimestamp = value; }
+        public readonly double DetectionAbsTimestamp;
         /// <summary>
         /// Type of this hit in the context of a segment.
         /// </summary>
-        public HitType HitType { get => hitType; set => hitType = value; }
+        public readonly HitType HitType;
     }
 }

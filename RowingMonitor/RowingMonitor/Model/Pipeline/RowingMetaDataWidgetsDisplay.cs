@@ -31,10 +31,12 @@ namespace RowingMonitor.Model.Pipeline
 
         public void Render()
         {
-            View.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                ViewModel.Render(tmpMetaData.CatchFactor, tmpMetaData.RowingStyleFactor);
-            }));
+            if (tmpMetaData != null) {
+                View.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    ViewModel.Render(tmpMetaData.CatchFactor, tmpMetaData.RowingStyleFactor);
+                }));
+            }
         }
 
         public ActionBlock<RowingMetaData> Input { get => input; set => input = value; }

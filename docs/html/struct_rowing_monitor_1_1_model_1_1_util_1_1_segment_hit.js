@@ -1,8 +1,9 @@
 var struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit =
 [
-    [ "AbsTimestamp", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ab40df6a59087cfd176f989111279a5e2", null ],
-    [ "DetectionAbsTimestamp", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ab9778fc572f014c1d75de5898f8c83d2", null ],
-    [ "DetectionIndex", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ad943df68e8adfeaa2b76701701cef0df", null ],
-    [ "HitType", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ab2a359ba79fbc8456596219484f2a159", null ],
-    [ "Index", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#aaf855f224da3b43af2ea5f7896914efb", null ]
+    [ "SegmentHit", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#a720f0e5262b246728d1ea27969fe6f85", null ],
+    [ "AbsTimestamp", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ad464e5cab8700898f8190d25071ed6fd", null ],
+    [ "DetectionAbsTimestamp", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#acc82d64eeac4faa3ed394a6c24e058a3", null ],
+    [ "DetectionIndex", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#a7d8d2679644b7b2a6ea2a7b28f24672a", null ],
+    [ "HitType", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#a186b2bc59a30015471d753632ff58878", null ],
+    [ "Index", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#a3cb4c75a6c12e3b7f1184fc9b5f91aeb", null ]
 ];

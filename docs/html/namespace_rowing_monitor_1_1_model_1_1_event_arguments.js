@@ -1,0 +1,10 @@
+var namespace_rowing_monitor_1_1_model_1_1_event_arguments =
+[
+    [ "CalculatedFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_calculated_frame_arrived_event_args.html", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_calculated_frame_arrived_event_args" ],
+    [ "ColorFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_color_frame_arrived_event_args.html", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_color_frame_arrived_event_args" ],
+    [ "KinectFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_kinect_frame_arrived_event_args.html", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_kinect_frame_arrived_event_args" ],
+    [ "KleshnevEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_kleshnev_event_args.html", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_kleshnev_event_args" ],
+    [ "SegmentDetectedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_segment_detected_event_args.html", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_segment_detected_event_args" ],
+    [ "ShiftedFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_shifted_frame_arrived_event_args.html", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_shifted_frame_arrived_event_args" ],
+    [ "SmoothedFrameArrivedEventArgs", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_smoothed_frame_arrived_event_args.html", "class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_smoothed_frame_arrived_event_args" ]
+];

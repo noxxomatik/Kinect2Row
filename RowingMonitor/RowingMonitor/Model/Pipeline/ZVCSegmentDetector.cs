@@ -69,14 +69,8 @@ namespace RowingMonitor.Model.Pipeline
         {
             // check if it is the first hit
             if (hits.Count == 0) {
-                SegmentHit hit = new SegmentHit
-                {
-                    HitType = HitType.SegmentStart,
-                    Index = jointData.Index,
-                    DetectionIndex = jointData.Index,
-                    AbsTimestamp = jointData.AbsTimestamp,
-                    DetectionAbsTimestamp = jointData.AbsTimestamp
-                };
+                SegmentHit hit = new SegmentHit(jointData.Index, jointData.Index, 
+                    jointData.AbsTimestamp, jointData.AbsTimestamp, HitType.SegmentStart);
                 hits.Add(hit);
                 OnSegmentDetected(new SegmentDetectedEventArgs(hits));
             }
@@ -86,26 +80,16 @@ namespace RowingMonitor.Model.Pipeline
                 if (slopeRising != lastSlopeRising) {
                     // determine the hit type
                     if (slopeRising) {
-                        SegmentHit hit = new SegmentHit
-                        {
-                            HitType = endStartHitIsRisingVelocity ? HitType.SegmentEndStart : HitType.SegmentInternal,
-                            Index = jointData.Index,
-                            DetectionIndex = jointData.Index,
-                            AbsTimestamp = jointData.AbsTimestamp,
-                            DetectionAbsTimestamp = jointData.AbsTimestamp
-                        };
+                        SegmentHit hit = new SegmentHit(jointData.Index, jointData.Index, jointData.AbsTimestamp, 
+                            jointData.AbsTimestamp, 
+                            endStartHitIsRisingVelocity ? HitType.SegmentEndStart : HitType.SegmentInternal);
                         hits.Add(hit);
                         OnSegmentDetected(new SegmentDetectedEventArgs(hits));
                     }
                     else {
-                        SegmentHit hit = new SegmentHit
-                        {
-                            HitType = endStartHitIsRisingVelocity ? HitType.SegmentInternal : HitType.SegmentEndStart,
-                            Index = jointData.Index,
-                            DetectionIndex = jointData.Index,
-                            AbsTimestamp = jointData.AbsTimestamp,
-                            DetectionAbsTimestamp = jointData.AbsTimestamp
-                        };
+                        SegmentHit hit = new SegmentHit(jointData.Index, jointData.Index, jointData.AbsTimestamp, 
+                            jointData.AbsTimestamp, 
+                            endStartHitIsRisingVelocity ? HitType.SegmentInternal : HitType.SegmentEndStart);
                         hits.Add(hit);
                         OnSegmentDetected(new SegmentDetectedEventArgs(hits));
                     }

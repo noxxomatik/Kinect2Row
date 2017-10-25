@@ -51,16 +51,9 @@ namespace RowingMonitor.Model.Util
                 relStartTime = relTimestamp;
             }
 
-            JointData jointData = new JointData
-            {
-                RelTimestamp = relTimestamp,
-                AbsTimestamp = relTimestamp - relStartTime,
-                Index = LastIndex,
-                Joints = FixFeet(joints)
-            };
-            jointData.Timestamps = new List<double>();
+            JointData jointData = new JointData(relTimestamp, relTimestamp - relStartTime, 
+                FixFeet(joints), LastIndex, new List<double>(), DataStreamType.RawPosition);
             jointData.Timestamps.Add(creationTimestamp);
-            jointData.DataStreamType = DataStreamType.RawPosition;
 
             LastIndex++;
             return jointData;
@@ -207,15 +200,8 @@ namespace RowingMonitor.Model.Util
             IReadOnlyDictionary<JointType, Joint> newJoints,
             DataStreamType dataStreamType)
         {
-            JointData jointData = new JointData
-            {
-                RelTimestamp = oldJointData.RelTimestamp,
-                AbsTimestamp = oldJointData.AbsTimestamp,
-                Timestamps = oldJointData.Timestamps,
-                Index = oldJointData.Index,
-                Joints = newJoints,
-                DataStreamType = dataStreamType
-            };
+            JointData jointData = new JointData(oldJointData.RelTimestamp, oldJointData.AbsTimestamp, 
+                newJoints, oldJointData.Index, oldJointData.Timestamps, dataStreamType);
 
             // add the creationTimestamp to the right pipeline step
             jointData.Timestamps.Add(creationTimestamp);
@@ -271,62 +257,59 @@ namespace RowingMonitor.Model.Util
     /// </summary>
     public struct JointData
     {
-        private double relTimestamp;
-        private double absTimestamp;
-        private IReadOnlyDictionary<JointType, Joint> joints;
-        private long index;
-        private List<double> timestamps;
-        private DataStreamType dataStreamType;
+        /// <summary>
+        /// Creates a new joint data collection with its associated
+        /// meta data.
+        /// </summary>
+        /// <param name="relTimestamp">Time in milliseconds since Kinect sensor started.</param>
+        /// <param name="absTimestamp">Time in milliseconds since first frame.</param>
+        /// <param name="joints">Positions of all joints.</param>
+        /// <param name="index">Incrementing number of frames.</param>
+        /// <param name="timestamps">List of all timestamps that were set in the pipeline</param>
+        /// <param name="dataStreamType">Type of the data.</param>
+        public JointData(double relTimestamp, double absTimestamp, 
+            IReadOnlyDictionary<JointType, Joint> joints, long index, 
+            List<double> timestamps, DataStreamType dataStreamType)
+        {
+            RelTimestamp = relTimestamp;
+            AbsTimestamp = absTimestamp;
+            Joints = joints;
+            Index = index;
+            Timestamps = timestamps;
+            DataStreamType = dataStreamType;
+        }
 
         /// <summary>
         /// Time in milliseconds since Kinect sensor started.
         /// </summary>
-        public double RelTimestamp
-        {
-            get => relTimestamp; set => relTimestamp = value;
-        }
+        public readonly double RelTimestamp;
         /// <summary>
         /// Time in milliseconds since first frame.
         /// </summary>
-        public double AbsTimestamp
-        {
-            get => absTimestamp; set => absTimestamp = value;
-        }
+        public readonly double AbsTimestamp;
         /// <summary>
         /// Positions of all joints.
         /// </summary>
-        public IReadOnlyDictionary<JointType, Joint> Joints
-        {
-            get => joints; set => joints = value;
-        }
+        public readonly IReadOnlyDictionary<JointType, Joint> Joints;
         /// <summary>
         /// Incrementing number of frames.
         /// </summary>
-        public long Index
-        {
-            get => index; set => index = value;
-        }
+        public readonly long Index;
         /// <summary>
         /// List of all timestamps that were set in the pipeline
         /// </summary>
-        public List<double> Timestamps
-        {
-            get => timestamps; set => timestamps = value;
-        }
+        public readonly List<double> Timestamps;
         /// <summary>
         /// Type of the data.
         /// </summary>
-        public DataStreamType DataStreamType
-        {
-            get => dataStreamType; set => dataStreamType = value;
-        }
+        public readonly DataStreamType DataStreamType;
         /// <summary>
         /// Returns true if this element conatins no joint data.
         /// </summary>
         public bool IsEmpty
         {
             get {
-                if (joints == null) { return true; }
+                if (Joints == null) { return true; }
                 else { return false; }
             }
         }

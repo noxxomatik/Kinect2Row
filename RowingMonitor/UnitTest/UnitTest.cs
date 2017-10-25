@@ -30,12 +30,6 @@ namespace UnitTest
             float[] values = { 1, 2, 4, 7, 11, 16 };
             float[] results = { 1.0f, 1.5f, 2.5f, 3.5f, 4.5f, 5.0f };
             for (int i = 0; i < 6; i++) {
-                JointData joint = new JointData {
-                    RelTimestamp = 1000 + i * 1000,
-                    AbsTimestamp = 0 + i * 1000,
-                    Index = i,
-                    Timestamps = new List<double>()
-                };
                 Dictionary<JointType, Joint> joints = new Dictionary<JointType, Joint>();
                 Joint newJoint = new Joint();
                 newJoint.Position.X = values[i];
@@ -43,7 +37,10 @@ namespace UnitTest
                 newJoint.Position.Z = values[i];
                 // use SpineBase joint because the calculator tests for its values 
                 joints.Add(JointType.SpineBase, newJoint);
-                joint.Joints = joints;
+
+                JointData joint = new JointData(1000 + i * 1000, 0 + i * 1000, joints, i, 
+                    new List<double>(), DataStreamType.RawPosition);
+
                 jointData[i] = joint;
             }
             for (int i = 0; i < 6; i++) {
@@ -111,14 +108,6 @@ namespace UnitTest
             Shifter shifter = new Shifter();
             shifter.ShiftedFrameArrived += Shifter_ShiftedFrameArrived;
 
-            JointData jointData = new JointData
-            {
-                RelTimestamp = 0,
-                AbsTimestamp = 0,
-                Index = 0,
-                Timestamps = new List<double>()
-            };
-
             Dictionary<JointType, Joint> joints = new Dictionary<JointType, Joint>();
 
             Joint ankleR = new Joint();
@@ -141,7 +130,7 @@ namespace UnitTest
             spine.Position.Z = 0;
             joints.Add(JointType.SpineBase, spine);
 
-            jointData.Joints = joints;
+            JointData jointData = new JointData(0, 0, joints, 0, new List<double>(), DataStreamType.RawPosition);
 
             shifter.Updata(jointData);
 
@@ -208,14 +197,11 @@ namespace UnitTest
                 joint.Position.Y = signals[i];
                 joint.Position.Z = signals[i];
 
-                JointData jointData = new JointData();
-                jointData.RelTimestamp = timestamps[i] * 1000;
-                jointData.AbsTimestamp = 0.0;
-                jointData.Index = 0;
-                jointData.Timestamps = new List<double>();
                 Dictionary<JointType, Joint> joints = new Dictionary<JointType, Joint>();
                 joints.Add(JointType.SpineBase, joint);
-                jointData.Joints = joints;
+
+                JointData jointData = new JointData(timestamps[i] * 1000, 0.0, joints, 0,
+                    new List<double>(), DataStreamType.RawPosition);
 
                 filter.Update(jointData);
 

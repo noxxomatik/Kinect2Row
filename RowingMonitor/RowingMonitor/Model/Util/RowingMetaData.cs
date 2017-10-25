@@ -6,15 +6,10 @@ using System.Threading.Tasks;
 
 namespace RowingMonitor.Model.Util
 {
-    public class RowingMetaDataHandler
-    {
-        private RowingMetaDataHandler() { }
-    }
-
     /// <summary>
     /// Calculated meta data that describes the current rowing session.
     /// </summary>
-    public struct RowingMetaData
+    public class RowingMetaData
     {
         private long index;
         private double absTimestamp;

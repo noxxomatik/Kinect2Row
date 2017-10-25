@@ -42,35 +42,37 @@ namespace RowingMonitor.ViewModel
 
         internal void Render(RowingMetaData metaData)
         {
-            if (metaData.SegmentState != SegmentState.SegmentEnded) {
-                FrameIndex = metaData.Index.ToString();
-                SessionTime = (metaData.SessionTime / 60000).ToString("0.00");
-                StrokeLength = metaData.StrokeLength.ToString("0.00");
-                StrokeTime = (metaData.StrokeTime / 1000).ToString("0.00");
-                SeatTravelDistance = metaData.SeatTravelDistance.ToString("0.00");
-                MaxHandleVelocity = metaData.MaxHandleVelocity.ToString("0.00");
-                MaxLegsVelocity = metaData.MaxLegsVelocity.ToString("0.00");
-                MaxArmsVelocity = metaData.MaxArmsVelocity.ToString("0.00");
-                MaxTrunkVelocity = metaData.MaxTrunkVelocity.ToString("0.00");
-                TrunkAngle = Degrees.RadianToDegree(metaData.TrunkAngle).ToString("0.00");
-                CatchFactor = metaData.CatchFactor.ToString("0.00");                
-            }
-            else {
-                StrokeCount = metaData.StrokeCount.ToString();
-                StrokeRate = metaData.StrokeRate.ToString("0.00");
-                MeanStrokeLength = metaData.MeanStrokeLength.ToString("0.00");
-                MeanStrokeTime = (metaData.MeanStrokeTime / 1000).ToString("0.00");
-                MeanSeatTravelDistance = metaData.MeanSeatTravelDistance.ToString("0.00");
-                MeanMaxHandleVelocity = metaData.MeanMaxHandleVelocity.ToString("0.00");
-                MeanMaxLegsVelocity = metaData.MeanMaxLegsVelocity.ToString("0.00");
-                MeanMaxArmsVelocity = metaData.MeanMaxArmsVelocity.ToString("0.00");
-                MeanMaxTrunkVelocity = metaData.MeanMaxTrunkVelocity.ToString("0.00");
-                StrokesPerMinute = metaData.StrokesPerMinute.ToString("0.00");
-                MaxCatchTrunkAngle = Degrees.RadianToDegree(metaData.MaxCatchTrunkAngle).ToString("0.00");
-                MaxFinishTrunkAngle = Degrees.RadianToDegree(metaData.MaxFinishTrunkAngle).ToString("0.00");
-                MeanCatchFactor = metaData.MeanCatchFactor.ToString("0.00");
-                RowingStyleFactor = (metaData.RowingStyleFactor * 100).ToString("0.00");
-                MeanRowingStyleFactor = metaData.RowingStyleFactor.ToString("0.00");
+            if (metaData != null) {
+                if (metaData.SegmentState != SegmentState.SegmentEnded) {
+                    FrameIndex = metaData.Index.ToString();
+                    SessionTime = (metaData.SessionTime / 60000).ToString("0.00");
+                    StrokeLength = metaData.StrokeLength.ToString("0.00");
+                    StrokeTime = (metaData.StrokeTime / 1000).ToString("0.00");
+                    SeatTravelDistance = metaData.SeatTravelDistance.ToString("0.00");
+                    MaxHandleVelocity = metaData.MaxHandleVelocity.ToString("0.00");
+                    MaxLegsVelocity = metaData.MaxLegsVelocity.ToString("0.00");
+                    MaxArmsVelocity = metaData.MaxArmsVelocity.ToString("0.00");
+                    MaxTrunkVelocity = metaData.MaxTrunkVelocity.ToString("0.00");
+                    TrunkAngle = Degrees.RadianToDegree(metaData.TrunkAngle).ToString("0.00");
+                    CatchFactor = metaData.CatchFactor.ToString("0.00");
+                }
+                else {
+                    StrokeCount = metaData.StrokeCount.ToString();
+                    StrokeRate = metaData.StrokeRate.ToString("0.00");
+                    MeanStrokeLength = metaData.MeanStrokeLength.ToString("0.00");
+                    MeanStrokeTime = (metaData.MeanStrokeTime / 1000).ToString("0.00");
+                    MeanSeatTravelDistance = metaData.MeanSeatTravelDistance.ToString("0.00");
+                    MeanMaxHandleVelocity = metaData.MeanMaxHandleVelocity.ToString("0.00");
+                    MeanMaxLegsVelocity = metaData.MeanMaxLegsVelocity.ToString("0.00");
+                    MeanMaxArmsVelocity = metaData.MeanMaxArmsVelocity.ToString("0.00");
+                    MeanMaxTrunkVelocity = metaData.MeanMaxTrunkVelocity.ToString("0.00");
+                    StrokesPerMinute = metaData.StrokesPerMinute.ToString("0.00");
+                    MaxCatchTrunkAngle = Degrees.RadianToDegree(metaData.MaxCatchTrunkAngle).ToString("0.00");
+                    MaxFinishTrunkAngle = Degrees.RadianToDegree(metaData.MaxFinishTrunkAngle).ToString("0.00");
+                    MeanCatchFactor = metaData.MeanCatchFactor.ToString("0.00");
+                    RowingStyleFactor = (metaData.RowingStyleFactor * 100).ToString("0.00");
+                    MeanRowingStyleFactor = metaData.RowingStyleFactor.ToString("0.00");
+                }
             }
         }
 

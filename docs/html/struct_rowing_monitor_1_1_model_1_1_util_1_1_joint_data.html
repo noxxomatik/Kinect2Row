@@ -81,6 +81,8 @@ $(document).ready(function(){initNavTree('struct_rowing_monitor_1_1_model_1_1_ut
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -91,105 +93,205 @@ $(document).ready(function(){initNavTree('struct_rowing_monitor_1_1_model_1_1_ut
 <p><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html" title="JointData is a collection of the tracked joints of one frame and its meta data which is passed throug...">JointData</a> is a collection of the tracked joints of one frame and its meta data which is passed through the processing pipeline.  
  <a href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa4e60113e86ffba5ec4761d7b7005cea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#aa4e60113e86ffba5ec4761d7b7005cea">JointData</a> (double relTimestamp, double absTimestamp, IReadOnlyDictionary&lt; JointType, Joint &gt; joints, long index, List&lt; double &gt; timestamps, <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f">DataStreamType</a> dataStreamType)</td></tr>
+<tr class="memdesc:aa4e60113e86ffba5ec4761d7b7005cea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new joint data collection with its associated meta data.  <a href="#aa4e60113e86ffba5ec4761d7b7005cea">More...</a><br /></td></tr>
+<tr class="separator:aa4e60113e86ffba5ec4761d7b7005cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a11461865b37ccd34cbc454a466e88dbb"><td class="memItemLeft" align="right" valign="top">readonly double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a11461865b37ccd34cbc454a466e88dbb">RelTimestamp</a></td></tr>
+<tr class="memdesc:a11461865b37ccd34cbc454a466e88dbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time in milliseconds since Kinect sensor started.  <a href="#a11461865b37ccd34cbc454a466e88dbb">More...</a><br /></td></tr>
+<tr class="separator:a11461865b37ccd34cbc454a466e88dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d38015e2443e84d79700f2f842b7926"><td class="memItemLeft" align="right" valign="top">readonly double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a5d38015e2443e84d79700f2f842b7926">AbsTimestamp</a></td></tr>
+<tr class="memdesc:a5d38015e2443e84d79700f2f842b7926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time in milliseconds since first frame.  <a href="#a5d38015e2443e84d79700f2f842b7926">More...</a><br /></td></tr>
+<tr class="separator:a5d38015e2443e84d79700f2f842b7926"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf91e98cd46d3c7e0028ce521c2a254d"><td class="memItemLeft" align="right" valign="top">readonly IReadOnlyDictionary&lt; JointType, Joint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#acf91e98cd46d3c7e0028ce521c2a254d">Joints</a></td></tr>
+<tr class="memdesc:acf91e98cd46d3c7e0028ce521c2a254d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Positions of all joints.  <a href="#acf91e98cd46d3c7e0028ce521c2a254d">More...</a><br /></td></tr>
+<tr class="separator:acf91e98cd46d3c7e0028ce521c2a254d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad98cbe415b7e37c6921202e9241bc733"><td class="memItemLeft" align="right" valign="top">readonly long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#ad98cbe415b7e37c6921202e9241bc733">Index</a></td></tr>
+<tr class="memdesc:ad98cbe415b7e37c6921202e9241bc733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Incrementing number of frames.  <a href="#ad98cbe415b7e37c6921202e9241bc733">More...</a><br /></td></tr>
+<tr class="separator:ad98cbe415b7e37c6921202e9241bc733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62e3cfba26bff489750fd3adfc676561"><td class="memItemLeft" align="right" valign="top">readonly List&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a62e3cfba26bff489750fd3adfc676561">Timestamps</a></td></tr>
+<tr class="memdesc:a62e3cfba26bff489750fd3adfc676561"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of all timestamps that were set in the pipeline  <a href="#a62e3cfba26bff489750fd3adfc676561">More...</a><br /></td></tr>
+<tr class="separator:a62e3cfba26bff489750fd3adfc676561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a649131dc27f65dd083e625652910e264"><td class="memItemLeft" align="right" valign="top">readonly <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f">DataStreamType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a649131dc27f65dd083e625652910e264">DataStreamType</a></td></tr>
+<tr class="memdesc:a649131dc27f65dd083e625652910e264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the data.  <a href="#a649131dc27f65dd083e625652910e264">More...</a><br /></td></tr>
+<tr class="separator:a649131dc27f65dd083e625652910e264"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a56463d7bd16c6e5cad4e3619e9df9508"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a56463d7bd16c6e5cad4e3619e9df9508">RelTimestamp</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a56463d7bd16c6e5cad4e3619e9df9508"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time in milliseconds since Kinect sensor started.  <a href="#a56463d7bd16c6e5cad4e3619e9df9508">More...</a><br /></td></tr>
-<tr class="separator:a56463d7bd16c6e5cad4e3619e9df9508"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c951ee40b3e49be73b92cf39c5aa9ab"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a2c951ee40b3e49be73b92cf39c5aa9ab">AbsTimestamp</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a2c951ee40b3e49be73b92cf39c5aa9ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time in milliseconds since first frame.  <a href="#a2c951ee40b3e49be73b92cf39c5aa9ab">More...</a><br /></td></tr>
-<tr class="separator:a2c951ee40b3e49be73b92cf39c5aa9ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa67f920730db9679102686913774e69"><td class="memItemLeft" align="right" valign="top">IReadOnlyDictionary&lt; JointType, Joint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#afa67f920730db9679102686913774e69">Joints</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:afa67f920730db9679102686913774e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Positions of all joints.  <a href="#afa67f920730db9679102686913774e69">More...</a><br /></td></tr>
-<tr class="separator:afa67f920730db9679102686913774e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2193c6359b3e9e2d6dfdb6178351a8b3"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a2193c6359b3e9e2d6dfdb6178351a8b3">Index</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a2193c6359b3e9e2d6dfdb6178351a8b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Incrementing number of frames.  <a href="#a2193c6359b3e9e2d6dfdb6178351a8b3">More...</a><br /></td></tr>
-<tr class="separator:a2193c6359b3e9e2d6dfdb6178351a8b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98bf571ea92c7f9b8e197062f17ddc27"><td class="memItemLeft" align="right" valign="top">List&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a98bf571ea92c7f9b8e197062f17ddc27">Timestamps</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a98bf571ea92c7f9b8e197062f17ddc27"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of all timestamps that were set in the pipeline  <a href="#a98bf571ea92c7f9b8e197062f17ddc27">More...</a><br /></td></tr>
-<tr class="separator:a98bf571ea92c7f9b8e197062f17ddc27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ed0022c598484f0b418ad30b50bbfb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f">DataStreamType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a8ed0022c598484f0b418ad30b50bbfb6">DataStreamType</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a8ed0022c598484f0b418ad30b50bbfb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the data.  <a href="#a8ed0022c598484f0b418ad30b50bbfb6">More...</a><br /></td></tr>
-<tr class="separator:a8ed0022c598484f0b418ad30b50bbfb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e86bf9206df62d0fb4b77c8017ccf8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#a1e86bf9206df62d0fb4b77c8017ccf8a">IsEmpty</a><code> [get]</code></td></tr>
 <tr class="memdesc:a1e86bf9206df62d0fb4b77c8017ccf8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this element conatins no joint data.  <a href="#a1e86bf9206df62d0fb4b77c8017ccf8a">More...</a><br /></td></tr>
 <tr class="separator:a1e86bf9206df62d0fb4b77c8017ccf8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html" title="JointData is a collection of the tracked joints of one frame and its meta data which is passed throug...">JointData</a> is a collection of the tracked joints of one frame and its meta data which is passed through the processing pipeline. </p>
-</div><h2 class="groupheader">Property Documentation</h2>
-<a id="a2c951ee40b3e49be73b92cf39c5aa9ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c951ee40b3e49be73b92cf39c5aa9ab">&#9670;&nbsp;</a></span>AbsTimestamp</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa4e60113e86ffba5ec4761d7b7005cea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4e60113e86ffba5ec4761d7b7005cea">&#9670;&nbsp;</a></span>JointData()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double RowingMonitor.Model.Util.JointData.AbsTimestamp</td>
+          <td class="memname">RowingMonitor.Model.Util.JointData.JointData </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>relTimestamp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>absTimestamp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IReadOnlyDictionary&lt; JointType, Joint &gt;&#160;</td>
+          <td class="paramname"><em>joints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">List&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>timestamps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f">DataStreamType</a>&#160;</td>
+          <td class="paramname"><em>dataStreamType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
+</div><div class="memdoc">
+
+<p>Creates a new joint data collection with its associated meta data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">relTimestamp</td><td>Time in milliseconds since Kinect sensor started.</td></tr>
+    <tr><td class="paramname">absTimestamp</td><td>Time in milliseconds since first frame.</td></tr>
+    <tr><td class="paramname">joints</td><td>Positions of all joints.</td></tr>
+    <tr><td class="paramname">index</td><td>Incrementing number of frames.</td></tr>
+    <tr><td class="paramname">timestamps</td><td>List of all timestamps that were set in the pipeline</td></tr>
+    <tr><td class="paramname">dataStreamType</td><td>Type of the data.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5d38015e2443e84d79700f2f842b7926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d38015e2443e84d79700f2f842b7926">&#9670;&nbsp;</a></span>AbsTimestamp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly double RowingMonitor.Model.Util.JointData.AbsTimestamp</td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 <p>Time in milliseconds since first frame. </p>
 
 </div>
 </div>
-<a id="a8ed0022c598484f0b418ad30b50bbfb6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ed0022c598484f0b418ad30b50bbfb6">&#9670;&nbsp;</a></span>DataStreamType</h2>
+<a id="a649131dc27f65dd083e625652910e264"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a649131dc27f65dd083e625652910e264">&#9670;&nbsp;</a></span>DataStreamType</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f">DataStreamType</a> RowingMonitor.Model.Util.JointData.DataStreamType</td>
+          <td class="memname">readonly <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f">DataStreamType</a> RowingMonitor.Model.Util.JointData.DataStreamType</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Type of the data. </p>
 
 </div>
 </div>
-<a id="a2193c6359b3e9e2d6dfdb6178351a8b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2193c6359b3e9e2d6dfdb6178351a8b3">&#9670;&nbsp;</a></span>Index</h2>
+<a id="ad98cbe415b7e37c6921202e9241bc733"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad98cbe415b7e37c6921202e9241bc733">&#9670;&nbsp;</a></span>Index</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long RowingMonitor.Model.Util.JointData.Index</td>
+          <td class="memname">readonly long RowingMonitor.Model.Util.JointData.Index</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Incrementing number of frames. </p>
 
 </div>
 </div>
+<a id="acf91e98cd46d3c7e0028ce521c2a254d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf91e98cd46d3c7e0028ce521c2a254d">&#9670;&nbsp;</a></span>Joints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly IReadOnlyDictionary&lt;JointType, Joint&gt; RowingMonitor.Model.Util.JointData.Joints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Positions of all joints. </p>
+
+</div>
+</div>
+<a id="a11461865b37ccd34cbc454a466e88dbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11461865b37ccd34cbc454a466e88dbb">&#9670;&nbsp;</a></span>RelTimestamp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly double RowingMonitor.Model.Util.JointData.RelTimestamp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Time in milliseconds since Kinect sensor started. </p>
+
+</div>
+</div>
+<a id="a62e3cfba26bff489750fd3adfc676561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62e3cfba26bff489750fd3adfc676561">&#9670;&nbsp;</a></span>Timestamps</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly List&lt;double&gt; RowingMonitor.Model.Util.JointData.Timestamps</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>List of all timestamps that were set in the pipeline </p>
+
+</div>
+</div>
+<h2 class="groupheader">Property Documentation</h2>
 <a id="a1e86bf9206df62d0fb4b77c8017ccf8a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e86bf9206df62d0fb4b77c8017ccf8a">&#9670;&nbsp;</a></span>IsEmpty</h2>
 
@@ -211,78 +313,6 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns true if this element conatins no joint data. </p>
-
-</div>
-</div>
-<a id="afa67f920730db9679102686913774e69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa67f920730db9679102686913774e69">&#9670;&nbsp;</a></span>Joints</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">IReadOnlyDictionary&lt;JointType, Joint&gt; RowingMonitor.Model.Util.JointData.Joints</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Positions of all joints. </p>
-
-</div>
-</div>
-<a id="a56463d7bd16c6e5cad4e3619e9df9508"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56463d7bd16c6e5cad4e3619e9df9508">&#9670;&nbsp;</a></span>RelTimestamp</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double RowingMonitor.Model.Util.JointData.RelTimestamp</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Time in milliseconds since Kinect sensor started. </p>
-
-</div>
-</div>
-<a id="a98bf571ea92c7f9b8e197062f17ddc27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98bf571ea92c7f9b8e197062f17ddc27">&#9670;&nbsp;</a></span>Timestamps</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">List&lt;double&gt; RowingMonitor.Model.Util.JointData.Timestamps</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>List of all timestamps that were set in the pipeline </p>
 
 </div>
 </div>

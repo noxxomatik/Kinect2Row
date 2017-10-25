@@ -149,10 +149,8 @@ namespace RowingMonitor.Model.Pipeline
                     // should the plot show this joint?
                     if (PlotJointTypes.Contains(joint.Key)) {
                         // create the new point
-                        PlotData point = new PlotData();
-                        point.X = jointData.AbsTimestamp / 1000;
-                        point.Y = joint.Value.Position.Z;
-                        point.DataStreamType = jointData.DataStreamType;
+                        PlotData point = new PlotData(jointData.AbsTimestamp / 1000, 
+                            joint.Value.Position.Z, jointData.DataStreamType);
 
                         // add to the plot data
                         // does this series exist? if not create it
@@ -201,10 +199,8 @@ namespace RowingMonitor.Model.Pipeline
                     // add the hits
                     List<PlotData> points = new List<PlotData>();
                     foreach (SegmentHit hit in hits) {
-                        PlotData point = new PlotData();
-                        point.X = hit.AbsTimestamp / 1000;
-                        point.Annotation = hit.HitType.ToString();
-                        point.DataStreamType = DataStreamType.SegmentHits;
+                        PlotData point = new PlotData(hit.AbsTimestamp / 1000, hit.HitType.ToString(),
+                            DataStreamType.SegmentHits);
                         points.Add(point);
                     }
                     List<PlotData> removed;

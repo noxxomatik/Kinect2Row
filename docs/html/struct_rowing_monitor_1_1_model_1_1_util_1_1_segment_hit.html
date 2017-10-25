@@ -81,146 +81,177 @@ $(document).ready(function(){initNavTree('struct_rowing_monitor_1_1_model_1_1_ut
 
 <div class="header">
   <div class="summary">
-<a href="#properties">Properties</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">RowingMonitor.Model.Util.SegmentHit Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Holds information about a detected segment hit.  
+ <a href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
-Properties</h2></td></tr>
-<tr class="memitem:aaf855f224da3b43af2ea5f7896914efb"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#aaf855f224da3b43af2ea5f7896914efb">Index</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:aaf855f224da3b43af2ea5f7896914efb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the joint data that this hit belongs to.  <a href="#aaf855f224da3b43af2ea5f7896914efb">More...</a><br /></td></tr>
-<tr class="separator:aaf855f224da3b43af2ea5f7896914efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad943df68e8adfeaa2b76701701cef0df"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ad943df68e8adfeaa2b76701701cef0df">DetectionIndex</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:ad943df68e8adfeaa2b76701701cef0df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the joint data where this hit was detected.  <a href="#ad943df68e8adfeaa2b76701701cef0df">More...</a><br /></td></tr>
-<tr class="separator:ad943df68e8adfeaa2b76701701cef0df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab40df6a59087cfd176f989111279a5e2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ab40df6a59087cfd176f989111279a5e2">AbsTimestamp</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:ab40df6a59087cfd176f989111279a5e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute timestamp of the joint data that this hit belongs to.  <a href="#ab40df6a59087cfd176f989111279a5e2">More...</a><br /></td></tr>
-<tr class="separator:ab40df6a59087cfd176f989111279a5e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9778fc572f014c1d75de5898f8c83d2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ab9778fc572f014c1d75de5898f8c83d2">DetectionAbsTimestamp</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:ab9778fc572f014c1d75de5898f8c83d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute timestamp of the joint data where this hit was detected.  <a href="#ab9778fc572f014c1d75de5898f8c83d2">More...</a><br /></td></tr>
-<tr class="separator:ab9778fc572f014c1d75de5898f8c83d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2a359ba79fbc8456596219484f2a159"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a7135d50f11f02e6f0cb9680dc68dba56">HitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ab2a359ba79fbc8456596219484f2a159">HitType</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:ab2a359ba79fbc8456596219484f2a159"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of this hit in the context of a segment.  <a href="#ab2a359ba79fbc8456596219484f2a159">More...</a><br /></td></tr>
-<tr class="separator:ab2a359ba79fbc8456596219484f2a159"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a720f0e5262b246728d1ea27969fe6f85"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#a720f0e5262b246728d1ea27969fe6f85">SegmentHit</a> (long index, long detectionIndex, double absTimestamp, double detectionAbsTimestamp, <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a7135d50f11f02e6f0cb9680dc68dba56">HitType</a> hitType)</td></tr>
+<tr class="memdesc:a720f0e5262b246728d1ea27969fe6f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates new segment hit data.  <a href="#a720f0e5262b246728d1ea27969fe6f85">More...</a><br /></td></tr>
+<tr class="separator:a720f0e5262b246728d1ea27969fe6f85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a3cb4c75a6c12e3b7f1184fc9b5f91aeb"><td class="memItemLeft" align="right" valign="top">readonly long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#a3cb4c75a6c12e3b7f1184fc9b5f91aeb">Index</a></td></tr>
+<tr class="memdesc:a3cb4c75a6c12e3b7f1184fc9b5f91aeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the joint data that this hit belongs to.  <a href="#a3cb4c75a6c12e3b7f1184fc9b5f91aeb">More...</a><br /></td></tr>
+<tr class="separator:a3cb4c75a6c12e3b7f1184fc9b5f91aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d8d2679644b7b2a6ea2a7b28f24672a"><td class="memItemLeft" align="right" valign="top">readonly long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#a7d8d2679644b7b2a6ea2a7b28f24672a">DetectionIndex</a></td></tr>
+<tr class="memdesc:a7d8d2679644b7b2a6ea2a7b28f24672a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the joint data where this hit was detected.  <a href="#a7d8d2679644b7b2a6ea2a7b28f24672a">More...</a><br /></td></tr>
+<tr class="separator:a7d8d2679644b7b2a6ea2a7b28f24672a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad464e5cab8700898f8190d25071ed6fd"><td class="memItemLeft" align="right" valign="top">readonly double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#ad464e5cab8700898f8190d25071ed6fd">AbsTimestamp</a></td></tr>
+<tr class="memdesc:ad464e5cab8700898f8190d25071ed6fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute timestamp of the joint data that this hit belongs to.  <a href="#ad464e5cab8700898f8190d25071ed6fd">More...</a><br /></td></tr>
+<tr class="separator:ad464e5cab8700898f8190d25071ed6fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc82d64eeac4faa3ed394a6c24e058a3"><td class="memItemLeft" align="right" valign="top">readonly double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#acc82d64eeac4faa3ed394a6c24e058a3">DetectionAbsTimestamp</a></td></tr>
+<tr class="memdesc:acc82d64eeac4faa3ed394a6c24e058a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute timestamp of the joint data where this hit was detected.  <a href="#acc82d64eeac4faa3ed394a6c24e058a3">More...</a><br /></td></tr>
+<tr class="separator:acc82d64eeac4faa3ed394a6c24e058a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a186b2bc59a30015471d753632ff58878"><td class="memItemLeft" align="right" valign="top">readonly <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a7135d50f11f02e6f0cb9680dc68dba56">HitType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html#a186b2bc59a30015471d753632ff58878">HitType</a></td></tr>
+<tr class="memdesc:a186b2bc59a30015471d753632ff58878"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of this hit in the context of a segment.  <a href="#a186b2bc59a30015471d753632ff58878">More...</a><br /></td></tr>
+<tr class="separator:a186b2bc59a30015471d753632ff58878"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Property Documentation</h2>
-<a id="ab40df6a59087cfd176f989111279a5e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab40df6a59087cfd176f989111279a5e2">&#9670;&nbsp;</a></span>AbsTimestamp</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Holds information about a detected segment hit. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a720f0e5262b246728d1ea27969fe6f85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a720f0e5262b246728d1ea27969fe6f85">&#9670;&nbsp;</a></span>SegmentHit()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double RowingMonitor.Model.Util.SegmentHit.AbsTimestamp</td>
+          <td class="memname">RowingMonitor.Model.Util.SegmentHit.SegmentHit </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>detectionIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>absTimestamp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>detectionAbsTimestamp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a7135d50f11f02e6f0cb9680dc68dba56">HitType</a>&#160;</td>
+          <td class="paramname"><em>hitType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
+</div><div class="memdoc">
+
+<p>Creates new segment hit data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Index of the joint data that this hit belongs to.</td></tr>
+    <tr><td class="paramname">detectionIndex</td><td>Index of the joint data where this hit was detected.</td></tr>
+    <tr><td class="paramname">absTimestamp</td><td>Absolute timestamp of the joint data that this hit belongs to.</td></tr>
+    <tr><td class="paramname">detectionAbsTimestamp</td><td>Absolute timestamp of the joint data where this hit was detected.</td></tr>
+    <tr><td class="paramname">hitType</td><td>Type of this hit in the context of a segment.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad464e5cab8700898f8190d25071ed6fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad464e5cab8700898f8190d25071ed6fd">&#9670;&nbsp;</a></span>AbsTimestamp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly double RowingMonitor.Model.Util.SegmentHit.AbsTimestamp</td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 <p>Absolute timestamp of the joint data that this hit belongs to. </p>
 
 </div>
 </div>
-<a id="ab9778fc572f014c1d75de5898f8c83d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9778fc572f014c1d75de5898f8c83d2">&#9670;&nbsp;</a></span>DetectionAbsTimestamp</h2>
+<a id="acc82d64eeac4faa3ed394a6c24e058a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc82d64eeac4faa3ed394a6c24e058a3">&#9670;&nbsp;</a></span>DetectionAbsTimestamp</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double RowingMonitor.Model.Util.SegmentHit.DetectionAbsTimestamp</td>
+          <td class="memname">readonly double RowingMonitor.Model.Util.SegmentHit.DetectionAbsTimestamp</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Absolute timestamp of the joint data where this hit was detected. </p>
 
 </div>
 </div>
-<a id="ad943df68e8adfeaa2b76701701cef0df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad943df68e8adfeaa2b76701701cef0df">&#9670;&nbsp;</a></span>DetectionIndex</h2>
+<a id="a7d8d2679644b7b2a6ea2a7b28f24672a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d8d2679644b7b2a6ea2a7b28f24672a">&#9670;&nbsp;</a></span>DetectionIndex</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long RowingMonitor.Model.Util.SegmentHit.DetectionIndex</td>
+          <td class="memname">readonly long RowingMonitor.Model.Util.SegmentHit.DetectionIndex</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Index of the joint data where this hit was detected. </p>
 
 </div>
 </div>
-<a id="ab2a359ba79fbc8456596219484f2a159"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2a359ba79fbc8456596219484f2a159">&#9670;&nbsp;</a></span>HitType</h2>
+<a id="a186b2bc59a30015471d753632ff58878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a186b2bc59a30015471d753632ff58878">&#9670;&nbsp;</a></span>HitType</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a7135d50f11f02e6f0cb9680dc68dba56">HitType</a> RowingMonitor.Model.Util.SegmentHit.HitType</td>
+          <td class="memname">readonly <a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a7135d50f11f02e6f0cb9680dc68dba56">HitType</a> RowingMonitor.Model.Util.SegmentHit.HitType</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Type of this hit in the context of a segment. </p>
 
 </div>
 </div>
-<a id="aaf855f224da3b43af2ea5f7896914efb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf855f224da3b43af2ea5f7896914efb">&#9670;&nbsp;</a></span>Index</h2>
+<a id="a3cb4c75a6c12e3b7f1184fc9b5f91aeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cb4c75a6c12e3b7f1184fc9b5f91aeb">&#9670;&nbsp;</a></span>Index</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">long RowingMonitor.Model.Util.SegmentHit.Index</td>
+          <td class="memname">readonly long RowingMonitor.Model.Util.SegmentHit.Index</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Index of the joint data that this hit belongs to. </p>

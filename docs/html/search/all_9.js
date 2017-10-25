@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['jointdata',['JointData',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html',1,'RowingMonitor.Model.Util.JointData'],['../class_rowing_monitor_1_1_model_1_1_kinect_frame_arrived_event_args.html#a2249c19be25bb9b2c3627fb1bfa7512b',1,'RowingMonitor.Model.KinectFrameArrivedEventArgs.JointData()']]],
+  ['jointdata',['JointData',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html',1,'RowingMonitor.Model.Util.JointData'],['../class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_kinect_frame_arrived_event_args.html#abc71e92926dedd08ee7a526ac516971c',1,'RowingMonitor.Model.EventArguments.KinectFrameArrivedEventArgs.JointData()'],['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#aa4e60113e86ffba5ec4761d7b7005cea',1,'RowingMonitor.Model.Util.JointData.JointData()']]],
   ['jointdatablock',['JointDataBlock',['../class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a6e860c115b12d8f17b8f800f9bc64645',1,'RowingMonitor::Model::Pipeline::KinectReader']]],
   ['jointdatahandler',['JointDataHandler',['../class_rowing_monitor_1_1_model_1_1_util_1_1_joint_data_handler.html',1,'RowingMonitor::Model::Util']]],
   ['jointdatahandler_2ecs',['JointDataHandler.cs',['../_joint_data_handler_8cs.html',1,'']]],
@@ -13,5 +13,5 @@ var searchData=
   ['jointdataplotview_2examl_2ecs',['JointDataPlotView.xaml.cs',['../_joint_data_plot_view_8xaml_8cs.html',1,'']]],
   ['jointdataplotviewmodel',['JointDataPlotViewModel',['../class_rowing_monitor_1_1_view_model_1_1_joint_data_plot_view_model.html',1,'RowingMonitor.ViewModel.JointDataPlotViewModel'],['../class_rowing_monitor_1_1_view_model_1_1_joint_data_plot_view_model.html#a0617e5a1a406a41c3c0c0efb38fc4544',1,'RowingMonitor.ViewModel.JointDataPlotViewModel.JointDataPlotViewModel()']]],
   ['jointdataplotviewmodel_2ecs',['JointDataPlotViewModel.cs',['../_joint_data_plot_view_model_8cs.html',1,'']]],
-  ['joints',['Joints',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#afa67f920730db9679102686913774e69',1,'RowingMonitor::Model::Util::JointData']]]
+  ['joints',['Joints',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html#acf91e98cd46d3c7e0028ce521c2a254d',1,'RowingMonitor::Model::Util::JointData']]]
 ];

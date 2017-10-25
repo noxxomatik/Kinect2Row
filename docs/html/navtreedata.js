@@ -29,9 +29,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_app_8xaml_8cs.html",
-"class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html#a69f71477e3f769bab61917c3654b4965",
-"class_rowing_monitor_1_1_view_1_1_skeleton_side_view.html#ae823832e7aa40c2585f66c0939c83040",
-"functions_prop_p.html"
+"class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_reader.html",
+"class_rowing_monitor_1_1_view_1_1_kleshnev_plot_view.html#a3e703e3daef530061957b5c15978ae56",
+"functions_func_u.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -8,6 +8,5 @@ var namespace_rowing_monitor =
     [ "FrontalSkeletonView", "class_rowing_monitor_1_1_frontal_skeleton_view.html", "class_rowing_monitor_1_1_frontal_skeleton_view" ],
     [ "JointDataPlot", "class_rowing_monitor_1_1_joint_data_plot.html", "class_rowing_monitor_1_1_joint_data_plot" ],
     [ "MainWindow", "class_rowing_monitor_1_1_main_window.html", "class_rowing_monitor_1_1_main_window" ],
-    [ "RelayCommand", "class_rowing_monitor_1_1_relay_command.html", "class_rowing_monitor_1_1_relay_command" ],
     [ "RowingMonitorWindow", "class_rowing_monitor_1_1_rowing_monitor_window.html", "class_rowing_monitor_1_1_rowing_monitor_window" ]
 ];
