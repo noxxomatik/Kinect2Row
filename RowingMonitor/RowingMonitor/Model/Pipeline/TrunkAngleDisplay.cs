@@ -14,6 +14,9 @@ using System.Windows.Media;
 
 namespace RowingMonitor.Model.Pipeline
 {
+    /// <summary>
+    /// TrunkAngleDisplay visualizes the angle between the upper body and the vertical line.
+    /// </summary>
     public class TrunkAngleDisplay
     {
         private ActionBlock<JointData> input;

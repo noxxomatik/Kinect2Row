@@ -96,24 +96,31 @@ $(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_pip
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a348927ce21661a1658060d083a91bd61"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html#a348927ce21661a1658060d083a91bd61">ShiftedFrameArrivedEventHandler</a> (Object sender, <a class="el" href="class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_shifted_frame_arrived_event_args.html">ShiftedFrameArrivedEventArgs</a> e)</td></tr>
+<tr class="memdesc:a348927ce21661a1658060d083a91bd61"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="#a348927ce21661a1658060d083a91bd61">More...</a><br /></td></tr>
 <tr class="separator:a348927ce21661a1658060d083a91bd61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22e7862fcbc55f78166971743aba7a94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html#a22e7862fcbc55f78166971743aba7a94">Shifter</a> ()</td></tr>
+<tr class="memdesc:a22e7862fcbc55f78166971743aba7a94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html" title="Shifts the origin to the middle point between the foot joints plus an offset from foot to hip joint...">Shifter</a> object and defines the Input and Output dataflow blocks.  <a href="#a22e7862fcbc55f78166971743aba7a94">More...</a><br /></td></tr>
 <tr class="separator:a22e7862fcbc55f78166971743aba7a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac48bc7448590a3926823feb882fa9042"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html#ac48bc7448590a3926823feb882fa9042">ShiftAndRotate</a> (<a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> jointData)</td></tr>
+<tr class="memdesc:ac48bc7448590a3926823feb882fa9042"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shifts the origin of all joint data to the center of the feet and rotates the coordinate system until the line between origin and spine base is horizontal.  <a href="#ac48bc7448590a3926823feb882fa9042">More...</a><br /></td></tr>
 <tr class="separator:ac48bc7448590a3926823feb882fa9042"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae34f476a6eee98adea44c3e0e72d6e70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html#ae34f476a6eee98adea44c3e0e72d6e70">Updata</a> (<a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> jointData)</td></tr>
+<tr class="memdesc:ae34f476a6eee98adea44c3e0e72d6e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="#ae34f476a6eee98adea44c3e0e72d6e70">More...</a><br /></td></tr>
 <tr class="separator:ae34f476a6eee98adea44c3e0e72d6e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a6d1edcd6586e11141863498c7bddfc13"><td class="memItemLeft" align="right" valign="top">BroadcastBlock&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html#a6d1edcd6586e11141863498c7bddfc13">Output</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a6d1edcd6586e11141863498c7bddfc13"><td class="mdescLeft">&#160;</td><td class="mdescRight">BroadcastBlock that sends the transformed JointData to all linked target blocks.  <a href="#a6d1edcd6586e11141863498c7bddfc13">More...</a><br /></td></tr>
 <tr class="separator:a6d1edcd6586e11141863498c7bddfc13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa404f3bb229b6f57e5144f2a5c67bb43"><td class="memItemLeft" align="right" valign="top">ActionBlock&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html#aa404f3bb229b6f57e5144f2a5c67bb43">Input</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:aa404f3bb229b6f57e5144f2a5c67bb43"><td class="mdescLeft">&#160;</td><td class="mdescRight">ActionBlock that recieves JointData.  <a href="#aa404f3bb229b6f57e5144f2a5c67bb43">More...</a><br /></td></tr>
 <tr class="separator:aa404f3bb229b6f57e5144f2a5c67bb43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="events"></a>
 Events</h2></td></tr>
 <tr class="memitem:afd44d987e237cb912776101166c9f14f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html#a348927ce21661a1658060d083a91bd61">ShiftedFrameArrivedEventHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html#afd44d987e237cb912776101166c9f14f">ShiftedFrameArrived</a></td></tr>
+<tr class="memdesc:afd44d987e237cb912776101166c9f14f"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="#afd44d987e237cb912776101166c9f14f">More...</a><br /></td></tr>
 <tr class="separator:afd44d987e237cb912776101166c9f14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -134,6 +141,8 @@ Events</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Creates a new <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_shifter.html" title="Shifts the origin to the middle point between the foot joints plus an offset from foot to hip joint...">Shifter</a> object and defines the Input and Output dataflow blocks. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -152,6 +161,15 @@ Events</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Shifts the origin of all joint data to the center of the feet and rotates the coordinate system until the line between origin and spine base is horizontal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jointData</td><td>The joint data to be transformed.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the transformed joint data.</dd></dl>
 
 </div>
 </div>
@@ -181,6 +199,15 @@ Events</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>DEPRECATED </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sender</td><td></td></tr>
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ae34f476a6eee98adea44c3e0e72d6e70"></a>
@@ -198,6 +225,14 @@ Events</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>DEPRECATED </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jointData</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -222,6 +257,8 @@ Events</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>ActionBlock that recieves JointData. </p>
+
 </div>
 </div>
 <a id="a6d1edcd6586e11141863498c7bddfc13"></a>
@@ -244,6 +281,8 @@ Events</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>BroadcastBlock that sends the transformed JointData to all linked target blocks. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Event Documentation</h2>
@@ -258,6 +297,8 @@ Events</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>DEPRECATED </p>
 
 </div>
 </div>

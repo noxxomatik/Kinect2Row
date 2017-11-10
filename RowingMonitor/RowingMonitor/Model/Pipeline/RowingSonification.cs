@@ -9,11 +9,15 @@ using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
-    class RowingSonification
+    /// <summary>
+    /// RowingSonification searches for peaks in the velocities of legs, 
+    /// trunk and arms and plays a tune if they appear.
+    /// 
+    /// It also plays a double tone if a rowing segment ended to 
+    /// represent the rhythm of the rower.
+    /// </summary>
+    public class RowingSonification
     {
-        //private bool mute;
-        //private bool playBeep;
-
         private ActionBlock<KleshnevData> input;
         private ActionBlock<List<SegmentHit>> inputSegmentHits;
 
@@ -30,6 +34,9 @@ namespace RowingMonitor.Model.Pipeline
         private SoundPlayer armsSoundPlayer;
         private SoundPlayer segmentSoundPlayer;
 
+        /// <summary>
+        /// Create a new RowingSonification.
+        /// </summary>
         public RowingSonification()
         {
             // create peak detectors
@@ -168,6 +175,9 @@ namespace RowingMonitor.Model.Pipeline
             }
         }
 
+        /// <summary>
+        /// Close all sound player.
+        /// </summary>
         public void Destroy()
         {
             legsSoundPlayer.Dispose();
@@ -175,10 +185,14 @@ namespace RowingMonitor.Model.Pipeline
             armsSoundPlayer.Dispose();
             segmentSoundPlayer.Dispose();
         }
-
-        //public bool Mute { get => mute; set => mute = value; }
+        
+        /// <summary>
+        /// The ActionBlock that recieves the KleshnevData.
+        /// </summary>
         public ActionBlock<KleshnevData> Input { get => input; set => input = value; }
+        /// <summary>
+        /// The ActionBlock that recieves the list of SegmentHit.
+        /// </summary>
         public ActionBlock<List<SegmentHit>> InputSegmentHits { get => inputSegmentHits; set => inputSegmentHits = value; }
-        //public bool PlayBeep { get => playBeep; set => playBeep = value; }
     }
 }

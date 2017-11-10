@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace RowingMonitor.ViewModel
 {
-    class RowingMetaDataWidgetsViewModel : INotifyPropertyChanged
+    class RowingMetadataWidgetsViewModel : INotifyPropertyChanged
     {
         private Thickness catchFactorMargin;
         private Thickness rowingStyleFactorMargin;

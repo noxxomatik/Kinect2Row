@@ -18,7 +18,7 @@ namespace RowingMonitor.View
     /// <summary>
     /// Interaktionslogik für KleshnevPlotView.xaml
     /// </summary>
-    public partial class KleshnevPlotView : Page
+    public partial class KleshnevPlotView : UserControl
     {
         public KleshnevPlotView()
         {

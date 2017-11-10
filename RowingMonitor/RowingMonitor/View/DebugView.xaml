@@ -41,9 +41,11 @@
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="18">Options</TextBlock>
             <TextBlock Foreground="{StaticResource KinectBlueBrush}" FontFamily="Segoe UI" FontSize="16">Smoothing Filter</TextBlock>
             <RadioButton GroupName="SmoothingFilter" Content="1€ Filter" IsChecked="True" Checked="RadioButton_Checked"></RadioButton>
-            <TextBlock>Beta:</TextBlock>
+            <TextBlock Foreground="{StaticResource KinectBlueBrush}"
+                       FontFamily="Segoe UI">Beta:</TextBlock>
             <Controls:NumericUpDown Value="{Binding Beta}" Minimum="0" Maximum="1" Interval="0.1"/>
-            <TextBlock>Fcmin:</TextBlock>
+            <TextBlock Foreground="{StaticResource KinectBlueBrush}"
+                       FontFamily="Segoe UI">Fcmin:</TextBlock>
             <Controls:NumericUpDown Value="{Binding Fcmin}" Minimum="1" Maximum="100" Interval="0.1"/>
             <RadioButton GroupName="SmoothingFilter"
                          Content="Kinect Joint Filter"
@@ -58,7 +60,7 @@
             <CheckBox IsChecked="False" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">Raw Position</CheckBox>
             <CheckBox IsChecked="False" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1">Smoothed Position</CheckBox>
             <CheckBox IsChecked="True" Checked="CheckBox_Checked_29" Unchecked="CheckBox_Unchecked_29">Shifted Position</CheckBox>
-            <CheckBox IsChecked="False" Checked="CheckBox_Checked_2" Unchecked="CheckBox_Unchecked_2">Velocity</CheckBox>
+            <CheckBox IsChecked="True" Checked="CheckBox_Checked_2" Unchecked="CheckBox_Unchecked_2">Velocity</CheckBox>
             <CheckBox IsChecked="True" Checked="CheckBox_Checked_3" Unchecked="CheckBox_Unchecked_3">Segment Hits</CheckBox>
             <TextBlock Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="16">Select visible joints:</TextBlock>
             <!--<ComboBox x:Name="jointComboBox" Text="{Binding SelectedJointName}">

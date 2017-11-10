@@ -18,6 +18,9 @@ namespace RowingMonitor.Model.Pipeline
     /// The KinectReader class connects the application to the Kinect device.
     /// 
     /// This class uses the singleton pattern with static initialization.
+    /// 
+    /// Get an instance of the class with:
+    /// KinectReader kinectReader = KinectReader.Instance;
     /// </summary>
     public sealed class KinectReader
     {

@@ -9,10 +9,10 @@ namespace RowingMonitor.Model.Util
 {
     /// <summary>
     /// The JointDataHandler class handles the generated kinect data and provides 
-    /// static functions to work with the joint data.
+    /// static functions to work with the JointData.
     /// 
     /// This class implements the singleton pattern. Only one instance per application 
-    /// is allowed since it also counts the genrated frames of the kinect sensor. The
+    /// is allowed since it also counts the generated frames of the kinect sensor. The
     /// class has no public constructor.
     /// 
     /// Get an instance of the class with:
@@ -60,6 +60,27 @@ namespace RowingMonitor.Model.Util
         }
 
         /// <summary>
+        /// Return the longest tracked body.
+        /// </summary>
+        /// <returns></returns>
+        public Body GetFirstTrackedBody()
+        {
+            if (Bodies != null)
+            {
+                foreach (Body body in Bodies)
+                {
+                    if (body.IsTracked)
+                    {
+                        return body;
+                    }
+                }
+                return null;
+            }
+            else
+                return null;
+        }
+
+        /// <summary>
         /// Feet should be fixed joints since they are fixed to the footstretcher.
         /// Use the mean position of the last ten foot positions, if the foot joint is inferred.
         /// </summary>
@@ -104,25 +125,7 @@ namespace RowingMonitor.Model.Util
 
                 return joints;
             }
-        }
-
-        /// <summary>
-        /// Return the longest tracked body.
-        /// </summary>
-        /// <returns></returns>
-        public Body GetFirstTrackedBody()
-        {
-            if (Bodies != null) {
-                foreach (Body body in Bodies) {
-                    if (body.IsTracked) {
-                        return body;
-                    }
-                }
-                return null;
-            }
-            else
-                return null;
-        }
+        }        
 
         /// <summary>
         /// Calculates and returns the mean position of the left or right foot.

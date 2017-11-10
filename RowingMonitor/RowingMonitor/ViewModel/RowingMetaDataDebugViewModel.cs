@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace RowingMonitor.ViewModel
 {
-    class RowingMetaDataDebugViewModel : INotifyPropertyChanged
+    class RowingMetadataDebugViewModel : INotifyPropertyChanged
     {
         private string frameIndex;
         private string sessionTime;
@@ -40,7 +40,7 @@ namespace RowingMonitor.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        internal void Render(RowingMetaData metaData)
+        internal void Render(RowingMetadata metaData)
         {
             if (metaData != null) {
                 if (metaData.SegmentState != SegmentState.SegmentEnded) {

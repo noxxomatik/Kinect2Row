@@ -13,23 +13,31 @@ using System.Threading.Tasks.Dataflow;
 namespace RowingMonitor.Model.Pipeline
 {
     /// <summary>
-    /// Shifts  the origin to the middle point between the foot joints plus an offset from foot to hip joint.
+    /// Shifts the origin to the middle point between the foot joints plus an offset from foot to hip joint.
     /// Also rotates all joints until origin and hip joint form a horizontal line.
     /// </summary>
     public class Shifter
     {
+        /// <summary>
+        /// DEPRECATED
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public delegate void ShiftedFrameArrivedEventHandler(Object sender,
             ShiftedFrameArrivedEventArgs e);
+        /// <summary>
+        /// DEPRECATED
+        /// </summary>
         public event ShiftedFrameArrivedEventHandler ShiftedFrameArrived;
 
         private ActionBlock<JointData> input;
-        private BroadcastBlock<JointData> output;
-
-        public BroadcastBlock<JointData> Output { get => output; set => output = value; }
-        public ActionBlock<JointData> Input { get => input; set => input = value; }
+        private BroadcastBlock<JointData> output;        
 
         private List<double> timeLog = new List<double>();
 
+        /// <summary>
+        /// Creates a new Shifter object and defines the Input and Output dataflow blocks.
+        /// </summary>
         public Shifter()
         {
             Input = new ActionBlock<JointData>(jointData =>
@@ -54,6 +62,12 @@ namespace RowingMonitor.Model.Pipeline
             });
         }
 
+        /// <summary>
+        /// Shifts the origin of all joint data to the center of the feet and rotates
+        /// the coordinate system until the line between origin and spine base is horizontal.
+        /// </summary>
+        /// <param name="jointData">The joint data to be transformed.</param>
+        /// <returns>Returns the transformed joint data.</returns>
         public JointData ShiftAndRotate(JointData jointData)
         {
             if (jointData.Joints[JointType.FootLeft].TrackingState == TrackingState.NotTracked
@@ -123,7 +137,6 @@ namespace RowingMonitor.Model.Pipeline
                 shiftedJoints.Add(joint.Key, newJoint);
             }
 
-
             JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
                 jointData,
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
@@ -132,10 +145,24 @@ namespace RowingMonitor.Model.Pipeline
             return newJointData;
         }
 
+        /// <summary>
+        /// DEPRECATED
+        /// </summary>
+        /// <param name="jointData"></param>
         public void Updata(JointData jointData)
         {
             JointData shiftedJointData = ShiftAndRotate(jointData);
             ShiftedFrameArrived(this, new ShiftedFrameArrivedEventArgs(shiftedJointData));
         }
+
+        /// <summary>
+        /// BroadcastBlock that sends the transformed JointData to all linked target blocks.
+        /// </summary>
+        public BroadcastBlock<JointData> Output { get => output; set => output = value; }
+
+        /// <summary>
+        /// ActionBlock that recieves JointData.
+        /// </summary>
+        public ActionBlock<JointData> Input { get => input; set => input = value; }
     }
 }

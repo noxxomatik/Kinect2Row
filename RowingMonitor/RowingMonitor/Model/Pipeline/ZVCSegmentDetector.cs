@@ -11,7 +11,10 @@ using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
-    class ZVCSegmentDetector : SegmentDetector
+    /// <summary>
+    /// A SegmentDetector which checks the signal for zero velocity crossings.
+    /// </summary>
+    public class ZVCSegmentDetector : SegmentDetector
     {
         private JointData lastJointData;
 
@@ -29,7 +32,8 @@ namespace RowingMonitor.Model.Pipeline
         /// <param name="minimumHitGap">Minimum count ouf indices between two hits.</param>
         /// <param name="startSegmentWithRisingVelocity">Define if the start/end point 
         /// of a segment has a rising or falling slope</param>
-        public ZVCSegmentDetector(int minimumHitGap, bool startSegmentWithRisingVelocity = true)
+        public ZVCSegmentDetector(int minimumHitGap, 
+            bool startSegmentWithRisingVelocity = true)
         {
             minHitGap = minimumHitGap;
             endStartHitIsRisingVelocity = startSegmentWithRisingVelocity ? true : false;
@@ -65,7 +69,8 @@ namespace RowingMonitor.Model.Pipeline
         }
 
         // select hits
-        private void AddHits(JointData jointData, float value, float lastValue, bool slopeRising)
+        private void AddHits(JointData jointData, float value, float lastValue, 
+            bool slopeRising)
         {
             // check if it is the first hit
             if (hits.Count == 0) {
@@ -80,39 +85,61 @@ namespace RowingMonitor.Model.Pipeline
                 if (slopeRising != lastSlopeRising) {
                     // determine the hit type
                     if (slopeRising) {
-                        SegmentHit hit = new SegmentHit(jointData.Index, jointData.Index, jointData.AbsTimestamp, 
+                        SegmentHit hit = new SegmentHit(jointData.Index, jointData.Index, 
                             jointData.AbsTimestamp, 
-                            endStartHitIsRisingVelocity ? HitType.SegmentEndStart : HitType.SegmentInternal);
+                            jointData.AbsTimestamp, 
+                            endStartHitIsRisingVelocity ? 
+                            HitType.SegmentEndStart : HitType.SegmentInternal);
                         hits.Add(hit);
                         OnSegmentDetected(new SegmentDetectedEventArgs(hits));
                     }
                     else {
-                        SegmentHit hit = new SegmentHit(jointData.Index, jointData.Index, jointData.AbsTimestamp, 
+                        SegmentHit hit = new SegmentHit(jointData.Index, jointData.Index, 
                             jointData.AbsTimestamp, 
-                            endStartHitIsRisingVelocity ? HitType.SegmentInternal : HitType.SegmentEndStart);
+                            jointData.AbsTimestamp, 
+                            endStartHitIsRisingVelocity ? 
+                            HitType.SegmentInternal : HitType.SegmentEndStart);
                         hits.Add(hit);
                         OnSegmentDetected(new SegmentDetectedEventArgs(hits));
                     }
                 }
                 else {
-                    Logger.Log(this.ToString(), "Hit dropped because it has the same slope as the last hit.");
+                    Logger.Log(this.ToString(), 
+                        "Hit dropped because it has the same slope as the last hit.");
                 }
             }
             else {
-                Logger.Log(this.ToString() ,"Hit dropped because it was inside the minimum hit gap.");
+                Logger.Log(this.ToString() ,
+                    "Hit dropped because it was inside the minimum hit gap.");
             }
         }
 
+        /// <summary>
+        /// DEPRECATED
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnSegmentDetected(SegmentDetectedEventArgs e)
         {
             base.OnSegmentDetected(e);
         }
 
-        public override List<SegmentHit> Detect(JointData jointData, JointType jointType, string axis)
+        /// <summary>
+        /// Uses the zero velocity crossings detection method to detect
+        /// segments in the given signal.
+        /// </summary>
+        /// <param name="jointData">The JointData which will be observed.</param>
+        /// <param name="jointType">The JointType of the JointData which will be 
+        /// observed.</param>
+        /// <param name="axis">The axis of the JointType which will be observed.</param>
+        /// <returns></returns>
+        public override List<SegmentHit> Detect(JointData jointData, JointType jointType, 
+            string axis)
         {
             if (lastJointData.RelTimestamp != 0) {
-                float value = JointDataHandler.GetJointDataValue(jointData, jointType, axis);
-                float lastValue = JointDataHandler.GetJointDataValue(lastJointData, jointType, axis);
+                float value = JointDataHandler.GetJointDataValue(jointData, jointType, 
+                    axis);
+                float lastValue = JointDataHandler.GetJointDataValue(lastJointData, 
+                    jointType, axis);
 
                 // set slope rising true if the current value is greater then the last
                 bool slopeRising = value - lastValue > 0 ? true : false;

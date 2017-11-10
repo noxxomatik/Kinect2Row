@@ -5,6 +5,10 @@ using System.Diagnostics;
 
 namespace RowingMonitor.Model.Util
 {
+    /// <summary> 
+    /// Another implementation of the 1€ Filter to test the implementation of OneEuroSmoothingFilter.
+    /// Source: http://cristal.univ-lille.fr/~casiez/1euro/OneEuroFilter.cs
+    /// </summary>
     public class OneEuroFilter
     {
         public OneEuroFilter(double minCutoff, double beta)

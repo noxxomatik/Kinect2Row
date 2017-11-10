@@ -91,29 +91,36 @@ $(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_pip
 <div class="title">RowingMonitor.Model.Pipeline.SegmentDetector Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Abstract class of a segment detector to generalize the usage of different methods for segment detection.  
+ <a href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for RowingMonitor.Model.Pipeline.SegmentDetector:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.png" usemap="#RowingMonitor.Model.Pipeline.SegmentDetector_map" alt=""/>
   <map id="RowingMonitor.Model.Pipeline.SegmentDetector_map" name="RowingMonitor.Model.Pipeline.SegmentDetector_map">
-<area href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_d_t_w_segment_detector.html" alt="RowingMonitor.Model.Pipeline.DTWSegmentDetector" shape="rect" coords="0,56,311,80"/>
-<area href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_z_v_c_segment_detector.html" alt="RowingMonitor.Model.Pipeline.ZVCSegmentDetector" shape="rect" coords="321,56,632,80"/>
+<area href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_d_t_w_segment_detector.html" title="A SegmentDetector which uses dynamic time warping to detect subsequences of a template in the signal ..." alt="RowingMonitor.Model.Pipeline.DTWSegmentDetector" shape="rect" coords="0,56,311,80"/>
+<area href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_z_v_c_segment_detector.html" title="A SegmentDetector which checks the signal for zero velocity crossings. " alt="RowingMonitor.Model.Pipeline.ZVCSegmentDetector" shape="rect" coords="321,56,632,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aee5283f7fa49f68c5c4195449442093c"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#aee5283f7fa49f68c5c4195449442093c">SegmentDetectedEventHandler</a> (Object sender, <a class="el" href="class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_segment_detected_event_args.html">SegmentDetectedEventArgs</a> e)</td></tr>
+<tr class="memdesc:aee5283f7fa49f68c5c4195449442093c"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="#aee5283f7fa49f68c5c4195449442093c">More...</a><br /></td></tr>
 <tr class="separator:aee5283f7fa49f68c5c4195449442093c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24dcb2926660a6218af3052f147d82da"><td class="memItemLeft" align="right" valign="top">abstract void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a24dcb2926660a6218af3052f147d82da">Update</a> (<a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> jointData, JointType jointType, String axis)</td></tr>
-<tr class="separator:a24dcb2926660a6218af3052f147d82da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28a3c23d7d350c0e37e9a58ff9a4e16b"><td class="memItemLeft" align="right" valign="top">abstract List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a28a3c23d7d350c0e37e9a58ff9a4e16b">Detect</a> (<a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> jointData, JointType jointType, String axis)</td></tr>
+<tr class="memdesc:a28a3c23d7d350c0e37e9a58ff9a4e16b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses the detection method of the derives class to detect segments in the given signal.  <a href="#a28a3c23d7d350c0e37e9a58ff9a4e16b">More...</a><br /></td></tr>
 <tr class="separator:a28a3c23d7d350c0e37e9a58ff9a4e16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24dcb2926660a6218af3052f147d82da"><td class="memItemLeft" align="right" valign="top">abstract void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a24dcb2926660a6218af3052f147d82da">Update</a> (<a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> jointData, JointType jointType, String axis)</td></tr>
+<tr class="memdesc:a24dcb2926660a6218af3052f147d82da"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="#a24dcb2926660a6218af3052f147d82da">More...</a><br /></td></tr>
+<tr class="separator:a24dcb2926660a6218af3052f147d82da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a30d5b8752257a3992db11770506f6a8a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a30d5b8752257a3992db11770506f6a8a">OnSegmentDetected</a> (<a class="el" href="class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_segment_detected_event_args.html">SegmentDetectedEventArgs</a> e)</td></tr>
+<tr class="memdesc:a30d5b8752257a3992db11770506f6a8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="#a30d5b8752257a3992db11770506f6a8a">More...</a><br /></td></tr>
 <tr class="separator:a30d5b8752257a3992db11770506f6a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -124,20 +131,27 @@ Protected Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a2f9933aa3e7251629d0b1676b73a336a"><td class="memItemLeft" align="right" valign="top">BroadcastBlock&lt; List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a2f9933aa3e7251629d0b1676b73a336a">Output</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a2f9933aa3e7251629d0b1676b73a336a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The BroadcastBlock for sending the detected SegmentHit to all linked target blocks.  <a href="#a2f9933aa3e7251629d0b1676b73a336a">More...</a><br /></td></tr>
 <tr class="separator:a2f9933aa3e7251629d0b1676b73a336a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bc85068e6ac401713535e38c0f1e18d"><td class="memItemLeft" align="right" valign="top">JointType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a0bc85068e6ac401713535e38c0f1e18d">DetectionJointType</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a0bc85068e6ac401713535e38c0f1e18d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The JointType which will be observed.  <a href="#a0bc85068e6ac401713535e38c0f1e18d">More...</a><br /></td></tr>
 <tr class="separator:a0bc85068e6ac401713535e38c0f1e18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8b2b75b70356efbe159de7427eb31fd"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#ae8b2b75b70356efbe159de7427eb31fd">DetectionAxis</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ae8b2b75b70356efbe159de7427eb31fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The axis of the DetectionJointType which will be observed.  <a href="#ae8b2b75b70356efbe159de7427eb31fd">More...</a><br /></td></tr>
 <tr class="separator:ae8b2b75b70356efbe159de7427eb31fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dff97a3144d7642595a8ce1fd4831a4"><td class="memItemLeft" align="right" valign="top">ActionBlock&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#a1dff97a3144d7642595a8ce1fd4831a4">Input</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a1dff97a3144d7642595a8ce1fd4831a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ActionBlock that recieves JointData for detection.  <a href="#a1dff97a3144d7642595a8ce1fd4831a4">More...</a><br /></td></tr>
 <tr class="separator:a1dff97a3144d7642595a8ce1fd4831a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="events"></a>
 Events</h2></td></tr>
 <tr class="memitem:aecedec106356c5d32e43e9c9471f12a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#aee5283f7fa49f68c5c4195449442093c">SegmentDetectedEventHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_segment_detector.html#aecedec106356c5d32e43e9c9471f12a3">SegmentDetected</a></td></tr>
+<tr class="memdesc:aecedec106356c5d32e43e9c9471f12a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="#aecedec106356c5d32e43e9c9471f12a3">More...</a><br /></td></tr>
 <tr class="separator:aecedec106356c5d32e43e9c9471f12a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract class of a segment detector to generalize the usage of different methods for segment detection. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a28a3c23d7d350c0e37e9a58ff9a4e16b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a28a3c23d7d350c0e37e9a58ff9a4e16b">&#9670;&nbsp;</a></span>Detect()</h2>
 
@@ -178,6 +192,17 @@ Events</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Uses the detection method of the derives class to detect segments in the given signal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jointData</td><td>The JointData which will be observed.</td></tr>
+    <tr><td class="paramname">jointType</td><td>The JointType of the JointData which will be observed.</td></tr>
+    <tr><td class="paramname">axis</td><td>The axis of the JointType which will be observed.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
 </div>
 </div>
 <a id="a30d5b8752257a3992db11770506f6a8a"></a>
@@ -203,6 +228,14 @@ Events</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>DEPRECATED </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented in <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_z_v_c_segment_detector.html#a5eab838eda9f217722dfa05bc9d5095b">RowingMonitor.Model.Pipeline.ZVCSegmentDetector</a>, and <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_d_t_w_segment_detector.html#a6d2644f751e290cef82649c42becdd92">RowingMonitor.Model.Pipeline.DTWSegmentDetector</a>.</p>
 
@@ -233,6 +266,15 @@ Events</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>DEPRECATED </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sender</td><td></td></tr>
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -275,6 +317,16 @@ Events</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>DEPRECATED </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jointData</td><td></td></tr>
+    <tr><td class="paramname">jointType</td><td></td></tr>
+    <tr><td class="paramname">axis</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implemented in <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_z_v_c_segment_detector.html#a81c28e4ede1561c2fe1eca29f63f0767">RowingMonitor.Model.Pipeline.ZVCSegmentDetector</a>.</p>
 
@@ -324,6 +376,8 @@ Events</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The axis of the DetectionJointType which will be observed. </p>
+
 </div>
 </div>
 <a id="a0bc85068e6ac401713535e38c0f1e18d"></a>
@@ -345,6 +399,8 @@ Events</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The JointType which will be observed. </p>
 
 </div>
 </div>
@@ -368,6 +424,8 @@ Events</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The ActionBlock that recieves JointData for detection. </p>
+
 </div>
 </div>
 <a id="a2f9933aa3e7251629d0b1676b73a336a"></a>
@@ -390,6 +448,8 @@ Events</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The BroadcastBlock for sending the detected SegmentHit to all linked target blocks. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Event Documentation</h2>
@@ -404,6 +464,8 @@ Events</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>DEPRECATED </p>
 
 </div>
 </div>

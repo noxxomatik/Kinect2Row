@@ -30,14 +30,14 @@ namespace RowingMonitor.ViewModel
         private VelocityCalculator velocityCalculator;
         private KleshnevVelocityCalculator kleshnevVelocityCalculator;
         // meta data
-        private RowingMetaDataCalculator metaDataCalculator;
+        private RowingMetadataCalculator metaDataCalculator;
         // outputs
         private SkeletonSideDisplay skeletonSideDisplay;
         private TrunkAngleDisplay trunkAngleDisplay;
         private RowingSonification rowingSonification;
-        private RowingMetaDataWidgetsDisplay widgetsDisplay;
+        private RowingMetadataWidgetsDisplay widgetsDisplay;
         // view specific
-        private ActionBlock<RowingMetaData> viewInput;
+        private ActionBlock<RowingMetadata> viewInput;
 
         /* pipeline links */
         private IDisposable readerLink;
@@ -69,14 +69,14 @@ namespace RowingMonitor.ViewModel
             velocitySmoothingFilter = new OneEuroSmoothingFilter(DataStreamType.Velocity);
             segmentDetector = new ZVCSegmentDetector(minimumHitGap, startSegmentWithRisingVelocity);
             kleshnevVelocityCalculator = new KleshnevVelocityCalculator();
-            metaDataCalculator = new RowingMetaDataCalculator();
+            metaDataCalculator = new RowingMetadataCalculator();
 
             skeletonSideDisplay = new SkeletonSideDisplay();
             trunkAngleDisplay = new TrunkAngleDisplay();
             rowingSonification = new RowingSonification();
-            widgetsDisplay = new RowingMetaDataWidgetsDisplay();
+            widgetsDisplay = new RowingMetadataWidgetsDisplay();
 
-            viewInput = new ActionBlock<RowingMetaData>(metaData =>
+            viewInput = new ActionBlock<RowingMetadata>(metaData =>
             {
                 UpdateRowingMetaData(metaData);
             });
@@ -148,7 +148,7 @@ namespace RowingMonitor.ViewModel
             MainGrid.Children.Add(frame);
         }
 
-        private void UpdateRowingMetaData(RowingMetaData metaData)
+        private void UpdateRowingMetaData(RowingMetadata metaData)
         {
             // prepare the meta data for the view
             TimeSpan time = TimeSpan.FromMilliseconds(metaData.SessionTime);

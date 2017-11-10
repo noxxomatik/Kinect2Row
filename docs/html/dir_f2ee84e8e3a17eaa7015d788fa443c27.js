@@ -15,11 +15,11 @@ var dir_f2ee84e8e3a17eaa7015d788fa443c27 =
     [ "KleshnevPlotView.xaml.cs", "_kleshnev_plot_view_8xaml_8cs.html", [
       [ "KleshnevPlotView", "class_rowing_monitor_1_1_view_1_1_kleshnev_plot_view.html", "class_rowing_monitor_1_1_view_1_1_kleshnev_plot_view" ]
     ] ],
-    [ "RowingMetaDataDebugView.xaml.cs", "_rowing_meta_data_debug_view_8xaml_8cs.html", [
-      [ "RowingMetaDataDebugView", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_debug_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_debug_view" ]
+    [ "RowingMetadataDebugView.xaml.cs", "_rowing_metadata_debug_view_8xaml_8cs.html", [
+      [ "RowingMetadataDebugView", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_debug_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_debug_view" ]
     ] ],
-    [ "RowingMetaDataWidgetsView.xaml.cs", "_rowing_meta_data_widgets_view_8xaml_8cs.html", [
-      [ "RowingMetaDataWidgetsView", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_widgets_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_widgets_view" ]
+    [ "RowingMetadataWidgetsView.xaml.cs", "_rowing_metadata_widgets_view_8xaml_8cs.html", [
+      [ "RowingMetadataWidgetsView", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_widgets_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_widgets_view" ]
     ] ],
     [ "SkeletonFrontalView.xaml.cs", "_skeleton_frontal_view_8xaml_8cs.html", [
       [ "SkeletonFrontalView", "class_rowing_monitor_1_1_view_1_1_skeleton_frontal_view.html", "class_rowing_monitor_1_1_view_1_1_skeleton_frontal_view" ]

@@ -12,7 +12,9 @@ namespace RowingMonitor.Model.Pipeline
 {
     /// <summary>
     /// Adapted default Kinect smoothing filter to work with the pipeline.
-    /// https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk
+    /// Source: https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk
+    /// 
+    /// Implements a Holt Double Exponential Smoothing filter.
     /// </summary>
     class KinectJointSmoothingFilter : SmoothingFilter
     {
@@ -43,6 +45,10 @@ namespace RowingMonitor.Model.Pipeline
         float m_fMaxDeviationRadius;
         private List<double> timeLog = new List<double>();
 
+        /// <summary>
+        /// Creates a new instance of the KinectJointSmoothingFilter.
+        /// </summary>
+        /// <param name="outputDataStreamType">The DataStreamType of the output JointData.</param>
         public KinectJointSmoothingFilter(DataStreamType outputDataStreamType)
         {
             OutputDataStreamType = outputDataStreamType;
@@ -83,7 +89,8 @@ namespace RowingMonitor.Model.Pipeline
             Shutdown();
         }
 
-        public void Init(float fSmoothing = 0.25f, float fCorrection = 0.25f, float fPrediction = 0.25f, float fJitterRadius = 0.03f, float fMaxDeviationRadius = 0.05f)
+        public void Init(float fSmoothing = 0.25f, float fCorrection = 0.25f, float fPrediction = 0.25f, 
+            float fJitterRadius = 0.03f, float fMaxDeviationRadius = 0.05f)
         {
             Reset(fSmoothing, fCorrection, fPrediction, fJitterRadius, fMaxDeviationRadius);
         }
@@ -92,7 +99,8 @@ namespace RowingMonitor.Model.Pipeline
         {
         }
 
-        public void Reset(float fSmoothing = 0.25f, float fCorrection = 0.25f, float fPrediction = 0.25f, float fJitterRadius = 0.03f, float fMaxDeviationRadius = 0.05f)
+        public void Reset(float fSmoothing = 0.25f, float fCorrection = 0.25f, float fPrediction = 0.25f, 
+            float fJitterRadius = 0.03f, float fMaxDeviationRadius = 0.05f)
         {
             if (m_pFilteredJoints == null || m_pHistory == null) {
                 return;
@@ -298,12 +306,13 @@ namespace RowingMonitor.Model.Pipeline
             base.OnSmoothedFrameFinished(e);
         }
 
+        /// <summary>
+        /// Smoothing of noisy JointData with the default KinectJointSmoothingFilter.
+        /// </summary>
+        /// <param name="jointData">Noisy JointData.</param>
+        /// <returns>Smoothed JointData.</returns>
         public override JointData Smooth(JointData jointData)
         {
-            //if (jointData.RelTimestamp == 0) {
-            //    return jointData;
-            //}
-
             // Check for divide by zero. Use an epsilon of a 10th of a millimeter
             m_fJitterRadius = Math.Max(0.0001f, m_fJitterRadius);
 

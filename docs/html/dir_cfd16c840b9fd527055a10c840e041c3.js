@@ -35,7 +35,7 @@ var dir_cfd16c840b9fd527055a10c840e041c3 =
       [ "RelayCommand", "class_rowing_monitor_1_1_model_1_1_util_1_1_relay_command.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_relay_command" ]
     ] ],
     [ "RowingMetaData.cs", "_rowing_meta_data_8cs.html", [
-      [ "RowingMetaData", "class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data" ]
+      [ "RowingMetadata", "class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_metadata.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_metadata" ]
     ] ],
     [ "SegmentHitHandler.cs", "_segment_hit_handler_8cs.html", [
       [ "SegmentHit", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit" ]

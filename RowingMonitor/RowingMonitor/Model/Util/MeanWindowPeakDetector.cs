@@ -81,8 +81,8 @@ namespace RowingMonitor.Model.Util
         /// <summary>
         /// Resets the detection after a segment ended and finds the global maximum of a segment.
         /// Also uses the global maximum to improve the detection of future peaks.
-        /// <returns>Returns the timestamp in milliseconds of the global maximum.</returns>
         /// </summary>
+        /// <returns>Returns the timestamp in milliseconds of the global maximum.</returns>
         public double SegmentEnded()
         {
             // check again for the global maximum and remember its timestamp

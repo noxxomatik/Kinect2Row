@@ -12,16 +12,28 @@ using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
-    class DTWSegmentDetector : SegmentDetector
+    /// <summary>
+    /// A SegmentDetector which uses dynamic time warping to detect subsequences
+    /// of a template in the signal stream.
+    /// </summary>
+    public class DTWSegmentDetector : SegmentDetector
     {
         private SubsequenceDTW subsequenceDTW;
 
         private List<JointData> jointDataHistory = new List<JointData>();
         private List<double> timeLog = new List<double>();
 
+        /// <summary>
+        /// Creates a new instance of DTWSegmentDetector.
+        /// </summary>
+        /// <param name="distanceThreshold">Maximum distance between the subsequence 
+        /// and the template.</param>
+        /// <param name="minimumSubsequenceLength">Minimum length of a detected 
+        /// subsequence.</param> 
         public DTWSegmentDetector(float distanceThreshold, int minimumSubsequenceLength)
         {
-            subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), distanceThreshold, minimumSubsequenceLength);
+            subsequenceDTW = new SubsequenceDTW(GetTemplateFromSettings(), 
+                distanceThreshold, minimumSubsequenceLength);
 
             Input = new ActionBlock<JointData>(jointData =>
             {
@@ -46,12 +58,22 @@ namespace RowingMonitor.Model.Pipeline
             });
         }
 
+        /// <summary>
+        /// DEPRECATED
+        /// </summary>
+        /// <param name="jointData"></param>
+        /// <param name="jointType"></param>
+        /// <param name="axis"></param>
         public override void Update(JointData jointData, JointType jointType,
             string axis)
         {
             Detect(jointData, jointType, axis);
         }
 
+        /// <summary>
+        /// DEPRECATED
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnSegmentDetected(SegmentDetectedEventArgs e)
         {
             base.OnSegmentDetected(e);
@@ -64,19 +86,24 @@ namespace RowingMonitor.Model.Pipeline
             string[] splittedText = templateText.Split(';');
 
             foreach (string value in splittedText) {
-                template.Add(Double.Parse(value, NumberStyles.Float, CultureInfo.CurrentUICulture.NumberFormat));
+                template.Add(Double.Parse(value, NumberStyles.Float, 
+                    CultureInfo.CurrentUICulture.NumberFormat));
             }
 
             return template;
         }
 
-        public override List<SegmentHit> Detect(JointData jointData, JointType jointType, string axis)
+        /// <summary>
+        /// Uses the SPRING DTW detection method to detect
+        /// segments in the given signal.
+        /// </summary>
+        /// <param name="jointData">The JointData which will be observed.</param>
+        /// <param name="jointType">The JointType of the JointData which will be observed.</param>
+        /// <param name="axis">The axis of the JointType which will be observed.</param>
+        /// <returns></returns>
+        public override List<SegmentHit> Detect(JointData jointData, JointType jointType,
+            string axis)
         {
-            // if first time of update, set the index offset
-            /*if (indexOffset == -1) {
-                indexOffset = (int)jointData.Index;
-            }*/
-
             jointDataHistory.Add(jointData);
 
             // normalize jointData before comparing with the template
@@ -95,7 +122,8 @@ namespace RowingMonitor.Model.Pipeline
                 int endIndex = subsequence.TEnd - 1;
                 int detectionIndex = subsequence.TDetected - 1;
 
-                Logger.Log(this.ToString() ,"Optimal subsequence detected with distance: " + subsequence.Distance
+                Logger.Log(this.ToString() ,"Optimal subsequence detected with distance: " 
+                    + subsequence.Distance
                     + " | Detection latency: " + (detectionIndex - endIndex));
 
                 double startAbsTimestamp = -1;
@@ -121,10 +149,12 @@ namespace RowingMonitor.Model.Pipeline
                 }
                 jointDataHistory = new List<JointData>(buffer);
 
-                SegmentHit startHit = new SegmentHit(startIndex, jointData.Index, startAbsTimestamp, 
+                SegmentHit startHit = new SegmentHit(startIndex, jointData.Index, 
+                    startAbsTimestamp, 
                     jointData.AbsTimestamp, HitType.SegmentStart);
 
-                SegmentHit endHit = new SegmentHit(endIndex, jointData.Index, endAbsTimestamp, 
+                SegmentHit endHit = new SegmentHit(endIndex, jointData.Index, 
+                    endAbsTimestamp, 
                     jointData.AbsTimestamp, HitType.SegmentEnd);
 
                 hits.Add(startHit);

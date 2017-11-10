@@ -16,10 +16,10 @@ var dir_8b813a46eb1ef45602fb594223d0a80f =
       [ "KleshnevPlotViewModel", "class_rowing_monitor_1_1_view_model_1_1_kleshnev_plot_view_model.html", "class_rowing_monitor_1_1_view_model_1_1_kleshnev_plot_view_model" ]
     ] ],
     [ "RowingMetaDataDebugViewModel.cs", "_rowing_meta_data_debug_view_model_8cs.html", [
-      [ "RowingMetaDataDebugViewModel", "class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model.html", "class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_debug_view_model" ]
+      [ "RowingMetadataDebugViewModel", "class_rowing_monitor_1_1_view_model_1_1_rowing_metadata_debug_view_model.html", "class_rowing_monitor_1_1_view_model_1_1_rowing_metadata_debug_view_model" ]
     ] ],
     [ "RowingMetaDataWidgetsViewModel.cs", "_rowing_meta_data_widgets_view_model_8cs.html", [
-      [ "RowingMetaDataWidgetsViewModel", "class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_widgets_view_model.html", "class_rowing_monitor_1_1_view_model_1_1_rowing_meta_data_widgets_view_model" ]
+      [ "RowingMetadataWidgetsViewModel", "class_rowing_monitor_1_1_view_model_1_1_rowing_metadata_widgets_view_model.html", "class_rowing_monitor_1_1_view_model_1_1_rowing_metadata_widgets_view_model" ]
     ] ],
     [ "SettingsViewModel.cs", "_settings_view_model_8cs.html", [
       [ "SettingsViewModel", "class_rowing_monitor_1_1_view_model_1_1_settings_view_model.html", "class_rowing_monitor_1_1_view_model_1_1_settings_view_model" ]

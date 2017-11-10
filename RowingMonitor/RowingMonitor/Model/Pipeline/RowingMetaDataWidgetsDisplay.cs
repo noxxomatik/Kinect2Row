@@ -1,4 +1,4 @@
-﻿using RowingMonitor.Model.Util;
+﻿   using RowingMonitor.Model.Util;
 using RowingMonitor.View;
 using RowingMonitor.ViewModel;
 using System;
@@ -10,20 +10,23 @@ using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
-    public class RowingMetaDataWidgetsDisplay
+    /// <summary>
+    /// RowingMetadataWidgetsDisplay visualizes the Rowing style factor and Catch factor in segmented bars.
+    /// </summary>
+    public class RowingMetadataWidgetsDisplay
     {
-        ActionBlock<RowingMetaData> input;
-        RowingMetaData tmpMetaData;
+        ActionBlock<RowingMetadata> input;
+        RowingMetadata tmpMetaData;
 
-        private RowingMetaDataWidgetsView view;
-        private RowingMetaDataWidgetsViewModel viewModel;
+        private RowingMetadataWidgetsView view;
+        private RowingMetadataWidgetsViewModel viewModel;
 
-        public RowingMetaDataWidgetsDisplay()
+        public RowingMetadataWidgetsDisplay()
         {
-            View = new RowingMetaDataWidgetsView();
-            ViewModel = (RowingMetaDataWidgetsViewModel)View.DataContext;
+            View = new RowingMetadataWidgetsView();
+            ViewModel = (RowingMetadataWidgetsViewModel)View.DataContext;
 
-            Input = new ActionBlock<RowingMetaData>(metaData =>
+            Input = new ActionBlock<RowingMetadata>(metaData =>
             {
                 tmpMetaData = metaData;
             });
@@ -39,8 +42,8 @@ namespace RowingMonitor.Model.Pipeline
             }
         }
 
-        public ActionBlock<RowingMetaData> Input { get => input; set => input = value; }
-        public RowingMetaDataWidgetsView View { get => view; set => view = value; }
-        internal RowingMetaDataWidgetsViewModel ViewModel { get => viewModel; set => viewModel = value; }
+        public ActionBlock<RowingMetadata> Input { get => input; set => input = value; }
+        public RowingMetadataWidgetsView View { get => view; set => view = value; }
+        internal RowingMetadataWidgetsViewModel ViewModel { get => viewModel; set => viewModel = value; }
     }
 }

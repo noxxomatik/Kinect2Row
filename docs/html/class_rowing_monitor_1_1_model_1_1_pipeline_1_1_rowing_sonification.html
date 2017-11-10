@@ -88,22 +88,32 @@ $(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_pip
 <div class="title">RowingMonitor.Model.Pipeline.RowingSonification Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html" title="RowingSonification searches for peaks in the velocities of legs, trunk and arms and plays a tune if t...">RowingSonification</a> searches for peaks in the velocities of legs, trunk and arms and plays a tune if they appear.  
+ <a href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa3189ffe2f7c36a9cc5afaad8c7d896d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html#aa3189ffe2f7c36a9cc5afaad8c7d896d">RowingSonification</a> ()</td></tr>
+<tr class="memdesc:aa3189ffe2f7c36a9cc5afaad8c7d896d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html" title="RowingSonification searches for peaks in the velocities of legs, trunk and arms and plays a tune if t...">RowingSonification</a>.  <a href="#aa3189ffe2f7c36a9cc5afaad8c7d896d">More...</a><br /></td></tr>
 <tr class="separator:aa3189ffe2f7c36a9cc5afaad8c7d896d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cbd9341e4f5fc752ed5f9b9d09a928e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html#a5cbd9341e4f5fc752ed5f9b9d09a928e">Destroy</a> ()</td></tr>
+<tr class="memdesc:a5cbd9341e4f5fc752ed5f9b9d09a928e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close all sound player.  <a href="#a5cbd9341e4f5fc752ed5f9b9d09a928e">More...</a><br /></td></tr>
 <tr class="separator:a5cbd9341e4f5fc752ed5f9b9d09a928e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:aa36c7f6801b612cb4363e2c0338e6e70"><td class="memItemLeft" align="right" valign="top">ActionBlock&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_data.html">KleshnevData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html#aa36c7f6801b612cb4363e2c0338e6e70">Input</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:aa36c7f6801b612cb4363e2c0338e6e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ActionBlock that recieves the <a class="el" href="struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_data.html" title="KleshnevData holds the velocities of the body segments in the sagittal plane defined by Kleshnev...">KleshnevData</a>.  <a href="#aa36c7f6801b612cb4363e2c0338e6e70">More...</a><br /></td></tr>
 <tr class="separator:aa36c7f6801b612cb4363e2c0338e6e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52fbdd66e6e0d5a8a936df0a193ab59a"><td class="memItemLeft" align="right" valign="top">ActionBlock&lt; List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html#a52fbdd66e6e0d5a8a936df0a193ab59a">InputSegmentHits</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a52fbdd66e6e0d5a8a936df0a193ab59a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ActionBlock that recieves the list of SegmentHit.  <a href="#a52fbdd66e6e0d5a8a936df0a193ab59a">More...</a><br /></td></tr>
 <tr class="separator:a52fbdd66e6e0d5a8a936df0a193ab59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html" title="RowingSonification searches for peaks in the velocities of legs, trunk and arms and plays a tune if t...">RowingSonification</a> searches for peaks in the velocities of legs, trunk and arms and plays a tune if they appear. </p>
+<p>It also plays a double tone if a rowing segment ended to represent the rhythm of the rower. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa3189ffe2f7c36a9cc5afaad8c7d896d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa3189ffe2f7c36a9cc5afaad8c7d896d">&#9670;&nbsp;</a></span>RowingSonification()</h2>
 
@@ -118,6 +128,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Create a new <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html" title="RowingSonification searches for peaks in the velocities of legs, trunk and arms and plays a tune if t...">RowingSonification</a>. </p>
 
 </div>
 </div>
@@ -136,6 +148,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Close all sound player. </p>
 
 </div>
 </div>
@@ -160,6 +174,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The ActionBlock that recieves the <a class="el" href="struct_rowing_monitor_1_1_model_1_1_pipeline_1_1_kleshnev_data.html" title="KleshnevData holds the velocities of the body segments in the sagittal plane defined by Kleshnev...">KleshnevData</a>. </p>
+
 </div>
 </div>
 <a id="a52fbdd66e6e0d5a8a936df0a193ab59a"></a>
@@ -181,6 +197,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The ActionBlock that recieves the list of SegmentHit. </p>
 
 </div>
 </div>

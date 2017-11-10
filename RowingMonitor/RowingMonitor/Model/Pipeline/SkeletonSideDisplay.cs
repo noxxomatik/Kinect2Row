@@ -15,6 +15,10 @@ using System.Windows.Media.Imaging;
 
 namespace RowingMonitor.Model.Pipeline
 {
+    /// <summary>
+    /// SkeletonSideDisplay displays the tracked skeleton in the sagittal plane. 
+    /// Additionally it shows the trajectories of the center of mass, the hands and the knees. 
+    /// </summary>
     public class SkeletonSideDisplay
     {
         // width of training area in m

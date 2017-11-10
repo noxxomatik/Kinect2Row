@@ -27,10 +27,13 @@ namespace RowingMonitor.Model.Util
         /// <summary>
         /// Creates a new instance of the SubsequenceDTW class.
         /// </summary>
-        /// <param name="template"></param>Template stream for comparison.
-        /// <param name="distanceThreshold"></param>Distance threshold which describes the maximum distance that reports a detected subsequence.
-        /// <param name="minimumSubsequenceLength"></param>Minimum length of a detected subsequence.
-        public SubsequenceDTW(List<double> template, float distanceThreshold, int minimumSubsequenceLength = 2)
+        /// <param name="template"></param>Template signal for comparison.
+        /// <param name="distanceThreshold">Maximum distance between the subsequence 
+        /// and the template.</param>
+        /// <param name="minimumSubsequenceLength">Minimum length of a detected 
+        /// subsequence.</param> 
+        public SubsequenceDTW(List<double> template, float distanceThreshold, 
+            int minimumSubsequenceLength = 2)
         {
             m = template.Count;
 
@@ -65,8 +68,19 @@ namespace RowingMonitor.Model.Util
 
         /// <summary>
         /// Compare the value x at time t of the data stream with the template.
-        /// Returns an unset, not optimal or optimal subsequence with its distance, starttime and endtime.
+        /// Returns an unset, not optimal or optimal subsequence with its distance, 
+        /// starttime and endtime.
+        /// 
         /// Uses the SPRING DTW algorithm.
+        /// 
+        /// Sakurai, Yasushi; Faloutsos, Christos; Yamamuro, Masashi (2007):
+        /// Stream Monitoring under the Time Warping Distance. 
+        /// In: IEEE 23rd International Conference on Data Engineering, 2007.
+        /// 15 - 20 April, 2007, [Istanbul, Turkey]. 
+        /// 2007 IEEE 23rd International Conference on Data Engineering. Istanbul, Turkey.
+        /// Institute of Electrical and Electronics Engineers; 
+        /// International Conference on Data Engineering; ICDE 2007. 
+        /// Piscataway, NJ: IEEE Service Center, S. 1046–1055.
         /// </summary>
         /// <param name="xT"></param>Value x of data stream at time t.
         /// <param name="t"></param>Time t of value x. Time starts with 1.
@@ -115,7 +129,8 @@ namespace RowingMonitor.Model.Util
                 tS = s[m];
                 tE = t;
 
-                // if no optimal subsequence is reported, report the not optimal subsequence
+                // if no optimal subsequence is reported, report the not optimal 
+                // subsequence
                 if (report.Status != SubsequenceStatus.Optimal) {
                     report.Distance = dMin;
                     report.TStart = tS;

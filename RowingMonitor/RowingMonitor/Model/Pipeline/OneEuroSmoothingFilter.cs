@@ -4,13 +4,13 @@ using RowingMonitor.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
+    /// <summary>
+    /// Implements the 1€ Filter from Casiez et al.
+    /// </summary>
     public class OneEuroSmoothingFilter : SmoothingFilter
     {
         // data update rate in Hz (default is 30 FPS)
@@ -31,26 +31,14 @@ namespace RowingMonitor.Model.Pipeline
 
         JointData lastJointData;
 
-        private bool firstTime = true;
-
-        /* Properties */
-        public Double Beta { get => beta; set => beta = value; }
-        public double Fcmin
-        {
-            get => fcmin;
-            set {
-                fcmin = value;
-                Mincutoff = InitCutoffDictionary(fcmin);
-            }
-        }
-        public Dictionary<JointType, Dictionary<string, double>> Mincutoff
-        {
-            get => mincutoff;
-            set => mincutoff = value;
-        }       
+        private bool firstTime = true;          
 
         private List<double> timeLog = new List<double>();
 
+        /// <summary>
+        /// Creates a new instance of the 1€ Filter.
+        /// </summary>
+        /// <param name="outputDataStreamType">The DataStreamType of the output JointData.</param>
         public OneEuroSmoothingFilter(DataStreamType outputDataStreamType)
         {
             OutputDataStreamType = outputDataStreamType;
@@ -87,18 +75,10 @@ namespace RowingMonitor.Model.Pipeline
             {
                 return jointData;
             });
-        }
-        
-        public override void Update(JointData jointData)
-        {
-            JointData smoothedJointData = Smooth(jointData);
-
-            OnSmoothedFrameFinished(new SmoothedFrameArrivedEventArgs(jointData,
-                smoothedJointData));
-        }
+        }        
 
         /// <summary>
-        /// Alpha computation.
+        /// Alpha computation for the low pass filter.
         /// </summary>
         /// <param name="rate">Data update rate in Hz.</param>
         /// <param name="cutoff">Cutoff frequency in Hz</param>
@@ -139,13 +119,20 @@ namespace RowingMonitor.Model.Pipeline
             return ret;
         }
 
+        /// <summary>
+        /// DEPRECATED
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnSmoothedFrameFinished(SmoothedFrameArrivedEventArgs e)
         {
             base.OnSmoothedFrameFinished(e);
         }
 
-        // IN : Noisy sample value: x
-        // OUT: Filtered sample value
+        /// <summary>
+        /// Smoothing of noisy JointData with the 1€ Filter.
+        /// </summary>
+        /// <param name="jointData">Noisy JointData.</param>
+        /// <returns>Smoothed JointData.</returns>
         public override JointData Smooth(JointData jointData)
         {
             Dictionary<JointType, Joint> dx = new Dictionary<JointType, Joint>();
@@ -180,11 +167,8 @@ namespace RowingMonitor.Model.Pipeline
                     dx.Add(joint.Key, newJoint);
                 }
             }
-            // end
-
             // edx = dxfilt.filter(dx, alpha(rate, dcutoff))
             Dictionary<JointType, Joint> edx = dxfilt.Filter(dx, Alpha(rate, dcutoff));
-
             // cutoff = mincutoff + beta * |edx|
             Dictionary<JointType, Dictionary<String, Double>> cutoff =
                 new Dictionary<JointType, Dictionary<string, double>>();
@@ -195,14 +179,12 @@ namespace RowingMonitor.Model.Pipeline
                 values.Add("Z", Mincutoff[joint.Key]["Z"] + Beta * Math.Abs(edx[joint.Key].Position.Z));
                 cutoff.Add(joint.Key, values);
             }
-
             // return xfilt.filter(x, alpha(rate, cutoff ))
             Dictionary<JointType, Joint> x = new Dictionary<JointType, Joint>();
             foreach (KeyValuePair<JointType, Joint> joint in jointData.Joints) {
                 Joint newJoint = joint.Value;
                 x.Add(joint.Key, newJoint);
             }
-
             Dictionary<JointType, Joint> result = xfilt.Filter(x, Alpha(rate, cutoff));
 
             JointData newJointData = JointDataHandler.ReplaceJointsInJointData(
@@ -210,9 +192,44 @@ namespace RowingMonitor.Model.Pipeline
                 DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond,
                 result, OutputDataStreamType);
 
-            lastJointData = jointData;           
-
+            lastJointData = jointData;
             return newJointData;
+        }
+
+        /// <summary>
+        /// DEPRECATED
+        /// </summary>
+        /// <param name="jointData"></param>
+        public override void Update(JointData jointData)
+        {
+            JointData smoothedJointData = Smooth(jointData);
+
+            OnSmoothedFrameFinished(new SmoothedFrameArrivedEventArgs(jointData,
+                smoothedJointData));
+        }
+
+        /// <summary>
+        /// Slope of the function to determine the dynamic cutoff frequency.
+        /// </summary>
+        public Double Beta { get => beta; set => beta = value; }
+        /// <summary>
+        /// Minimum cutoff frequency of the the dynamic cutoff frequency.
+        /// </summary>
+        public double Fcmin
+        {
+            get => fcmin;
+            set {
+                fcmin = value;
+                Mincutoff = InitCutoffDictionary(fcmin);
+            }
+        }
+        /// <summary>
+        /// Minimum cutoff frequency of the the dynamic cutoff frequency.
+        /// </summary>
+        public Dictionary<JointType, Dictionary<string, double>> Mincutoff
+        {
+            get => mincutoff;
+            set => mincutoff = value;
         }
     }
 }

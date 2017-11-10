@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace RowingMonitor.Model.Pipeline
 {
-    public partial class RowingMetaDataCalculator
+    public partial class RowingMetadataCalculator
     {
         // temp calculation values
         private double startTimestamp = -1;
@@ -65,7 +65,7 @@ namespace RowingMonitor.Model.Pipeline
         /// Calculate the values, which can be obtained in realtime.
         /// </summary>
         /// <param name="metaData"></param>
-        private RowingMetaData CalculateRealtimeMetaData(RowingMetaData metaData)
+        private RowingMetadata CalculateRealtimeMetadata(RowingMetadata metaData)
         {
             // TODO: decide between segment started and no segment
             metaData.SegmentState = SegmentState.SegmentStarted;
@@ -122,7 +122,7 @@ namespace RowingMonitor.Model.Pipeline
             return buffer.Last().AbsTimestamp - buffer[0].AbsTimestamp;
         }
 
-        private double GetTrunkAngle(RowingMetaData metaData)
+        private double GetTrunkAngle(RowingMetadata metaData)
         {
             JointData jointData = GetJointDataByIndex(jointDataBuffer, metaData.Index);
             if (!jointData.IsEmpty) {
@@ -152,7 +152,7 @@ namespace RowingMonitor.Model.Pipeline
             return 0;
         }
 
-        private double GetMaxTrunkVelocity(RowingMetaData metaData)
+        private double GetMaxTrunkVelocity(RowingMetadata metaData)
         {
             KleshnevData klshData = GetKleshnevDataByIndex(kleshnevDataBuffer, metaData.Index);
             if (!klshData.IsEmpty) {
@@ -163,7 +163,7 @@ namespace RowingMonitor.Model.Pipeline
             return 0;
         }
 
-        private double GetMaxArmsVelocity(RowingMetaData metaData)
+        private double GetMaxArmsVelocity(RowingMetadata metaData)
         {
             KleshnevData klshData = GetKleshnevDataByIndex(kleshnevDataBuffer, metaData.Index);
             if (!klshData.IsEmpty) {
@@ -175,7 +175,7 @@ namespace RowingMonitor.Model.Pipeline
             return 0;
         }
 
-        private double GetMaxLegsVelocity(RowingMetaData metaData)
+        private double GetMaxLegsVelocity(RowingMetadata metaData)
         {
             KleshnevData klshData = GetKleshnevDataByIndex(kleshnevDataBuffer, metaData.Index);
             if (!klshData.IsEmpty) {
@@ -186,7 +186,7 @@ namespace RowingMonitor.Model.Pipeline
             return 0;
         }
 
-        private double GetMaxHandleVelocity(RowingMetaData metaData)
+        private double GetMaxHandleVelocity(RowingMetadata metaData)
         {
             KleshnevData klshData = GetKleshnevDataByIndex(kleshnevDataBuffer, metaData.Index);
             if (!klshData.IsEmpty) {
@@ -198,7 +198,7 @@ namespace RowingMonitor.Model.Pipeline
             return 0;
         }
 
-        private double GetSeatTravelDistance(RowingMetaData metaData)
+        private double GetSeatTravelDistance(RowingMetadata metaData)
         {
             JointData jointData = GetJointDataByIndex(jointDataBuffer, metaData.Index);
             if (!jointData.IsEmpty) {
@@ -212,7 +212,7 @@ namespace RowingMonitor.Model.Pipeline
             return 0;
         }
 
-        private double GetStrokeTime(RowingMetaData metaData)
+        private double GetStrokeTime(RowingMetadata metaData)
         {
             JointData jointData = GetJointDataByIndex(jointDataBuffer, metaData.Index);
             if (!jointData.IsEmpty) {
@@ -224,7 +224,7 @@ namespace RowingMonitor.Model.Pipeline
             return 0;
         }
 
-        private double GetStrokeLength(RowingMetaData metaData)
+        private double GetStrokeLength(RowingMetadata metaData)
         {
             JointData jointData = GetJointDataByIndex(jointDataBuffer, metaData.Index);
             if (!jointData.IsEmpty) {
@@ -243,7 +243,7 @@ namespace RowingMonitor.Model.Pipeline
         /// Calculate values that need all realtime segment values.
         /// </summary>
         /// <param name="metaData"></param>
-        private RowingMetaData CalculateSegmentMetaData(RowingMetaData metaData)
+        private RowingMetadata CalculateSegmentMetadata(RowingMetadata metaData)
         {
             metaData.SegmentState = SegmentState.SegmentEnded;
 
@@ -282,7 +282,7 @@ namespace RowingMonitor.Model.Pipeline
             return catchFactors.Sum() / catchFactors.Count;
         }
 
-        private double GetStrokesPerMinute(RowingMetaData metaData)
+        private double GetStrokesPerMinute(RowingMetadata metaData)
         {
             return metaData.StrokeCount / (metaData.SessionTime / 60000);
         }
@@ -332,7 +332,7 @@ namespace RowingMonitor.Model.Pipeline
             return 0;
         }
 
-        private double GetMeanStrokeTime(RowingMetaData metaData)
+        private double GetMeanStrokeTime(RowingMetadata metaData)
         {
             strokeTimes.Add(metaData.StrokeTime);
             if (strokeTimes.Count > 0) {

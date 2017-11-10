@@ -22,7 +22,7 @@ namespace RowingMonitor.ViewModel
         private SmoothingFilter smoothingFilter;
         // 1€ filter parameter
         private double beta = 0;
-        private double fcmin = 1;
+        private double fcmin = 2;
 
         // velocity smoothing filter
         private SmoothingFilter velocitySmoothingFilter;
@@ -44,7 +44,7 @@ namespace RowingMonitor.ViewModel
         private KleshnevVelocityCalculator kleshnevVelocityCalculator;
 
         // meta data
-        private RowingMetaDataCalculator metaDataCalculator;
+        private RowingMetadataCalculator metaDataCalculator;
 
         // outputs
         private JointDataPlot jointDataPlot;
@@ -52,9 +52,9 @@ namespace RowingMonitor.ViewModel
         private SkeletonSideDisplay skeletonSideDisplay;
         private KleshnevPlot kleshnevPlot;
         private TrunkAngleDisplay trunkAngleDisplay;
-        private RowingMetaDataDebugDisplay metaDataDisplay;
+        private RowingMetadataDebugDisplay metaDataDisplay;
         private RowingSonification rowingSonification;
-        private RowingMetaDataWidgetsDisplay widgetsDisplay;
+        private RowingMetadataWidgetsDisplay widgetsDisplay;
 
         /* GUI */
         private Grid grid;
@@ -86,7 +86,7 @@ namespace RowingMonitor.ViewModel
             //velocitySmoothingFilter = new OneEuroSmoothingFilter(DataStreamType.Velocity);
             segmentDetector = new ZVCSegmentDetector(minimumHitGap, startSegmentWithRisingVelocity);
             kleshnevVelocityCalculator = new KleshnevVelocityCalculator();
-            metaDataCalculator = new RowingMetaDataCalculator();
+            metaDataCalculator = new RowingMetadataCalculator();
 
             jointDataPlot = new JointDataPlot(PlotRange);
             skeletonFrontalDisplay = new SkeletonFrontalDisplay(
@@ -95,9 +95,9 @@ namespace RowingMonitor.ViewModel
             skeletonSideDisplay = new SkeletonSideDisplay();
             kleshnevPlot = new KleshnevPlot(KleshnevPlotRange);
             trunkAngleDisplay = new TrunkAngleDisplay();
-            metaDataDisplay = new RowingMetaDataDebugDisplay();
+            metaDataDisplay = new RowingMetadataDebugDisplay();
             rowingSonification = new RowingSonification();
-            widgetsDisplay = new RowingMetaDataWidgetsDisplay();
+            widgetsDisplay = new RowingMetadataWidgetsDisplay();
 
             // link pipeline together
             //kinectReader.JointDataBlock.LinkTo(smoothingFilter.SmoothingBlock);
@@ -241,35 +241,25 @@ namespace RowingMonitor.ViewModel
 
         public void ChangeSmoothingFilter()
         {
-            // Dispose links that link to the segment detector
+            // dispose links that link to the smoothing filter
             smoothingLink?.Dispose();
             velocitySmoothingLink?.Dispose();
 
             if (UseKinectJointFilter) {
                 smoothingFilter = new KinectJointSmoothingFilter(
                     DataStreamType.SmoothedPosition);
-                //kinectJointFilter.Init();   // suggested value
-                // Some smoothing with little latency (defaults).
-                // Only filters out small jitters.
-                // Good for gesture recognition in games.
-                //kinectJointFilter.Init(0.5f, 0.5f, 0.5f, 0.05f, 0.04f);
+
                 // Smoothed with some latency.
                 // Filters out medium jitters.
-                // Good for a menu system that needs to be smooth but
-                // doesn't need the reduced latency as much as gesture recognition does.
                 ((KinectJointSmoothingFilter)smoothingFilter).Init(
                     0.5f, 0.1f, 0.5f, 0.1f, 0.1f);
+
                 // Very smooth, but with a lot of latency.
                 // Filters out large jitters.
-                // Good for situations where smooth data is absolutely required
-                // and latency is not an issue.
-                //kinectJointFilter.Init(0.7f, 0.3f, 1.0f, 1.0f, 1.0f);                
-
                 velocitySmoothingFilter = new KinectJointSmoothingFilter(
                     DataStreamType.Velocity);
                 ((KinectJointSmoothingFilter)velocitySmoothingFilter).Init(
                     0.7f, 0.3f, 1.0f, 1.0f, 1.0f);
-
             }
             else {
                 smoothingFilter = new OneEuroSmoothingFilter(

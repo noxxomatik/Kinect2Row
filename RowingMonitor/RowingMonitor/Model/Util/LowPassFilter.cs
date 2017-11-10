@@ -7,15 +7,22 @@ using System.Threading.Tasks;
 
 namespace RowingMonitor.Model.Util
 {
+    /// <summary>
+    /// Implementation of a low pass filter.
+    /// </summary>
     class LowPassFilter
     {
         Dictionary<JointType, Joint> hatxprev = new Dictionary<JointType, Joint>();
         bool firstTime = true;
 
-        public LowPassFilter() { }
+        public LowPassFilter() { }        
 
-        public Dictionary<JointType, Joint> Hatxprev { get => hatxprev; private set => hatxprev = value; }
-
+        /// <summary>
+        /// Apply the low pass filter.
+        /// </summary>
+        /// <param name="joints">The noisy joints to be filtered.</param>
+        /// <param name="alpha">The amount of the preious values which influences the current filtered value.</param>
+        /// <returns>The smoothed joints.</returns>
         public Dictionary<JointType, Joint> Filter(Dictionary<JointType, Joint> joints,
             Dictionary<JointType, Dictionary<String, Double>> alpha)
         {
@@ -43,5 +50,10 @@ namespace RowingMonitor.Model.Util
 
             return hatx;
         }
+
+        /// <summary>
+        /// Previous filtered values of all joints.
+        /// </summary>
+        public Dictionary<JointType, Joint> Hatxprev { get => hatxprev; private set => hatxprev = value; }
     }
 }

@@ -14,6 +14,13 @@ using System.Windows.Media.Imaging;
 
 namespace RowingMonitor.Model.Pipeline
 {
+    /// <summary>
+    /// Adapted visualization of the Body Basics example of the 
+    /// Kinect for Windows SDK.
+    /// 
+    /// SkeletonFrontalDisplay shows the tracked skeleton on top 
+    /// of the recorded color image
+    /// </summary>
     public class SkeletonFrontalDisplay
     {
         private bool colorImageChanged = false;

@@ -149,11 +149,11 @@
     <Compile Include="Model\Pipeline\KinectJointSmoothingFilter.cs" />
     <Compile Include="Model\Pipeline\KleshnevPlot.cs" />
     <Compile Include="Model\Pipeline\KleshnevVelocityCalculator.cs" />
-    <Compile Include="Model\Pipeline\RowingMetaDataCalculator.Calculations.cs" />
-    <Compile Include="Model\Pipeline\RowingMetaDataCalculator.cs" />
+    <Compile Include="Model\Pipeline\RowingMetadataCalculator.Calculations.cs" />
+    <Compile Include="Model\Pipeline\RowingMetadataCalculator.cs" />
     <Compile Include="Model\Pipeline\DTWSegmentDetector.cs" />
-    <Compile Include="Model\Pipeline\RowingMetaDataDebugDisplay.cs" />
-    <Compile Include="Model\Pipeline\RowingMetaDataWidgetsDisplay.cs" />
+    <Compile Include="Model\Pipeline\RowingMetadataDebugDisplay.cs" />
+    <Compile Include="Model\Pipeline\RowingMetadataWidgetsDisplay.cs" />
     <Compile Include="Model\Pipeline\RowingSonification.cs" />
     <Compile Include="Model\Pipeline\SkeletonSideDisplay.cs" />
     <Compile Include="Model\Pipeline\SkeletonFrontalDisplay.cs" />
@@ -178,7 +178,7 @@
     <Compile Include="Model\Pipeline\KinectReader.cs" />
     <Compile Include="Model\Pipeline\OneEuroSmoothingFilter.cs" />
     <Compile Include="Model\Util\MeanWindowPeakDetector.cs" />
-    <Compile Include="Model\Util\RowingMetaData.cs" />
+    <Compile Include="Model\Util\RowingMetadata.cs" />
     <Compile Include="Model\Util\OneEuroFilter.cs" />
     <Compile Include="Model\Util\PlotDataHandler.cs" />
     <Compile Include="Model\Util\RelayCommand.cs" />
@@ -201,8 +201,8 @@
     </Compile>
     <Compile Include="ViewModel\KleshnevPlotViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
-    <Compile Include="ViewModel\RowingMetaDataDebugViewModel.cs" />
-    <Compile Include="ViewModel\RowingMetaDataWidgetsViewModel.cs" />
+    <Compile Include="ViewModel\RowingMetadataDebugViewModel.cs" />
+    <Compile Include="ViewModel\RowingMetadataWidgetsViewModel.cs" />
     <Compile Include="ViewModel\DebugViewModel.cs" />
     <Compile Include="ViewModel\SkeletonSideViewModel.cs" />
     <Compile Include="ViewModel\SkeletonFrontalViewModel.cs" />
@@ -216,11 +216,11 @@
     <Compile Include="View\KleshnevPlotView.xaml.cs">
       <DependentUpon>KleshnevPlotView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RowingMetaDataDebugView.xaml.cs">
-      <DependentUpon>RowingMetaDataDebugView.xaml</DependentUpon>
+    <Compile Include="View\RowingMetadataDebugView.xaml.cs">
+      <DependentUpon>RowingMetadataDebugView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RowingMetaDataWidgetsView.xaml.cs">
-      <DependentUpon>RowingMetaDataWidgetsView.xaml</DependentUpon>
+    <Compile Include="View\RowingMetadataWidgetsView.xaml.cs">
+      <DependentUpon>RowingMetadataWidgetsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SkeletonSideView.xaml.cs">
       <DependentUpon>SkeletonSideView.xaml</DependentUpon>
@@ -269,11 +269,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RowingMetaDataDebugView.xaml">
+    <Page Include="View\RowingMetadataDebugView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RowingMetaDataWidgetsView.xaml">
+    <Page Include="View\RowingMetadataWidgetsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -316,6 +316,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagramms\RowingMetadataCalculator.cd" />
+    <None Include="ClassDiagramms\SmoothingFilter.cd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

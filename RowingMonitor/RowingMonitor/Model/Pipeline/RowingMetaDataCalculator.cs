@@ -13,14 +13,14 @@ namespace RowingMonitor.Model.Pipeline
     /// <summary>
     /// Calculates all needed rowing analysis values and makes them accessible to the pipeline.
     /// </summary>
-    public partial class RowingMetaDataCalculator
+    public partial class RowingMetadataCalculator
     {
         // dataflow connections
         private ActionBlock<JointData> input;
         private ActionBlock<KleshnevData> inputKleshnevData;
         private ActionBlock<List<SegmentHit>> inputSegmentHits;
         private ActionBlock<JointData> inputVelocityJointData;
-        private BroadcastBlock<RowingMetaData> output;
+        private BroadcastBlock<RowingMetadata> output;
 
         // buffers
         private List<JointData> jointDataBuffer = new List<JointData>();
@@ -40,7 +40,7 @@ namespace RowingMonitor.Model.Pipeline
         /// <summary>
         /// Creates a new rowing meta data calculator instance.
         /// </summary>
-        public RowingMetaDataCalculator()
+        public RowingMetadataCalculator()
         {
             Input = new ActionBlock<JointData>(jointData =>
             {
@@ -95,7 +95,7 @@ namespace RowingMonitor.Model.Pipeline
                 segmentHitsRecieved = true;                
             });
 
-            Output = new BroadcastBlock<RowingMetaData>(rowingMetaData =>
+            Output = new BroadcastBlock<RowingMetadata>(rowingMetaData =>
             {
                 return rowingMetaData;
             });
@@ -135,7 +135,7 @@ namespace RowingMonitor.Model.Pipeline
         private void UpdateRowingMetaData(bool segmentEnded)
         {
             if (kleshnevDataBuffer.Count > 0) {
-                RowingMetaData metaData = new RowingMetaData();
+                RowingMetadata metaData = new RowingMetadata();
 
                 // use index and timestamp of kleshnev data since it is the 
                 // last data in the pipline and jointData and velocity 
@@ -146,10 +146,10 @@ namespace RowingMonitor.Model.Pipeline
                 metaData.AbsTimestamp = lastData.AbsTimestamp;
                 metaData.RelTimestamp = lastData.RelTimestamp;
 
-                metaData = CalculateRealtimeMetaData(metaData);
+                metaData = CalculateRealtimeMetadata(metaData);
 
                 if (segmentEnded) {
-                    metaData = CalculateSegmentMetaData(metaData);
+                    metaData = CalculateSegmentMetadata(metaData);
                 }
 
                 Output.Post(metaData);
@@ -172,6 +172,6 @@ namespace RowingMonitor.Model.Pipeline
                 inputVelocityJointData = value;
             }
         }
-        public BroadcastBlock<RowingMetaData> Output { get => output; set => output = value; }
+        public BroadcastBlock<RowingMetadata> Output { get => output; set => output = value; }
     }
 }

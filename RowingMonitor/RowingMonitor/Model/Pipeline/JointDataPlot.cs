@@ -17,7 +17,10 @@ using System.Diagnostics;
 
 namespace RowingMonitor.Model.Pipeline
 {
-    class JointDataPlot
+    /// <summary>
+    /// JointDataPlot visualizes the data of several data streams in a line plot.
+    /// </summary>
+    public class JointDataPlot
     {
         private ActionBlock<JointData> plotJointDataBlock;
 

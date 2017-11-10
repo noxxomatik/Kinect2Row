@@ -88,20 +88,27 @@ $(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_uti
 <div class="title">RowingMonitor.Model.Util.LowPassFilter Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Implementation of a low pass filter.  
+ <a href="class_rowing_monitor_1_1_model_1_1_util_1_1_low_pass_filter.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a050ff69afbb83d0770af0454ce2d6590"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_low_pass_filter.html#a050ff69afbb83d0770af0454ce2d6590">LowPassFilter</a> ()</td></tr>
 <tr class="separator:a050ff69afbb83d0770af0454ce2d6590"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14f5d68bc3ab965107fe6511d564e9ab"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; JointType, Joint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_low_pass_filter.html#a14f5d68bc3ab965107fe6511d564e9ab">Filter</a> (Dictionary&lt; JointType, Joint &gt; joints, Dictionary&lt; JointType, Dictionary&lt; String, Double &gt;&gt; alpha)</td></tr>
+<tr class="memdesc:a14f5d68bc3ab965107fe6511d564e9ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the low pass filter.  <a href="#a14f5d68bc3ab965107fe6511d564e9ab">More...</a><br /></td></tr>
 <tr class="separator:a14f5d68bc3ab965107fe6511d564e9ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a03626b2c6dc1463a1018b7a3b5ad9436"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; JointType, Joint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_low_pass_filter.html#a03626b2c6dc1463a1018b7a3b5ad9436">Hatxprev</a><code> [get]</code></td></tr>
+<tr class="memdesc:a03626b2c6dc1463a1018b7a3b5ad9436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previous filtered values of all joints.  <a href="#a03626b2c6dc1463a1018b7a3b5ad9436">More...</a><br /></td></tr>
 <tr class="separator:a03626b2c6dc1463a1018b7a3b5ad9436"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implementation of a low pass filter. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a050ff69afbb83d0770af0454ce2d6590"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a050ff69afbb83d0770af0454ce2d6590">&#9670;&nbsp;</a></span>LowPassFilter()</h2>
 
@@ -146,6 +153,16 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Apply the low pass filter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">joints</td><td>The noisy joints to be filtered.</td></tr>
+    <tr><td class="paramname">alpha</td><td>The amount of the preious values which influences the current filtered value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The smoothed joints.</dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
@@ -168,6 +185,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Previous filtered values of all joints. </p>
 
 </div>
 </div>

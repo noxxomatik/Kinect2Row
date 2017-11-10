@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['y',['Y',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data.html#a3174747887d119a02cf561bcb7b59859',1,'RowingMonitor::Model::Util::PlotData']]],
-  ['ymax',['yMax',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#a7265f213951d92146c03ddc6235964f5',1,'RowingMonitor::Model::Util::CurveFitting::QuadraticFunctionParameters']]]
+  ['x',['X',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data.html#adb39639d13dd722e2e6832cd5ec34783',1,'RowingMonitor::Model::Util::PlotData']]],
+  ['xfilt',['xFilt',['../class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html#a8c5c8ede133408fde40a26fd11f0e9c0',1,'RowingMonitor::Model::Util::OneEuroFilter']]],
+  ['xmax',['xMax',['../struct_rowing_monitor_1_1_model_1_1_util_1_1_curve_fitting_1_1_quadratic_function_parameters.html#ac0528b38840754899c904c31efd81545',1,'RowingMonitor::Model::Util::CurveFitting::QuadraticFunctionParameters']]]
 ];

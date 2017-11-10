@@ -1,4 +1,4 @@
-﻿<Page x:Class="RowingMonitor.View.RowingMetaDataDebugView"
+﻿<UserControl x:Class="RowingMonitor.View.RowingMetadataDebugView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,12 +6,11 @@
       xmlns:local="clr-namespace:RowingMonitor.View"
       xmlns:resx="clr-namespace:RowingMonitor.Properties"
       xmlns:vm="clr-namespace:RowingMonitor.ViewModel"
-      mc:Ignorable="d"
-      Title="RowingMetaDataView">
+      mc:Ignorable="d">
 
-    <Page.DataContext>
-        <vm:RowingMetaDataDebugViewModel x:Name="ViewModel"/>
-    </Page.DataContext>
+    <UserControl.DataContext>
+        <vm:RowingMetadataDebugViewModel x:Name="ViewModel"/>
+    </UserControl.DataContext>
 
     <Grid Margin="12">
         <Grid.Resources>
@@ -131,4 +130,4 @@
         <TextBlock Text="{x:Static resx:Resources.MeanRowingStyleFactor}" Grid.Row="25" Grid.Column="0"/>
         <TextBlock Text="{Binding MeanRowingStyleFactor}" Grid.Row="25" Grid.Column="1" TextAlignment="Right"/>
     </Grid>
-</Page>
+</UserControl>

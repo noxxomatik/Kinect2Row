@@ -87,25 +87,32 @@ $(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_uti
 <div class="title">RowingMonitor.Model.Util.SegmentHitHandler Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A static class to deal with detected segment hits and check if the detected segments are valid or incomplete.  
+ <a href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:adbd44130a8d894cd7c21430c3eedf9e1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#adbd44130a8d894cd7c21430c3eedf9e1">CheckIfNewSegmentStarted</a> (List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt; hits)</td></tr>
+<tr class="memdesc:adbd44130a8d894cd7c21430c3eedf9e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a new segment started and has not yet ended.  <a href="#adbd44130a8d894cd7c21430c3eedf9e1">More...</a><br /></td></tr>
 <tr class="separator:adbd44130a8d894cd7c21430c3eedf9e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75d8b23514da843ef1eebf9e684f8094"><td class="memItemLeft" align="right" valign="top">static long []&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#a75d8b23514da843ef1eebf9e684f8094">GetLastSegmentStartEnd</a> (List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt; hits)</td></tr>
-<tr class="memdesc:a75d8b23514da843ef1eebf9e684f8094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the bounding indices values of the last complete segment.  <a href="#a75d8b23514da843ef1eebf9e684f8094">More...</a><br /></td></tr>
-<tr class="separator:a75d8b23514da843ef1eebf9e684f8094"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac73a1aebbe85844658b84fd48591c302"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#ac73a1aebbe85844658b84fd48591c302">GetLastSegmentInternal</a> (List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt; hits)</td></tr>
-<tr class="memdesc:ac73a1aebbe85844658b84fd48591c302"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the index of the last detected internal segment hit.  <a href="#ac73a1aebbe85844658b84fd48591c302">More...</a><br /></td></tr>
-<tr class="separator:ac73a1aebbe85844658b84fd48591c302"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe07b33e8ee385a2320a5e6f05d86215"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#afe07b33e8ee385a2320a5e6f05d86215">IsSegmentValid</a> (List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt; hits, long[] bounds)</td></tr>
-<tr class="memdesc:afe07b33e8ee385a2320a5e6f05d86215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the segment is valid by comparing its duration with the minimum segment time from the settings.  <a href="#afe07b33e8ee385a2320a5e6f05d86215">More...</a><br /></td></tr>
-<tr class="separator:afe07b33e8ee385a2320a5e6f05d86215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f4fce5bfa8233f938340e75d9999a80"><td class="memItemLeft" align="right" valign="top">static List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#a6f4fce5bfa8233f938340e75d9999a80">FilterSegmentJointData</a> (List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt; buffer, long[] bounds)</td></tr>
 <tr class="memdesc:a6f4fce5bfa8233f938340e75d9999a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters the joint data of a completed segment.  <a href="#a6f4fce5bfa8233f938340e75d9999a80">More...</a><br /></td></tr>
 <tr class="separator:a6f4fce5bfa8233f938340e75d9999a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac73a1aebbe85844658b84fd48591c302"><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#ac73a1aebbe85844658b84fd48591c302">GetLastSegmentInternal</a> (List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt; hits)</td></tr>
+<tr class="memdesc:ac73a1aebbe85844658b84fd48591c302"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the index of the last detected internal segment hit.  <a href="#ac73a1aebbe85844658b84fd48591c302">More...</a><br /></td></tr>
+<tr class="separator:ac73a1aebbe85844658b84fd48591c302"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75d8b23514da843ef1eebf9e684f8094"><td class="memItemLeft" align="right" valign="top">static long []&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#a75d8b23514da843ef1eebf9e684f8094">GetLastSegmentStartEnd</a> (List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt; hits)</td></tr>
+<tr class="memdesc:a75d8b23514da843ef1eebf9e684f8094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the bounding indices values of the last complete segment.  <a href="#a75d8b23514da843ef1eebf9e684f8094">More...</a><br /></td></tr>
+<tr class="separator:a75d8b23514da843ef1eebf9e684f8094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe07b33e8ee385a2320a5e6f05d86215"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit_handler.html#afe07b33e8ee385a2320a5e6f05d86215">IsSegmentValid</a> (List&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html">SegmentHit</a> &gt; hits, long[] bounds)</td></tr>
+<tr class="memdesc:afe07b33e8ee385a2320a5e6f05d86215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the segment is valid by comparing its duration with the minimum segment time from the settings.  <a href="#afe07b33e8ee385a2320a5e6f05d86215">More...</a><br /></td></tr>
+<tr class="separator:afe07b33e8ee385a2320a5e6f05d86215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A static class to deal with detected segment hits and check if the detected segments are valid or incomplete. </p>
+<p>Also supplies methods to extract start and end points of segments. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="adbd44130a8d894cd7c21430c3eedf9e1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adbd44130a8d894cd7c21430c3eedf9e1">&#9670;&nbsp;</a></span>CheckIfNewSegmentStarted()</h2>
 
@@ -129,6 +136,15 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Checks if a new segment started and has not yet ended. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hits</td><td>List of detected hits.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>
@@ -244,7 +260,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Start an d end index of the lastdetected segment.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Start and end index of the lastdetected segment.</dd></dl>
 
 </div>
 </div>

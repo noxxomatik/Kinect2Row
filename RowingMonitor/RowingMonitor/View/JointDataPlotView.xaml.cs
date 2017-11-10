@@ -18,7 +18,7 @@ namespace RowingMonitor.View
     /// <summary>
     /// Interaktionslogik für JointDataPlotView.xaml
     /// </summary>
-    public partial class JointDataPlotView : Page
+    public partial class JointDataPlotView : UserControl
     {
         public JointDataPlotView()
         {

@@ -1,4 +1,4 @@
-﻿<Page x:Class="RowingMonitor.View.TrunkAngleView"
+﻿<UserControl x:Class="RowingMonitor.View.TrunkAngleView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,12 +9,11 @@
       xmlns:resx="clr-namespace:RowingMonitor.Properties"
       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
       mc:Ignorable="d" 
-      d:DesignHeight="250" d:DesignWidth="500"
-      Title="TrunkAngleView">
+      d:DesignHeight="250" d:DesignWidth="500">
     
-    <Page.DataContext>
+    <UserControl.DataContext>
         <vm:TrunkAngleViewModel x:Name="ViewModel"/>
-    </Page.DataContext>
+    </UserControl.DataContext>
 
     <Grid x:Name="ViewGrid">
         <Grid.RowDefinitions>
@@ -86,4 +85,4 @@
                        TextWrapping="Wrap"/>
         </Grid>
     </Grid>
-</Page>
+</UserControl>

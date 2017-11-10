@@ -9,7 +9,7 @@ namespace RowingMonitor.Model.Util
     /// <summary>
     /// Calculated meta data that describes the current rowing session.
     /// </summary>
-    public class RowingMetaData
+    public class RowingMetadata
     {
         private long index;
         private double absTimestamp;

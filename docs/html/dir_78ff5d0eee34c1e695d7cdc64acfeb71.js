@@ -24,17 +24,17 @@ var dir_78ff5d0eee34c1e695d7cdc64acfeb71 =
     [ "OneEuroSmoothingFilter.cs", "_one_euro_smoothing_filter_8cs.html", [
       [ "OneEuroSmoothingFilter", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_one_euro_smoothing_filter.html", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_one_euro_smoothing_filter" ]
     ] ],
-    [ "RowingMetaDataCalculator.Calculations.cs", "_rowing_meta_data_calculator_8_calculations_8cs.html", [
-      [ "RowingMetaDataCalculator", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_calculator.html", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_calculator" ]
+    [ "RowingMetadataCalculator.Calculations.cs", "_rowing_metadata_calculator_8_calculations_8cs.html", [
+      [ "RowingMetadataCalculator", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_metadata_calculator.html", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_metadata_calculator" ]
     ] ],
-    [ "RowingMetaDataCalculator.cs", "_rowing_meta_data_calculator_8cs.html", [
-      [ "RowingMetaDataCalculator", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_calculator.html", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_calculator" ]
+    [ "RowingMetadataCalculator.cs", "_rowing_metadata_calculator_8cs.html", [
+      [ "RowingMetadataCalculator", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_metadata_calculator.html", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_metadata_calculator" ]
     ] ],
     [ "RowingMetaDataDebugDisplay.cs", "_rowing_meta_data_debug_display_8cs.html", [
-      [ "RowingMetaDataDebugDisplay", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_debug_display.html", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_debug_display" ]
+      [ "RowingMetadataDebugDisplay", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_metadata_debug_display.html", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_metadata_debug_display" ]
     ] ],
-    [ "RowingMetaDataWidgetsDisplay.cs", "_rowing_meta_data_widgets_display_8cs.html", [
-      [ "RowingMetaDataWidgetsDisplay", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_widgets_display.html", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_meta_data_widgets_display" ]
+    [ "RowingMetadataWidgetsDisplay.cs", "_rowing_metadata_widgets_display_8cs.html", [
+      [ "RowingMetadataWidgetsDisplay", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_metadata_widgets_display.html", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_metadata_widgets_display" ]
     ] ],
     [ "RowingSonification.cs", "_rowing_sonification_8cs.html", [
       [ "RowingSonification", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification.html", "class_rowing_monitor_1_1_model_1_1_pipeline_1_1_rowing_sonification" ]

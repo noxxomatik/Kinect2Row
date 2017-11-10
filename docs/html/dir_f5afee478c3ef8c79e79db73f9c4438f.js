@@ -34,19 +34,19 @@ var dir_f5afee478c3ef8c79e79db73f9c4438f =
       [ "Page1", "class_rowing_monitor_1_1_view_1_1_page1.html", "class_rowing_monitor_1_1_view_1_1_page1" ]
     ] ],
     [ "RowingMetaDataDebugView.g.cs", "_debug_2_view_2_rowing_meta_data_debug_view_8g_8cs.html", [
-      [ "RowingMetaDataDebugView", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_debug_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_debug_view" ]
+      [ "RowingMetadataDebugView", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_debug_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_debug_view" ]
     ] ],
     [ "RowingMetaDataDebugView.g.i.cs", "_debug_2_view_2_rowing_meta_data_debug_view_8g_8i_8cs.html", [
-      [ "RowingMetaDataDebugView", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_debug_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_debug_view" ]
+      [ "RowingMetadataDebugView", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_debug_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_debug_view" ]
     ] ],
     [ "RowingMetaDataView.g.i.cs", "_rowing_meta_data_view_8g_8i_8cs.html", [
       [ "RowingMetaDataView", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_view" ]
     ] ],
     [ "RowingMetaDataWidgetsView.g.cs", "_debug_2_view_2_rowing_meta_data_widgets_view_8g_8cs.html", [
-      [ "RowingMetaDataWidgetsView", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_widgets_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_widgets_view" ]
+      [ "RowingMetadataWidgetsView", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_widgets_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_widgets_view" ]
     ] ],
     [ "RowingMetaDataWidgetsView.g.i.cs", "_debug_2_view_2_rowing_meta_data_widgets_view_8g_8i_8cs.html", [
-      [ "RowingMetaDataWidgetsView", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_widgets_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_meta_data_widgets_view" ]
+      [ "RowingMetadataWidgetsView", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_widgets_view.html", "class_rowing_monitor_1_1_view_1_1_rowing_metadata_widgets_view" ]
     ] ],
     [ "SkeletonFrontalView - Kopieren.g.i.cs", "_skeleton_frontal_view_01-_01_kopieren_8g_8i_8cs.html", [
       [ "SkeletonFrontalView", "class_rowing_monitor_1_1_view_1_1_skeleton_frontal_view.html", "class_rowing_monitor_1_1_view_1_1_skeleton_frontal_view" ]

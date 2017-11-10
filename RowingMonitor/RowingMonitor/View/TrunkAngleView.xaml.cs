@@ -18,7 +18,7 @@ namespace RowingMonitor.View
     /// <summary>
     /// Interaktionslogik für TrunkAngleView.xaml
     /// </summary>
-    public partial class TrunkAngleView : Page
+    public partial class TrunkAngleView : UserControl
     {
         public TrunkAngleView()
         {

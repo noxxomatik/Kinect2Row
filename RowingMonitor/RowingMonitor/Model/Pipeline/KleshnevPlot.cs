@@ -14,7 +14,14 @@ using System.Threading.Tasks.Dataflow;
 
 namespace RowingMonitor.Model.Pipeline
 {
-    class KleshnevPlot
+    /// <summary>
+    /// KleshnevPlot creteas two line plots.
+    /// One for the body segment and handle velocites of the last complete segment 
+    /// and one for dynamic plot for the velocities of the current segment.
+    /// 
+    /// KleshnevPlot also marks the maxima of each body segment velocity in each plot.
+    /// </summary>
+    public class KleshnevPlot
     {
         private ActionBlock<KleshnevData> kleshnevDataBlock;
 

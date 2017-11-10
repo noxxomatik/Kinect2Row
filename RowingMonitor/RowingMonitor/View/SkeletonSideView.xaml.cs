@@ -19,7 +19,7 @@ namespace RowingMonitor.View
     /// <summary>
     /// Interaktionslogik für SkeletonFrontalView.xaml
     /// </summary>
-    public partial class SkeletonSideView : Page
+    public partial class SkeletonSideView : UserControl
     {
         public SkeletonSideView()
         {

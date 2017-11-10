@@ -26,10 +26,7 @@ namespace RowingMonitor.Model.Pipeline
         private ActionBlock<JointData> input;
         private BroadcastBlock<JointData> output;
 
-        private List<double> timeLog = new List<double>();
-
-        public BroadcastBlock<JointData> Output { get => output; set => output = value; }
-        public ActionBlock<JointData> Input { get => input; set => input = value; }
+        private List<double> timeLog = new List<double>();        
 
         /// <summary>
         /// Creates a new VelocityCalculator class.
@@ -162,5 +159,14 @@ namespace RowingMonitor.Model.Pipeline
 
             return newJointData;
         }
+
+        /// <summary>
+        /// BroadcastBlock for sending the calculated velocities to all linked traget blocks.
+        /// </summary>
+        public BroadcastBlock<JointData> Output { get => output; set => output = value; }
+        /// <summary>
+        /// ActionBlock that recieves JointData.
+        /// </summary>
+        public ActionBlock<JointData> Input { get => input; set => input = value; }
     }
 }

@@ -18,9 +18,9 @@ namespace RowingMonitor.View
     /// <summary>
     /// Interaktionslogik für RowingMetaDataWidgetsView.xaml
     /// </summary>
-    public partial class RowingMetaDataWidgetsView : Page
+    public partial class RowingMetadataWidgetsView : UserControl
     {
-        public RowingMetaDataWidgetsView()
+        public RowingMetadataWidgetsView()
         {
             InitializeComponent();
         }

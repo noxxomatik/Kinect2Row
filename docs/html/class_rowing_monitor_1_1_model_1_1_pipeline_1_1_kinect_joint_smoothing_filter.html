@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('class_rowing_monitor_1_1_model_1_1_pip
 </div><!--header-->
 <div class="contents">
 
-<p>Adapted default Kinect smoothing filter to work with the pipeline. <a href="https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk">https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk</a>  
+<p>Adapted default Kinect smoothing filter to work with the pipeline. Source: <a href="https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk">https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk</a>  
  <a href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for RowingMonitor.Model.Pipeline.KinectJointSmoothingFilter:</div>
@@ -98,7 +98,7 @@ Inheritance diagram for RowingMonitor.Model.Pipeline.KinectJointSmoothingFilter:
  <div class="center">
   <img src="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.png" usemap="#RowingMonitor.Model.Pipeline.KinectJointSmoothingFilter_map" alt=""/>
   <map id="RowingMonitor.Model.Pipeline.KinectJointSmoothingFilter_map" name="RowingMonitor.Model.Pipeline.KinectJointSmoothingFilter_map">
-<area href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html" alt="RowingMonitor.Model.Pipeline.SmoothingFilter" shape="rect" coords="0,0,337,24"/>
+<area href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html" title="Abstract class of a smoothing filter to generalize the usage of different methods for value smoothing..." alt="RowingMonitor.Model.Pipeline.SmoothingFilter" shape="rect" coords="0,0,337,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -112,6 +112,7 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a66e7c67626da3288c67427b6aa8f974b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html#a66e7c67626da3288c67427b6aa8f974b">KinectJointSmoothingFilter</a> (<a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f">DataStreamType</a> outputDataStreamType)</td></tr>
+<tr class="memdesc:a66e7c67626da3288c67427b6aa8f974b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of the <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html" title="Adapted default Kinect smoothing filter to work with the pipeline. Source: https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk ">KinectJointSmoothingFilter</a>.  <a href="#a66e7c67626da3288c67427b6aa8f974b">More...</a><br /></td></tr>
 <tr class="separator:a66e7c67626da3288c67427b6aa8f974b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77e9c9b72aeeb466af5d5f6791e1d568"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html#a77e9c9b72aeeb466af5d5f6791e1d568">Init</a> (float fSmoothing=0.25f, float fCorrection=0.25f, float fPrediction=0.25f, float fJitterRadius=0.03f, float fMaxDeviationRadius=0.05f)</td></tr>
 <tr class="separator:a77e9c9b72aeeb466af5d5f6791e1d568"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,35 +121,44 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a47c8d921b68fbf92a773a83c9ab602b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html#a47c8d921b68fbf92a773a83c9ab602b7">Reset</a> (float fSmoothing=0.25f, float fCorrection=0.25f, float fPrediction=0.25f, float fJitterRadius=0.03f, float fMaxDeviationRadius=0.05f)</td></tr>
 <tr class="separator:a47c8d921b68fbf92a773a83c9ab602b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93cb6db0e00796dd2791789e472457b5"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html#a93cb6db0e00796dd2791789e472457b5">Update</a> (<a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> jointData)</td></tr>
+<tr class="memdesc:a93cb6db0e00796dd2791789e472457b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="#a93cb6db0e00796dd2791789e472457b5">More...</a><br /></td></tr>
 <tr class="separator:a93cb6db0e00796dd2791789e472457b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac138f87f70caab7b0c14071b52e84c7"><td class="memItemLeft" align="right" valign="top">CameraSpacePoint []&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html#aac138f87f70caab7b0c14071b52e84c7">GetFilteredJoints</a> ()</td></tr>
 <tr class="separator:aac138f87f70caab7b0c14071b52e84c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31ee74610f6c7de082306691f59d2f1c"><td class="memItemLeft" align="right" valign="top">override <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html#a31ee74610f6c7de082306691f59d2f1c">Smooth</a> (<a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> jointData)</td></tr>
+<tr class="memdesc:a31ee74610f6c7de082306691f59d2f1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Smoothing of noisy JointData with the default <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html" title="Adapted default Kinect smoothing filter to work with the pipeline. Source: https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk ">KinectJointSmoothingFilter</a>.  <a href="#a31ee74610f6c7de082306691f59d2f1c">More...</a><br /></td></tr>
 <tr class="separator:a31ee74610f6c7de082306691f59d2f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html">RowingMonitor.Model.Pipeline.SmoothingFilter</a></td></tr>
 <tr class="memitem:af8a8a5758bd7a174033f698dcb1b93b2 inherit pub_methods_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#af8a8a5758bd7a174033f698dcb1b93b2">SmoothedFrameArrivedEventHandler</a> (Object sender, <a class="el" href="class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_smoothed_frame_arrived_event_args.html">SmoothedFrameArrivedEventArgs</a> e)</td></tr>
+<tr class="memdesc:af8a8a5758bd7a174033f698dcb1b93b2 inherit pub_methods_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#af8a8a5758bd7a174033f698dcb1b93b2">More...</a><br /></td></tr>
 <tr class="separator:af8a8a5758bd7a174033f698dcb1b93b2 inherit pub_methods_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a944294caee0b2b26c0023a1c2d0c1a67"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html#a944294caee0b2b26c0023a1c2d0c1a67">OnSmoothedFrameFinished</a> (<a class="el" href="class_rowing_monitor_1_1_model_1_1_event_arguments_1_1_smoothed_frame_arrived_event_args.html">SmoothedFrameArrivedEventArgs</a> e)</td></tr>
+<tr class="memdesc:a944294caee0b2b26c0023a1c2d0c1a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="#a944294caee0b2b26c0023a1c2d0c1a67">More...</a><br /></td></tr>
 <tr class="separator:a944294caee0b2b26c0023a1c2d0c1a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td colspan="2" onclick="javascript:toggleInherit('properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html">RowingMonitor.Model.Pipeline.SmoothingFilter</a></td></tr>
 <tr class="memitem:a3151be406d68f220c45b674df65f0df5 inherit properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="memItemLeft" align="right" valign="top">BroadcastBlock&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#a3151be406d68f220c45b674df65f0df5">Output</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a3151be406d68f220c45b674df65f0df5 inherit properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">BroadcastBlock for sending the smoothed JointData to all linked traget blocks.  <a href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#a3151be406d68f220c45b674df65f0df5">More...</a><br /></td></tr>
 <tr class="separator:a3151be406d68f220c45b674df65f0df5 inherit properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25304d8ea2f3e1f80ab786fb40bca304 inherit properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_rowing_monitor_1_1_model_1_1_util.html#a01e1a06061533b246feb7421c9d0107f">DataStreamType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#a25304d8ea2f3e1f80ab786fb40bca304">OutputDataStreamType</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a25304d8ea2f3e1f80ab786fb40bca304 inherit properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">The DataStreamType of the resulting values. Dependant of the input DataStreamType.  <a href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#a25304d8ea2f3e1f80ab786fb40bca304">More...</a><br /></td></tr>
 <tr class="separator:a25304d8ea2f3e1f80ab786fb40bca304 inherit properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92bef5838dd409b0795f5b94c1ea45d5 inherit properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="memItemLeft" align="right" valign="top">ActionBlock&lt; <a class="el" href="struct_rowing_monitor_1_1_model_1_1_util_1_1_joint_data.html">JointData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#a92bef5838dd409b0795f5b94c1ea45d5">Input</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a92bef5838dd409b0795f5b94c1ea45d5 inherit properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">ActionBlock that recieves JointData.  <a href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#a92bef5838dd409b0795f5b94c1ea45d5">More...</a><br /></td></tr>
 <tr class="separator:a92bef5838dd409b0795f5b94c1ea45d5 inherit properties_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header events_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td colspan="2" onclick="javascript:toggleInherit('events_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter')"><img src="closed.png" alt="-"/>&#160;Events inherited from <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html">RowingMonitor.Model.Pipeline.SmoothingFilter</a></td></tr>
 <tr class="memitem:adfb76570d0a85e7cfd41d16121ce7a56 inherit events_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#af8a8a5758bd7a174033f698dcb1b93b2">SmoothedFrameArrivedEventHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#adfb76570d0a85e7cfd41d16121ce7a56">SmoothedFrameArrived</a></td></tr>
+<tr class="memdesc:adfb76570d0a85e7cfd41d16121ce7a56 inherit events_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">DEPRECATED  <a href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#adfb76570d0a85e7cfd41d16121ce7a56">More...</a><br /></td></tr>
 <tr class="separator:adfb76570d0a85e7cfd41d16121ce7a56 inherit events_class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Adapted default Kinect smoothing filter to work with the pipeline. <a href="https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk">https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk</a> </p>
+<div class="textblock"><p>Adapted default Kinect smoothing filter to work with the pipeline. Source: <a href="https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk">https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk</a> </p>
+<p>Implements a Holt Double Exponential Smoothing filter. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a66e7c67626da3288c67427b6aa8f974b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66e7c67626da3288c67427b6aa8f974b">&#9670;&nbsp;</a></span>KinectJointSmoothingFilter()</h2>
@@ -165,6 +175,14 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Creates a new instance of the <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html" title="Adapted default Kinect smoothing filter to work with the pipeline. Source: https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk ">KinectJointSmoothingFilter</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outputDataStreamType</td><td>The DataStreamType of the output JointData.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -255,6 +273,14 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>DEPRECATED </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented from <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#ac47b399ad4ae1ad899f5e571d6f6c05c">RowingMonitor.Model.Pipeline.SmoothingFilter</a>.</p>
 
@@ -347,6 +373,15 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Smoothing of noisy JointData with the default <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_kinect_joint_smoothing_filter.html" title="Adapted default Kinect smoothing filter to work with the pipeline. Source: https://social.msdn.microsoft.com/Forums/en-US/ffbc8ec7-7551-4462-88aa-2fab69eac38f/joint-smoothing-code-c-errors-in-kinectjointfilter-class?forum=kinectv2sdk ">KinectJointSmoothingFilter</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jointData</td><td>Noisy JointData.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Smoothed JointData.</dd></dl>
+
 <p>Implements <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#a65ba6a5a48fbf5a51fb564dbeefc95fe">RowingMonitor.Model.Pipeline.SmoothingFilter</a>.</p>
 
 </div>
@@ -374,6 +409,14 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>DEPRECATED </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jointData</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="class_rowing_monitor_1_1_model_1_1_pipeline_1_1_smoothing_filter.html#a6f017782fee0747d4ece9ec3ffea6115">RowingMonitor.Model.Pipeline.SmoothingFilter</a>.</p>
 

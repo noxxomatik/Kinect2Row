@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RowingMonitor.Model.Pipeline.SmoothingFilter">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="RowingMonitor.Model.Pipeline.SmoothingFilter.SmoothedFrameArrivedEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\Pipeline\SmoothingFilter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAAgAAAAAgAIAAIAGAAAABAAAAAAAAAAAAI=</HashCode>
+      <FileName>Model\Pipeline\SmoothingFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RowingMonitor.Model.Pipeline.OneEuroSmoothingFilter">
+    <Position X="3.25" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>IAQAAEAAAEAAAAAAEAAABAAgAAQCABQACwAEAAAEAAI=</HashCode>
+      <FileName>Model\Pipeline\OneEuroSmoothingFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RowingMonitor.Model.Pipeline.KinectJointSmoothingFilter">
+    <Position X="6" Y="0.5" Width="2.25" />
+    <NestedTypes>
+      <Struct Name="RowingMonitor.Model.Pipeline.KinectJointSmoothingFilter.TRANSFORM_SMOOTH_PARAMETERS" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\Pipeline\KinectJointSmoothingFilter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Class Name="RowingMonitor.Model.Pipeline.KinectJointSmoothingFilter.FilterDoubleExponentialData" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\Pipeline\KinectJointSmoothingFilter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAQAAIBAEAAABohAAAAEAQAgAAAAIwQAAQECAAQAAAM=</HashCode>
+      <FileName>Model\Pipeline\KinectJointSmoothingFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -12,7 +12,7 @@ var namespace_rowing_monitor_1_1_model_1_1_util =
     [ "OneEuroFilter", "class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_one_euro_filter" ],
     [ "PlotData", "struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data.html", "struct_rowing_monitor_1_1_model_1_1_util_1_1_plot_data" ],
     [ "RelayCommand", "class_rowing_monitor_1_1_model_1_1_util_1_1_relay_command.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_relay_command" ],
-    [ "RowingMetaData", "class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_meta_data" ],
+    [ "RowingMetadata", "class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_metadata.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_rowing_metadata" ],
     [ "SegmentHit", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit.html", "struct_rowing_monitor_1_1_model_1_1_util_1_1_segment_hit" ],
     [ "SimplePeakDetector", "class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector.html", "class_rowing_monitor_1_1_model_1_1_util_1_1_simple_peak_detector" ],
     [ "Subsequence", "struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence.html", "struct_rowing_monitor_1_1_model_1_1_util_1_1_subsequence" ],
