@@ -21,3 +21,6 @@ View for trainees:
 Extended view for coaches:
 
 <img src="https://github.com/noxxomatik/Kinect2Row/blob/master/screenshots/kinect2row_coachview.gif"/>
+
+## Documentation
+https://noxxomatik.github.io/Kinect2Row/
